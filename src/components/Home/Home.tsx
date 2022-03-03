@@ -26,7 +26,7 @@ const Home: React.FC = () => {
       <div className="row">
         <TopCard title="TỔNG SỐ GIÁO VIÊN" text={`${numberItemsCount}`} icon="user" class="primary" />
         <TopCard title="TỔNG SỐ KHÓA HỌC" text={`${numberCoursesCount}`} icon="warehouse" class="danger" />
-        <TopCard title="TỔNG SỐ HỌC VIÊN" text={`${numberClassCount}`} icon="user" class="danger" /> 
+        <TopCard title="TỔNG SỐ LỚP" text={`${numberClassCount}`} icon="user" class="danger" /> 
       </div>
 
       <div className="row">
