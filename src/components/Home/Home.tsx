@@ -2,18 +2,18 @@ import React, { Fragment, Dispatch } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import TopCard from "../../common/components/TopCard";
-import { IProductState, IStateType } from "../../store/models/root.interface";
+import { IUserState, IStateType, IMyClassState, ICourseState, IContestState} from "../../store/models/root.interface";
 import ProductList from "../Teachers/TeachersList";
-import { IOrder } from "../../store/models/order.interface";
 
 const Home: React.FC = () => {
-  const products: IProductState = useSelector((state: IStateType) => state.products);
-  const numberItemsCount: number = products.products.length;
-  const totalPrice: number = products.products.reduce((prev, next) => prev + ((next.price * next.amount) || 0), 0);
-  const totalProductAmount: number = products.products.reduce((prev, next) => prev + (next.amount || 0), 0);
-
-  const orders: IOrder[] = useSelector((state: IStateType) => state.orders.orders);
-  const totalOrderAmount: number = orders.reduce((prev, next) => prev + next.amount, 0);
+  const users: IUserState = useSelector((state: IStateType) => state.users);
+  const courses: ICourseState = useSelector((state: IStateType) => state.courses);
+  const classs: IMyClassState = useSelector((state: IStateType) => state.myclass);
+  const contests: IContestState = useSelector((state: IStateType) => state.contest);
+  const numberItemsCount: number = users.admins.length;
+  const numberCoursesCount: number = courses.courses.length;
+  const numberClassCount: number = classs.myclass.length;
+  const numberContestCount: number = contests.contest.length;
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Trang chủ", ""));
@@ -25,12 +25,12 @@ const Home: React.FC = () => {
 
       <div className="row">
         <TopCard title="TỔNG SỐ GIÁO VIÊN" text={`${numberItemsCount}`} icon="user" class="primary" />
-        <TopCard title="TỔNG SỐ LỚP" text={`${totalProductAmount}`} icon="warehouse" class="danger" />
-        <TopCard title="TỔNG SỐ HỌC VIÊN" text={totalOrderAmount.toString()} icon="user" class="danger" />
+        <TopCard title="TỔNG SỐ KHÓA HỌC" text={`${numberCoursesCount}`} icon="warehouse" class="danger" />
+        <TopCard title="TỔNG SỐ HỌC VIÊN" text={`${numberClassCount}`} icon="user" class="danger" /> 
       </div>
 
       <div className="row">
-        <TopCard title="TỔNG SỐ CUỘC THI" text={totalPrice.toString()} icon="box" class="primary" />
+        <TopCard title="TỔNG SỐ CUỘC THI" text={`${numberContestCount}`} icon="box" class="primary" />
       </div>
 
       <div className="row">
