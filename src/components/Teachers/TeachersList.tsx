@@ -21,8 +21,6 @@ function ProductList(props: productListProps): JSX.Element  {
       <th scope="row">{product.id}</th>
       <td>{product.name}</td>
       <td>{product.category}</td>
-      <td>{product.amount}</td>
-      <td>{product.price}</td>
     </tr>);
   });
 
@@ -34,9 +32,7 @@ function ProductList(props: productListProps): JSX.Element  {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Họ và tên</th>
-            <th scope="col">Giới tính</th>
-            <th scope="col">Tổng số lớp đang dạy</th>
-            <th scope="col">Tổng số cuộc thi tham gia chấm</th>
+            <th scope="col">Email</th>
           </tr>
         </thead>
         <tbody>

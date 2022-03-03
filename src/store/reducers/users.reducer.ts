@@ -3,11 +3,11 @@ import { ADD_ADMIN, REMOVE_ADMIN } from "../actions/users.action";
 
 const initialState: IUserState = {
     users: [
-        { id: 1, firstName: "Nguyễn", lastName: "Long", email: "nvlong00@gmail.com", },
-        { id: 2, firstName: "Trần", lastName: "Binh", email: "ohmy@fr.pl" }
+        { id: 1, fullName: "Nguyễn Văn Chung", email: "nvlong00@gmail.com", },
+        { id: 2, fullName: "Trần Đức Bình", email: "ohmy@fr.pl" }
     ],
     admins: [
-        { id: 3, firstName: "Nguyễn", lastName: "Chung", email: "jcrock@em.pl" },
+        { id: 3, fullName: "Nguyễn Văn Chung", email: "jcrock@em.pl" },
     ]
 };
 

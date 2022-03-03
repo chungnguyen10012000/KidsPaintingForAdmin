@@ -29,7 +29,7 @@ const Users: React.FC = () => {
         <th scope="row">{user.id}</th>
         <td>{user.fullName}</td>
         <td>{user.email}</td>
-        <td><button className="btn btn-success" onClick={() => setUserAdmin(user)}>Gán admin</button> </td>
+        <td><button className="btn btn-success" onClick={() => setUserAdmin(user)}>Thêm</button> </td>
       </tr>);
   });
 
@@ -40,25 +40,25 @@ const Users: React.FC = () => {
         <th scope="row">{admin.id}</th>
         <td>{admin.fullName}</td>
         <td>{admin.email}</td>
-        <td><button className="btn btn-danger" onClick={() => setUserNotAdmin(admin)}>Xóa admin</button> </td>
+        <td><button className="btn btn-danger" onClick={() => setUserNotAdmin(admin)}>Xóa</button> </td>
       </tr>);
   });
 
   return (
     <Fragment>
-      <h1 className="h3 mb-2 text-gray-800">Người dùng</h1>
+      <h1 className="h3 mb-2 text-gray-800">Giáo viên</h1>
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
-        <TopCard title="ADMINS" text={admins.length.toString()} icon="user-tie" class="primary" />
-        <TopCard title="Người dùng" text={users.length.toString()} icon="user" class="danger" />
+        <TopCard title="GIÁO VIÊN" text={admins.length.toString()} icon="user-tie" class="primary" />
+        <TopCard title="GIÁO VIÊN ĐĂNG KÍ" text={users.length.toString()} icon="user" class="danger" />
       </div>
 
       <div className="row">
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách admin</h6>
+              <h6 className="m-0 font-weight-bold text-green">Danh sách giáo viên</h6>
               <div className="header-buttons">
               </div>
             </div>
@@ -70,7 +70,7 @@ const Users: React.FC = () => {
                       <th scope="col">#</th>
                       <th scope="col">Họ và tên</th>
                       <th scope="col">Email</th>
-                      <th scope="col">Admin</th>
+                      <th scope="col">Cấp quyền</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -87,7 +87,7 @@ const Users: React.FC = () => {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách người dùng</h6>
+              <h6 className="m-0 font-weight-bold text-green">Danh sách đăng kí</h6>
               <div className="header-buttons">
               </div>
             </div>
@@ -99,7 +99,7 @@ const Users: React.FC = () => {
                       <th scope="col">#</th>
                       <th scope="col">Họ và tên</th>
                       <th scope="col">Email</th>
-                      <th scope="col">Admin</th>
+                      <th scope="col">Cấp quyền</th>
                     </tr>
                   </thead>
                   <tbody>

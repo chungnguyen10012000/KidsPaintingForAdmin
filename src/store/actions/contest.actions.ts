@@ -1,44 +1,44 @@
-import { IProduct, ProductModificationStatus } from "../models/product.interface";
-export const ADD_PRODUCT: string = "ADD_PRODUCT";
-export const EDIT_PRODUCT: string = "EDIT_PRODUCT";
-export const REMOVE_PRODUCT: string = "REMOVE_PRODUCT";
-export const CHANGE_PRODUCT_AMOUNT: string = "CHANGE_PRODUCT_AMOUNT";
-export const CHANGE_PRODUCT_PENDING_EDIT: string = "CHANGE_PRODUCT_PENDING_EDIT";
-export const CLEAR_PRODUCT_PENDING_EDIT: string = "CLEAR_PRODUCT_PENDING_EDIT";
+import { IContest, ContestModificationStatus } from "../models/contest.interface";
+export const ADD_CONTEST: string = "ADD_CONTEST";
+export const EDIT_CONTEST: string = "EDIT_CONTEST";
+export const REMOVE_CONTEST: string = "REMOVE_CONTEST";
+export const CHANGE_CONTEST_AMOUNT: string = "CHANGE_CONTEST_AMOUNT";
+export const CHANGE_CONTEST_PENDING_EDIT: string = "CHANGE_CONTEST_PENDING_EDIT";
+export const CLEAR_CONTEST_PENDING_EDIT: string = "CLEAR_CONTEST_PENDING_EDIT";
 export const SET_MODIFICATION_STATE: string = "SET_MODIFICATION_STATE";
 
-export function addProduct(product: IProduct): IAddProductActionType {
-    return { type: ADD_PRODUCT, product: product };
+export function addContest(contest: IContest): IAddContestActionType {
+    return { type: ADD_CONTEST, contest: contest };
 }
 
-export function editProduct(product: IProduct): IEditProductActionType {
-    return { type: EDIT_PRODUCT, product: product };
+export function editContest(contest: IContest): IEditContestActionType {
+    return { type: EDIT_CONTEST, contest: contest };
 }
 
-export function removeProduct(id: number): IRemoveProductActionType {
-    return { type: REMOVE_PRODUCT, id: id };
+export function removeContest(id: number): IRemoveContestActionType {
+    return { type: REMOVE_CONTEST, id: id };
 }
 
-export function changeProductAmount(id: number, amount: number): IChangeProductAmountType {
-    return { type: CHANGE_PRODUCT_AMOUNT, id: id, amount: amount };
+export function changeContestAmount(id: number, amount: number): IChangeContestAmountType {
+    return { type: CHANGE_CONTEST_AMOUNT, id: id, amount: amount };
 }
 
-export function changeSelectedProduct(product: IProduct): IChangeSelectedProductActionType {
-    return { type: CHANGE_PRODUCT_PENDING_EDIT, product: product };
+export function changeSelectedContest(contest: IContest): IChangeSelectedContestActionType {
+    return { type: CHANGE_CONTEST_PENDING_EDIT, contest: contest };
 }
 
-export function clearSelectedProduct(): IClearSelectedProductActionType {
-    return { type: CLEAR_PRODUCT_PENDING_EDIT };
+export function clearSelectedContest(): IClearSelectedContestActionType {
+    return { type: CLEAR_CONTEST_PENDING_EDIT };
 }
 
-export function setModificationState(value: ProductModificationStatus): ISetModificationStateActionType {
+export function setModificationState(value: ContestModificationStatus): ISetModificationStateActionType {
     return { type: SET_MODIFICATION_STATE, value: value };
 }
 
-interface IAddProductActionType { type: string, product: IProduct };
-interface IEditProductActionType { type: string, product: IProduct };
-interface IRemoveProductActionType { type: string, id: number };
-interface IChangeSelectedProductActionType { type: string, product: IProduct };
-interface IClearSelectedProductActionType { type: string };
-interface ISetModificationStateActionType { type: string, value:  ProductModificationStatus};
-interface IChangeProductAmountType {type: string, id: number, amount: number};
+interface IAddContestActionType { type: string, contest: IContest };
+interface IEditContestActionType { type: string, contest: IContest };
+interface IRemoveContestActionType { type: string, id: number };
+interface IChangeSelectedContestActionType { type: string, contest: IContest };
+interface IClearSelectedContestActionType { type: string };
+interface ISetModificationStateActionType { type: string, value:  ContestModificationStatus};
+interface IChangeContestAmountType {type: string, id: number, amount: number};

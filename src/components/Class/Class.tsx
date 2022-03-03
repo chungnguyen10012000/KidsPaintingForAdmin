@@ -1,77 +1,77 @@
 import React, { Fragment, Dispatch, useState, useEffect } from "react";
-import ContestList from "./ContestList";
-import ContestForm from "./ContestForm";
+import ClassList from "./ClassList";
+import ClassForm from "./ClassForm";
 import TopCard from "../../common/components/TopCard";
-import "./Contest.css";
+import "./Class.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
-import { IContestState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
+import { IClassState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
 import Popup from "reactjs-popup";
-import { removeContest, clearSelectedContest, setModificationState,
-  changeSelectedContest } from "../../store/actions/contest.actions";
+import { removeClass, clearSelectedClass, setModificationState,
+  changeSelectedClass } from "../../store/actions/class.actions";
 import { addNotification } from "../../store/actions/notifications.action";
-import { ContestModificationStatus, IContest } from "../../store/models/contest.interface";
+import { ClassModificationStatus, IClass} from "../../store/models/class.interface";
 
-const Contests: React.FC = () => {
+const MyClass: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  const contests: IContestState = useSelector((state: IStateType) => state.contest);
+  const myClass: IClassState = useSelector((state: IStateType) => state.class);
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
-  const numberItemsCount: number = contests.contest.length;
+  const numberItemsCount: number = myClass.class.length;
   const [popup, setPopup] = useState(false);
 
   useEffect(() => {
-    dispatch(clearSelectedContest());
+    dispatch(clearSelectedClass());
     dispatch(updateCurrentPath("Giáo viên", "Danh sách"));
   }, [path.area, dispatch]);
 
-  function onContestSelect(product: IContest): void {
-    dispatch(changeSelectedContest(product));
-    dispatch(setModificationState(ContestModificationStatus.None));
+  function onClassSelect(_class: IClass): void {
+    dispatch(changeSelectedClass(_class));
+    dispatch(setModificationState(ClassModificationStatus.None));
   }
 
-  function onContestRemove() {
-    if(contests.selectedContest) {
+  function onClassRemove() {
+    if(myClass.selectedClass) {
       setPopup(true);
     }
   }
 
   return (
     <Fragment>
-      <h1 className="h3 mb-2 text-gray-800">Cuộc thi</h1>
+      <h1 className="h3 mb-2 text-gray-800">Lớp</h1>
       <p className="mb-4">Thông tin chung</p>
       <div className="row">
-        <TopCard title="TỔNG SỐ CUỘC THI" text={`${numberItemsCount}`} icon="box" class="primary" />
+        <TopCard title="TỔNG SỐ LỚP HỌC" text={`${numberItemsCount}`} icon="box" class="primary" />
       </div>
 
       <div className="row">
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi</h6>
+              <h6 className="m-0 font-weight-bold text-green">Danh sách lớp</h6>
               <div className="header-buttons">
                 <button className="btn btn-success btn-green" onClick={() =>
-                  dispatch(setModificationState(ContestModificationStatus.Create))}>
+                  dispatch(setModificationState(ClassModificationStatus.Create))}>
                   <i className="fas fa fa-plus"></i>
                 </button>
                 <button className="btn btn-success btn-blue" onClick={() =>
-                  dispatch(setModificationState(ContestModificationStatus.Edit))}>
+                  dispatch(setModificationState(ClassModificationStatus.Edit))}>
                   <i className="fas fa fa-pen"></i>
                 </button>
-                <button className="btn btn-success btn-red" onClick={() => onContestRemove()}>
+                <button className="btn btn-success btn-red" onClick={() => onClassRemove()}>
                   <i className="fas fa fa-times"></i>
                 </button>
               </div>
             </div>
             <div className="card-body">
-              <ContestList
-                onSelect={onContestSelect}
+              <ClassList
+                onSelect={onClassSelect}
               />
             </div>
           </div>
         </div>
-        {((contests.modificationState === ContestModificationStatus.Create)
-          || (contests.modificationState === ContestModificationStatus.Edit && contests.selectedContest)) ?
-          <ContestForm /> : null}
+        {((myClass.modificationState === ClassModificationStatus.Create)
+          || (myClass.modificationState === ClassModificationStatus.Edit && myClass.selectedClass)) ?
+          <ClassForm /> : null}
       </div>
 
 
@@ -89,12 +89,12 @@ const Contests: React.FC = () => {
             <button type="button"
               className="btn btn-danger"
               onClick={() => {
-                if (!contests.selectedContest) {
+                if (!myClass.selectedClass) {
                   return;
                 }
-                dispatch(addNotification("Cuộc thi", ` ${contests.selectedContest.name} đã bị xóa khỏi hệ thống`));
-                dispatch(removeContest(contests.selectedContest.id));
-                dispatch(clearSelectedContest());
+                dispatch(addNotification("Lớp", ` ${myClass.selectedClass.name} đã bị xóa khỏi hệ thống`));
+                dispatch(removeClass(myClass.selectedClass.id));
+                dispatch(clearSelectedClass());
                 setPopup(false);
               }}>Xóa
               </button>
@@ -105,4 +105,4 @@ const Contests: React.FC = () => {
   );
 };
 
-export default Contests;
+export default MyClass;

@@ -12,10 +12,10 @@ const App: React.FC = () => {
     <div className="App" id="wrapper">
       <Router>
         <Switch>
+          <AccountRoute path="/login"><Login /></AccountRoute>
           <PrivateRoute path="/">
             <Admin />
           </PrivateRoute>
-          <AccountRoute path="/login"><Login /></AccountRoute>
         </Switch>
       </Router>
     </div>

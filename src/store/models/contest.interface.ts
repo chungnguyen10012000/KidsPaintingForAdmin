@@ -2,6 +2,9 @@ export interface IContest {
     id: number;
     name: string;
     description: string;
+    type: string;
+    level: string;
+    status: string;
     amount: number;
     hasBeginDate: string;
     hasExpiryDate: string;

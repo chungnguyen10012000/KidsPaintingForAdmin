@@ -10,7 +10,7 @@ const initialState: IProductState = {
     selectedProduct: null,
     products: [{
         id: 1, name: "Nguyễn Văn Chung", description: "Thanh Hoa",
-        amount: 10, price: 4, hasExpiryDate: true, category: "Name"
+        amount: 10, price: 4, hasExpiryDate: true, category: "nvchung00@gmail.com"
     }]
 };
 

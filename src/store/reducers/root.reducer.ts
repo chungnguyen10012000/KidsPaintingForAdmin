@@ -6,6 +6,10 @@ import notificationReducer from "./notification.reducer";
 import userReducer from "./users.reducer";
 import orderReducer from "./order.reducer";
 import accountReducer from "./account.reducer";
+import courseReducer from "./courses.reducer";
+import classReducer from "./class.reducer";
+import contestReducer from "./contest.reducer";
+import myclasssReducer from "./myclass.reducer";
 
 const initialState: IRootStateType = {
     page: {area: "home", subArea: ""}
@@ -20,9 +24,14 @@ function rootReducer(state: IRootStateType = initialState, action: IActionBase):
     }
 }
 
-const rootReducers: Reducer<IStateType> = combineReducers({root: rootReducer,
+const rootReducers: Reducer<IStateType> = combineReducers({
+    root: rootReducer,
     products: productsReducer,
     notifications: notificationReducer,
+    courses: courseReducer,
+    myclass: myclasssReducer,
+    class: classReducer,
+    contest: contestReducer,
     users: userReducer,
     orders: orderReducer,
     account: accountReducer,

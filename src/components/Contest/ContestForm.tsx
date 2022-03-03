@@ -1,32 +1,33 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
-import { IStateType, IProductState } from "../../store/models/root.interface";
+import { IStateType, IContestState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
-import { IProduct, ProductModificationStatus } from "../../store/models/product.interface";
+import { IContest, ContestModificationStatus } from "../../store/models/contest.interface";
 import TextInput from "../../common/components/TextInput";
-import { editProduct, clearSelectedProduct, setModificationState, addProduct } from "../../store/actions/products.action";
+import { editContest, clearSelectedContest, setModificationState, addContest } from "../../store/actions/contest.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
-import Checkbox from "../../common/components/Checkbox";
+import { OnChangeModel, IContestFormState } from "../../common/types/Form.types";
 import SelectInput from "../../common/components/Select";
-import { OnChangeModel, IProductFormState } from "../../common/types/Form.types";
 
 const ContestForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  const products: IProductState | null = useSelector((state: IStateType) => state.products);
-  let product: IProduct | null = products.selectedProduct;
-  const isCreate: boolean = (products.modificationState === ProductModificationStatus.Create);
+  const contests: IContestState | null = useSelector((state: IStateType) => state.contest);
+  let contest: IContest | null = contests.selectedContest;
+  const isCreate: boolean = (contests.modificationState === ContestModificationStatus.Create);
   
-  if (!product || isCreate) {
-    product = { id: 0, name: "", description: "", amount: 0, price: 0, hasExpiryDate: false, category: "" };
+  if (!contest || isCreate) {
+    contest = { id: 0, name: "", description: "", type: "", level: "", status: "", amount: 0, hasBeginDate: "", hasExpiryDate: ""};
   }
 
   const [formState, setFormState] = useState({
-    name: { error: "", value: product.name },
-    description: { error: "", value: product.description },
-    amount: { error: "", value: product.amount },
-    price: { error: "", value: product.price },
-    hasExpiryDate: { error: "", value: product.hasExpiryDate },
-    category: { error: "", value: product.category }
+    name: { error: "", value: contest.name },
+    description: { error: "", value: contest.description },
+    type: { error: "", value: contest.type },
+    level: { error: "", value: contest.level },
+    status: { error: "", value: contest.status },
+    amount: { error: "", value: contest.amount },
+    hasBeginDate: { error: "", value: contest.hasBeginDate },
+    hasExpiryDate: { error: "", value: contest.hasExpiryDate },
   });
 
   function hasFormValueChanged(model: OnChangeModel): void {
@@ -39,30 +40,32 @@ const ContestForm: React.FC = () => {
       return;
     }
 
-    let saveUserFn: Function = (isCreate) ? addProduct : editProduct;
+    let saveUserFn: Function = (isCreate) ? addContest : editContest;
     saveForm(formState, saveUserFn);
   }
 
-  function saveForm(formState: IProductFormState, saveFn: Function): void {
-    if (product) {
+  function saveForm(formState: IContestFormState, saveFn: Function): void {
+    if (contest) {
       dispatch(saveFn({
-        ...product,
+        ...contest,
         name: formState.name.value,
         description: formState.description.value,
-        price: formState.price.value,
+        type: formState.type.value,
+        level:  formState.level.value,
+        status:  formState.status.value,
         amount: formState.amount.value,
+        hasBeginDate:  formState.hasBeginDate.value,
         hasExpiryDate: formState.hasExpiryDate.value,
-        category: formState.category.value
       }));
 
-      dispatch(addNotification("Product edited", `Product ${formState.name.value} edited by you`));
-      dispatch(clearSelectedProduct());
-      dispatch(setModificationState(ProductModificationStatus.None));
+      dispatch(addNotification("Contest edited", `Contest ${formState.name.value} edited by you`));
+      dispatch(clearSelectedContest());
+      dispatch(setModificationState(ContestModificationStatus.None));
     }
   }
 
   function cancelForm(): void {
-    dispatch(setModificationState(ProductModificationStatus.None));
+    dispatch(setModificationState(ContestModificationStatus.None));
   }
 
   function getDisabledClass(): string {
@@ -72,8 +75,8 @@ const ContestForm: React.FC = () => {
 
   function isFormInvalid(): boolean {
     return (formState.amount.error || formState.description.error
-      || formState.name.error || formState.price.error || formState.hasExpiryDate.error
-      || formState.category.error || !formState.name.value || !formState.category.value) as boolean;
+      || formState.name.error || formState.type.error || formState.level.error || formState.status.error || formState.hasBeginDate.error || formState.hasExpiryDate.error
+      || formState.level.error || !formState.name.value || !formState.type.value) as boolean;
 }
 
   return (
@@ -85,17 +88,15 @@ const ContestForm: React.FC = () => {
           </div>
           <div className="card-body">
             <form onSubmit={saveUser}>
-              <div className="form-row">
-                <div className="form-group col-md-6">
-                  <TextInput id="input_email"
-                    value={formState.name.value}
-                    field="name"
-                    onChange={hasFormValueChanged}
-                    required={true}
-                    maxLength={20}
-                    label="Tên cuộc thi"
-                    placeholder="Nhập tên cuộc thi" />
-                </div>
+              <div className="form-group">
+                <TextInput id="input_name"
+                  value={formState.name.value}
+                  field="name"
+                  onChange={hasFormValueChanged}
+                  required={true}
+                  maxLength={10000}
+                  label="Tên cuộc thi"
+                  placeholder="Nhập tên cuộc thi" />
               </div>
               <div className="form-group">
                 <TextInput id="input_description"
@@ -103,31 +104,69 @@ const ContestForm: React.FC = () => {
                   value={formState.description.value}
                   onChange={hasFormValueChanged}
                   required={false}
-                  maxLength={100}
-                  label="Miêu tả chi tiết"
-                  placeholder="Miêu tả chi tiết" />
+                  maxLength={10000}
+                  label="Miêu tả chi tiết cuộc thi"
+                  placeholder="" />
               </div>
-              <div className="form-row">
-              <div className="form-group col-md-6">
-                  <NumberInput id="input_price"
-                    value={formState.price.value}
-                    field="price"
+              <div className="form-group">
+                <TextInput id="input_type"
+                  value={formState.type.value}
+                  field="type"
+                  onChange={hasFormValueChanged}
+                  required={true}
+                  maxLength={20}
+                  label="Thể loại"
+                  placeholder="" />
+              </div>
+              <div className="form-group">
+                <SelectInput
+                    id="input_level"
+                    field="level"
+                    label="Đối tượng"
+                    options={["5-9 tuổi", "9-12 tuổi", "10-16 tuổi"]}
+                    required={true}
+                    onChange={hasFormValueChanged}
+                    value={formState.level.value}
+                  />
+              </div>
+              <div className="form-group">
+                <TextInput id="input_status"
+                field = "status"
+                  value={formState.status.value}
+                  onChange={hasFormValueChanged}
+                  required={false}
+                  maxLength={100}
+                  label="Trạng thái"
+                  placeholder="" />
+              </div>
+              <div className="form-group">
+                  <NumberInput id="input_amount"
+                    value={formState.amount.value}
+                    field="amount"
                     onChange={hasFormValueChanged}
                     max={1000}
                     min={0}
-                    label="Số lương tối đa tham gia" />
-                </div>
-                <div className="form-group">
-              </div>
+                    label="Số lượng tối đa tham gia" />
               </div>
               <div className="form-group">
-                <Checkbox
-                  id="checkbox_expiry"
-                  field="hasExpiryDate"
-                  value={formState.hasExpiryDate.value}
-                  label="Chắc chắn đúng thông tin "
+                <TextInput id="input_hasBeginDate"
+                  field = "hasBeginDate"
+                  value={formState.hasBeginDate.value}
                   onChange={hasFormValueChanged}
-                />
+                  required={false}
+                  maxLength={100}
+                  label="Thời gian bắt đầu"
+                  placeholder="" />
+              </div>
+              <div className="form-group">
+                <TextInput id="input_hasExpiryDate"
+                field = "hasExpiryDate"
+                  value={formState.hasExpiryDate.value}
+                  onChange={hasFormValueChanged}
+                  required={false}
+                  maxLength={100}
+                  label="Thời gian hết hạn"
+                  placeholder="" />
               </div>
               <button className="btn btn-danger" onClick={() => cancelForm()}>Cancel</button>
               <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Save</button>

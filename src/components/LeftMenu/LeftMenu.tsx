@@ -44,14 +44,21 @@ const LeftMenu: React.FC = () => {
                 </div>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/products`}>
+                    <Link className="nav-link" to={`/teacher`}>
                         <i className="fas fa-fw fa-user"></i>
                         <span>Giáo viên</span>
                     </Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/orders`}>
+                    <Link className="nav-link" to={`/courses`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Khoá học</span>
+                    </Link>
+                </li>
+
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/myclass`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Lớp học</span>
                     </Link>
@@ -63,22 +70,6 @@ const LeftMenu: React.FC = () => {
                         <span>Cuộc thi</span>
                     </Link>
                 </li>
-
-                <hr className="sidebar-divider" />
-
-                <div className="sidebar-heading">
-                    Admin
-                </div>
-
-
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/users`}>
-                        <i className="fas fa-fw fa-user"></i>
-                        <span>Users</span>
-                    </Link>
-                </li>
-
-                <hr className="sidebar-divider d-none d-md-block" />
             </ul>
         </Fragment>
     );
