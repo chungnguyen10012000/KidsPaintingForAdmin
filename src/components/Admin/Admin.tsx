@@ -27,8 +27,8 @@ const Admin: React.FC = () => {
               <Route path={`/courses`}><Courses /></Route>
               <Route path={`/myclass`}><MyClass /></Route>
               <Route path={`/contest`}><Contest /></Route>
-              <Route path="/"><Home /></Route>
-              <Route path="/login"><Login /></Route>
+              <Route path={`/home`}><Home /></Route>
+              <Route path={`/login`}><Login /></Route>
             </Switch>
           </div>
         </div>

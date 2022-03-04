@@ -1,11 +1,18 @@
 import React, { useState, FormEvent, Dispatch } from "react";
+import { useHistory } from "react-router";
 import { OnChangeModel } from "../../common/types/Form.types";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/actions/account.actions";
 import TextInput from "../../common/components/TextInput";
 
+const admin = {
+  email: 'nvchung00@gmail.com',
+  password: '12345678',
+}
+
 const Login: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
+  let history = useHistory();
 
   const [formState, setFormState] = useState({
     email: { error: "", value: "" },
@@ -16,10 +23,22 @@ const Login: React.FC = () => {
     setFormState({ ...formState, [model.field]: { error: model.error, value: model.value } });
   }
 
-  function submit(e: FormEvent<HTMLFormElement>): void {
+  function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if(isFormInvalid()) { return; }
     dispatch(login(formState.email.value));
+    if (formState.email.value === admin.email) {
+      if (formState.password.value === admin.password) {
+        alert('Đăng nhập thành công!')
+        history.push('/home')
+      }
+      else{
+        alert('Mật khẩu không đúng!')
+      }
+    }
+    else{
+      alert('Email không đúng!')
+    }
   }
 
   function isFormInvalid() {

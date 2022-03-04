@@ -32,7 +32,7 @@ const LeftMenu: React.FC = () => {
 
                 <li className="nav-item active">
 
-                    <Link className="nav-link" to="Home">
+                    <Link className="nav-link" to="/home">
                         <i className="fas fa-fw fa-tachometer-alt"></i>
                         <span>Trang chủ</span>
                     </Link>
