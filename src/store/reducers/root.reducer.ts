@@ -10,6 +10,8 @@ import courseReducer from "./courses.reducer";
 import classReducer from "./class.reducer";
 import contestReducer from "./contest.reducer";
 import myclasssReducer from "./myclass.reducer";
+import mytypesReducer from "./mytypes.reducer";
+import levelsReducer from "./levels.reducer";
 
 const initialState: IRootStateType = {
     page: {area: "home", subArea: ""}
@@ -35,6 +37,8 @@ const rootReducers: Reducer<IStateType> = combineReducers({
     users: userReducer,
     orders: orderReducer,
     account: accountReducer,
+    mytypes: mytypesReducer,
+    levels: levelsReducer,
 });
 
 

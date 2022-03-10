@@ -9,13 +9,14 @@ export type OnChangeModel = {
 
 export interface IFormStateField<T> {error: string, value: T};
 
-export interface IProductFormState {
-    name: IFormStateField<string>;
-    description: IFormStateField<string>;
-    amount: IFormStateField<number>;
-    price: IFormStateField<number>;
-    hasExpiryDate: IFormStateField<boolean>; 
-    category: IFormStateField<string>;
+export interface IUserFormState {
+    fullName: IFormStateField<string>;
+    email: IFormStateField<string>;
+    sex: IFormStateField<string>;
+    dateOfDay:  IFormStateField<string>;
+    address: IFormStateField<string>;
+    phone: IFormStateField<string>;
+    password: IFormStateField<string>;
 }
 
 export interface ICourseFormState {
@@ -24,6 +25,13 @@ export interface ICourseFormState {
     type: IFormStateField<string>;
     level: IFormStateField<string>;
     price: IFormStateField<number>; 
+}
+
+export interface IMytypeFormState {
+    name: IFormStateField<string>;
+}
+export interface ILevelFormState {
+    name: IFormStateField<string>;
 }
 
 export interface IMyClassFormState {

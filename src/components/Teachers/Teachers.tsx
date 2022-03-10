@@ -3,7 +3,7 @@ import TopCard from "../../common/components/TopCard";
 import { IUser } from "../../store/models/user.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
-import { addAdmin, removeAdmin } from "../../store/actions/users.action";
+import { addUser, removeUser } from "../../store/actions/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 
 const Users: React.FC = () => {
@@ -15,11 +15,11 @@ const Users: React.FC = () => {
   const admins: IUser[] = useSelector((state: IStateType) => state.users.admins);
 
   function setUserAdmin(user: IUser): void {
-    dispatch(addAdmin(user));
+    dispatch(addUser(user));
   }
 
   function setUserNotAdmin(admin: IUser): void {
-    dispatch(removeAdmin(admin)); 
+    dispatch(removeUser(admin)); 
   }
 
   const userElements: JSX.Element[] = users.map(user => {

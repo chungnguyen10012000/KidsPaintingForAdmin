@@ -21,7 +21,7 @@ const MyClass: React.FC = () => {
 
   useEffect(() => {
     dispatch(clearSelectedMyClass());
-    dispatch(updateCurrentPath("Giáo viên", "Danh sách"));
+    dispatch(updateCurrentPath("Lớp", "Danh sách"));
   }, [path.area, dispatch]);
 
   function onMyClassSelect(myClass: IMyClass): void {

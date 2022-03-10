@@ -1,5 +1,5 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
-import { IStateType, ICourseState } from "../../store/models/root.interface";
+import { IStateType, ICourseState, ILevelState, IMytypeState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { ICourse, CourseModificationStatus } from "../../store/models/courses.interface";
 import TextInput from "../../common/components/TextInput";
@@ -8,6 +8,18 @@ import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import SelectInput from "../../common/components/Select";
 import { OnChangeModel, ICourseFormState } from "../../common/types/Form.types";
+import { ILevel } from "../../store/models/levels.interface";
+import { IMytype } from "../../store/models/mytypes.interface";
+
+export type levelListProps = {
+  onSelect?: (level: ILevel) => void;
+  children?: React.ReactNode;
+};
+
+export type mytypeListProps = {
+  onSelect?: (mytype: IMytype) => void;
+  children?: React.ReactNode;
+};
 
 const CoursesForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
@@ -18,6 +30,22 @@ const CoursesForm: React.FC = () => {
   if (!course || isCreate) {
   course = { id: 0, name: "", description: "", type: "", level: "", price: 0};
   }
+
+  const levels: ILevelState = useSelector((state: IStateType) => state.levels);
+  const listLevel: ILevel[] = levels.levels
+  const listLevels: string[] = []
+  listLevel.map((ele) => {
+    return listLevels.push(ele.name)
+  })
+
+  const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
+  const listMytype: IMytype[] = mytypes.mytypes
+  const listMytypes: string[] = []
+  listMytype.map((ele) => {
+    return listMytypes.push(ele.name)
+  })
+
+  //console.log(listLevels)
 
   const [formState, setFormState] = useState({
     name: { error: "", value: course.name },
@@ -103,21 +131,21 @@ const CoursesForm: React.FC = () => {
                   placeholder="" />
               </div>
               <div className="form-group">
-                <TextInput id="input_type"
+                <SelectInput id="input_type"
                   field = "type"
                   value={formState.type.value}
                   onChange={hasFormValueChanged}
                   required={true}
-                  maxLength={100}
                   label="Thể loại"
-                  placeholder="" />
+                  options={listMytypes}
+                />
               </div>
               <div className="form-group">
                   <SelectInput
                     id="input_level"
                     field="level"
                     label="Mức độ"
-                    options={["5-9 tuổi", "9-12 tuổi", "10-16 tuổi"]}
+                    options={listLevels}
                     required={true}
                     onChange={hasFormValueChanged}
                     value={formState.level.value}

@@ -21,7 +21,7 @@ const Contests: React.FC = () => {
 
   useEffect(() => {
     dispatch(clearSelectedContest());
-    dispatch(updateCurrentPath("Giáo viên", "Danh sách"));
+    dispatch(updateCurrentPath("Cuộc thi", "Danh sách"));
   }, [path.area, dispatch]);
 
   function onContestSelect(product: IContest): void {

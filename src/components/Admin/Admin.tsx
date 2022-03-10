@@ -10,6 +10,7 @@ import Contest from "../Contest/Contest"
 import Notifications from "../../common/components/Notification";
 import Courses from "../Courses/Courses";
 import MyClass from "../MyClass/MyClass";
+import Account from "../Account/account";
 
 const Admin: React.FC = () => {
 
@@ -29,6 +30,7 @@ const Admin: React.FC = () => {
               <Route path={`/contest`}><Contest /></Route>
               <Route path={`/home`}><Home /></Route>
               <Route path={`/login`}><Login /></Route>
+              <Route path={`/account`}><Account /></Route>
             </Switch>
           </div>
         </div>

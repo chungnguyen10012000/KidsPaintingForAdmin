@@ -5,11 +5,6 @@ import { useDispatch } from "react-redux";
 import { login } from "../../store/actions/account.actions";
 import TextInput from "../../common/components/TextInput";
 
-const admin = {
-  email: 'nvchung00@gmail.com',
-  password: '12345678',
-}
-
 const Login: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   let history = useHistory();
@@ -26,19 +21,10 @@ const Login: React.FC = () => {
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if(isFormInvalid()) { return; }
-    dispatch(login(formState.email.value));
-    if (formState.email.value === admin.email) {
-      if (formState.password.value === admin.password) {
-        alert('Đăng nhập thành công!')
-        history.push('/home')
-      }
-      else{
-        alert('Mật khẩu không đúng!')
-      }
-    }
-    else{
-      alert('Email không đúng!')
-    }
+    dispatch(login(formState.email.value)); 
+    alert('Đăng nhập thành công!')
+    history.push('/home')
+
   }
 
   function isFormInvalid() {

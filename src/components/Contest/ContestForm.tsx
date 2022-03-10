@@ -1,5 +1,5 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
-import { IStateType, IContestState } from "../../store/models/root.interface";
+import { IStateType, IContestState, ILevelState, IMytypeState  } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { IContest, ContestModificationStatus } from "../../store/models/contest.interface";
 import TextInput from "../../common/components/TextInput";
@@ -8,6 +8,19 @@ import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import { OnChangeModel, IContestFormState } from "../../common/types/Form.types";
 import SelectInput from "../../common/components/Select";
+
+import { ILevel } from "../../store/models/levels.interface";
+import { IMytype } from "../../store/models/mytypes.interface";
+
+export type levelListProps = {
+  onSelect?: (level: ILevel) => void;
+  children?: React.ReactNode;
+};
+
+export type mytypeListProps = {
+  onSelect?: (mytype: IMytype) => void;
+  children?: React.ReactNode;
+};
 
 const ContestForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
@@ -18,6 +31,20 @@ const ContestForm: React.FC = () => {
   if (!contest || isCreate) {
     contest = { id: 0, name: "", description: "", type: "", level: "", status: "", amount: 0, hasBeginDate: "", hasExpiryDate: ""};
   }
+
+  const levels: ILevelState = useSelector((state: IStateType) => state.levels);
+  const listLevel: ILevel[] = levels.levels
+  const listLevels: string[] = []
+  listLevel.map((ele) => {
+    return listLevels.push(ele.name)
+  })
+
+  const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
+  const listMytype: IMytype[] = mytypes.mytypes
+  const listMytypes: string[] = []
+  listMytype.map((ele) => {
+    return listMytypes.push(ele.name)
+  })
 
   const [formState, setFormState] = useState({
     name: { error: "", value: contest.name },
@@ -109,21 +136,21 @@ const ContestForm: React.FC = () => {
                   placeholder="" />
               </div>
               <div className="form-group">
-                <TextInput id="input_type"
+                <SelectInput id="input_type"
+                  field = "type"
                   value={formState.type.value}
-                  field="type"
                   onChange={hasFormValueChanged}
                   required={true}
-                  maxLength={20}
                   label="Thể loại"
-                  placeholder="" />
+                  options={listMytypes}
+                />
               </div>
               <div className="form-group">
-                <SelectInput
+                  <SelectInput
                     id="input_level"
                     field="level"
-                    label="Đối tượng"
-                    options={["5-9 tuổi", "9-12 tuổi", "10-16 tuổi"]}
+                    label="Mức độ"
+                    options={listLevels}
                     required={true}
                     onChange={hasFormValueChanged}
                     value={formState.level.value}
