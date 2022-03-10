@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 
-const LeftMenu: React.FC = () => {
+const LeftMenuForTeacher: React.FC = () => {
 
     let [leftMenuVisibility, setLeftMenuVisibility] = useState(false);
 
@@ -32,7 +32,7 @@ const LeftMenu: React.FC = () => {
 
                 <li className="nav-item active">
 
-                    <Link className="nav-link" to="/admin/home">
+                    <Link className="nav-link" to="/teacher/home">
                         <i className="fas fa-fw fa-tachometer-alt"></i>
                         <span>Trang chủ</span>
                     </Link>
@@ -44,28 +44,14 @@ const LeftMenu: React.FC = () => {
                 </div>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/teacher`}>
-                        <i className="fas fa-fw fa-user"></i>
-                        <span>Giáo viên</span>
-                    </Link>
-                </li>
-
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/courses`}>
-                        <i className="fas fa-fw fa-warehouse"></i>
-                        <span>Khoá học</span>
-                    </Link>
-                </li>
-
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/myclass`}>
+                    <Link className="nav-link" to={`/teacher/myclass`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Lớp học</span>
                     </Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/contest`}>
+                    <Link className="nav-link" to={`/teacher/contest`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Cuộc thi</span>
                     </Link>
@@ -75,7 +61,7 @@ const LeftMenu: React.FC = () => {
                     Quản lý tài khoản
                 </div>
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/account`}>
+                    <Link className="nav-link" to={`/teacher/account`}>
                         <i className="fas fa-fw fa-user-circle"></i>
                         <span>Tài khoản</span>
                     </Link>
@@ -85,4 +71,4 @@ const LeftMenu: React.FC = () => {
     );
 };
 
-export default LeftMenu;
+export default LeftMenuForTeacher;

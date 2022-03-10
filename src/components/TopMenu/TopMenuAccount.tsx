@@ -22,8 +22,7 @@ function TopMenuAccount(): JSX.Element {
         aria-haspopup="true"
         aria-expanded="false">
         <span className="mr-2 d-none d-lg-inline small cadet">{email}</span>
-        <img className="img-profile rounded-circle" alt=""
-          src="https://source.unsplash.com/QAB-WJcbgJk/60x60" />
+        <i className="fas fa-fw fa-user-circle"></i>
       </a>
 
       <div className={`dropdown-menu dropdown-menu-right shadow animated--grow-in ${(isShow) ? "show" : ""}`}

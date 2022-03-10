@@ -23,7 +23,7 @@ export function AccountRoute({ children, ...rest }: RouteProps): JSX.Element {
                     />
                 ) : <Login />
             } 
-            path="/login">
+            path="/admin/login">
         </Route>
     );
 }

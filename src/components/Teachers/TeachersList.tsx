@@ -20,7 +20,7 @@ function ProductList(props: userListProps): JSX.Element  {
       key={`user_${user.id}`}>
       <th scope="row">{user.id}</th>
       <td>{user.fullName}</td>
-      <td>{user.sex}</td>
+      <td>{user.email}</td>
     </tr>);
   });
 

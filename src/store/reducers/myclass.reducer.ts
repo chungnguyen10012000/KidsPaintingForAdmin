@@ -9,7 +9,11 @@ const initialState: IMyClassState = {
     modificationState: MyClassModificationStatus.None,
     selectedMyClass: null,
     myclass: [{
-        id: 1, name: "Cơ bản", course: 1, teacher_id: 1,
+        id: 1, name: "CM-1", course: 1, teacher_id: 1,
+        amount: 6
+    },
+    {
+        id: 2, name: "CM-2", course: 1, teacher_id: 2,
         amount: 6
     }]
 };

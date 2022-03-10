@@ -1,13 +1,19 @@
 import React, { useState, FormEvent, Dispatch } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { OnChangeModel } from "../../common/types/Form.types";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/actions/account.actions";
 import TextInput from "../../common/components/TextInput";
 
+type role = {
+  id: string;
+};
+
 const Login: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   let history = useHistory();
+
+  const { id } = useParams<role>()
 
   const [formState, setFormState] = useState({
     email: { error: "", value: "" },
@@ -22,8 +28,14 @@ const Login: React.FC = () => {
     e.preventDefault();
     if(isFormInvalid()) { return; }
     dispatch(login(formState.email.value)); 
-    alert('Đăng nhập thành công!')
-    history.push('/home')
+    if(id === "admin"){
+      alert('Quản trị viên đăng nhập thành công!')
+      history.push({pathname: '/admin', state: {isAdmin: true}})
+    }
+    else {
+      alert('Giáo viên đăng nhập thành công!')
+      history.push({pathname: '/teacher', state: {isAdmin: false}})
+    }
 
   }
 
@@ -49,7 +61,7 @@ const Login: React.FC = () => {
                 <div className="col-lg-6">
                   <div className="p-5">
                     <div className="text-center">
-                      <h1 className="h4 text-gray-900 mb-4">Chào mừng bạn!</h1>
+                      <h1 className="h4 text-gray-900 mb-4">Chào mừng {id === "admin" ? "quản trị viên" : "giáo viên"} !</h1>
                     </div>
                     <form className="user" onSubmit={submit}>
                       <div className="form-group">
@@ -86,6 +98,18 @@ const Login: React.FC = () => {
                         type="submit">
                         Đăng nhập
                       </button>
+                      {
+                        function () {
+                          if (id === "admin"){
+                            return (
+                              <a href="/teacher/login">Bạn là giáo viên ?</a>
+                            )
+                          }
+                          return (
+                            <a href="/admin/login">Bạn là quản trị viên ?</a>
+                          )
+                        }()
+                      }
                     </form>
                   </div>
                 </div>

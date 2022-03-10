@@ -12,8 +12,8 @@ const App: React.FC = () => {
     <div className="App" id="wrapper">
       <Router>
         <Switch>
-          <AccountRoute path="/login"><Login /></AccountRoute>
-          <PrivateRoute path="/">
+          <AccountRoute path="/:id/login"><Login /></AccountRoute>
+          <PrivateRoute path="/:id">
             <Admin />
           </PrivateRoute>
         </Switch>
