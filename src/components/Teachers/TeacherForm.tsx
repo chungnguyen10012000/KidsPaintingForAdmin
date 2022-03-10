@@ -6,11 +6,9 @@ import TextInput from "../../common/components/TextInput";
 import { addUser, clearSelectedUser, setModificationState } from "../../store/actions/users.action";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IUserFormState } from "../../common/types/Form.types";
-import SelectInput from "../../common/components/Select";
 
 const TeacherForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  const users: IUserState | null = useSelector((state: IStateType) => state.users);
   let user: IUser  = {id: 0, fullName: '', email: '', sex: '', dateOfDay: '', address: '', phone: '', password: ''}
   
 
