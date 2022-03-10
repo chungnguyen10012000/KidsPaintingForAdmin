@@ -1,6 +1,5 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
-import { IStateType, IUserState } from "../../store/models/root.interface";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { IUser, UserModificationStatus } from "../../store/models/user.interface";
 import TextInput from "../../common/components/TextInput";
 import { addUser, clearSelectedUser, setModificationState } from "../../store/actions/users.action";
