@@ -11,8 +11,8 @@ export function addUser(user: IUser): IAddUserActionType {
     return { type: ADD_USER, user: user };
 }
 
-export function removeUser(user: IUser): IRemoveUserActionType {
-    return { type: REMOVE_USER, user: user };
+export function removeUser(id: number): IRemoveUserActionType {
+    return { type: REMOVE_USER, id: id };
 }
 
 export function editUser(user: IUser): IEditUserActionType {
@@ -35,7 +35,7 @@ export function clearSelectedUser(): IClearSelectedUserActionType {
 
 interface IEditUserActionType { type: string, user: IUser };
 interface IAddUserActionType { type: string, user: IUser };
-interface IRemoveUserActionType { type: string, user: IUser };
+interface IRemoveUserActionType { type: string, id: number };
 interface ISetModificationStateActionUser { type: string, value:  UserModificationStatus};
 interface IChangeSelectedUserActionType { type: string, user: IUser };
 interface IClearSelectedUserActionType { type: string };

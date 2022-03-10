@@ -1,26 +1,26 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { IStateType, IProductState } from "../../store/models/root.interface";
-import { IProduct } from "../../store/models/product.interface";
+import { IStateType, IUserState } from "../../store/models/root.interface";
+import { IUser } from "../../store/models/user.interface";
 
-export type productListProps = {
-  onSelect?: (product: IProduct) => void;
+export type userListProps = {
+  onSelect?: (user: IUser) => void;
   children?: React.ReactNode;
 };
 
-function ProductList(props: productListProps): JSX.Element  {
-  const products: IProductState = useSelector((state: IStateType) => state.products);
+function ProductList(props: userListProps): JSX.Element  {
+  const users: IUserState = useSelector((state: IStateType) => state.users);
 
-  const productElements: (JSX.Element | null)[] = products.products.map(product => {
-    if (!product) { return null; }
-    return (<tr className={`table-row ${(products.selectedProduct && products.selectedProduct.id === product.id) ? "selected" : ""}`}
+  const userElements: (JSX.Element | null)[] = users.users.map(user => {
+    if (!user) { return null; }
+    return (<tr className={`table-row ${(users.selectedUser && users.selectedUser.id === user.id) ? "selected" : ""}`}
       onClick={() => {
-        if(props.onSelect) props.onSelect(product);
+        if(props.onSelect) props.onSelect(user);
       }}
-      key={`product_${product.id}`}>
-      <th scope="row">{product.id}</th>
-      <td>{product.name}</td>
-      <td>{product.category}</td>
+      key={`user_${user.id}`}>
+      <th scope="row">{user.id}</th>
+      <td>{user.fullName}</td>
+      <td>{user.sex}</td>
     </tr>);
   });
 
@@ -36,7 +36,7 @@ function ProductList(props: productListProps): JSX.Element  {
           </tr>
         </thead>
         <tbody>
-          {productElements}
+          {userElements}
         </tbody>
       </table>
     </div>

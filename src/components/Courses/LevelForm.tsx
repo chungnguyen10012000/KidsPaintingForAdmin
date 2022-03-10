@@ -42,7 +42,7 @@ const LevelForm: React.FC = () => {
         name: formState.name.value,
       }));
 
-      dispatch(addNotification("Thể loại", `${formState.name.value} đã được thêm bởi bạn`));
+      dispatch(addNotification("Thể loại", `${formState.name.value} đã được lưu bởi bạn`));
       dispatch(clearSelectedLevel());
       dispatch(setModificationStateLevel(LevelModificationStatus.None));
     }

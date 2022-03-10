@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
 import { addUser, removeUser } from "../../store/actions/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
+import TeacherForm from "./TeacherForm";
+import { addNotification } from "../../store/actions/notifications.action";
 
 const Users: React.FC = () => {
 
@@ -18,8 +20,9 @@ const Users: React.FC = () => {
     dispatch(addUser(user));
   }
 
-  function setUserNotAdmin(admin: IUser): void {
-    dispatch(removeUser(admin)); 
+  function removeTeacher(teacher: IUser): void {
+    dispatch(addNotification("Giáo viên", ` ${teacher.email} đã bị xóa khỏi hệ thống`));
+    dispatch(removeUser(teacher.id)); 
   }
 
   const userElements: JSX.Element[] = users.map(user => {
@@ -27,20 +30,8 @@ const Users: React.FC = () => {
       <tr className={`table-row`}
         key={`user_${user.id}`}>
         <th scope="row">{user.id}</th>
-        <td>{user.fullName}</td>
         <td>{user.email}</td>
-        <td><button className="btn btn-success" onClick={() => setUserAdmin(user)}>Thêm</button> </td>
-      </tr>);
-  });
-
-  const adminElements: JSX.Element[] = admins.map(admin => {
-    return (
-      <tr className={`table-row`}
-        key={`user_${admin.id}`}>
-        <th scope="row">{admin.id}</th>
-        <td>{admin.fullName}</td>
-        <td>{admin.email}</td>
-        <td><button className="btn btn-danger" onClick={() => setUserNotAdmin(admin)}>Xóa</button> </td>
+        <td><button className="btn btn-success" onClick={() => removeTeacher(user)}>Xóa</button> </td>
       </tr>);
   });
 
@@ -68,36 +59,6 @@ const Users: React.FC = () => {
                   <thead className="thead-light">
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Họ và tên</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Cấp quyền</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {adminElements}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-xl-12 col-lg-12">
-          <div className="card shadow mb-4">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách đăng kí</h6>
-              <div className="header-buttons">
-              </div>
-            </div>
-            <div className="card-body">
-              <div className="table-responsive portlet">
-                <table className="table">
-                  <thead className="thead-light">
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Họ và tên</th>
                       <th scope="col">Email</th>
                       <th scope="col">Cấp quyền</th>
                     </tr>
@@ -110,6 +71,9 @@ const Users: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="row">
+          <TeacherForm />
       </div>
     </Fragment >
   );

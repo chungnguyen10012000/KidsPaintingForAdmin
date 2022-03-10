@@ -23,10 +23,12 @@ function userReducer(state: IUserState = initialState, action: IActionBase): IUs
             return { ...state, admins: admins };
         }
         case ADD_USER: {
-            return { ...state, users: state.users.filter(x=>x.id !== action.user.id), admins: [...state.admins, action.user]};
+            let maxId: number = Math.max.apply(Math, state.users.map(function(o) { return o.id; }));
+            action.user.id = maxId + 1;
+            return { ...state, users: [...state.users, action.user]};
         }
         case REMOVE_USER: {
-            return { ...state, admins: state.admins.filter(x=>x.id !== action.user.id), users: [...state.users, action.user]};
+            return { ...state, users: state.users.filter(pr => pr.id !== action.id) };
         }
         default:
             return state;

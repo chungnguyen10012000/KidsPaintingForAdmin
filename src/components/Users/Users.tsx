@@ -19,7 +19,7 @@ const Users: React.FC = () => {
   }
 
   function setUserNotAdmin(admin: IUser): void {
-    dispatch(removeUser(admin)); 
+    dispatch(removeUser(admin.id)); 
   }
 
   const userElements: JSX.Element[] = users.map(user => {

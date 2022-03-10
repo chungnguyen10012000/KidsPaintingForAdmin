@@ -10,7 +10,7 @@ const Home: React.FC = () => {
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
   const classs: IMyClassState = useSelector((state: IStateType) => state.myclass);
   const contests: IContestState = useSelector((state: IStateType) => state.contest);
-  const numberItemsCount: number = users.admins.length;
+  const numberTeacherCount: number = users.users.length;
   const numberCoursesCount: number = courses.courses.length;
   const numberClassCount: number = classs.myclass.length;
   const numberContestCount: number = contests.contest.length;
@@ -24,7 +24,7 @@ const Home: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
-        <TopCard title="TỔNG SỐ GIÁO VIÊN" text={`${numberItemsCount}`} icon="user" class="primary" />
+        <TopCard title="TỔNG SỐ GIÁO VIÊN" text={`${numberTeacherCount}`} icon="user" class="primary" />
         <TopCard title="TỔNG SỐ KHÓA HỌC" text={`${numberCoursesCount}`} icon="warehouse" class="danger" />
         <TopCard title="TỔNG SỐ LỚP HỌC" text={`${numberClassCount}`} icon="warehouse" class="danger" /> 
       </div>
