@@ -30,11 +30,11 @@ const Login: React.FC = () => {
     dispatch(login(formState.email.value)); 
     if(id === "admin"){
       alert('Quản trị viên đăng nhập thành công!')
-      history.push({pathname: '/admin', state: {isAdmin: true}})
+      history.push({pathname: '/admin/home', state: {isAdmin: true}})
     }
     else {
       alert('Giáo viên đăng nhập thành công!')
-      history.push({pathname: '/teacher', state: {isAdmin: false}})
+      history.push({pathname: '/teacher/home', state: {isAdmin: false}})
     }
 
   }

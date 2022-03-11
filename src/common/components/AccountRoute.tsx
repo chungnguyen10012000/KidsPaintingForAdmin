@@ -1,10 +1,9 @@
-import { Route, RouteProps } from "react-router";
+import { Route, Redirect, RouteProps } from "react-router";
 import React from "react";
 import { useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
 import { IAccount } from "../../store/models/account.interface";
 import Login from "../../components/Account/Login";
-import { Redirect } from "react-router-dom";
 
 
 export function AccountRoute({ children, ...rest }: RouteProps): JSX.Element {
@@ -18,12 +17,11 @@ export function AccountRoute({ children, ...rest }: RouteProps): JSX.Element {
                 account.email ? (
                     <Redirect
                         to={{
-                            pathname: "/home"
+                            pathname: "/admin/home"
                         }}
                     />
                 ) : <Login />
-            } 
-            path="/admin/login">
-        </Route>
+            }
+        />
     );
 }

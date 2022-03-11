@@ -11,8 +11,16 @@ import { removeContest, clearSelectedContest, setModificationState,
   changeSelectedContest } from "../../store/actions/contest.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { ContestModificationStatus, IContest } from "../../store/models/contest.interface";
+import { useParams } from "react-router-dom";
+
+type role = {
+  id: string;
+};
 
 const Contests: React.FC = () => {
+
+  const { id } = useParams<role>()
+
   const dispatch: Dispatch<any> = useDispatch();
   const contests: IContestState = useSelector((state: IStateType) => state.contest);
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
@@ -33,6 +41,35 @@ const Contests: React.FC = () => {
     if(contests.selectedContest) {
       setPopup(true);
     }
+  }
+
+  if (id === 'teacher'){
+    return (
+      <Fragment>
+        <h1 className="h3 mb-2 text-gray-800">Cuộc thi</h1>
+        <p className="mb-4">Thông tin chung</p>
+        <div className="row">
+          <TopCard title="TỔNG SỐ CUỘC THI" text={`${numberItemsCount}`} icon="box" class="primary" />
+        </div>
+  
+        <div className="row">
+          <div className="col-xl-12 col-lg-12">
+            <div className="card shadow mb-4">
+              <div className="card-header py-3">
+                <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi</h6>
+                <div className="header-buttons">
+                </div>
+              </div>
+              <div className="card-body">
+                <ContestList
+                  onSelect={onContestSelect}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Fragment >
+    );
   }
 
   return (

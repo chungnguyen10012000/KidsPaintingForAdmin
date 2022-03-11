@@ -11,6 +11,10 @@ import Notifications from "../../common/components/Notification";
 import Courses from "../Courses/Courses";
 import MyClass from "../MyClass/MyClass";
 import Account from "../Account/account";
+import Lesson from "../Lesson/Lesson";
+import LessonDetail from "../Lesson/LessonDetail";
+import ExerciseDetail from "../Exercises/ExerciseDetail";
+import ContestDetail from "../Contest/ContestDetail";
 
 import { useParams } from "react-router";
 
@@ -20,7 +24,7 @@ type role = {
 
 const Admin: React.FC = () => {
   const { id } = useParams<role>()
-  console.log(id)
+  //console.log(id)
   if (id === "teacher"){
     return (
       <Fragment>
@@ -35,6 +39,10 @@ const Admin: React.FC = () => {
               <Route path={`/:id/teacher`}><Products /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
               <Route path={`/:id/myclass`}><MyClass /></Route>
+              <Route path={`/:id/lesson`}><Lesson /></Route>
+              <Route path={`/:id/lesson-detail`}><LessonDetail /></Route>
+              <Route path={`/:id/submit-exercise`}><ExerciseDetail /></Route>
+              <Route path={`/:id/submit-contest`}><ContestDetail /></Route>
               <Route path={`/:id/contest`}><Contest /></Route>
               <Route path={`/:id/home`}><Home /></Route>
               <Route path={`/:id/account`}><Account /></Route>

@@ -11,8 +11,17 @@ import { removeMyClass, clearSelectedMyClass, setModificationState,
   changeSelectedMyClass } from "../../store/actions/myclass.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { MyClassModificationStatus, IMyClass} from "../../store/models/myclass.interface";
+import { useParams } from "react-router";
+import MyClassListForKid from "./MyClassListForKid";
+
+type role = {
+  id: string;
+};
 
 const MyClass: React.FC = () => {
+  const { id } = useParams<role>()
+  //console.log(id)
+
   const dispatch: Dispatch<any> = useDispatch();
   const myClass: IMyClassState = useSelector((state: IStateType) => state.myclass);
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
@@ -33,6 +42,35 @@ const MyClass: React.FC = () => {
     if(myClass.selectedMyClass) {
       setPopup(true);
     }
+  }
+
+  if (id === "teacher") {
+    return (
+      <Fragment>
+        <h1 className="h3 mb-2 text-gray-800">Lớp</h1>
+        <p className="mb-4">Thông tin chung</p>
+        <div className="row">
+          <TopCard title="TỔNG SỐ LỚP HỌC" text={`${numberItemsCount}`} icon="box" class="primary" />
+        </div>
+  
+        <div className="row">
+          <div className="col-xl-12 col-lg-12">
+            <div className="card shadow mb-4">
+              <div className="card-header py-3">
+                <h6 className="m-0 font-weight-bold text-green">Danh sách lớp</h6>
+                <div className="header-buttons">
+                </div>
+              </div>
+              <div className="card-body">
+                <MyClassListForKid
+                  onSelect={onMyClassSelect}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Fragment >
+    );
   }
 
   return (

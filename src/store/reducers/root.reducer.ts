@@ -12,6 +12,7 @@ import contestReducer from "./contest.reducer";
 import myclasssReducer from "./myclass.reducer";
 import mytypesReducer from "./mytypes.reducer";
 import levelsReducer from "./levels.reducer";
+import exercisesReducer from "./exercise.reducer";
 
 const initialState: IRootStateType = {
     page: {area: "home", subArea: ""}
@@ -39,6 +40,7 @@ const rootReducers: Reducer<IStateType> = combineReducers({
     account: accountReducer,
     mytypes: mytypesReducer,
     levels: levelsReducer,
+    exercises: exercisesReducer,
 });
 
 

@@ -41,6 +41,13 @@ export interface IMyClassFormState {
     amount: IFormStateField<number>;
 }
 
+export interface IExerciseFormState {
+    name: IFormStateField<string>;
+    body: IFormStateField<string>;
+    weight: IFormStateField<number>;
+    maxSubmit: IFormStateField<number>;
+}
+
 export interface IClassFormState {
     name: IFormStateField<string>;
     course: IFormStateField<number>;
