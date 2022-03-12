@@ -10,7 +10,7 @@ import "quill/dist/quill.snow.css";
 
 
 
-const ExerciseDetail: React.FC = () => {
+const ExerciseGrade: React.FC = () => {
 
     let { id } = useLocation().state
 
@@ -45,4 +45,4 @@ const ExerciseDetail: React.FC = () => {
     )
 };
 
-export default ExerciseDetail;
+export default ExerciseGrade;

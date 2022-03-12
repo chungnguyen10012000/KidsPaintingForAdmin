@@ -13,7 +13,7 @@ import MyClass from "../MyClass/MyClass";
 import Account from "../Account/account";
 import Lesson from "../Lesson/Lesson";
 import LessonDetail from "../Lesson/LessonDetail";
-import ExerciseDetail from "../Exercises/ExerciseGrade";
+import ExerciseGrade from "../Exercises/ExerciseGrade";
 import ContestDetail from "../Contest/ContestDetail";
 import Exercises from "../Exercises/Exercise";
 import Blogs from "../Blogs/Blog";
@@ -44,7 +44,7 @@ const Admin: React.FC = () => {
               <Route path={`/:id/lesson`}><Lesson /></Route>
               <Route path={`/:id/lesson-detail`}><LessonDetail /></Route>
               <Route path={`/:id/exercise`}><Exercises /></Route>
-              <Route path={`/:id/submit-exercise`}><ExerciseDetail /></Route>
+              <Route path={`/:id/exercise-grade`}><ExerciseGrade /></Route>
               <Route path={`/:id/submit-contest`}><ContestDetail /></Route>
               <Route path={`/:id/contest`}><Contest /></Route>
               <Route path={`/:id/home`}><Home /></Route>

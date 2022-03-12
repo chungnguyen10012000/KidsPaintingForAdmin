@@ -55,19 +55,19 @@ const Blogs: React.FC = () => {
 
   return (
     <Fragment>
-      <h1 className="h3 mb-2 text-gray-800">Bài viết</h1>
+      <h1 className="h3 mb-2 text-gray-800">Phản hồi</h1>
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
-        <TopCard title="BÀI VIẾT ĐƯỢC CHẤP NHẬN" text={blogAccept.length.toString()} icon="user-tie" class="primary" />
-        <TopCard title="BÀI VIẾT CHỜ XỬ LÝ" text={blogs.length.toString()} icon="user" class="danger" />
+        <TopCard title="PHẢN HỒI ĐƯỢC CHẤP NHẬN" text={blogAccept.length.toString()} icon="user-tie" class="primary" />
+        <TopCard title="PHẢN HỒI CHỜ XỬ LÝ" text={blogs.length.toString()} icon="user" class="danger" />
       </div>
 
       <div className="row">
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách bài viết được chấp nhận</h6>
+              <h6 className="m-0 font-weight-bold text-green">Danh sách phản hồi được chấp nhận</h6>
               <div className="header-buttons">
               </div>
             </div>
@@ -95,7 +95,7 @@ const Blogs: React.FC = () => {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách bài viết chờ xử lý</h6>
+              <h6 className="m-0 font-weight-bold text-green">Danh sách phản hồi chờ xử lý</h6>
               <div className="header-buttons">
               </div>
             </div>

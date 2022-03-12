@@ -16,6 +16,7 @@ import { ExerciseModificationStatus, IExercise } from "../../store/models/exerci
 const Exercises: React.FC = () => {
 
 
+
   const dispatch: Dispatch<any> = useDispatch();
   const exercises: IExerciseState = useSelector((state: IStateType) => state.exercises);
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
