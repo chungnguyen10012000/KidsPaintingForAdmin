@@ -20,7 +20,6 @@ function CoursesList(props: courseListProps): JSX.Element  {
       key={`course_${course.id}`}>
       <th scope="row">{course.id}</th>
       <td>{course.name}</td>
-      <td>{course.description}</td>
       <td>{course.type}</td>
       <td>{course.level}</td>
       <td>{course.price}</td>
@@ -35,7 +34,6 @@ function CoursesList(props: courseListProps): JSX.Element  {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Tên khóa học</th>
-            <th scope="col">Miêu tả chi tiết</th>
             <th scope="col">Thể loại</th>
             <th scope="col">Mức độ</th>
             <th scope="col">Giá</th>

@@ -70,6 +70,12 @@ const LeftMenu: React.FC = () => {
                         <span>Cuộc thi</span>
                     </Link>
                 </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/admin/blogs`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Bài viết</span>
+                    </Link>
+                </li>
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
                     Quản lý tài khoản

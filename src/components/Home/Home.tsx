@@ -2,7 +2,7 @@ import React, { Fragment, Dispatch } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import TopCard from "../../common/components/TopCard";
-import { IUserState, IStateType, IMyClassState, ICourseState, IContestState} from "../../store/models/root.interface";
+import { IUserState, IStateType, IMyClassState, ICourseState, IContestState, IBlogState} from "../../store/models/root.interface";
 import ProductList from "../Teachers/TeachersList";
 import MyClassListForKid from "../MyClass/MyClassListForKid";
 import { useParams } from "react-router";
@@ -17,6 +17,7 @@ const Home: React.FC = () => {
   //console.log(id)
 
   const users: IUserState = useSelector((state: IStateType) => state.users);
+  const blogs: IBlogState = useSelector((state: IStateType) => state.blogs);
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
   const classs: IMyClassState = useSelector((state: IStateType) => state.myclass);
   const contests: IContestState = useSelector((state: IStateType) => state.contest);
@@ -24,6 +25,7 @@ const Home: React.FC = () => {
   const numberCoursesCount: number = courses.courses.length;
   const numberClassCount: number = classs.myclass.length;
   const numberContestCount: number = contests.contest.length;
+  const numberBlogAcceptCount: number = blogs.blogAccept.length;
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Trang chủ", ""));
@@ -66,11 +68,14 @@ const Home: React.FC = () => {
       <div className="row">
         <TopCard title="TỔNG SỐ GIÁO VIÊN" text={`${numberTeacherCount}`} icon="user" class="primary" />
         <TopCard title="TỔNG SỐ KHÓA HỌC" text={`${numberCoursesCount}`} icon="warehouse" class="danger" />
-        <TopCard title="TỔNG SỐ LỚP HỌC" text={`${numberClassCount}`} icon="warehouse" class="danger" /> 
       </div>
 
       <div className="row">
+        <TopCard title="TỔNG SỐ LỚP HỌC" text={`${numberClassCount}`} icon="warehouse" class="danger" /> 
         <TopCard title="TỔNG SỐ CUỘC THI" text={`${numberContestCount}`} icon="box" class="primary" />
+      </div>
+      <div className="row">
+        <TopCard title="TỔNG SỐ BÀI VIẾT" text={`${numberBlogAcceptCount}`} icon="warehouse" class="danger" /> 
       </div>
 
       <div className="row">

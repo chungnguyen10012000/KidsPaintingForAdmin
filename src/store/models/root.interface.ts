@@ -10,6 +10,7 @@ import { IMyClass, MyClassModificationStatus } from "./myclass.interface";
 import { IMytype, MytypeModificationStatus } from "./mytypes.interface";
 import { ILevel, LevelModificationStatus } from "./levels.interface";
 import { IExercise, ExerciseModificationStatus } from "./exercise.interface";
+import { IBlog, BlogModificationStatus } from "./blog.interface";
 
 export interface IRootPageStateType {
     area: string;
@@ -33,6 +34,14 @@ export interface IStateType {
     mytypes: IMytypeState;
     levels: ILevelState;
     exercises: IExerciseState;
+    blogs: IBlogState;
+}
+
+export interface IBlogState {
+    blogs: IBlog[];
+    blogAccept: IBlog[];
+    selectedBlog: IBlog | null;
+    modificationState: BlogModificationStatus;
 }
 
 export interface IExerciseState {

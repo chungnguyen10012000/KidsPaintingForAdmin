@@ -66,7 +66,7 @@ const TypeForm: React.FC = () => {
       <div className="col-xl-7 col-lg-7">
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-green"> {(isCreate ? "Tạo" : "Sửa")} khóa học</h6>
+            <h6 className="m-0 font-weight-bold text-green"> {(isCreate ? "Tạo" : "Sửa")} thể loại</h6>
           </div>
           <div className="card-body">
             <form onSubmit={saveUser}>

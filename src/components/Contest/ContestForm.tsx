@@ -12,6 +12,10 @@ import SelectInput from "../../common/components/Select";
 import { ILevel } from "../../store/models/levels.interface";
 import { IMytype } from "../../store/models/mytypes.interface";
 
+import { useQuill } from 'react-quilljs';
+import BlotFormatter from 'quill-blot-formatter';
+import 'quill/dist/quill.snow.css';
+
 export type levelListProps = {
   onSelect?: (level: ILevel) => void;
   children?: React.ReactNode;
@@ -31,6 +35,32 @@ const ContestForm: React.FC = () => {
   if (!contest || isCreate) {
     contest = { id: 0, name: "", description: "", type: "", level: "", status: "", amount: 0, hasBeginDate: "", hasExpiryDate: ""};
   }
+
+  const { quill, quillRef, Quill } = useQuill({
+    modules: { blotFormatter: {} }
+  });
+
+  if (Quill && !quill) {
+    // const BlotFormatter = require('quill-blot-formatter');
+    Quill.register('modules/blotFormatter', BlotFormatter);
+  }
+
+  let [textHtml, setTextHtml] = useState<string>('')
+
+  React.useEffect(() => {
+    if (quill && contest && !isCreate) {
+      quill.clipboard.dangerouslyPasteHTML(contest.description);
+    }
+  }, [quill, contest, isCreate]);
+
+
+  React.useEffect(() => {
+    if (quill) {
+      quill.on('text-change', (delta, oldDelta, source) => {
+        setTextHtml(quill.root.innerHTML); // Get innerHTML using quillRef
+      });
+    }
+  }, [quill]);
 
   const levels: ILevelState = useSelector((state: IStateType) => state.levels);
   const listLevel: ILevel[] = levels.levels
@@ -76,7 +106,7 @@ const ContestForm: React.FC = () => {
       dispatch(saveFn({
         ...contest,
         name: formState.name.value,
-        description: formState.description.value,
+        description: textHtml,
         type: formState.type.value,
         level:  formState.level.value,
         status:  formState.status.value,
@@ -85,7 +115,7 @@ const ContestForm: React.FC = () => {
         hasExpiryDate: formState.hasExpiryDate.value,
       }));
 
-      dispatch(addNotification("Contest edited", `Contest ${formState.name.value} edited by you`));
+      dispatch(addNotification("Cuộc thi", ` ${formState.name.value} chỉnh bởi bạn`));
       dispatch(clearSelectedContest());
       dispatch(setModificationState(ContestModificationStatus.None));
     }
@@ -101,7 +131,7 @@ const ContestForm: React.FC = () => {
   }
 
   function isFormInvalid(): boolean {
-    return (formState.amount.error || formState.description.error
+    return (formState.amount.error 
       || formState.name.error || formState.type.error || formState.level.error || formState.status.error || formState.hasBeginDate.error || formState.hasExpiryDate.error
       || formState.level.error || !formState.name.value || !formState.type.value) as boolean;
 }
@@ -126,14 +156,7 @@ const ContestForm: React.FC = () => {
                   placeholder="Nhập tên cuộc thi" />
               </div>
               <div className="form-group">
-                <TextInput id="input_description"
-                field = "description"
-                  value={formState.description.value}
-                  onChange={hasFormValueChanged}
-                  required={false}
-                  maxLength={10000}
-                  label="Miêu tả chi tiết cuộc thi"
-                  placeholder="" />
+                <div ref={quillRef} />
               </div>
               <div className="form-group">
                 <SelectInput id="input_type"

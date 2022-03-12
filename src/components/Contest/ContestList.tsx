@@ -29,7 +29,6 @@ function ContestList(props: productListProps): JSX.Element  {
       <td>{contest_item.name}</td>
       <td>{contest_item.type}</td>
       <td>{contest_item.level}</td>
-      <td>{contest_item.description}</td>
       <td>{contest_item.status}</td>
       <td>{contest_item.amount}</td>
       <td>{contest_item.hasBeginDate}</td>
@@ -47,7 +46,6 @@ function ContestList(props: productListProps): JSX.Element  {
             <th scope="col">Tên cuộc thi</th>
             <th scope="col">Thể loại</th>
             <th scope="col">Cấp độ</th>
-            <th scope="col">Nội dung cuộc thi</th>
             <th scope="col">Trạng thái cuộc thi</th>
             <th scope="col">Số lượng tối đa tham gia</th>
             <th scope="col">Thời gian bắt đầu</th>

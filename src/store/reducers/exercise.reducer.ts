@@ -9,7 +9,7 @@ const initialState: IExerciseState = {
     modificationState: ExerciseModificationStatus.None,
     selectedExercise: null,
     exercises: [{
-        id: 1, name: "Vẽ con mèo", body: '...', maxSubmit: 3, weight: 10
+        id: 1, name: "Vẽ con mèo", body: '<p>...</p>', maxSubmit: 3, weight: 10
     }]
 };
 

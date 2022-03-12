@@ -14,7 +14,6 @@ const Users: React.FC = () => {
   dispatch(updateCurrentPath("Người dùng", "Danh sách"));
   
   const users: IUser[] = useSelector((state: IStateType) => state.users.users);
-  const admins: IUser[] = useSelector((state: IStateType) => state.users.admins);
 
   function removeTeacher(teacher: IUser): void {
     dispatch(addNotification("Giáo viên", ` ${teacher.email} đã bị xóa khỏi hệ thống`));
@@ -37,8 +36,7 @@ const Users: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
-        <TopCard title="GIÁO VIÊN" text={admins.length.toString()} icon="user-tie" class="primary" />
-        <TopCard title="GIÁO VIÊN ĐĂNG KÍ" text={users.length.toString()} icon="user" class="danger" />
+        <TopCard title="GIÁO VIÊN" text={users.length.toString()} icon="user" class="danger" />
       </div>
 
       <div className="row">

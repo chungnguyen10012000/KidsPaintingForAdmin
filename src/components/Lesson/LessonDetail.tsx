@@ -1,11 +1,13 @@
 import React, { Fragment, Dispatch } from "react";
 import { useDispatch } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
-import ExerciseForm from "../Exercises/ExerciseForm";
 import ExerciseList from "../Exercises/ExerciseList";
+import { useHistory } from "react-router-dom";
 
 
 const LessonDetail: React.FC = () => {
+
+  let history = useHistory();
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Buổi học","Chi tiết buổi học"));
@@ -43,19 +45,18 @@ const LessonDetail: React.FC = () => {
                 {
                     <ExerciseList />
                 }
+                <button
+                    className={`btn btn-primary btn-user btn-block` }
+                    onClick = {() => {
+                      history.push('/teacher/exercise')
+                    }}
+                >
+                    Chỉnh sửa
+                </button>
         </div>
         </div>
         </div>
       </div>
-
-      <div className="row">
-        <div className="col-xl-12 col-lg-12">
-        </div>
-        {
-            <ExerciseForm />
-        }
-      </div>
-
     </Fragment>
     )
 };

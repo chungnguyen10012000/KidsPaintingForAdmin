@@ -4,6 +4,8 @@ import { updateCurrentPath } from "../../store/actions/root.actions";
 
 import { useLocation } from "react-router-dom";
 
+import "quill/dist/quill.snow.css"; 
+
 
 const ContestDetail: React.FC = () => {
 
@@ -11,6 +13,7 @@ const ContestDetail: React.FC = () => {
 
     const dispatch: Dispatch<any> = useDispatch();
     dispatch(updateCurrentPath("Bài tập", "Danh sách nộp"));
+
 
     return (
         <Fragment>
@@ -28,7 +31,7 @@ const ContestDetail: React.FC = () => {
                         <label>Nhập điểm</label>
                             <input type="text" className="form-control"  placeholder="" />
                             <label>Nhận xét</label>
-                            <input type="text" className="form-control"  placeholder="" />
+                            <input type="text" className="form-control" placeholder="" />
                              <button className="btn btn-primary">Gửi</button>
                         </div>
                     </form>

@@ -9,7 +9,7 @@ const initialState: IContestState = {
     modificationState: ContestModificationStatus.None,
     selectedContest: null,
     contest: [{
-        id: 1, name: "Cuộc thi vẽ tranh gia đình", description: "........",
+        id: 1, name: "Cuộc thi vẽ tranh gia đình", description: "<p></p>",
         type: "chì màu", level: "5-9 tuổi", status: "", amount: 50, hasBeginDate: "10/10/2022", hasExpiryDate: "10/11/2022"
     }]
 };

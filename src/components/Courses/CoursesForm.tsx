@@ -11,6 +11,10 @@ import { OnChangeModel, ICourseFormState } from "../../common/types/Form.types";
 import { ILevel } from "../../store/models/levels.interface";
 import { IMytype } from "../../store/models/mytypes.interface";
 
+import { useQuill } from 'react-quilljs';
+import BlotFormatter from 'quill-blot-formatter';
+import 'quill/dist/quill.snow.css';
+
 export type levelListProps = {
   onSelect?: (level: ILevel) => void;
   children?: React.ReactNode;
@@ -30,6 +34,32 @@ const CoursesForm: React.FC = () => {
   if (!course || isCreate) {
   course = { id: 0, name: "", description: "", type: "", level: "", price: 0};
   }
+
+  const { quill, quillRef, Quill } = useQuill({
+    modules: { blotFormatter: {} }
+  });
+
+  if (Quill && !quill) {
+    // const BlotFormatter = require('quill-blot-formatter');
+    Quill.register('modules/blotFormatter', BlotFormatter);
+  }
+
+  let [textHtml, setTextHtml] = useState<string>('')
+
+  React.useEffect(() => {
+    if (quill && course && !isCreate) {
+      quill.clipboard.dangerouslyPasteHTML(course.description);
+    }
+  }, [quill, course, isCreate]);
+
+
+  React.useEffect(() => {
+    if (quill) {
+      quill.on('text-change', (delta, oldDelta, source) => {
+        setTextHtml(quill.root.innerHTML); // Get innerHTML using quillRef
+      });
+    }
+  }, [quill]);
 
   const levels: ILevelState = useSelector((state: IStateType) => state.levels);
   const listLevel: ILevel[] = levels.levels
@@ -74,7 +104,7 @@ const CoursesForm: React.FC = () => {
       dispatch(saveFn({
         ...course,
         name: formState.name.value,
-        description: formState.description.value,
+        description: textHtml,
         type: formState.type.value,
         level: formState.level.value,
         price: formState.price.value,
@@ -96,8 +126,8 @@ const CoursesForm: React.FC = () => {
   }
 
   function isFormInvalid(): boolean {
-    return (formState.price.error || formState.description.error
-      || formState.name.error ||  formState.type.error
+    return (formState.price.error
+      || formState.name.error ||  formState.type.error 
       || formState.level.error || !formState.name.value || !formState.type.value) as boolean;
 }
 
@@ -121,14 +151,7 @@ const CoursesForm: React.FC = () => {
                   placeholder="Nhập tên khóa học" />
               </div>
               <div className="form-group">
-                <TextInput id="input_description"
-                  field = "description"
-                  value={formState.description.value}
-                  onChange={hasFormValueChanged}
-                  required={true}
-                  maxLength={100}
-                  label="Miêu tả chi tiết"
-                  placeholder="" />
+                <div ref={quillRef} />
               </div>
               <div className="form-group">
                 <SelectInput id="input_type"

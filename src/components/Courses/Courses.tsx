@@ -23,6 +23,7 @@ import { removeCourse, clearSelectedCourse, setModificationState, changeSelected
 import { removeLevel, clearSelectedLevel, changeSelectedLevel, setModificationStateLevel } from "../../store/actions/levels.actions";
 
 const Courses: React.FC = () => {
+  let [isCheck, setIsCheck] = useState('')
   const dispatch: Dispatch<any> = useDispatch();
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
@@ -73,6 +74,7 @@ const Courses: React.FC = () => {
       setPopup2(true);
     }
   }
+  //console.log(isCheck)
 
   return (
     <Fragment>
@@ -88,8 +90,9 @@ const Courses: React.FC = () => {
             <div className="card-header py-3">
               <h6 className="m-0 font-weight-bold text-green">Danh sách khóa học</h6>
               <div className="header-buttons">
-                <button className="btn btn-success btn-green" id="0" onClick={() =>
-                  dispatch(setModificationState(CourseModificationStatus.Create))}>
+                <button className="btn btn-success btn-green" id="0" onClick={() =>{
+                  setIsCheck('1')
+                  dispatch(setModificationState(CourseModificationStatus.Create))}}>
                   <i className="fas fa fa-plus"></i>
                 </button>
                 <button className="btn btn-success btn-blue" onClick={() =>
@@ -108,7 +111,7 @@ const Courses: React.FC = () => {
             </div>
           </div>
         </div>
-        {((courses.modificationState === CourseModificationStatus.Create)
+        {((courses.modificationState === CourseModificationStatus.Create && isCheck === '1')
           || (courses.modificationState === CourseModificationStatus.Edit && courses.selectedCourse)) ?
           <CoursesForm /> : null}
       </div>
@@ -122,7 +125,7 @@ const Courses: React.FC = () => {
               <h6 className="m-0 font-weight-bold text-green">Danh sách loại hình </h6>
               <div className="header-buttons">
                 <button className="btn btn-success btn-green btn-createType" id="1" onClick={() =>{
-                  console.log('Đã click')
+                  setIsCheck('2')
                   dispatch(setModificationStateMytype(MytypeModificationStatus.Create))}}>
                   <i className="fas fa fa-plus"></i>
                 </button>
@@ -142,7 +145,7 @@ const Courses: React.FC = () => {
             </div>
           </div>
         </div>
-        {((mytypes.modificationState === MytypeModificationStatus.Create)
+        {((mytypes.modificationState === MytypeModificationStatus.Create && isCheck === '2')
           || (mytypes.modificationState === MytypeModificationStatus.Edit && mytypes.selectedMytype)) ?
           <TypeForm /> : null}
       </div>
@@ -154,8 +157,9 @@ const Courses: React.FC = () => {
             <div className="card-header py-3">
               <h6 className="m-0 font-weight-bold text-green">Danh sách mức độ </h6>
               <div className="header-buttons">
-                <button className="btn btn-success btn-green btn-createType1" id="1" onClick={() =>
-                  dispatch(setModificationStateLevel(LevelModificationStatus.Create))}>
+                <button className="btn btn-success btn-green btn-createType1" id="1" onClick={() =>{
+                  setIsCheck('3')
+                  dispatch(setModificationStateLevel(LevelModificationStatus.Create))}}>
                   <i className="fas fa fa-plus"></i>
                 </button>
                 <button className="btn btn-success btn-blue btn-editType1" onClick={() =>
@@ -174,7 +178,7 @@ const Courses: React.FC = () => {
             </div>
           </div>
         </div>
-        {((levels.modificationState === LevelModificationStatus.Create)
+        {((levels.modificationState === LevelModificationStatus.Create && isCheck === '3')
           || (levels.modificationState === LevelModificationStatus.Edit && levels.selectedLevel)) ?
           <LevelForm /> : null}
       </div>

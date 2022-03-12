@@ -13,8 +13,10 @@ import MyClass from "../MyClass/MyClass";
 import Account from "../Account/account";
 import Lesson from "../Lesson/Lesson";
 import LessonDetail from "../Lesson/LessonDetail";
-import ExerciseDetail from "../Exercises/ExerciseDetail";
+import ExerciseDetail from "../Exercises/ExerciseGrade";
 import ContestDetail from "../Contest/ContestDetail";
+import Exercises from "../Exercises/Exercise";
+import Blogs from "../Blogs/Blog";
 
 import { useParams } from "react-router";
 
@@ -41,6 +43,7 @@ const Admin: React.FC = () => {
               <Route path={`/:id/myclass`}><MyClass /></Route>
               <Route path={`/:id/lesson`}><Lesson /></Route>
               <Route path={`/:id/lesson-detail`}><LessonDetail /></Route>
+              <Route path={`/:id/exercise`}><Exercises /></Route>
               <Route path={`/:id/submit-exercise`}><ExerciseDetail /></Route>
               <Route path={`/:id/submit-contest`}><ContestDetail /></Route>
               <Route path={`/:id/contest`}><Contest /></Route>
@@ -63,6 +66,7 @@ const Admin: React.FC = () => {
           <div className="container-fluid">
             <Switch>
               <Route path={`/:id/users`}><Users /></Route>
+              <Route path={`/:id/blogs`}><Blogs /></Route>
               <Route path={`/:id/teacher`}><Products /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
               <Route path={`/:id/myclass`}><MyClass /></Route>
