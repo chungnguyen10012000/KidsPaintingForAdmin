@@ -4,7 +4,7 @@ import LeftMenuForTeacher from "../LeftMenu/LefMenuForTeacher";
 import TopMenu from "../TopMenu/TopMenu";
 import { Switch, Route } from "react-router";
 import Users from "../Users/Users";
-import Products from "../Teachers/Teachers";
+import Teachers from "../Teachers/Teachers";
 import Home from "../Home/Home";
 import Contest from "../Contest/Contest"
 import Notifications from "../../common/components/Notification";
@@ -19,6 +19,8 @@ import Exercises from "../Exercises/Exercise";
 import Blogs from "../Blogs/Blog";
 
 import { useParams } from "react-router";
+import LeftMenuForEmployees from "../LeftMenu/LeftMenuForEmployees";
+import Employees from "../Employees/Employees";
 
 type role = {
   id: string;
@@ -38,7 +40,7 @@ const Admin: React.FC = () => {
           <div className="container-fluid">
             <Switch>
               <Route path={`/:id/users`}><Users /></Route>
-              <Route path={`/:id/teacher`}><Products /></Route>
+              <Route path={`/:id/teacher`}><Teachers /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
               <Route path={`/:id/myclass`}><MyClass /></Route>
               <Route path={`/:id/lesson`}><Lesson /></Route>
@@ -56,10 +58,38 @@ const Admin: React.FC = () => {
     </Fragment>   
     )
   }
+
+  else if (id === "admin"){
+    return (
+      <Fragment>
+        <Notifications />
+        <LeftMenu />
+        <div id="content-wrapper" className="d-flex flex-column">
+          <div id="content">
+            <TopMenu />
+            <div className="container-fluid">
+              <Switch>
+                <Route path={`/:id/users`}><Users /></Route>
+                <Route path={`/:id/blogs`}><Blogs /></Route>
+                <Route path={`/:id/teacher`}><Teachers /></Route>
+                <Route path={`/:id/employee`}><Employees /></Route>
+                <Route path={`/:id/courses`}><Courses /></Route>
+                <Route path={`/:id/myclass`}><MyClass /></Route>
+                <Route path={`/:id/contest`}><Contest /></Route>
+                <Route path={`/:id/home`}><Home /></Route>
+                <Route path={`/:id/account`}><Account /></Route>
+              </Switch>
+            </div>
+          </div>
+        </div>
+      </Fragment>
+    );
+  }
+
   return (
     <Fragment>
       <Notifications />
-      <LeftMenu />
+      <LeftMenuForEmployees />
       <div id="content-wrapper" className="d-flex flex-column">
         <div id="content">
           <TopMenu />
@@ -67,7 +97,7 @@ const Admin: React.FC = () => {
             <Switch>
               <Route path={`/:id/users`}><Users /></Route>
               <Route path={`/:id/blogs`}><Blogs /></Route>
-              <Route path={`/:id/teacher`}><Products /></Route>
+              <Route path={`/:id/teacher`}><Teachers /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
               <Route path={`/:id/myclass`}><MyClass /></Route>
               <Route path={`/:id/contest`}><Contest /></Route>
@@ -79,6 +109,7 @@ const Admin: React.FC = () => {
       </div>
     </Fragment>
   );
+
 };
 
 export default Admin;

@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 
-const LeftMenu: React.FC = () => {
+const LeftMenuForEmployees: React.FC = () => {
 
     let [leftMenuVisibility, setLeftMenuVisibility] = useState(false);
 
@@ -32,7 +32,7 @@ const LeftMenu: React.FC = () => {
 
                 <li className="nav-item active">
 
-                    <Link className="nav-link" to="/admin/home">
+                    <Link className="nav-link" to="/employee/home">
                         <i className="fas fa-fw fa-tachometer-alt"></i>
                         <span>Trang chủ</span>
                     </Link>
@@ -44,46 +44,36 @@ const LeftMenu: React.FC = () => {
                 </div>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/teacher`}>
+                    <Link className="nav-link" to={`/employee/teacher`}>
                         <i className="fas fa-fw fa-user"></i>
                         <span>Giáo viên</span>
                     </Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/courses`}>
+                    <Link className="nav-link" to={`/employee/courses`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Khoá học</span>
                     </Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/myclass`}>
+                    <Link className="nav-link" to={`/employee/myclass`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Lớp học</span>
                     </Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/contest`}>
+                    <Link className="nav-link" to={`/employee/contest`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Cuộc thi</span>
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/blogs`}>
+                    <Link className="nav-link" to={`/employee/blogs`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Phản hồi</span>
-                    </Link>
-                </li>
-                <hr className="sidebar-divider" />
-                <div className="sidebar-heading">
-                    Quản lý nhân viên
-                </div>
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/employee`}>
-                        <i className="fas fa-fw fa-user-circle"></i>
-                        <span>Nhân viên</span>
                     </Link>
                 </li>
                 <hr className="sidebar-divider" />
@@ -91,7 +81,7 @@ const LeftMenu: React.FC = () => {
                     Quản lý tài khoản
                 </div>
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/account`}>
+                    <Link className="nav-link" to={`/employee/account`}>
                         <i className="fas fa-fw fa-user-circle"></i>
                         <span>Tài khoản</span>
                     </Link>
@@ -101,4 +91,4 @@ const LeftMenu: React.FC = () => {
     );
 };
 
-export default LeftMenu;
+export default LeftMenuForEmployees;

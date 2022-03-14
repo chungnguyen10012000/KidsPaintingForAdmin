@@ -32,9 +32,13 @@ const Login: React.FC = () => {
       alert('Quản trị viên đăng nhập thành công!')
       history.push({pathname: '/admin/home', state: {isAdmin: true}})
     }
-    else {
+    else if (id === "teacher"){
       alert('Giáo viên đăng nhập thành công!')
       history.push({pathname: '/teacher/home', state: {isAdmin: false}})
+    }
+    else {
+      alert('Nhân viên đăng nhập thành công!')
+      history.push({pathname: '/employee/home', state: {isAdmin: 'employee'}})
     }
 
   }
@@ -61,7 +65,17 @@ const Login: React.FC = () => {
                 <div className="col-lg-6">
                   <div className="p-5">
                     <div className="text-center">
-                      <h1 className="h4 text-gray-900 mb-4">Chào mừng {id === "admin" ? "quản trị viên" : "giáo viên"} !</h1>
+                      <h1 className="h4 text-gray-900 mb-4">Chào mừng {
+                        function (){
+                          if (id === "admin"){
+                            return "Quản trị viên"
+                          }
+                          else if (id === "teacher"){
+                            return "Giáo viên"
+                          }
+                          return "Nhân viên"
+                        }()
+                      } !</h1>
                     </div>
                     <form className="user" onSubmit={submit}>
                       <div className="form-group">
@@ -102,12 +116,40 @@ const Login: React.FC = () => {
                         function () {
                           if (id === "admin"){
                             return (
-                              <a href="/teacher/login">Bạn là giáo viên ?</a>
+                              <div className="container">
+                                <div className="row">
+                                  <a href="/teacher/login">Bạn là giáo viên ?</a>
+                                </div>
+                                <div className="row">
+                                  <a href="/employee/login">Bạn là nhân viên ?</a>
+                                </div>
+                              </div>
                             )
                           }
-                          return (
-                            <a href="/admin/login">Bạn là quản trị viên ?</a>
-                          )
+                          else if(id === "teacher"){
+                            return (
+                              <div className="container">
+                                <div className="row">
+                                  <a href="/admin/login">Bạn là quản trị viên ?</a>
+                                </div>
+                                <div className="row">
+                                  <a href="/employee/login">Bạn là nhân viên ?</a>
+                                </div>
+                              </div>
+                            )
+                          }
+                          else{
+                            return (
+                              <div className="container">
+                                <div className="row">
+                                  <a href="/teacher/login">Bạn là giáo viên ?</a>
+                                </div>
+                                <div className="row">
+                                  <a href="/admin/login">Bạn là quản trị viên ?</a>
+                                </div>
+                              </div>
+                            )
+                          }
                         }()
                       }
                     </form>
