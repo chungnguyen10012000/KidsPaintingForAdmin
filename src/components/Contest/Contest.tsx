@@ -11,7 +11,7 @@ import { removeContest, clearSelectedContest, setModificationState,
   changeSelectedContest } from "../../store/actions/contest.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { ContestModificationStatus, IContest } from "../../store/models/contest.interface";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 type role = {
   id: string;
@@ -20,6 +20,9 @@ type role = {
 const Contests: React.FC = () => {
 
   const { id } = useParams<role>()
+  let isId: number = 0;
+
+  let history = useHistory();
 
   const dispatch: Dispatch<any> = useDispatch();
   const contests: IContestState = useSelector((state: IStateType) => state.contest);
@@ -35,6 +38,7 @@ const Contests: React.FC = () => {
   function onContestSelect(product: IContest): void {
     dispatch(changeSelectedContest(product));
     dispatch(setModificationState(ContestModificationStatus.None));
+    isId = product.id
   }
 
   function onContestRemove() {
@@ -58,6 +62,17 @@ const Contests: React.FC = () => {
               <div className="card-header py-3">
                 <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi</h6>
                 <div className="header-buttons">
+                <button className="btn btn-success btn-blue" onClick={() => 
+                  {
+                    if (contests.selectedContest){
+                      history.push({
+                        pathname: '/teacher/exercise-grade',
+                        state: { id : isId}
+                      })
+                    }
+                  }}>
+                  <i className="fas fa fa-info-circle"></i>
+                </button>
                 </div>
               </div>
               <div className="card-body">
