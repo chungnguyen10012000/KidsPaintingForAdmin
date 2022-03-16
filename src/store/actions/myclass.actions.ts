@@ -1,6 +1,7 @@
 import { IMyClass, MyClassModificationStatus } from "../models/myclass.interface";
 export const ADD_MYCLASS: string = "ADD_MYCLASS";
 export const EDIT_MYCLASS: string = "EDIT_MYCLASS";
+export const LIST_LESSON: string = "LIST_LESSON";
 export const REMOVE_MYCLASS: string = "REMOVE_MYCLASS";
 export const CHANGE_MYCLASS_AMOUNT: string = "CHANGE_MYCLASS_AMOUNT";
 export const CHANGE_MYCLASS_PENDING_EDIT: string = "CHANGE_MYCLASS_PENDING_EDIT";
@@ -17,6 +18,10 @@ export function editMyClass(myclass: IMyClass): IEditMyClassActionType {
 
 export function removeMyClass(id: number): IRemoveMyClassActionType {
     return { type: REMOVE_MYCLASS, id: id };
+}
+
+export function listLesson(myclass: IMyClass): IListLessonMyClassActionType {
+    return { type: LIST_LESSON, myclass: myclass };
 }
 
 export function changeMyClassAmount(id: number, amount: number): IChangeMyClassAmountType {
@@ -38,6 +43,7 @@ export function setModificationState(value: MyClassModificationStatus): ISetModi
 interface IAddMyClassActionType { type: string, myclass: IMyClass };
 interface IEditMyClassActionType { type: string, myclass: IMyClass };
 interface IRemoveMyClassActionType { type: string, id: number };
+interface IListLessonMyClassActionType { type: string, myclass: IMyClass };
 interface IChangeSelectedMyClassActionType { type: string, myclass: IMyClass };
 interface IClearSelectedMyClassActionType { type: string };
 interface ISetModificationStateActionType { type: string, value:  MyClassModificationStatus};

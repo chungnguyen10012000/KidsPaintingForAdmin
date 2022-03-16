@@ -17,10 +17,12 @@ import ExerciseGrade from "../Exercises/ExerciseGrade";
 import ContestDetail from "../Contest/ContestDetail";
 import Exercises from "../Exercises/Exercise";
 import Blogs from "../Blogs/Blog";
+import Sesson from "../Sesson/Sesson";
 
 import { useParams } from "react-router";
 import LeftMenuForEmployees from "../LeftMenu/LeftMenuForEmployees";
 import Employees from "../Employees/Employees";
+import Schedule from "../Schedule/Schedule";
 
 type role = {
   id: string;
@@ -51,6 +53,7 @@ const Admin: React.FC = () => {
               <Route path={`/:id/contest`}><Contest /></Route>
               <Route path={`/:id/home`}><Home /></Route>
               <Route path={`/:id/account`}><Account /></Route>
+              <Route path={`/:id/schedule`}><Schedule /></Route>
             </Switch>
           </div>
         </div>
@@ -75,6 +78,7 @@ const Admin: React.FC = () => {
                 <Route path={`/:id/employee`}><Employees /></Route>
                 <Route path={`/:id/courses`}><Courses /></Route>
                 <Route path={`/:id/myclass`}><MyClass /></Route>
+                <Route path={`/:id/sesson`}><Sesson /></Route>
                 <Route path={`/:id/contest`}><Contest /></Route>
                 <Route path={`/:id/home`}><Home /></Route>
                 <Route path={`/:id/account`}><Account /></Route>

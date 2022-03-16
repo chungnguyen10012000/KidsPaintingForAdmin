@@ -23,6 +23,7 @@ function CoursesList(props: courseListProps): JSX.Element  {
       <td>{course.type}</td>
       <td>{course.level}</td>
       <td>{course.price}</td>
+      <td>{course.amount}</td>
     </tr>);
   });
 
@@ -37,6 +38,7 @@ function CoursesList(props: courseListProps): JSX.Element  {
             <th scope="col">Thể loại</th>
             <th scope="col">Mức độ</th>
             <th scope="col">Giá</th>
+            <th scope="col">Số buổi học</th>
           </tr>
         </thead>
         <tbody>

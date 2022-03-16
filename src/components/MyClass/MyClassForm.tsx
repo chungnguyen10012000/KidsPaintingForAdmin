@@ -1,5 +1,5 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
-import { IStateType, IMyClassState } from "../../store/models/root.interface";
+import { IStateType, IMyClassState, ICourseState, IUserState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { IMyClass, MyClassModificationStatus } from "../../store/models/myclass.interface";
 import TextInput from "../../common/components/TextInput";
@@ -7,6 +7,9 @@ import { editMyClass, clearSelectedMyClass, setModificationState, addMyClass } f
 import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import { OnChangeModel, IMyClassFormState } from "../../common/types/Form.types";
+import { ICourse } from "../../store/models/courses.interface";
+import { IUser } from "../../store/models/user.interface";
+import SelectInput from "../../common/components/Select";
 
 const MyClassForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
@@ -15,8 +18,23 @@ const MyClassForm: React.FC = () => {
   const isCreate: boolean = (myClass.modificationState === MyClassModificationStatus.Create);
   
   if (!myclass || isCreate) {
-    myclass = { id: 0, name: "", course: 1, teacher_id: 1, amount: 0};
+    myclass = { id: 0, name: "", course: '', teacher_id: '', amount: 0};
   }
+
+  const courses: ICourseState = useSelector((state: IStateType) => state.courses);
+  const listCourse: ICourse[] = courses.courses
+  const listCourses: string[] = []
+  listCourse.map((ele) => {
+    return listCourses.push(ele.name)
+  })
+
+
+  const teachers: IUserState = useSelector((state: IStateType) => state.users);
+  const listTeacher: IUser[] = teachers.users
+  const listTeachers: string[] = []
+  listTeacher.map((ele) => {
+    return listTeachers.push(ele.fullName)
+  })
 
   const [formState, setFormState] = useState({
     name: { error: "", value: myclass.name },
@@ -90,20 +108,26 @@ const MyClassForm: React.FC = () => {
                   placeholder="Nhập tên lớp học" />
               </div>
               <div className="form-group">
-                <NumberInput id="input_course"
-                  field = "course"
-                  value={formState.course.value}
-                  onChange={hasFormValueChanged}
-                  label="Thuộc khóa học (Nhập ID)"
-                />
+                  <SelectInput
+                    id="input_course"
+                    field="course"
+                    label="Thuộc khóa học"
+                    options={listCourses}
+                    required={true}
+                    onChange={hasFormValueChanged}
+                    value={formState.course.value}
+                  />
               </div>
               <div className="form-group">
-                <NumberInput id="input_teacher_id"
-                  field = "teacher_id"
-                  value={formState.teacher_id.value}
-                  onChange={hasFormValueChanged}
-                  label="Giáo viên (Nhập ID)"
-                />
+                  <SelectInput
+                    id="input_teacher"
+                    field="teacher"
+                    label="Giáo viên giảng dạy"
+                    options={listTeachers}
+                    required={true}
+                    onChange={hasFormValueChanged}
+                    value={formState.teacher_id.value}
+                  />
               </div>
               <div className="form-group">
                 <NumberInput id="input_amount"

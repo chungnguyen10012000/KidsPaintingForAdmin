@@ -13,6 +13,7 @@ import { addNotification } from "../../store/actions/notifications.action";
 import { MyClassModificationStatus, IMyClass} from "../../store/models/myclass.interface";
 import { useParams } from "react-router";
 import MyClassListForKid from "./MyClassListForKid";
+import { useHistory } from "react-router-dom";
 
 type role = {
   id: string;
@@ -21,6 +22,9 @@ type role = {
 const MyClass: React.FC = () => {
   const { id } = useParams<role>()
   //console.log(id)
+  let isId: number = 0;
+
+  let history = useHistory();
 
   const dispatch: Dispatch<any> = useDispatch();
   const myClass: IMyClassState = useSelector((state: IStateType) => state.myclass);
@@ -36,6 +40,7 @@ const MyClass: React.FC = () => {
   function onMyClassSelect(myClass: IMyClass): void {
     dispatch(changeSelectedMyClass(myClass));
     dispatch(setModificationState(MyClassModificationStatus.None));
+    isId = myClass.id
   }
 
   function onMyClassRemove() {
@@ -97,6 +102,17 @@ const MyClass: React.FC = () => {
                 </button>
                 <button className="btn btn-success btn-red" onClick={() => onMyClassRemove()}>
                   <i className="fas fa fa-times"></i>
+                </button>
+                <button className="btn btn-success btn-blue" onClick={() => 
+                  {
+                    if (myClass.selectedMyClass){
+                      history.push({
+                        pathname: '/admin/sesson',
+                        state: { id : isId}
+                      })
+                    }
+                  }}>
+                  <i className="fas fa fa-info-circle"></i>
                 </button>
               </div>
             </div>

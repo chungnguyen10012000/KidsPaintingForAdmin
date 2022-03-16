@@ -25,6 +25,7 @@ export interface ICourseFormState {
     type: IFormStateField<string>;
     level: IFormStateField<string>;
     price: IFormStateField<number>; 
+    amount: IFormStateField<number>; 
 }
 
 export interface IMytypeFormState {
@@ -36,9 +37,17 @@ export interface ILevelFormState {
 
 export interface IMyClassFormState {
     name: IFormStateField<string>;
-    course: IFormStateField<number>;
-    teacher_id: IFormStateField<number>;
+    course: IFormStateField<string>;
+    teacher_id: IFormStateField<string>;
     amount: IFormStateField<number>;
+}
+
+export interface ISessonFormState {
+    name: IFormStateField<string>;
+    description: IFormStateField<string>;
+    startTime: IFormStateField<string>;
+    endTime: IFormStateField<string>;
+    currentDay: IFormStateField<string>;
 }
 
 export interface IExerciseFormState {

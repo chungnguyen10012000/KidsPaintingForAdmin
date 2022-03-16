@@ -3,11 +3,12 @@ import TopCard from "../../common/components/TopCard";
 import "./Lesson.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
-import { IMyClassState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
+import { IMyClassState, IStateType, IRootPageStateType, ISessonState } from "../../store/models/root.interface";
 import {
     clearSelectedMyClass,
 } from "../../store/actions/myclass.actions";
 import { useLocation, useHistory } from 'react-router-dom';
+import { ISesson } from '../../store/models/sesson.interface'
 
 const Lesson: React.FC = () => {
 
@@ -15,6 +16,13 @@ const Lesson: React.FC = () => {
     let { id } = location.state
     //console.log(id)
     let history = useHistory()
+
+    const sessons: ISessonState = useSelector((state: IStateType) => state.sessons);
+    const listSesson: ISesson[] = sessons.sessons
+    const listSessons: string[] = []
+    listSesson.map((ele) => {
+      return listSessons.push(ele.name)
+    })
 
     const dispatch: Dispatch<any> = useDispatch();
     const myClass: IMyClassState = useSelector((state: IStateType) => state.myclass);
@@ -26,26 +34,24 @@ const Lesson: React.FC = () => {
         }
         
     }
-    //console.log(numberItemsCount)
-    const n = Array.from(Array(numberItemsCount + 1).keys())
 
     useEffect(() => {
         dispatch(clearSelectedMyClass());
         dispatch(updateCurrentPath("Buổi học", "Danh sách"));
     }, [path.area, dispatch]);
 
-    const myLessonElements: (JSX.Element | null)[] = n.map(lesson_item => {
+    const myLessonElements: (JSX.Element | null)[] = listSesson.map((lesson_item, index) => {
         if (!lesson_item) { return null; }
         return (<tr className={`table-row ${(myClass.selectedMyClass && myClass.selectedMyClass.id === id) ? "selected" : ""}`}
           onClick={() => {
             history.push({
                 pathname: '/teacher/lesson-detail',
-                state: { id : lesson_item}
+                state: { id : lesson_item.id}
             })
           }}
-          key={`lesson_${lesson_item}`}>
-          <th scope="row">{lesson_item}</th>
-          <td>{lesson_item}</td>
+          key={`lesson_${lesson_item.id}`}>
+          <th scope="row">{index}</th>
+          <td>{lesson_item.name}</td>
         </tr>);
       });
     return (

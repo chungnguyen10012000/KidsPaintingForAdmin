@@ -32,7 +32,7 @@ const CoursesForm: React.FC = () => {
   const isCreate: boolean = (courses.modificationState === CourseModificationStatus.Create);
   
   if (!course || isCreate) {
-  course = { id: 0, name: "", description: "", type: "", level: "", price: 0};
+  course = { id: 0, name: "", description: "", type: "", level: "", price: 0, amount: 0};
   }
 
   const { quill, quillRef, Quill } = useQuill({
@@ -83,6 +83,7 @@ const CoursesForm: React.FC = () => {
     type: { error: "", value: course.type },
     level: { error: "", value: course.level },
     price: { error: "", value: course.price },
+    amount: { error: "", value: course.amount },
   });
 
   function hasFormValueChanged(model: OnChangeModel): void {
@@ -108,6 +109,7 @@ const CoursesForm: React.FC = () => {
         type: formState.type.value,
         level: formState.level.value,
         price: formState.price.value,
+        amount: formState.amount.value,
       }));
 
       dispatch(addNotification("Khóa học", `${formState.name.value} đã được thêm bởi bạn`));
@@ -180,6 +182,14 @@ const CoursesForm: React.FC = () => {
                   value={formState.price.value}
                   onChange={hasFormValueChanged}
                   label="Giá"
+                />
+              </div>
+              <div className="form-group">
+                <NumberInput id="input_amount"
+                  field = "amount"
+                  value={formState.amount.value}
+                  onChange={hasFormValueChanged}
+                  label="Số lượng buổi học"
                 />
               </div>
               <button className="btn btn-danger" onClick={() => cancelForm()}>Cancel</button>

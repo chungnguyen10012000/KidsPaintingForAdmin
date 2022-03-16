@@ -9,6 +9,7 @@ export type myclassListProps = {
 };
 
 function MyClassList(props: myclassListProps): JSX.Element  {
+
   const myClass: IMyClassState = useSelector((state: IStateType) => state.myclass);
 
   const myclassElements: (JSX.Element | null)[] = myClass.myclass.map(class_item => {

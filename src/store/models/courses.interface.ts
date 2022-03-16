@@ -5,6 +5,7 @@ export interface ICourse {
     type: string;
     level: string;
     price: number;
+    amount: number;
 }
 
 export enum CourseModificationStatus {

@@ -70,7 +70,8 @@ const AccountForm: React.FC = () => {
     return (formState.phone.error || formState.email.error
       || formState.fullName.error || formState.sex.error || formState.dateOfDay.error || formState.address.error || formState.password.error
       || formState.dateOfDay.error || !formState.fullName.value || !formState.sex.value) as boolean;
-}
+  }
+
 
   return (
     <Fragment>
@@ -106,7 +107,7 @@ const AccountForm: React.FC = () => {
                     id="input_sex"
                     field="sex"
                     label="Giới tính"
-                    options={["Name", "Nữ", "Không xác định"]}
+                    options={["Nam", "Nữ", "Không xác định"]}
                     required={true}
                     onChange={hasFormValueChanged}
                     value={formState.sex.value}
@@ -145,6 +146,7 @@ const AccountForm: React.FC = () => {
               <div className="form-group">
                 <TextInput id="input_password"
                   field = "password"
+                  type="password"
                   value={formState.password.value}
                   onChange={hasFormValueChanged}
                   required={false}

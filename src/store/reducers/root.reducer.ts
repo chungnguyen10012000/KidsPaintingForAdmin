@@ -14,6 +14,7 @@ import mytypesReducer from "./mytypes.reducer";
 import levelsReducer from "./levels.reducer";
 import exercisesReducer from "./exercise.reducer";
 import blogReducer from "./blog.reducer";
+import sessonsReducer from "./sesson.reducer";
 
 const initialState: IRootStateType = {
     page: {area: "home", subArea: ""}
@@ -43,6 +44,7 @@ const rootReducers: Reducer<IStateType> = combineReducers({
     levels: levelsReducer,
     exercises: exercisesReducer,
     blogs: blogReducer,
+    sessons: sessonsReducer,
 });
 
 

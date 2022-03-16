@@ -62,6 +62,8 @@ const ContestForm: React.FC = () => {
     }
   }, [quill]);
 
+  const listStatus = ['Còn hạn', 'Hết hạn']
+
   const levels: ILevelState = useSelector((state: IStateType) => state.levels);
   const listLevel: ILevel[] = levels.levels
   const listLevels: string[] = []
@@ -180,14 +182,15 @@ const ContestForm: React.FC = () => {
                   />
               </div>
               <div className="form-group">
-                <TextInput id="input_status"
-                field = "status"
-                  value={formState.status.value}
-                  onChange={hasFormValueChanged}
-                  required={false}
-                  maxLength={100}
-                  label="Trạng thái"
-                  placeholder="" />
+                  <SelectInput
+                    id="input_status"
+                    field="status"
+                    label="Trạng thái"
+                    options={listStatus}
+                    required={true}
+                    onChange={hasFormValueChanged}
+                    value={formState.status.value}
+                  />
               </div>
               <div className="form-group">
                   <NumberInput id="input_amount"
@@ -201,6 +204,7 @@ const ContestForm: React.FC = () => {
               <div className="form-group">
                 <TextInput id="input_hasBeginDate"
                   field = "hasBeginDate"
+                  type="date"
                   value={formState.hasBeginDate.value}
                   onChange={hasFormValueChanged}
                   required={false}
@@ -210,7 +214,8 @@ const ContestForm: React.FC = () => {
               </div>
               <div className="form-group">
                 <TextInput id="input_hasExpiryDate"
-                field = "hasExpiryDate"
+                  field = "hasExpiryDate"
+                  type="date"
                   value={formState.hasExpiryDate.value}
                   onChange={hasFormValueChanged}
                   required={false}
