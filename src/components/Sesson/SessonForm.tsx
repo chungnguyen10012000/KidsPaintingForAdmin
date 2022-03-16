@@ -155,8 +155,8 @@ const SessonForm: React.FC = () => {
                   label="Ngày học"
                   placeholder="" />
               </div>
-              <button className="btn btn-danger" onClick={() => cancelForm()}>Cancel</button>
-              <button type="submit" className={`btn btn-success left-margin ${getDisabledSesson()}`}>Save</button>
+              <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
+              <button type="submit" className={`btn btn-success left-margin ${getDisabledSesson()}`}>Lưu</button>
             </form>
           </div>
         </div>

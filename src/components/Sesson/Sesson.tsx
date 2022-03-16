@@ -32,7 +32,7 @@ const Sesson: React.FC = () => {
 
   useEffect(() => {
     dispatch(clearSelectedSesson());
-    dispatch(updateCurrentPath("Lớp", "Danh sách"));
+    dispatch(updateCurrentPath("Lớp", "Buổi học"));
   }, [path.area, dispatch]);
 
   function onSessonSelect(sesson: ISesson): void {

@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { IStateType, IContestState } from "../../store/models/root.interface";
 import { IContest } from "../../store/models/contest.interface";
-import { useHistory } from "react-router-dom";
 
 export type productListProps = {
   onSelect?: (product: IContest) => void;
@@ -12,17 +11,11 @@ export type productListProps = {
 function ContestList(props: productListProps): JSX.Element  {
   const contests: IContestState = useSelector((state: IStateType) => state.contest);
 
-  const history = useHistory()
-
   const productElements: (JSX.Element | null)[] = contests.contest.map(contest_item => {
     if (!contest_item) { return null; }
     return (<tr className={`table-row ${(contests.selectedContest&& contests.selectedContest.id === contest_item.id) ? "selected" : ""}`}
       onClick={() => {
         if(props.onSelect) props.onSelect(contest_item);
-        history.push({
-          pathname: '/teacher/submit-contest',
-          state: { id: contest_item.id}
-        })
       }}
       key={`contest_${contest_item.id}`}>
       <th scope="row">{contest_item.id}</th>

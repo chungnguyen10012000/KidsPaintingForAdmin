@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import TopCard from "../../common/components/TopCard";
 import { IUserState, IStateType, IMyClassState, ICourseState, IContestState, IBlogState} from "../../store/models/root.interface";
-import ProductList from "../Teachers/TeachersList";
 import MyClassListForKid from "../MyClass/MyClassListForKid";
 import { useParams } from "react-router";
 
@@ -25,7 +24,7 @@ const Home: React.FC = () => {
   const numberCoursesCount: number = courses.courses.length;
   const numberClassCount: number = classs.myclass.length;
   const numberContestCount: number = contests.contest.length;
-  const numberBlogAcceptCount: number = blogs.blogAccept.length;
+  const numberBlogAcceptCount: number = blogs.blogs.length;
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Trang chủ", ""));
@@ -75,22 +74,7 @@ const Home: React.FC = () => {
         <TopCard title="TỔNG SỐ CUỘC THI" text={`${numberContestCount}`} icon="box" class="primary" />
       </div>
       <div className="row">
-        <TopCard title="TỔNG SỐ BÀI VIẾT" text={`${numberBlogAcceptCount}`} icon="warehouse" class="danger" /> 
-      </div>
-
-      <div className="row">
-
-        <div className="col-xl-6 col-lg-6">
-          <div className="card shadow mb-4">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách giáo viên</h6>
-            </div>
-            <div className="card-body">
-              <ProductList />
-            </div>
-          </div>
-
-        </div>
+        <TopCard title="TỔNG SỐ PHẢN HỒI" text={`${numberBlogAcceptCount}`} icon="warehouse" class="danger" /> 
       </div>
 
     </Fragment>

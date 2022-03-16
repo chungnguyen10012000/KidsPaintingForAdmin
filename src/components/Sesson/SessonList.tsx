@@ -21,6 +21,7 @@ function SessonList(props: sessonListProps): JSX.Element  {
       <th scope="row">{class_item.id}</th>
       <td>{class_item.name}</td>
       <td>{class_item.startTime}</td>
+      <td>{class_item.endTime}</td>
       <td>{class_item.currentDay}</td>
     </tr>);
   });
@@ -33,7 +34,8 @@ function SessonList(props: sessonListProps): JSX.Element  {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Tên buổi học</th>
-            <th scope="col">Thơi gian học</th>
+            <th scope="col">Thơi gian bắt đầu</th>
+            <th scope="col">Thơi gian kết thúc</th>
             <th scope="col">Ngày học</th>
           </tr>
         </thead>

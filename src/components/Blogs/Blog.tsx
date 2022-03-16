@@ -4,8 +4,17 @@ import { IBlog } from "../../store/models/blog.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
 import { updateCurrentPath } from "../../store/actions/root.actions";
+import { useHistory, useParams } from "react-router-dom";
+
+type role = {
+  id: string;
+};
 
 const Blogs: React.FC = () => {
+
+  const { id } = useParams<role>()
+
+  let history = useHistory();
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Phản hồi", "Danh sách"));
@@ -14,14 +23,25 @@ const Blogs: React.FC = () => {
 
 
   const blogElements: JSX.Element[] = blogs.map(blog => {
+
     return (
       <tr className={`table-row`}
         key={`blog_${blog.id}`}>
         <th scope="row">{blog.id}</th>
         <td>{blog.email}</td>
-        <td>{blog.description}</td>
         <td><button className="btn btn-success" onClick={() => {
-          
+            if (id === 'admin'){
+              history.push({
+                pathname: '/admin/feedback-detail',
+                state: { id : blog.id}
+              })
+            }
+            else if (id === "employee"){
+              history.push({
+                pathname: '/employee/feedback-detail',
+                state: { id : blog.id}
+              })
+            }
           }}>Xem chi tiết</button> </td>
         {/* <td><button className="btn btn-danger" > {isCheckView === true ? 'Đã xem' : 'Chưa xem'}</button> </td> */}
       </tr>);
@@ -51,7 +71,6 @@ const Blogs: React.FC = () => {
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Email</th>
-                      <th scope="col">Chi tiết</th>
                     </tr>
                   </thead>
                   <tbody id="xxx">

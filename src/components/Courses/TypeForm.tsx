@@ -80,8 +80,8 @@ const TypeForm: React.FC = () => {
                   label="Tên thể loại"
                   placeholder="Nhập tên thể loại" />
               </div>
-              <button className="btn btn-danger" onClick={() => cancelForm()}>Cancel</button>
-              <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Save</button>
+              <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
+              <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Lưu</button>
             </form>
           </div>
         </div>

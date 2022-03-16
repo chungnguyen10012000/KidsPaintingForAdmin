@@ -137,8 +137,8 @@ const MyClassForm: React.FC = () => {
                   label="Nhập số lượng tối đa học sinh"
                 />
               </div>
-              <button className="btn btn-danger" onClick={() => cancelForm()}>Cancel</button>
-              <button type="submit" className={`btn btn-success left-margin ${getDisabledMyClass()}`}>Save</button>
+              <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
+              <button type="submit" className={`btn btn-success left-margin ${getDisabledMyClass()}`}>Lưu</button>
             </form>
           </div>
         </div>

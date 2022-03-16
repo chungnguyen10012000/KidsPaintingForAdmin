@@ -80,8 +80,8 @@ const LevelForm: React.FC = () => {
                   label="Tên mức độ"
                   placeholder="Nhập tên mức độ" />
               </div>
-              <button className="btn btn-danger" onClick={() => cancelForm()}>Cancel</button>
-              <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Save</button>
+              <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
+              <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Lưu</button>
             </form>
           </div>
         </div>

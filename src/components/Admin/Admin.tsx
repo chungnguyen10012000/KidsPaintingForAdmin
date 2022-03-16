@@ -23,6 +23,7 @@ import { useParams } from "react-router";
 import LeftMenuForEmployees from "../LeftMenu/LeftMenuForEmployees";
 import Employees from "../Employees/Employees";
 import Schedule from "../Schedule/Schedule";
+import FeedBackDetail from "../Blogs/FeedBackDetail"
 
 type role = {
   id: string;
@@ -78,6 +79,7 @@ const Admin: React.FC = () => {
                 <Route path={`/:id/employee`}><Employees /></Route>
                 <Route path={`/:id/courses`}><Courses /></Route>
                 <Route path={`/:id/myclass`}><MyClass /></Route>
+                <Route path={`/:id/feedback-detail`}><FeedBackDetail /></Route>
                 <Route path={`/:id/sesson`}><Sesson /></Route>
                 <Route path={`/:id/contest`}><Contest /></Route>
                 <Route path={`/:id/home`}><Home /></Route>
@@ -103,6 +105,7 @@ const Admin: React.FC = () => {
               <Route path={`/:id/blogs`}><Blogs /></Route>
               <Route path={`/:id/teacher`}><Teachers /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
+              <Route path={`/:id/feedback-detail`}><FeedBackDetail /></Route>
               <Route path={`/:id/myclass`}><MyClass /></Route>
               <Route path={`/:id/contest`}><Contest /></Route>
               <Route path={`/:id/home`}><Home /></Route>

@@ -6,8 +6,8 @@ const initialState: IBlogState = {
     modificationState: BlogModificationStatus.None,
     selectedBlog: null,
     blogs: [
-        { id: 1, email: "nvlong00@gmail.com", description: ''},
-        { id: 2, email: "ohmy@fr.pl", description: '' }
+        { id: 1, email: "nvlong00@gmail.com", description: 'hello'},
+        { id: 2, email: "ohmy@fr.pl", description: 'hello2' }
     ],
     blogAccept: [
         { id: 3, email: "jcrock@em.pl", description: '' },
