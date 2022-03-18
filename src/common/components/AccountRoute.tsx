@@ -14,7 +14,7 @@ export function AccountRoute({ children, ...rest }: RouteProps): JSX.Element {
         <Route
             {...rest}
             render={() =>
-                account.email ? (
+                localStorage.getItem('email') ? (
                     <Redirect
                         to={{
                             pathname: "/admin/home"

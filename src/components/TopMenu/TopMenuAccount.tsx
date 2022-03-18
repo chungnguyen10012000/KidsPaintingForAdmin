@@ -28,7 +28,10 @@ function TopMenuAccount(): JSX.Element {
       <div className={`dropdown-menu dropdown-menu-right shadow animated--grow-in ${(isShow) ? "show" : ""}`}
         aria-labelledby="userDropdown">
         <a className="dropdown-item"
-        onClick={() => dispatch(logout())}
+        onClick={() => {
+          dispatch(logout())
+          localStorage.setItem('email', '')
+        }}
         href="/login" 
         data-toggle="modal"
         data-target="#logoutModal">

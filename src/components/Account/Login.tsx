@@ -4,6 +4,7 @@ import { OnChangeModel } from "../../common/types/Form.types";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/actions/account.actions";
 import TextInput from "../../common/components/TextInput";
+import jwtDecode, { JwtPayload } from "jwt-decode";
 
 type role = {
   id: string;
@@ -27,20 +28,57 @@ const Login: React.FC = () => {
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if(isFormInvalid()) { return; }
-    dispatch(login(formState.email.value)); 
-    if(id === "admin"){
-      alert('Quản trị viên đăng nhập thành công!')
-      history.push({pathname: '/admin/home', state: {isAdmin: true}})
-    }
-    else if (id === "teacher"){
-      alert('Giáo viên đăng nhập thành công!')
-      history.push({pathname: '/teacher/home', state: {isAdmin: false}})
-    }
-    else {
-      alert('Nhân viên đăng nhập thành công!')
-      history.push({pathname: '/employee/home', state: {isAdmin: 'employee'}})
-    }
+    var details: { [key: string]: any }= {
+      'client_id': 'login-app',
+      'username': formState.email.value,
+      'password': formState.password.value,
+      'grant_type': 'password'
+    };
 
+    console.log(details)
+
+    var formBody: string[] = [];
+    for (var property in details) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue: string = encodeURIComponent(details[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+    var formBodySString: string = formBody.join("&");
+    //console.log(formBody)
+
+    fetch('https://kidraw-keycloak.herokuapp.com/auth/realms/SpringBootKeycloak/protocol/openid-connect/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: formBodySString
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        localStorage.setItem('access_token', data.access_token) // Authorization
+        localStorage.setItem('refresh_token', data.refresh_token)
+        localStorage.setItem('email', formState.email.value)
+        const token: string = data.access_token;
+        const decoded = jwtDecode<JwtPayload>(token); 
+        console.log(decoded)
+        dispatch(login(formState.email.value)); 
+        if(id === "admin"){
+          alert('Quản trị viên đăng nhập thành công!')
+          history.push({pathname: '/admin/home', state: {isAdmin: true}})
+        }
+        else if (id === "teacher"){
+          alert('Giáo viên đăng nhập thành công!')
+          history.push({pathname: '/teacher/home', state: {isAdmin: false}})
+        }
+        else{
+          alert('Nhân viên đăng nhập thành công!')
+          history.push({pathname: '/employee/home', state: {isAdmin: 'employee'}})
+        }
+      })
+      .catch(() => {
+        alert('Đăng nhập không thành công!')
+      })
   }
 
   function isFormInvalid() {
