@@ -9,25 +9,25 @@ const initialState: IMytypeState = {
     modificationState: MytypeModificationStatus.None,
     selectedMytype: null,
     mytypes: [{
-        id: 1, name: "Chì màu"
+        typeId: 1, typeName: "Chì màu"
     }]
 };
 
 function mytypesReducer(state: IMytypeState = initialState, action: IActionBase): IMytypeState {
     switch (action.type) {
         case ADD_MYTYPE: {
-            let maxId: number = Math.max.apply(Math, state.mytypes.map(function(o) { return o.id; }));
-            action.mytype.id = maxId + 1;
+            let maxId: number = Math.max.apply(Math, state.mytypes.map(function(o) { return o.typeId; }));
+            action.mytype.typeId = maxId + 1;
             return { ...state, mytypes: [...state.mytypes, action.mytype]};
         }
         case EDIT_MYTYPE: {
-            const foundIndex: number = state.mytypes.findIndex(pr => pr.id === action.mytype.id);
+            const foundIndex: number = state.mytypes.findIndex(pr => pr.typeId === action.mytype.typeId);
             let mytypes: IMytype[] = state.mytypes;
             mytypes[foundIndex] = action.mytype;
             return { ...state, mytypes: mytypes };
         }
         case REMOVE_MYTYPE: {
-            return { ...state, mytypes: state.mytypes.filter(pr => pr.id !== action.id) };
+            return { ...state, mytypes: state.mytypes.filter(pr => pr.typeId !== action.typeId) };
         }
         case CHANGE_MYTYPE_PENDING_EDIT: {
             return { ...state, selectedMytype: action.mytype };
@@ -39,9 +39,9 @@ function mytypesReducer(state: IMytypeState = initialState, action: IActionBase)
             return { ...state, modificationState: action.value };
         }
         case CHANGE_MYTYPE_AMOUNT: {
-            const foundIndex: number = state.mytypes.findIndex(pr => pr.id === action.id);
+            const foundIndex: number = state.mytypes.findIndex(pr => pr.typeId === action.id);
             let mytypes: IMytype[] = state.mytypes;
-            mytypes[foundIndex].id = mytypes[foundIndex].id - action.amount;
+            mytypes[foundIndex].typeId = mytypes[foundIndex].typeId - action.amount;
             return { ...state, mytypes: mytypes };
         }
         default:

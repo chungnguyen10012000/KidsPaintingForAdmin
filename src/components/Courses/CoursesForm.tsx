@@ -1,5 +1,5 @@
-import React, { useState, FormEvent, Dispatch, Fragment } from "react";
-import { IStateType, ICourseState, ILevelState, IMytypeState } from "../../store/models/root.interface";
+import React, { useState, FormEvent, Dispatch, Fragment, useEffect } from "react";
+import { IStateType, ICourseState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { ICourse, CourseModificationStatus } from "../../store/models/courses.interface";
 import TextInput from "../../common/components/TextInput";
@@ -32,7 +32,7 @@ const CoursesForm: React.FC = () => {
   const isCreate: boolean = (courses.modificationState === CourseModificationStatus.Create);
   
   if (!course || isCreate) {
-  course = { id: 0, name: "", description: "", type: "", level: "", price: 0, amount: 0};
+    course = { courseId: 0, courseName: "", courseDescription: "", courseLevel: "", courseType: "", coursePrice: 0, maxCourseParticipant: 0, sumOfSection: 0};
   }
 
   const { quill, quillRef, Quill } = useQuill({
@@ -48,7 +48,7 @@ const CoursesForm: React.FC = () => {
 
   React.useEffect(() => {
     if (quill && course && !isCreate) {
-      quill.clipboard.dangerouslyPasteHTML(course.description);
+      quill.clipboard.dangerouslyPasteHTML(course.courseDescription);
     }
   }, [quill, course, isCreate]);
 
@@ -61,29 +61,48 @@ const CoursesForm: React.FC = () => {
     }
   }, [quill]);
 
-  const levels: ILevelState = useSelector((state: IStateType) => state.levels);
-  const listLevel: ILevel[] = levels.levels
-  const listLevels: string[] = []
-  listLevel.map((ele) => {
-    return listLevels.push(ele.name)
-  })
+  const [mytype, setMyType] = useState<IMytype[]>([])
 
-  const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
-  const listMytype: IMytype[] = mytypes.mytypes
+  useEffect(() => {
+    fetch('http://localhost:8080/api/v1/typeArt')
+    .then(res => res.json())
+    .then(x => {
+      setMyType(x)
+    })
+  }, [])
+
+  const listMytype: IMytype[] = mytype
   const listMytypes: string[] = []
   listMytype.map((ele) => {
-    return listMytypes.push(ele.name)
+    return listMytypes.push(ele.typeName)
+  })
+
+  const [mylevel, setMyLevel] = useState<ILevel[]>([])
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/v1/level')
+    .then(res => res.json())
+    .then(x => {
+      setMyLevel(x)
+    })
+  }, [])
+
+  const listLevel: ILevel[] = mylevel
+  const listLevels: string[] = []
+  listLevel.map((ele) => {
+    return listLevels.push(ele.levelName)
   })
 
   //console.log(listLevels)
 
   const [formState, setFormState] = useState({
-    name: { error: "", value: course.name },
-    description: { error: "", value: course.description },
-    type: { error: "", value: course.type },
-    level: { error: "", value: course.level },
-    price: { error: "", value: course.price },
-    amount: { error: "", value: course.amount },
+    name: { error: "", value: course.courseName },
+    description: { error: "", value: course.courseDescription },
+    type: { error: "", value: course.courseType },
+    level: { error: "", value: course.courseLevel },
+    price: { error: "", value: course.coursePrice },
+    amount: { error: "", value: course.maxCourseParticipant },
+    sumOfSesson: { error: "", value: course.sumOfSection },
   });
 
   function hasFormValueChanged(model: OnChangeModel): void {
@@ -106,11 +125,31 @@ const CoursesForm: React.FC = () => {
         ...course,
         name: formState.name.value,
         description: textHtml,
-        type: formState.type.value,
         level: formState.level.value,
+        type: formState.type.value,
         price: formState.price.value,
         amount: formState.amount.value,
+        sumOfSesson: formState.sumOfSesson.value,
       }));
+
+      if (saveFn === addCourse){
+        fetch(`http://localhost:8080/api/v1/${formState.type.value}/${formState.level.value}/course`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ courseName: formState.name.value, courseDescription: textHtml,coursePrice: formState.price.value, maxCourseParticipant: formState.amount.value, 
+          sumOfSection: formState.sumOfSesson.value})
+        })
+          .then(response => response.json())
+          .then(data => console.log(data));
+      }
+      else{
+        fetch(`http://localhost:8080/api/v1/course/${course.courseId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ courseName: formState.name.value, courseDescription: textHtml, coursePrice: formState.price.value, maxCourseParticipant: formState.amount.value, 
+            sumOfSection: formState.sumOfSesson.value })
+        })
+      }
 
       dispatch(addNotification("Khóa học", `${formState.name.value} đã được thêm bởi bạn`));
       dispatch(clearSelectedCourse());
@@ -129,8 +168,7 @@ const CoursesForm: React.FC = () => {
 
   function isFormInvalid(): boolean {
     return (formState.price.error
-      || formState.name.error ||  formState.type.error 
-      || formState.level.error || !formState.name.value || !formState.type.value) as boolean;
+      || formState.name.error || !formState.name.value ) as boolean;
 }
 
   return (
@@ -175,7 +213,7 @@ const CoursesForm: React.FC = () => {
                     onChange={hasFormValueChanged}
                     value={formState.level.value}
                   />
-              </div>
+              </div> 
               <div className="form-group">
                 <NumberInput id="input_price"
                   field = "price"
@@ -188,6 +226,14 @@ const CoursesForm: React.FC = () => {
                 <NumberInput id="input_amount"
                   field = "amount"
                   value={formState.amount.value}
+                  onChange={hasFormValueChanged}
+                  label="Số lượng tối đa học viên"
+                />
+              </div>
+              <div className="form-group">
+                <NumberInput id="input_sumOfSesson"
+                  field = "sumOfSesson"
+                  value={formState.sumOfSesson.value}
                   onChange={hasFormValueChanged}
                   label="Số lượng buổi học"
                 />

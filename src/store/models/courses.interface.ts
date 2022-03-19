@@ -1,11 +1,12 @@
 export interface ICourse {
-    id: number;
-    name: string;
-    description: string;
-    type: string;
-    level: string;
-    price: number;
-    amount: number;
+    courseId: number;
+    courseName: string;
+    courseDescription: string;
+    courseType: string;
+    courseLevel: string;
+    coursePrice: number;
+    maxCourseParticipant: number;
+    sumOfSection: number;
 }
 
 export enum CourseModificationStatus {

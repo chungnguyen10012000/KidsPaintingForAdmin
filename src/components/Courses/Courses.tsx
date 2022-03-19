@@ -23,11 +23,20 @@ import { removeCourse, clearSelectedCourse, setModificationState, changeSelected
 import { removeLevel, clearSelectedLevel, changeSelectedLevel, setModificationStateLevel } from "../../store/actions/levels.actions";
 
 const Courses: React.FC = () => {
+  const [data, setData] = useState<ICourse[]>([])
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/v1/course')
+    .then(res => res.json())
+    .then(x => {
+      setData(x)
+    })
+  })
   let [isCheck, setIsCheck] = useState('')
   const dispatch: Dispatch<any> = useDispatch();
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
-  const numberItemsCount: number = courses.courses.length;
+  const numberItemsCount: number = data.length;
   const [popup, setPopup] = useState(false);
   const [popup1, setPopup1] = useState(false);
   const [popup2, setPopup2] = useState(false);
@@ -200,8 +209,9 @@ const Courses: React.FC = () => {
                 if (!levels.selectedLevel) {
                   return;
                 }
-                dispatch(addNotification("Mức độ", ` ${levels.selectedLevel.name} đã bị xóa khỏi hệ thống`));
-                dispatch(removeLevel(levels.selectedLevel.id));
+                fetch(`http://localhost:8080/api/v1/level/${levels.selectedLevel.levelId}`, { method: 'DELETE' })
+                dispatch(addNotification("Mức độ", ` ${levels.selectedLevel.levelName} đã bị xóa khỏi hệ thống`));
+                dispatch(removeLevel(levels.selectedLevel.levelId));
                 dispatch(clearSelectedLevel());
                 setPopup2(false);
               }}>Xóa
@@ -227,8 +237,9 @@ const Courses: React.FC = () => {
                 if (!mytypes.selectedMytype) {
                   return;
                 }
-                dispatch(addNotification("Thể loại", ` ${mytypes.selectedMytype.name} đã bị xóa khỏi hệ thống`));
-                dispatch(removeMytype(mytypes.selectedMytype.id));
+                fetch(`http://localhost:8080/api/v1/typeArt/${mytypes.selectedMytype.typeId}`, { method: 'DELETE' })
+                dispatch(addNotification("Thể loại", ` ${mytypes.selectedMytype.typeName} đã bị xóa khỏi hệ thống`));
+                dispatch(removeMytype(mytypes.selectedMytype.typeId));
                 dispatch(clearSelectedMytype());
                 setPopup1(false);
               }}>Xóa
@@ -255,8 +266,9 @@ const Courses: React.FC = () => {
                 if (!courses.selectedCourse) {
                   return;
                 }
-                dispatch(addNotification("Khóa học", ` ${courses.selectedCourse.name} đã bị xóa khỏi hệ thống`));
-                dispatch(removeCourse(courses.selectedCourse.id));
+                fetch(`http://localhost:8080/api/v1/course/${courses.selectedCourse.courseId}`, { method: 'DELETE' })
+                dispatch(addNotification("Khóa học", ` ${courses.selectedCourse.courseName} đã bị xóa khỏi hệ thống`));
+                dispatch(removeCourse(courses.selectedCourse.courseId));
                 dispatch(clearSelectedCourse());
                 setPopup(false);
               }}>Xóa

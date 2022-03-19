@@ -22,10 +22,11 @@ export interface IUserFormState {
 export interface ICourseFormState {
     name: IFormStateField<string>;
     description: IFormStateField<string>;
+    price: IFormStateField<number>; 
     type: IFormStateField<string>;
     level: IFormStateField<string>;
-    price: IFormStateField<number>; 
     amount: IFormStateField<number>; 
+    sumOfSesson: IFormStateField<number>; 
 }
 
 export interface IMytypeFormState {

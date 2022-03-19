@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { IStateType, ICourseState } from "../../store/models/root.interface";
 import { ICourse } from "../../store/models/courses.interface";
@@ -9,21 +9,32 @@ export type courseListProps = {
 };
 
 function CoursesList(props: courseListProps): JSX.Element  {
-  const courses: ICourseState = useSelector((state: IStateType) => state.courses);
+const courses: ICourseState = useSelector((state: IStateType) => state.courses);
 
-  const courseElements: (JSX.Element | null)[] = courses.courses.map(course => {
+  const [data, setData] = useState<ICourse[]>([])
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/v1/course')
+    .then(res => res.json())
+    .then(x => {
+      setData(x)
+    })
+  })
+  
+  const courseElements: (JSX.Element | null)[] = data.map(course => {
     if (!course) { return null; }
-    return (<tr className={`table-row ${(courses.selectedCourse && courses.selectedCourse.id === course.id) ? "selected" : ""}`}
+    return (<tr className={`table-row ${(courses.selectedCourse && courses.selectedCourse.courseId === course.courseId) ? "selected" : ""}`}
       onClick={() => {
         if(props.onSelect) props.onSelect(course);
       }}
-      key={`course_${course.id}`}>
-      <th scope="row">{course.id}</th>
-      <td>{course.name}</td>
-      <td>{course.type}</td>
-      <td>{course.level}</td>
-      <td>{course.price}</td>
-      <td>{course.amount}</td>
+      key={`course_${course.courseId}`}>
+      <th scope="row">{course.courseId}</th>
+      <td>{course.courseName}</td>
+      <td>{course.courseType}</td>
+      <td>{course.courseLevel}</td>
+      <td>{course.coursePrice}</td>
+      <td>{course.maxCourseParticipant}</td>
+      <td>{course.sumOfSection}</td>
     </tr>);
   });
 
@@ -38,6 +49,7 @@ function CoursesList(props: courseListProps): JSX.Element  {
             <th scope="col">Thể loại</th>
             <th scope="col">Mức độ</th>
             <th scope="col">Giá</th>
+            <th scope="col">Số học sinh tham gia tối đa</th>
             <th scope="col">Số buổi học</th>
           </tr>
         </thead>

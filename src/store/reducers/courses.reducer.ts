@@ -9,26 +9,25 @@ const initialState: ICourseState = {
     modificationState: CourseModificationStatus.None,
     selectedCourse: null,
     courses: [{
-        id: 1, name: "Khóa học chì màu dành cho trẻ 5-9 tuổi", description: '<p></p>', type: "Chì màu",
-        level: "5-9 tuổi", price: 2000000, amount: 25
+        courseId: 1, courseName: "Khóa học chì màu dành cho trẻ 5-9 tuổi",  courseLevel: '5-9 tuổi', courseType: 'Chì màu', courseDescription: '<p></p>', coursePrice: 2000000, maxCourseParticipant: 25, sumOfSection: 25
     }]
 };
 
 function coursesReducer(state: ICourseState = initialState, action: IActionBase): ICourseState {
     switch (action.type) {
         case ADD_COURSE: {
-            let maxId: number = Math.max.apply(Math, state.courses.map(function(o) { return o.id; }));
+            let maxId: number = Math.max.apply(Math, state.courses.map(function(o) { return o.courseId; }));
             action.course.id = maxId + 1;
             return { ...state, courses: [...state.courses, action.course]};
         }
         case EDIT_COURSE: {
-            const foundIndex: number = state.courses.findIndex(pr => pr.id === action.course.id);
+            const foundIndex: number = state.courses.findIndex(pr => pr.courseId === action.course.id);
             let courses: ICourse[] = state.courses;
             courses[foundIndex] = action.course;
             return { ...state, courses: courses };
         }
         case REMOVE_COURSE: {
-            return { ...state, courses: state.courses.filter(pr => pr.id !== action.id) };
+            return { ...state, courses: state.courses.filter(pr => pr.courseId !== action.id) };
         }
         case CHANGE_COURSE_PENDING_EDIT: {
             return { ...state, selectedCourse: action.course };
@@ -40,9 +39,9 @@ function coursesReducer(state: ICourseState = initialState, action: IActionBase)
             return { ...state, modificationState: action.value };
         }
         case CHANGE_COURSE_AMOUNT: {
-            const foundIndex: number = state.courses.findIndex(pr => pr.id === action.id);
+            const foundIndex: number = state.courses.findIndex(pr => pr.courseId === action.id);
             let courses: ICourse[] = state.courses;
-            courses[foundIndex].price = courses[foundIndex].price - action.amount;
+            courses[foundIndex].coursePrice = courses[foundIndex].coursePrice - action.amount;
             return { ...state, courses: courses };
         }
         default:

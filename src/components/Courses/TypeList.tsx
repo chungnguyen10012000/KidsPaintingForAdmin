@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { IStateType, IMytypeState } from "../../store/models/root.interface";
 import { IMytype } from "../../store/models/mytypes.interface";
@@ -11,15 +11,25 @@ export type mytypeListProps = {
 function TypeList(props: mytypeListProps): JSX.Element  {
   const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
 
-  const mytypeElements: (JSX.Element | null)[] = mytypes.mytypes.map(mytype => {
+  const [data, setData] = useState<IMytype[]>([])
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/v1/typeArt')
+    .then(res => res.json())
+    .then(x => {
+      setData(x)
+    })
+  })
+
+  const mytypeElements: (JSX.Element | null)[] = data.map(mytype => {
     if (!mytype) { return null; }
-    return (<tr className={`table-row ${(mytypes.selectedMytype && mytypes.selectedMytype.id === mytype.id) ? "selected" : ""}`}
+    return (<tr className={`table-row ${(mytypes.selectedMytype && mytypes.selectedMytype.typeId === mytype.typeId) ? "selected" : ""}`}
       onClick={() => {
         if(props.onSelect) props.onSelect(mytype);
       }}
-      key={`mytype_${mytype.id}`}>
-      <th scope="row">{mytype.id}</th>
-      <td>{mytype.name}</td>
+      key={`mytype_${mytype.typeId}`}>
+      <th scope="row">{mytype.typeId}</th>
+      <td>{mytype.typeName}</td>
     </tr>);
   });
 

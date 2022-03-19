@@ -7,6 +7,10 @@ import { editLevel, clearSelectedLevel, setModificationStateLevel, addLevel } fr
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, ILevelFormState } from "../../common/types/Form.types";
 
+interface data {
+  levelName: string;
+}
+
 const LevelForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const levels: ILevelState | null = useSelector((state: IStateType) => state.levels);
@@ -14,11 +18,11 @@ const LevelForm: React.FC = () => {
   const isCreate: boolean = (levels.modificationState === LevelModificationStatus.Create);
   
   if (!level || isCreate) {
-  level = { id: 0, name: ""};
+  level = { levelId: 0, levelName: ""};
   }
 
   const [formState, setFormState] = useState({
-    name: { error: "", value: level.name },
+    name: { error: "", value: level.levelName },
   });
 
   function hasFormValueChanged(model: OnChangeModel): void {
@@ -45,6 +49,23 @@ const LevelForm: React.FC = () => {
       dispatch(addNotification("Thể loại", `${formState.name.value} đã được lưu bởi bạn`));
       dispatch(clearSelectedLevel());
       dispatch(setModificationStateLevel(LevelModificationStatus.None));
+
+      if (saveFn === addLevel){
+        fetch('http://localhost:8080/api/v1/level', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ levelName: formState.name.value })
+        })
+          .then(response => response.json())
+          .then(data => console.log(data));
+      }
+      else{
+        fetch(`http://localhost:8080/api/v1/level/${level.levelId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ levelName: formState.name.value })
+        })
+      }
     }
   }
 

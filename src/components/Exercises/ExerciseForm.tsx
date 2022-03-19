@@ -69,14 +69,14 @@ const ExerciseForm: React.FC = () => {
   const listLevel: ILevel[] = levels.levels
   const listLevels: string[] = []
   listLevel.map((ele) => {
-    return listLevels.push(ele.name)
+    return listLevels.push(ele.levelName)
   })
 
   const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
   const listMytype: IMytype[] = mytypes.mytypes
   const listMytypes: string[] = []
   listMytype.map((ele) => {
-    return listMytypes.push(ele.name)
+    return listMytypes.push(ele.typeName)
   })
 
   const [formState, setFormState] = useState({

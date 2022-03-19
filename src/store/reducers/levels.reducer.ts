@@ -9,25 +9,25 @@ const initialState: ILevelState = {
     modificationState: LevelModificationStatus.None,
     selectedLevel: null,
     levels: [{
-        id: 1, name: "5-9 tuổi"
+        levelId: 1, levelName: "5-9 tuổi"
     }]
 };
 
 function levelsReducer(state: ILevelState = initialState, action: IActionBase): ILevelState {
     switch (action.type) {
         case ADD_LEVEL: {
-            let maxId: number = Math.max.apply(Math, state.levels.map(function(o) { return o.id; }));
-            action.level.id = maxId + 1;
+            let maxId: number = Math.max.apply(Math, state.levels.map(function(o) { return o.levelId; }));
+            action.level.levelId = maxId + 1;
             return { ...state, levels: [...state.levels, action.level]};
         }
         case EDIT_LEVEL: {
-            const foundIndex: number = state.levels.findIndex(pr => pr.id === action.level.id);
+            const foundIndex: number = state.levels.findIndex(pr => pr.levelId === action.level.levelId);
             let levels: ILevel[] = state.levels;
             levels[foundIndex] = action.level;
             return { ...state, levels: levels };
         }
         case REMOVE_LEVEL: {
-            return { ...state, levels: state.levels.filter(pr => pr.id !== action.id) };
+            return { ...state, levels: state.levels.filter(pr => pr.levelId !== action.levelId) };
         }
         case CHANGE_LEVEL_PENDING_EDIT: {
             return { ...state, selectedLevel: action.level };
@@ -39,9 +39,9 @@ function levelsReducer(state: ILevelState = initialState, action: IActionBase): 
             return { ...state, modificationState: action.value };
         }
         case CHANGE_LEVEL_AMOUNT: {
-            const foundIndex: number = state.levels.findIndex(pr => pr.id === action.id);
+            const foundIndex: number = state.levels.findIndex(pr => pr.levelId === action.id);
             let levels: ILevel[] = state.levels;
-            levels[foundIndex].id = levels[foundIndex].id - action.amount;
+            levels[foundIndex].levelId = levels[foundIndex].levelId - action.amount;
             return { ...state, levels: levels };
         }
         default:

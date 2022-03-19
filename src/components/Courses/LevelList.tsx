@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { IStateType, ILevelState } from "../../store/models/root.interface";
 import { ILevel } from "../../store/models/levels.interface";
@@ -10,21 +10,29 @@ export type levelListProps = {
 
 function TypeList(props: levelListProps): JSX.Element  {
 
-  fetch('https://backend-kidspainting-1.herokuapp.com/api/v1/level')
+  const [data, setData] = useState<ILevel[]>([])
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/v1/level')
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(x => {
+      setData(x)
+    })
+  })
+
+  //console.log('data',data)
   
   const levels: ILevelState = useSelector((state: IStateType) => state.levels);
 
-  const levelElements: (JSX.Element | null)[] = levels.levels.map(level => {
+  const levelElements: (JSX.Element | null)[] = data.map(level => {
     if (!level) { return null; }
-    return (<tr className={`table-row ${(levels.selectedLevel && levels.selectedLevel.id === level.id) ? "selected" : ""}`}
+    return (<tr className={`table-row ${(levels.selectedLevel && levels.selectedLevel.levelId === level.levelId) ? "selected" : ""}`}
       onClick={() => {
         if(props.onSelect) props.onSelect(level);
       }}
-      key={`level_${level.id}`}>
-      <th scope="row">{level.id}</th>
-      <td>{level.name}</td>
+      key={`level_${level.levelId}`}>
+      <th scope="row">{level.levelId}</th>
+      <td>{level.levelName}</td>
     </tr>);
   });
 
@@ -35,7 +43,7 @@ function TypeList(props: levelListProps): JSX.Element  {
         <thead className="thead-light">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Tên thể loại</th>
+            <th scope="col">Mức độ</th>
           </tr>
         </thead>
         <tbody>
