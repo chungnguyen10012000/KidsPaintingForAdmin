@@ -9,6 +9,11 @@ export type levelListProps = {
 };
 
 function TypeList(props: levelListProps): JSX.Element  {
+
+  fetch('https://backend-kidspainting-1.herokuapp.com/api/v1/level')
+    .then(res => res.json())
+    .then(data => console.log(data))
+  
   const levels: ILevelState = useSelector((state: IStateType) => state.levels);
 
   const levelElements: (JSX.Element | null)[] = levels.levels.map(level => {

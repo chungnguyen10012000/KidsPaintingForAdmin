@@ -35,7 +35,7 @@ const Login: React.FC = () => {
       'grant_type': 'password'
     };
 
-    console.log(details)
+    //console.log(details)
 
     var formBody: string[] = [];
     for (var property in details) {
@@ -55,7 +55,7 @@ const Login: React.FC = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
+        //console.log(data)
         localStorage.setItem('access_token', data.access_token) // Authorization
         localStorage.setItem('refresh_token', data.refresh_token)
         localStorage.setItem('email', formState.email.value)
