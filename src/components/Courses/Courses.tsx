@@ -25,13 +25,6 @@ import { removeLevel, clearSelectedLevel, changeSelectedLevel, setModificationSt
 const Courses: React.FC = () => {
   const [data, setData] = useState<ICourse[]>([])
 
-  useEffect(() => {
-    fetch('http://localhost:8080/api/v1/course')
-    .then(res => res.json())
-    .then(x => {
-      setData(x)
-    })
-  })
   let [isCheck, setIsCheck] = useState('')
   const dispatch: Dispatch<any> = useDispatch();
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);

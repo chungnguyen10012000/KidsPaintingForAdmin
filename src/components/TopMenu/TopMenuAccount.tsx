@@ -30,7 +30,10 @@ function TopMenuAccount(): JSX.Element {
         <a className="dropdown-item"
         onClick={() => {
           dispatch(logout())
-          localStorage.setItem('email', '')
+          localStorage.removeItem('email')
+          localStorage.removeItem('access_token') // Authorization
+          localStorage.removeItem('refresh_token')
+          localStorage.removeItem('rememberMe')
         }}
         href="/login" 
         data-toggle="modal"

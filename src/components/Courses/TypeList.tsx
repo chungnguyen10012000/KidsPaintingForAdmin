@@ -13,15 +13,8 @@ function TypeList(props: mytypeListProps): JSX.Element  {
 
   const [data, setData] = useState<IMytype[]>([])
 
-  useEffect(() => {
-    fetch('http://localhost:8080/api/v1/typeArt')
-    .then(res => res.json())
-    .then(x => {
-      setData(x)
-    })
-  })
 
-  const mytypeElements: (JSX.Element | null)[] = data.map(mytype => {
+  const mytypeElements: (JSX.Element | null)[] = mytypes.mytypes.map(mytype => {
     if (!mytype) { return null; }
     return (<tr className={`table-row ${(mytypes.selectedMytype && mytypes.selectedMytype.typeId === mytype.typeId) ? "selected" : ""}`}
       onClick={() => {

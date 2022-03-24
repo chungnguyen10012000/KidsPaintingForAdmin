@@ -49,23 +49,6 @@ const LevelForm: React.FC = () => {
       dispatch(addNotification("Thể loại", `${formState.name.value} đã được lưu bởi bạn`));
       dispatch(clearSelectedLevel());
       dispatch(setModificationStateLevel(LevelModificationStatus.None));
-
-      if (saveFn === addLevel){
-        fetch('http://localhost:8080/api/v1/level', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ levelName: formState.name.value })
-        })
-          .then(response => response.json())
-          .then(data => console.log(data));
-      }
-      else{
-        fetch(`http://localhost:8080/api/v1/level/${level.levelId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ levelName: formState.name.value })
-        })
-      }
     }
   }
 

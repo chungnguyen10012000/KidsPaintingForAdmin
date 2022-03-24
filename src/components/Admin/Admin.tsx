@@ -18,6 +18,7 @@ import ContestDetail from "../Contest/ContestDetail";
 import Exercises from "../Exercises/Exercise";
 import Blogs from "../Blogs/Blog";
 import Sesson from "../Sesson/Sesson";
+import JitsiComponent from "../Lesson/VideoCall";
 
 import { useParams } from "react-router";
 import LeftMenuForEmployees from "../LeftMenu/LeftMenuForEmployees";
@@ -48,6 +49,7 @@ const Admin: React.FC = () => {
               <Route path={`/:id/myclass`}><MyClass /></Route>
               <Route path={`/:id/lesson`}><Lesson /></Route>
               <Route path={`/:id/lesson-detail`}><LessonDetail /></Route>
+              <Route path={`/:id/video-call`}><JitsiComponent /></Route>
               <Route path={`/:id/exercise`}><Exercises /></Route>
               <Route path={`/:id/exercise-grade`}><ExerciseGrade /></Route>
               <Route path={`/:id/submit-contest`}><ContestDetail /></Route>

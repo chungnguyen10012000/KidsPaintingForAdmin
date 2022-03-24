@@ -1,4 +1,4 @@
-import React, { Fragment, Dispatch } from "react";
+import React, { Fragment, Dispatch, useEffect, useState } from "react";
 import TopCard from "../../common/components/TopCard";
 import { IUser } from "../../store/models/user.interface";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,9 @@ import { removeUser } from "../../store/actions/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import EmployeeForm from "./EmployeesForm";
 import { addNotification } from "../../store/actions/notifications.action";
+import { getDomain, getRestApiWithToken } from "../../common/util/RestAPI.util";
+import { RestApiAuth } from "../../common/components/RestApiAuth";
+import { Page } from "../../common/util/User.util";
 
 const Employees: React.FC = () => {
 
@@ -20,7 +23,23 @@ const Employees: React.FC = () => {
     dispatch(removeUser(Employee.id)); 
   }
 
-  const userElements: JSX.Element[] = users.map(user => {
+  const [listStaff, setListStaff] = useState<any[]>([])
+
+  useEffect(() => {
+    let pathUsers = getDomain('user?role=ROLE_STAFF')
+    let token: string | null = localStorage.getItem('access_token');
+    if (token != null) {
+      getRestApiWithToken(pathUsers, token)
+        .then(res => {
+          return RestApiAuth(res);
+        })
+        .then( (data: Page) => {
+          setListStaff(data.items)
+        })
+      }
+  }, [])
+
+  const userElements: JSX.Element[] = listStaff.map(user => {
     return (
       <tr className={`table-row`}
         key={`user_${user.id}`}>
@@ -36,7 +55,7 @@ const Employees: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
-        <TopCard title="NHÂN VIÊN" text={users.length.toString()} icon="user" class="danger" />
+        <TopCard title="NHÂN VIÊN" text={listStaff.length.toString()} icon="user" class="danger" />
       </div>
 
       <div className="row">
@@ -74,3 +93,4 @@ const Employees: React.FC = () => {
 };
 
 export default Employees;
+

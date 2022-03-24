@@ -13,15 +13,8 @@ const courses: ICourseState = useSelector((state: IStateType) => state.courses);
 
   const [data, setData] = useState<ICourse[]>([])
 
-  useEffect(() => {
-    fetch('http://localhost:8080/api/v1/course')
-    .then(res => res.json())
-    .then(x => {
-      setData(x)
-    })
-  })
   
-  const courseElements: (JSX.Element | null)[] = data.map(course => {
+  const courseElements: (JSX.Element | null)[] = courses.courses.map(course => {
     if (!course) { return null; }
     return (<tr className={`table-row ${(courses.selectedCourse && courses.selectedCourse.courseId === course.courseId) ? "selected" : ""}`}
       onClick={() => {

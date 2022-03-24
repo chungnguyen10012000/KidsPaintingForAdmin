@@ -5,16 +5,14 @@ import { useDispatch } from "react-redux";
 import { login } from "../../store/actions/account.actions";
 import TextInput from "../../common/components/TextInput";
 import jwtDecode, { JwtPayload } from "jwt-decode";
+import { JwtType } from '../../common/types/Jwt.types'
+import { getDomain } from "../../common/util/RestAPI.util";
 
-type role = {
-  id: string;
-};
 
 const Login: React.FC = () => {
+  let role: string[] = []
   const dispatch: Dispatch<any> = useDispatch();
   let history = useHistory();
-
-  const { id } = useParams<role>()
 
   const [formState, setFormState] = useState({
     email: { error: "", value: "" },
@@ -26,59 +24,52 @@ const Login: React.FC = () => {
   }
 
   function submit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
     if(isFormInvalid()) { return; }
-    var details: { [key: string]: any }= {
-      'client_id': 'login-app',
-      'username': formState.email.value,
-      'password': formState.password.value,
-      'grant_type': 'password'
-    };
-
-    //console.log(details)
-
-    var formBody: string[] = [];
-    for (var property in details) {
-      var encodedKey = encodeURIComponent(property);
-      var encodedValue: string = encodeURIComponent(details[property]);
-      formBody.push(encodedKey + "=" + encodedValue);
-    }
-    var formBodySString: string = formBody.join("&");
-    //console.log(formBody)
-
-    fetch('https://kidraw-keycloak.herokuapp.com/auth/realms/SpringBootKeycloak/protocol/openid-connect/token', {
+    let pathAuth = getDomain('auth')
+    fetch(pathAuth, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
       },
-      body: formBodySString
+      body: JSON.stringify({
+        "username":formState.email.value,
+        "password": formState.password.value
+      })
     })
       .then(res => res.json())
       .then(data => {
         //console.log(data)
-        localStorage.setItem('access_token', data.access_token) // Authorization
-        localStorage.setItem('refresh_token', data.refresh_token)
+        localStorage.setItem('access_token', data.accessToken) // Authorization
+        localStorage.setItem('refresh_token', data.refreshToken)
         localStorage.setItem('email', formState.email.value)
-        const token: string = data.access_token;
-        const decoded = jwtDecode<JwtPayload>(token); 
-        console.log(decoded)
-        dispatch(login(formState.email.value)); 
-        if(id === "admin"){
-          alert('Quản trị viên đăng nhập thành công!')
-          history.push({pathname: '/admin/home', state: {isAdmin: true}})
+        const token: string = data.accessToken;
+        //console.log(token)
+        const decoded = jwtDecode<JwtType>(token); 
+        //console.log(decoded.roles)
+        role = decoded.roles
+        for (let index = 0; index < role.length; index++) {
+          dispatch(login(formState.email.value))
+          //console.log(decoded)
+          if(role[index] === "ROLE_ADMIN"){
+            //console.log(10)
+            alert('Quản trị viên đăng nhập thành công!')
+            history.push({pathname: '/admin/home', state: {isAdmin: true}})
+          }
+          else if (role[index] === "ROLE_TEACHER"){
+            alert('Giáo viên đăng nhập thành công!')
+            history.push({pathname: '/teacher/home', state: {isAdmin: false}})
+          }
+          else if (role[index] === "ROLE_STAFF"){
+            alert('Nhân viên đăng nhập thành công!')
+            history.push({pathname: '/employee/home', state: {isAdmin: 'employee'}})
+          }
         }
-        else if (id === "teacher"){
-          alert('Giáo viên đăng nhập thành công!')
-          history.push({pathname: '/teacher/home', state: {isAdmin: false}})
-        }
-        else{
-          alert('Nhân viên đăng nhập thành công!')
-          history.push({pathname: '/employee/home', state: {isAdmin: 'employee'}})
-        }
+        //console.log(role)
       })
       .catch(() => {
         alert('Đăng nhập không thành công!')
       })
+    e.preventDefault();
   }
 
   function isFormInvalid() {
@@ -103,17 +94,7 @@ const Login: React.FC = () => {
                 <div className="col-lg-6">
                   <div className="p-5">
                     <div className="text-center">
-                      <h1 className="h4 text-gray-900 mb-4">Chào mừng {
-                        function (){
-                          if (id === "admin"){
-                            return "Quản trị viên"
-                          }
-                          else if (id === "teacher"){
-                            return "Giáo viên"
-                          }
-                          return "Nhân viên"
-                        }()
-                      } !</h1>
+                      <h1 className="h4 text-gray-900 mb-4">Chào mừng bạn !</h1>
                     </div>
                     <form className="user" onSubmit={submit}>
                       <div className="form-group">
@@ -124,8 +105,8 @@ const Login: React.FC = () => {
                           onChange={hasFormValueChanged}
                           required={true}
                           maxLength={100}
-                          label="Email"
-                          placeholder="Nhập Email" />
+                          label="Tên đăng nhập"
+                          placeholder="Nhập tên đăng nhập" />
                       </div>
                       <div className="form-group">
                         <TextInput id="input_password"
@@ -150,9 +131,9 @@ const Login: React.FC = () => {
                         type="submit">
                         Đăng nhập
                       </button>
-                      {
+                      {/* {
                         function () {
-                          if (id === "admin"){
+                          if (role === "ADMIN_USER"){
                             return (
                               <div className="container">
                                 <div className="row">
@@ -164,7 +145,7 @@ const Login: React.FC = () => {
                               </div>
                             )
                           }
-                          else if(id === "teacher"){
+                          else if(role === "TEACHER_USER"){
                             return (
                               <div className="container">
                                 <div className="row">
@@ -176,7 +157,7 @@ const Login: React.FC = () => {
                               </div>
                             )
                           }
-                          else{
+                          else if (role === "STAFF_USER"){
                             return (
                               <div className="container">
                                 <div className="row">
@@ -189,7 +170,7 @@ const Login: React.FC = () => {
                             )
                           }
                         }()
-                      }
+                      } */}
                     </form>
                   </div>
                 </div>

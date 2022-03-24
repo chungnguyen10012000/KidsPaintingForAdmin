@@ -42,23 +42,6 @@ const TypeForm: React.FC = () => {
         name: formState.name.value,
       }));
 
-      if (saveFn === addMytype){
-        fetch('http://localhost:8080/api/v1/typeArt', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ typeName: formState.name.value })
-        })
-          .then(response => response.json())
-          .then(data => console.log(data));
-      }
-      else{
-        fetch(`http://localhost:8080/api/v1/typeArt/${mytype.typeId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ typeName: formState.name.value })
-        })
-      }
-
       dispatch(addNotification("Thể loại", `${formState.name.value} đã được thêm bởi bạn`));
       dispatch(clearSelectedMytype());
       dispatch(setModificationStateMytype(MytypeModificationStatus.None));

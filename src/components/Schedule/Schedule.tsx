@@ -17,10 +17,10 @@ import { updateCurrentPath } from '../../store/actions/root.actions';
 
 
 const data = [{
-    Id: 2,
+    Id: 1,
     Subject: 'Meeting',
-    StartTime: new Date(2018, 1, 15, 10, 0),
-    EndTime: new Date(2018, 1, 15, 12, 30),
+    StartTime: new Date(2022, 3, 24, 12, 0),
+    EndTime: new Date(2022, 3, 24, 12, 30),
     IsAllDay: false,
     Status: 'Completed',
     Priority: 'High'

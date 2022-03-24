@@ -79,14 +79,6 @@ const CoursesForm: React.FC = () => {
 
   const [mylevel, setMyLevel] = useState<ILevel[]>([])
 
-  useEffect(() => {
-    fetch('http://localhost:8080/api/v1/level')
-    .then(res => res.json())
-    .then(x => {
-      setMyLevel(x)
-    })
-  }, [])
-
   const listLevel: ILevel[] = mylevel
   const listLevels: string[] = []
   listLevel.map((ele) => {
@@ -131,25 +123,6 @@ const CoursesForm: React.FC = () => {
         amount: formState.amount.value,
         sumOfSesson: formState.sumOfSesson.value,
       }));
-
-      if (saveFn === addCourse){
-        fetch(`http://localhost:8080/api/v1/${formState.type.value}/${formState.level.value}/course`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ courseName: formState.name.value, courseDescription: textHtml,coursePrice: formState.price.value, maxCourseParticipant: formState.amount.value, 
-          sumOfSection: formState.sumOfSesson.value})
-        })
-          .then(response => response.json())
-          .then(data => console.log(data));
-      }
-      else{
-        fetch(`http://localhost:8080/api/v1/course/${course.courseId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ courseName: formState.name.value, courseDescription: textHtml, coursePrice: formState.price.value, maxCourseParticipant: formState.amount.value, 
-            sumOfSection: formState.sumOfSesson.value })
-        })
-      }
 
       dispatch(addNotification("Khóa học", `${formState.name.value} đã được thêm bởi bạn`));
       dispatch(clearSelectedCourse());

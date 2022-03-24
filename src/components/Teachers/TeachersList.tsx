@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { IStateType, IUserState } from "../../store/models/root.interface";
 import { IUser } from "../../store/models/user.interface";
+import { getDomain } from "../../common/util/RestAPI.util";
 
 export type userListProps = {
   onSelect?: (user: IUser) => void;

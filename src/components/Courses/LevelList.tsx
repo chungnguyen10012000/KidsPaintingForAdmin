@@ -12,19 +12,13 @@ function TypeList(props: levelListProps): JSX.Element  {
 
   const [data, setData] = useState<ILevel[]>([])
 
-  useEffect(() => {
-    fetch('http://localhost:8080/api/v1/level')
-    .then(res => res.json())
-    .then(x => {
-      setData(x)
-    })
-  })
+
 
   //console.log('data',data)
   
   const levels: ILevelState = useSelector((state: IStateType) => state.levels);
 
-  const levelElements: (JSX.Element | null)[] = data.map(level => {
+  const levelElements: (JSX.Element | null)[] = levels.levels.map(level => {
     if (!level) { return null; }
     return (<tr className={`table-row ${(levels.selectedLevel && levels.selectedLevel.levelId === level.levelId) ? "selected" : ""}`}
       onClick={() => {

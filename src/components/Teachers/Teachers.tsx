@@ -1,4 +1,4 @@
-import React, { Fragment, Dispatch } from "react";
+import React, { Fragment, Dispatch, useState, useEffect } from "react";
 import TopCard from "../../common/components/TopCard";
 import { IUser } from "../../store/models/user.interface";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,26 +7,45 @@ import { removeUser } from "../../store/actions/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import TeacherForm from "./TeacherForm";
 import { addNotification } from "../../store/actions/notifications.action";
+import { getRestApiWithToken, getDomain, postRestApiWithToken } from "../../common/util/RestAPI.util";
+import { Page } from "../../common/util/User.util";
+import { RestApiAuth } from "../../common/components/RestApiAuth";
 
 const Teachers: React.FC = () => {
 
+  const [listUser, setListUser] = useState<any[]>([])
+
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Người dùng", "Danh sách"));
-  
   const users: IUser[] = useSelector((state: IStateType) => state.users.users);
+
+  useEffect(() => {
+    let pathUsers = getDomain('user?role=ROLE_TEACHER')
+    let token: string | null = localStorage.getItem('access_token');
+    if (token != null) {
+      getRestApiWithToken(pathUsers, token)
+        .then(res => {
+          return RestApiAuth(res);
+        })
+        .then( (data: Page) => {
+          setListUser(data.items)
+        })
+      }
+  }, [])
+
 
   function removeTeacher(teacher: IUser): void {
     dispatch(addNotification("Giáo viên", ` ${teacher.email} đã bị xóa khỏi hệ thống`));
-    dispatch(removeUser(teacher.id)); 
+    dispatch(removeUser(teacher.id));
   }
 
-  const userElements: JSX.Element[] = users.map(user => {
+  const userElements: JSX.Element[] = listUser.map(ele => {
     return (
       <tr className={`table-row`}
-        key={`user_${user.id}`}>
-        <th scope="row">{user.id}</th>
-        <td>{user.email}</td>
-        <td><button className="btn btn-success" onClick={() => removeTeacher(user)}>Xóa</button> </td>
+        key={`user_${ele.id}`}>
+        <th scope="row">{ele.id}</th>
+        <td>{ele.email}</td>
+        <td><button className="btn btn-success" onClick={() => removeTeacher(ele)}>Xóa</button> </td>
       </tr>);
   });
 
@@ -36,7 +55,7 @@ const Teachers: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
-        <TopCard title="GIÁO VIÊN" text={users.length.toString()} icon="user" class="danger" />
+        <TopCard title="GIÁO VIÊN" text={listUser.length.toString()} icon="user" class="danger" />
       </div>
 
       <div className="row">
@@ -67,7 +86,7 @@ const Teachers: React.FC = () => {
         </div>
       </div>
       <div className="row">
-          <TeacherForm />
+        <TeacherForm />
       </div>
     </Fragment >
   );
