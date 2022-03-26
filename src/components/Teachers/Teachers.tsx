@@ -7,9 +7,9 @@ import { removeUser } from "../../store/actions/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import TeacherForm from "./TeacherForm";
 import { addNotification } from "../../store/actions/notifications.action";
-import { getRestApiWithToken, getDomain, postRestApiWithToken } from "../../common/util/RestAPI.util";
-import { Page } from "../../common/util/User.util";
-import { RestApiAuth } from "../../common/components/RestApiAuth";
+//import { getRestApiWithToken, getDomain, postRestApiWithToken } from "../../common/util/RestAPI.util";
+//import { Page } from "../../common/util/User.util";
+//import { RestApiAuth } from "../../common/components/RestApiAuth";
 
 const Teachers: React.FC = () => {
 

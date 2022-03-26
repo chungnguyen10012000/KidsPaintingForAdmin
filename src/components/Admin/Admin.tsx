@@ -27,6 +27,7 @@ import LeftMenuForEmployees from "../LeftMenu/LeftMenuForEmployees";
 import Employees from "../Employees/Employees";
 import Schedule from "../Schedule/Schedule";
 import FeedBackDetail from "../FeedBack/FeedBackDetail"
+import ContestView from "../Contest/ContestView"
 
 type role = {
   id: string;
@@ -84,6 +85,7 @@ const Admin: React.FC = () => {
                 <Route path={`/:id/courses`}><Courses /></Route>
                 <Route path={`/:id/myclass`}><MyClass /></Route>
                 <Route path={`/:id/blog`}><Blogs /></Route>
+                <Route path={`/:id/contest-detail`}><ContestView /></Route>
                 <Route path={`/:id/blog-detail`}><BlogDetail /></Route>
                 <Route path={`/:id/feedback-detail`}><FeedBackDetail /></Route>
                 <Route path={`/:id/sesson`}><Sesson /></Route>
@@ -112,6 +114,7 @@ const Admin: React.FC = () => {
               <Route path={`/:id/teacher`}><Teachers /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
               <Route path={`/:id/blog`}><Blogs /></Route>
+              <Route path={`/:id/contest-detail`}><ContestView /></Route>
               <Route path={`/:id/blog-detail`}><BlogDetail /></Route>
               <Route path={`/:id/feedback-detail`}><FeedBackDetail /></Route>
               <Route path={`/:id/myclass`}><MyClass /></Route>

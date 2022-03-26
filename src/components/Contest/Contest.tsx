@@ -21,6 +21,7 @@ const Contests: React.FC = () => {
 
   const { id } = useParams<role>()
   let [isId, setIsId] = useState<number>(0)
+  let [description, setDescription] = useState<string>("");
 
   let history = useHistory();
 
@@ -39,6 +40,7 @@ const Contests: React.FC = () => {
     dispatch(changeSelectedContest(product));
     dispatch(setModificationState(ContestModificationStatus.None));
     setIsId(product.id)
+    setDescription(product.description)
   }
 
   function onContestRemove() {
@@ -111,6 +113,17 @@ const Contests: React.FC = () => {
                 </button>
                 <button className="btn btn-success btn-red" onClick={() => onContestRemove()}>
                   <i className="fas fa fa-times"></i>
+                </button>
+                <button className="btn btn-success btn-blue" onClick={() => 
+                  {
+                    if (contests.selectedContest){
+                      history.push({
+                        pathname: `/${id}/contest-detail`,
+                        state: { body : description}
+                      })
+                    }
+                  }}>
+                  <i className="fas fa fa-info-circle"></i>
                 </button>
               </div>
             </div>

@@ -1,10 +1,10 @@
 import React, { useState, FormEvent, Dispatch } from "react";
-import { useHistory, useParams } from "react-router";
+import { useHistory } from "react-router";
 import { OnChangeModel } from "../../common/types/Form.types";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/actions/account.actions";
 import TextInput from "../../common/components/TextInput";
-import jwtDecode, { JwtPayload } from "jwt-decode";
+import jwtDecode from "jwt-decode";
 import { JwtType } from '../../common/types/Jwt.types'
 import { getDomain } from "../../common/util/RestAPI.util";
 

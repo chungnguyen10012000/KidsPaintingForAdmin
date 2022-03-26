@@ -39,8 +39,6 @@ const LessonDetail: React.FC = () => {
   }, [quill]);
 
   console.log(textHtml)
-  const roomName = 'PersonalRubbishesAdviseDiscreetly'
-  const userFullName = 'Nguyen Chung'
   const [onCall, setOnCall] = useState(false)
   return (
     <Fragment>
