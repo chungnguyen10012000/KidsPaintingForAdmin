@@ -20,7 +20,7 @@ type role = {
 const Contests: React.FC = () => {
 
   const { id } = useParams<role>()
-  let isId: number = 0;
+  let [isId, setIsId] = useState<number>(0)
 
   let history = useHistory();
 
@@ -38,7 +38,7 @@ const Contests: React.FC = () => {
   function onContestSelect(product: IContest): void {
     dispatch(changeSelectedContest(product));
     dispatch(setModificationState(ContestModificationStatus.None));
-    isId = product.id
+    setIsId(product.id)
   }
 
   function onContestRemove() {

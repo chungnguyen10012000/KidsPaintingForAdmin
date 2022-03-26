@@ -29,7 +29,7 @@ const Courses: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
-  const numberItemsCount: number = data.length;
+  const numberItemsCount: number = courses.courses.length;
   const [popup, setPopup] = useState(false);
   const [popup1, setPopup1] = useState(false);
   const [popup2, setPopup2] = useState(false);

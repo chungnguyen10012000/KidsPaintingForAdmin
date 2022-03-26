@@ -10,8 +10,9 @@ import { IMyClass, MyClassModificationStatus } from "./myclass.interface";
 import { IMytype, MytypeModificationStatus } from "./mytypes.interface";
 import { ILevel, LevelModificationStatus } from "./levels.interface";
 import { IExercise, ExerciseModificationStatus } from "./exercise.interface";
-import { IBlog, BlogModificationStatus } from "./blog.interface";
+import { IFeedBack, FeedBackModificationStatus } from "./feedback.interface";
 import { ISesson, SessonModificationStatus } from "./sesson.interface";
+import { IBlog, BlogModificationStatus } from "./blogs.innterface";
 
 export interface IRootPageStateType {
     area: string;
@@ -35,8 +36,15 @@ export interface IStateType {
     mytypes: IMytypeState;
     levels: ILevelState;
     exercises: IExerciseState;
-    blogs: IBlogState;
+    feedbacks: IFeedBackState;
     sessons: ISessonState;
+    blogs: IBlogState;
+}
+
+export interface IBlogState {
+    blogs: IBlog[];
+    selectedBlog: IBlog | null;
+    modificationState: BlogModificationStatus;
 }
 
 export interface ISessonState {
@@ -45,11 +53,11 @@ export interface ISessonState {
     modificationState: SessonModificationStatus;
 }
 
-export interface IBlogState {
-    blogs: IBlog[];
-    blogAccept: IBlog[];
-    selectedBlog: IBlog | null;
-    modificationState: BlogModificationStatus;
+export interface IFeedBackState {
+    feedbacks: IFeedBack[];
+    feedbackAccept: IFeedBack[];
+    selectedFeedback: IFeedBack | null;
+    modificationState: FeedBackModificationStatus;
 }
 
 export interface IExerciseState {

@@ -1,14 +1,15 @@
 import React, { Fragment, Dispatch } from "react";
-import { IBlog } from "../../store/models/blog.interface";
+import { IBlog } from "../../store/models/blogs.innterface";
 import { useDispatch, useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { useLocation } from "react-router-dom";
 
-const FeedBackDetail: React.FC = () => {
+const BlogDetail: React.FC = () => {
 
     let location = useLocation()
-    let { id } = location.state
+    let { body } = location.state
+    console.log(body)
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Phản hồi", "Chi tiết"));
@@ -26,21 +27,7 @@ const FeedBackDetail: React.FC = () => {
               <div className="header-buttons">
               </div>
             </div>
-            <div className="card-body">
-                {
-                    function () {
-                        for (let index = 0; index < blogs.length; index++) {
-                            if (blogs[index].id === id){
-                                return (
-                                    <div>
-                                        {blogs[index].description}
-                                    </div>
-                                )
-                            }                          
-                        }
-                    }()
-                }
-            </div>
+            <div className="card-body" dangerouslySetInnerHTML={{ __html: body }}/>
           </div>
         </div>
       </div>
@@ -48,4 +35,4 @@ const FeedBackDetail: React.FC = () => {
   );
 };
 
-export default FeedBackDetail;
+export default BlogDetail;

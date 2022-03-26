@@ -71,9 +71,15 @@ const LeftMenuForEmployees: React.FC = () => {
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/employee/blogs`}>
+                    <Link className="nav-link" to={`/employee/feedbacks`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Phản hồi</span>
+                    </Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/employee/blog`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Blog</span>
                     </Link>
                 </li>
                 <hr className="sidebar-divider" />

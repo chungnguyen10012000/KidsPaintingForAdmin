@@ -1,6 +1,6 @@
 export interface IBlog {
     id: number;
-    email: string;
+    name: string;
     description: string;
 }
 

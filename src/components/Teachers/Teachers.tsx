@@ -19,19 +19,19 @@ const Teachers: React.FC = () => {
   dispatch(updateCurrentPath("Người dùng", "Danh sách"));
   const users: IUser[] = useSelector((state: IStateType) => state.users.users);
 
-  useEffect(() => {
-    let pathUsers = getDomain('user?role=ROLE_TEACHER')
-    let token: string | null = localStorage.getItem('access_token');
-    if (token != null) {
-      getRestApiWithToken(pathUsers, token)
-        .then(res => {
-          return RestApiAuth(res);
-        })
-        .then( (data: Page) => {
-          setListUser(data.items)
-        })
-      }
-  }, [])
+  // useEffect(() => {
+  //   let pathUsers = getDomain('user?role=ROLE_TEACHER')
+  //   let token: string | null = localStorage.getItem('access_token');
+  //   if (token != null) {
+  //     getRestApiWithToken(pathUsers, token)
+  //       .then(res => {
+  //         return RestApiAuth(res);
+  //       })
+  //       .then( (data: Page) => {
+  //         setListUser(data.items)
+  //       })
+  //     }
+  // }, [])
 
 
   function removeTeacher(teacher: IUser): void {
@@ -39,11 +39,12 @@ const Teachers: React.FC = () => {
     dispatch(removeUser(teacher.id));
   }
 
-  const userElements: JSX.Element[] = listUser.map(ele => {
+  const userElements: JSX.Element[] = users.map(ele => {
     return (
       <tr className={`table-row`}
         key={`user_${ele.id}`}>
         <th scope="row">{ele.id}</th>
+        <td>{ele.fullName}</td>
         <td>{ele.email}</td>
         <td><button className="btn btn-success" onClick={() => removeTeacher(ele)}>Xóa</button> </td>
       </tr>);
@@ -55,7 +56,7 @@ const Teachers: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
-        <TopCard title="GIÁO VIÊN" text={listUser.length.toString()} icon="user" class="danger" />
+        <TopCard title="GIÁO VIÊN" text={users.length.toString()} icon="user" class="danger" />
       </div>
 
       <div className="row">
@@ -72,6 +73,7 @@ const Teachers: React.FC = () => {
                   <thead className="thead-light">
                     <tr>
                       <th scope="col">#</th>
+                      <th scope="col">Tên đăng nhập</th>
                       <th scope="col">Email</th>
                       <th scope="col">Cấp quyền</th>
                     </tr>

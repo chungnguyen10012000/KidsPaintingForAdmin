@@ -23,27 +23,28 @@ const Employees: React.FC = () => {
     dispatch(removeUser(Employee.id)); 
   }
 
-  const [listStaff, setListStaff] = useState<any[]>([])
+  // const [listStaff, setListStaff] = useState<any[]>([])
 
-  useEffect(() => {
-    let pathUsers = getDomain('user?role=ROLE_STAFF')
-    let token: string | null = localStorage.getItem('access_token');
-    if (token != null) {
-      getRestApiWithToken(pathUsers, token)
-        .then(res => {
-          return RestApiAuth(res);
-        })
-        .then( (data: Page) => {
-          setListStaff(data.items)
-        })
-      }
-  }, [])
+  // useEffect(() => {
+  //   let pathUsers = getDomain('user?role=ROLE_STAFF')
+  //   let token: string | null = localStorage.getItem('access_token');
+  //   if (token != null) {
+  //     getRestApiWithToken(pathUsers, token)
+  //       .then(res => {
+  //         return RestApiAuth(res);
+  //       })
+  //       .then( (data: Page) => {
+  //         setListStaff(data.items)
+  //       })
+  //     }
+  // }, [])
 
-  const userElements: JSX.Element[] = listStaff.map(user => {
+  const userElements: JSX.Element[] = users.map(user => {
     return (
       <tr className={`table-row`}
         key={`user_${user.id}`}>
         <th scope="row">{user.id}</th>
+        <td>{user.fullName}</td>
         <td>{user.email}</td>
         <td><button className="btn btn-success" onClick={() => removeEmployee(user)}>Xóa</button> </td>
       </tr>);
@@ -55,7 +56,7 @@ const Employees: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
-        <TopCard title="NHÂN VIÊN" text={listStaff.length.toString()} icon="user" class="danger" />
+        <TopCard title="NHÂN VIÊN" text={users.length.toString()} icon="user" class="danger" />
       </div>
 
       <div className="row">
@@ -72,6 +73,7 @@ const Employees: React.FC = () => {
                   <thead className="thead-light">
                     <tr>
                       <th scope="col">#</th>
+                      <th scope="col">Tên đăng nhập</th>
                       <th scope="col">Email</th>
                       <th scope="col">Cấp quyền</th>
                     </tr>

@@ -12,7 +12,7 @@ export function RestApiAuth(res: Response) {
             .then(data => {
                 localStorage.setItem('access_token', data.accessToken) // Authorization
                 localStorage.setItem('refresh_token', data.refreshToken)
-                window.location.reload();
+                //window.location.reload();
             })
     }
 }

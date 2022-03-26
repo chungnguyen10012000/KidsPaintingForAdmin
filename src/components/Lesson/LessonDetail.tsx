@@ -1,5 +1,5 @@
 import React, { Fragment, Dispatch, useState } from "react";
-import { useDispatch, useStore } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import ExerciseList from "../Exercises/ExerciseList";
 import { useHistory } from "react-router-dom";
@@ -7,8 +7,6 @@ import { useQuill } from 'react-quilljs';
 import BlotFormatter from 'quill-blot-formatter';
 import 'quill/dist/quill.snow.css';
 import JitsiComponent from "./VideoCall";
-
-import Jitsi from 'react-jitsi'
 
 
 
@@ -19,6 +17,7 @@ const LessonDetail: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Buổi học", "Chi tiết buổi học"));
 
+
   const { quill, quillRef, Quill } = useQuill({
     modules: { blotFormatter: {} }
   });
@@ -28,6 +27,18 @@ const LessonDetail: React.FC = () => {
     Quill.register('modules/blotFormatter', BlotFormatter);
   }
 
+  let [textHtml, setTextHtml] = useState<string>('')
+
+
+  React.useEffect(() => {
+    if (quill) {
+      quill.on('text-change', (delta, oldDelta, source) => {
+        setTextHtml(quill.root.innerHTML); // Get innerHTML using quillRef
+      });
+    }
+  }, [quill]);
+
+  console.log(textHtml)
   const roomName = 'PersonalRubbishesAdviseDiscreetly'
   const userFullName = 'Nguyen Chung'
   const [onCall, setOnCall] = useState(false)
@@ -88,19 +99,21 @@ const LessonDetail: React.FC = () => {
         </div>
       </div>
     </div>
-    <div className="col-xl-6 col-lg-6">
-      <div className="card shadow mb-4">
-        <div className="card-header py-3">
+  </div>
+  <div className="row">
+    <div className="col-xl-12 col-lg-12">
+      <div className="card shadow mb-12">
+        <div className="card-header py-12">
           <h6 className="m-0 font-weight-bold text-green"> Soạn giáo án</h6>
         </div>
         <div className="card-body">
           {
-            <div ref={quillRef} style={{height: 200}}/>
+            <div ref={quillRef} style={{minHeight: 200}}/>
           }
           <button
             className={`btn btn-primary btn-user btn-block`}
             onClick={() => {
-              history.push('/teacher/exercise')
+              alert(textHtml)
             }}
           >
             Gửi

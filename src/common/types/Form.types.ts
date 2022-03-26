@@ -19,6 +19,11 @@ export interface IUserFormState {
     password: IFormStateField<string>;
 }
 
+export interface IBlogFormState {
+    name: IFormStateField<string>;
+    description: IFormStateField<string>;
+}
+
 export interface ICourseFormState {
     name: IFormStateField<string>;
     description: IFormStateField<string>;

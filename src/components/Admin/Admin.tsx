@@ -16,15 +16,17 @@ import LessonDetail from "../Lesson/LessonDetail";
 import ExerciseGrade from "../Exercises/ExerciseGrade";
 import ContestDetail from "../Contest/ContestDetail";
 import Exercises from "../Exercises/Exercise";
-import Blogs from "../Blogs/Blog";
+import FeedBack from "../FeedBack/FeedBack";
 import Sesson from "../Sesson/Sesson";
 import JitsiComponent from "../Lesson/VideoCall";
+import Blogs from "../Blogs/Blog";
+import BlogDetail from "../Blogs/BlogDetail";
 
 import { useParams } from "react-router";
 import LeftMenuForEmployees from "../LeftMenu/LeftMenuForEmployees";
 import Employees from "../Employees/Employees";
 import Schedule from "../Schedule/Schedule";
-import FeedBackDetail from "../Blogs/FeedBackDetail"
+import FeedBackDetail from "../FeedBack/FeedBackDetail"
 
 type role = {
   id: string;
@@ -76,11 +78,13 @@ const Admin: React.FC = () => {
             <div className="container-fluid">
               <Switch>
                 <Route path={`/:id/users`}><Users /></Route>
-                <Route path={`/:id/blogs`}><Blogs /></Route>
+                <Route path={`/:id/feedbacks`}><FeedBack /></Route>
                 <Route path={`/:id/teacher`}><Teachers /></Route>
                 <Route path={`/:id/employee`}><Employees /></Route>
                 <Route path={`/:id/courses`}><Courses /></Route>
                 <Route path={`/:id/myclass`}><MyClass /></Route>
+                <Route path={`/:id/blog`}><Blogs /></Route>
+                <Route path={`/:id/blog-detail`}><BlogDetail /></Route>
                 <Route path={`/:id/feedback-detail`}><FeedBackDetail /></Route>
                 <Route path={`/:id/sesson`}><Sesson /></Route>
                 <Route path={`/:id/contest`}><Contest /></Route>
@@ -104,9 +108,11 @@ const Admin: React.FC = () => {
           <div className="container-fluid">
             <Switch>
               <Route path={`/:id/users`}><Users /></Route>
-              <Route path={`/:id/blogs`}><Blogs /></Route>
+              <Route path={`/:id/feedbacks`}><FeedBack /></Route>
               <Route path={`/:id/teacher`}><Teachers /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
+              <Route path={`/:id/blog`}><Blogs /></Route>
+              <Route path={`/:id/blog-detail`}><BlogDetail /></Route>
               <Route path={`/:id/feedback-detail`}><FeedBackDetail /></Route>
               <Route path={`/:id/myclass`}><MyClass /></Route>
               <Route path={`/:id/contest`}><Contest /></Route>
