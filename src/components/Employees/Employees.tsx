@@ -18,6 +18,12 @@ const Employees: React.FC = () => {
   
   const users: IUser[] = useSelector((state: IStateType) => state.users.users);
 
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const handleChange = (event: any) => {
+    setSearchTerm(event.target.value);
+  };
+  console.log(searchTerm)
+
   function removeEmployee(Employee: IUser): void {
     dispatch(addNotification("Nhân viên", ` ${Employee.email} đã bị xóa khỏi hệ thống`));
     dispatch(removeUser(Employee.id)); 
@@ -44,7 +50,7 @@ const Employees: React.FC = () => {
       <tr className={`table-row`}
         key={`user_${user.id}`}>
         <th scope="row">{user.id}</th>
-        <td>{user.fullName}</td>
+        <td>{user.username}</td>
         <td>{user.email}</td>
         <td><button className="btn btn-success" onClick={() => removeEmployee(user)}>Xóa</button> </td>
       </tr>);
@@ -57,6 +63,19 @@ const Employees: React.FC = () => {
 
       <div className="row">
         <TopCard title="NHÂN VIÊN" text={users.length.toString()} icon="user" class="danger" />
+        <div className="col-xl-6 col-md-6 mb-4">
+          <div className="shadow h-100 py-4 ">
+            <div className="card-body">
+              <input
+                type="text"
+                placeholder="Tìm kiếm"
+                value={searchTerm}
+                onChange={handleChange}
+                style={{width: '100%'}}
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="row">

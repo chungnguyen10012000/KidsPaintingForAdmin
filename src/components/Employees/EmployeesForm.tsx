@@ -8,11 +8,14 @@ import { OnChangeModel, IUserFormState } from "../../common/types/Form.types";
 
 const EmployeeForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  let user: IUser  = {id: 0, fullName: '', email: '', sex: '', dateOfDay: '', address: '', phone: '', password: ''}
+  let user: IUser  = {id: 0, firstName: '', lastName: '', avatar: '', username: '', userStatus: true, email: '', sex: '', dateOfDay: '', address: '', phone: '', password: ''}
   
 
   const [formState, setFormState] = useState({
-    fullName: { error: "", value: user.fullName },
+    firstName: { error: "", value: user.firstName },
+    lastName: { error: "", value: user.lastName },
+    username: { error: "", value: user.username },
+    avatar: { error: "", value: user.avatar },
     email: { error: "", value: user.email },
     sex: { error: "", value: user.sex },
     dateOfDay: { error: "", value: user.dateOfDay },
@@ -39,7 +42,9 @@ const EmployeeForm: React.FC = () => {
     if (user) {
       dispatch(saveFn({
         ...user,
-        fullName: formState.fullName.value,
+        firstName: formState.firstName.value,
+        lastName: formState.lastName.value,
+        avatar: formState.avatar.value,
         email: formState.email.value,
         sex: formState.sex.value,
         dateOfDay:  formState.dateOfDay.value,
@@ -77,6 +82,16 @@ const EmployeeForm: React.FC = () => {
           </div>
           <div className="card-body">
             <form onSubmit={saveUser}>
+            <div className="form-group">
+                <TextInput id="input_username"
+                  field = "username"
+                  value={formState.username.value}
+                  onChange={hasFormValueChanged}
+                  required={false}
+                  maxLength={10000}
+                  label="Tên đăng nhập*"
+                  placeholder="" />
+              </div>
               <div className="form-group">
                 <TextInput id="input_email"
                 field = "email"
@@ -85,6 +100,16 @@ const EmployeeForm: React.FC = () => {
                   required={false}
                   maxLength={10000}
                   label="Email"
+                  placeholder="" />
+              </div>
+              <div className="form-group">
+                <TextInput id="input_password"
+                field = "password"
+                  value={formState.password.value}
+                  onChange={hasFormValueChanged}
+                  required={false}
+                  maxLength={10000}
+                  label="Mật khẩu*"
                   placeholder="" />
               </div>
               <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>

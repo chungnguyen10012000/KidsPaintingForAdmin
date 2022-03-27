@@ -20,6 +20,12 @@ const FeedBack: React.FC = () => {
   dispatch(updateCurrentPath("Phản hồi", "Danh sách"));
   
   const blogs: IFeedBack[] = useSelector((state: IStateType) => state.feedbacks.feedbacks);
+  const [searchTerm, setSearchTerm] = React.useState("");
+  
+  const handleChange = (event: any) => {
+    setSearchTerm(event.target.value);
+  };
+  console.log(searchTerm)
 
 
   const blogElements: JSX.Element[] = blogs.map(blog => {
@@ -54,6 +60,19 @@ const FeedBack: React.FC = () => {
 
       <div className="row">
         <TopCard title="PHẢN HỒI" text={blogs.length.toString()} icon="user" class="danger" />
+        <div className="col-xl-6 col-md-6 mb-4">
+          <div className="shadow h-100 py-4 ">
+            <div className="card-body">
+              <input
+                type="text"
+                placeholder="Tìm kiếm"
+                value={searchTerm}
+                onChange={handleChange}
+                style={{width: '100%'}}
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="row">

@@ -1,12 +1,16 @@
 export interface IUser {
     id: number;
-    fullName: string;
+    firstName: string;
+    lastName: string;
     email: string;
+    username: string;
     sex: string;
     dateOfDay:  string;
     address: string;
     phone: string;
     password: string;
+    userStatus: boolean;
+    avatar: string;
 }
 
 export enum UserModificationStatus {

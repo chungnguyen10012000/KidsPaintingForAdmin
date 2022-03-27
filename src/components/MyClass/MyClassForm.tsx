@@ -33,7 +33,7 @@ const MyClassForm: React.FC = () => {
   const listTeacher: IUser[] = teachers.users
   const listTeachers: string[] = []
   listTeacher.map((ele) => {
-    return listTeachers.push(ele.fullName)
+    return listTeachers.push(ele.username)
   })
 
   const [formState, setFormState] = useState({

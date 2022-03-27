@@ -27,7 +27,7 @@ const Users: React.FC = () => {
       <tr className={`table-row`}
         key={`user_${user.id}`}>
         <th scope="row">{user.id}</th>
-        <td>{user.fullName}</td>
+        <td>{user.username}</td>
         <td>{user.email}</td>
         <td><button className="btn btn-success" onClick={() => setUserAdmin(user)}>Gán admin</button> </td>
       </tr>);
@@ -38,7 +38,7 @@ const Users: React.FC = () => {
       <tr className={`table-row`}
         key={`user_${admin.id}`}>
         <th scope="row">{admin.id}</th>
-        <td>{admin.fullName}</td>
+        <td>{admin.username}</td>
         <td>{admin.email}</td>
         <td><button className="btn btn-danger" onClick={() => setUserNotAdmin(admin)}>Xóa admin</button> </td>
       </tr>);

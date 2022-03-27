@@ -19,7 +19,7 @@ function EmployeeList(props: userListProps): JSX.Element  {
       }}
       key={`user_${user.id}`}>
       <th scope="row">{user.id}</th>
-      <td>{user.fullName}</td>
+      <td>{user.username}</td>
       <td>{user.email}</td>
     </tr>);
   });
@@ -31,7 +31,7 @@ function EmployeeList(props: userListProps): JSX.Element  {
         <thead className="thead-light">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Họ và tên</th>
+            <th scope="col">Tên đăng nhập</th>
             <th scope="col">Email</th>
           </tr>
         </thead>

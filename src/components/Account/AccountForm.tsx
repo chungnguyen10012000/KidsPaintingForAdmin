@@ -15,13 +15,16 @@ const AccountForm: React.FC = () => {
   
 
   const [formState, setFormState] = useState({
-    fullName: { error: "", value: user.fullName },
+    firstName: { error: "", value: user.firstName },
+    lastName: { error: "", value: user.lastName},
     email: { error: "", value: user.email },
+    username: { error: "", value: user.username },
     sex: { error: "", value: user.sex },
     dateOfDay: { error: "", value: user.dateOfDay },
     address: { error: "", value: user.address },
     phone: { error: "", value: user.phone },
     password: { error: "", value: user.password },
+    avatar: { error: "", value: user.avatar },
   });
 
   function hasFormValueChanged(model: OnChangeModel): void {
@@ -42,8 +45,11 @@ const AccountForm: React.FC = () => {
     if (user) {
       dispatch(saveFn({
         ...user,
-        fullName: formState.fullName.value,
+        firstName: formState.firstName.value,
+        lastName: formState.lastName.value,
         email: formState.email.value,
+        username: formState.username.value,
+        avatar: formState.avatar.value,
         sex: formState.sex.value,
         dateOfDay:  formState.dateOfDay.value,
         address:  formState.address.value,
@@ -51,7 +57,7 @@ const AccountForm: React.FC = () => {
         password:  formState.password.value,
       }));
 
-      dispatch(addNotification("Thông tin cá nhân", ` ${formState.fullName.value} đã sửa bởi bạn`));
+      dispatch(addNotification("Thông tin cá nhân", ` ${formState.email.value} đã sửa bởi bạn`));
       dispatch(clearSelectedUser());
       dispatch(setModificationState(UserModificationStatus.None));
     }
@@ -68,8 +74,8 @@ const AccountForm: React.FC = () => {
 
   function isFormInvalid(): boolean {
     return (formState.phone.error || formState.email.error
-      || formState.fullName.error || formState.sex.error || formState.dateOfDay.error || formState.address.error || formState.password.error
-      || formState.dateOfDay.error || !formState.fullName.value || !formState.sex.value) as boolean;
+      || formState.firstName.error || formState.sex.error || formState.dateOfDay.error || formState.address.error || formState.password.error
+      || formState.dateOfDay.error || !formState.firstName.value || !formState.sex.value) as boolean;
   }
 
 
@@ -83,9 +89,26 @@ const AccountForm: React.FC = () => {
           <div className="card-body">
             <form onSubmit={saveUser}>
               <div className="form-group">
-                <TextInput id="input_name"
-                  value={formState.fullName.value}
-                  field="fullName"
+                <input id="input_avatar"
+                  type="file"
+                  value={formState.avatar.value}
+                  onChange={() => hasFormValueChanged}
+                  placeholder="Chọn ảnh đại diện" />
+              </div>
+              <div className="form-group">
+                <TextInput id="input_firstName"
+                  value={formState.firstName.value}
+                  field="firstName"
+                  onChange={hasFormValueChanged}
+                  required={true}
+                  maxLength={10000}
+                  label="Họ"
+                  placeholder="" />
+              </div>
+              <div className="form-group">
+                <TextInput id="input_lastName"
+                  value={formState.lastName.value}
+                  field="lastName"
                   onChange={hasFormValueChanged}
                   required={true}
                   maxLength={10000}
@@ -100,6 +123,16 @@ const AccountForm: React.FC = () => {
                   required={false}
                   maxLength={10000}
                   label="Email"
+                  placeholder="" />
+              </div>
+              <div className="form-group">
+                <TextInput id="input_username"
+                field = "username"
+                  value={formState.username.value}
+                  onChange={hasFormValueChanged}
+                  required={false}
+                  maxLength={10000}
+                  label="Tên đăng nhập"
                   placeholder="" />
               </div>
               <div className="form-group">

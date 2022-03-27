@@ -6,11 +6,11 @@ const initialState: IUserState = {
     modificationState: UserModificationStatus.None,
     selectedUser: null,
     users: [
-        { id: 1, fullName: "Nguyễn Văn Chung", email: "nvlong00@gmail.com", sex: "Nam", dateOfDay: "10/01/2000", address: "Thanh Hoa", phone: "0987123456", password: '123' },
-        { id: 2, fullName: "Trần Đức Bình", email: "ohmy@fr.pl", sex: "Nam", dateOfDay: "4/10/2000", address: "Ho Chi Minh", phone: "0987123490", password: '123' }
+        { id: 1, firstName: "Nguyễn", lastName: "Chung", email: "nvlong00@gmail.com", username: 'nvchung00', sex: "Nam", dateOfDay: "10/01/2000", address: "Thanh Hoa", phone: "0987123456", password: '123', userStatus: true, avatar: '' },
+        { id: 2, firstName: "Trần", lastName: 'Binh', email: "ohmy@fr.pl", username: 'binhtranh2k', sex: "Nam", dateOfDay: "4/10/2000", address: "Ho Chi Minh", phone: "0987123490", password: '123', userStatus: true, avatar: '' }
     ],
     admins: [
-        { id: 3, fullName: "Nguyễn Văn Chung", email: "jcrock@em.pl", sex: "Nam", dateOfDay: "10/01/2000", address: "Thanh Hoa", phone: "0987123456", password: '123' },
+        { id: 1, firstName: "Nguyễn", lastName: "Chung", email: "nvlong00@gmail.com", username: 'nvchung00', sex: "Nam", dateOfDay: "10/01/2000", address: "Thanh Hoa", phone: "0987123456", password: '123', userStatus: true, avatar: '' },
     ]
 };
 

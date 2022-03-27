@@ -10,7 +10,10 @@ export type OnChangeModel = {
 export interface IFormStateField<T> {error: string, value: T};
 
 export interface IUserFormState {
-    fullName: IFormStateField<string>;
+    firstName: IFormStateField<string>;
+    lastName: IFormStateField<string>;
+    avatar: IFormStateField<string>;
+    username: IFormStateField<string>;
     email: IFormStateField<string>;
     sex: IFormStateField<string>;
     dateOfDay:  IFormStateField<string>;

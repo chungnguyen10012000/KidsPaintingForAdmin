@@ -19,7 +19,7 @@ function AccountList(props: userListProps): JSX.Element  {
       }}
       key={`admin_${admin_item.id}`}>
       <th scope="row">{admin_item.id}</th>
-      <td>{admin_item.fullName}</td>
+      <td>{admin_item.username}</td>
       <td>{admin_item.email}</td>
       <td>{admin_item.sex}</td>
       <td>{admin_item.dateOfDay}</td>
@@ -35,7 +35,7 @@ function AccountList(props: userListProps): JSX.Element  {
         <thead className="thead-light">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Tên</th>
+            <th scope="col">Tên đăng nhập</th>
             <th scope="col">Email</th>
             <th scope="col">Giới tính</th>
             <th scope="col">Ngày sinh</th>
