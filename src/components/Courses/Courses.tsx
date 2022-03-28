@@ -91,8 +91,7 @@ const Courses: React.FC = () => {
       <div className="row">
         <TopCard title="TỔNG SỐ KHÓA HỌC" text={`${numberItemsCount}`} icon="box" class="primary" />
         <div className="col-xl-6 col-md-6 mb-4">
-          <div className="shadow h-100 py-4 ">
-            <div className="card-body">
+          <div className="card-body">
               <input
                 type="text"
                 placeholder="Tìm kiếm"
@@ -100,7 +99,6 @@ const Courses: React.FC = () => {
                 onChange={handleChange}
                 style={{width: '100%'}}
               />
-            </div>
           </div>
         </div>
       </div>

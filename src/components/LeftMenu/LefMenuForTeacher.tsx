@@ -64,6 +64,17 @@ const LeftMenuForTeacher: React.FC = () => {
                 </li>
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
+                    Mạng xã hội
+                </div>
+
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/teacher/social-media`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Mạng xã hội</span>
+                    </Link>
+                </li>
+                <hr className="sidebar-divider" />
+                <div className="sidebar-heading">
                     Quản lý tài khoản
                 </div>
                 <li className="nav-item">

@@ -64,7 +64,6 @@ const Employees: React.FC = () => {
       <div className="row">
         <TopCard title="NHÂN VIÊN" text={users.length.toString()} icon="user" class="danger" />
         <div className="col-xl-6 col-md-6 mb-4">
-          <div className="shadow h-100 py-4 ">
             <div className="card-body">
               <input
                 type="text"
@@ -74,7 +73,6 @@ const Employees: React.FC = () => {
                 style={{width: '100%'}}
               />
             </div>
-          </div>
         </div>
       </div>
 
