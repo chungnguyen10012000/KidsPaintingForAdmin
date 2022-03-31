@@ -7,6 +7,7 @@ export interface ICourse {
     coursePrice: number;
     maxCourseParticipant: number;
     sumOfSection: number;
+    time: string;
 }
 
 export enum CourseModificationStatus {

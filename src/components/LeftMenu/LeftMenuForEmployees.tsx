@@ -40,20 +40,51 @@ const LeftMenuForEmployees: React.FC = () => {
 
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
-                    Quản lý hệ thống
+                    Quản lý giáo viên
                 </div>
 
                 <li className="nav-item">
                     <Link className="nav-link" to={`/employee/teacher`}>
                         <i className="fas fa-fw fa-user"></i>
-                        <span>Giáo viên</span>
+                        <span>Thêm giáo viên</span>
                     </Link>
                 </li>
+
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/employee/teacher-request`}>
+                        <i className="fas fa-fw fa-user"></i>
+                        <span>Yêu cầu</span>
+                    </Link>
+                </li>
+
+                <hr className="sidebar-divider" />
+                <div className="sidebar-heading">
+                    Quản lý học viên
+                </div>
+
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/employee/student-request`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Yêu cầu</span>
+                    </Link>
+                </li>
+
+                <hr className="sidebar-divider" />
+                <div className="sidebar-heading">
+                    Quản lý hệ thống
+                </div>
 
                 <li className="nav-item">
                     <Link className="nav-link" to={`/employee/courses`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Khoá học</span>
+                    </Link>
+                </li>
+
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/employee/analysis`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Thống kê</span>
                     </Link>
                 </li>
 

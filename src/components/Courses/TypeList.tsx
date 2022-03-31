@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { IStateType, IMytypeState } from "../../store/models/root.interface";
 import { IMytype } from "../../store/models/mytypes.interface";
@@ -10,8 +10,6 @@ export type mytypeListProps = {
 
 function TypeList(props: mytypeListProps): JSX.Element  {
   const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
-
-  const [data, setData] = useState<IMytype[]>([])
 
 
   const mytypeElements: (JSX.Element | null)[] = mytypes.mytypes.map(mytype => {

@@ -1,7 +1,5 @@
 import React, { Fragment, Dispatch } from "react";
-import { IBlog } from "../../store/models/blogs.innterface";
-import { useDispatch, useSelector } from "react-redux";
-import { IStateType } from "../../store/models/root.interface";
+import { useDispatch } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { useLocation } from "react-router-dom";
 
@@ -13,8 +11,6 @@ const BlogDetail: React.FC = () => {
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Phản hồi", "Chi tiết"));
-  
-  const blogs: IBlog[] = useSelector((state: IStateType) => state.blogs.blogs);
 
   return (
     <Fragment>

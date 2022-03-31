@@ -10,6 +10,8 @@ import {
 import { useLocation, useHistory } from 'react-router-dom';
 import { ISesson } from '../../store/models/sesson.interface'
 
+//TODO: đánh giá điểm của lớp, bảng điểm từng thành viên lớp
+
 const Lesson: React.FC = () => {
 
     let location = useLocation()
@@ -37,7 +39,7 @@ const Lesson: React.FC = () => {
 
     useEffect(() => {
         dispatch(clearSelectedMyClass());
-        dispatch(updateCurrentPath("Buổi học", "Danh sách"));
+        dispatch(updateCurrentPath("Lớp CM-1", ""));
     }, [path.area, dispatch]);
 
     const myLessonElements: (JSX.Element | null)[] = listSesson.map((lesson_item, index) => {
@@ -60,13 +62,40 @@ const Lesson: React.FC = () => {
             <p className="mb-4">Thông tin chung</p>
             <div className="row">
                 <TopCard title="TỔNG SỐ BUỔI HỌC" text={`${numberItemsCount}`} icon="box" class="primary" />
+                <TopCard title="TỔNG SỐ HỌC SINH" text={`${numberItemsCount}`} icon="box" class="primary" />
             </div>
 
             <div className="row">
-                <div className="col-xl-12 col-lg-12">
+                <div className="col-xl-6 col-lg-6">
                     <div className="card shadow mb-4">
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-green">Danh sách buổi học</h6>
+                            <div className="header-buttons">
+                            </div>
+                        </div>
+                        <div className="card-body">
+                            <div className="table-responsive portlet">
+                                <table className="table">
+                                    <thead className="thead-light">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Buổi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            myLessonElements
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-xl-6 col-lg-6">
+                    <div className="card shadow mb-4">
+                        <div className="card-header py-3">
+                            <h6 className="m-0 font-weight-bold text-green">Danh sách học sinh</h6>
                             <div className="header-buttons">
                             </div>
                         </div>

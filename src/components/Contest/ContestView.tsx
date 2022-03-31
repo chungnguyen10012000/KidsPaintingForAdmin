@@ -1,7 +1,5 @@
 import React, { Fragment, Dispatch } from "react";
-import { IContest } from "../../store/models/contest.interface";
-import { useDispatch, useSelector } from "react-redux";
-import { IStateType } from "../../store/models/root.interface";
+import { useDispatch } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { useLocation } from "react-router-dom";
 
@@ -14,7 +12,6 @@ const ContestView: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Phản hồi", "Chi tiết"));
   
-  const contests: IContest[] = useSelector((state: IStateType) => state.contest.contest);
 
   return (
     <Fragment>

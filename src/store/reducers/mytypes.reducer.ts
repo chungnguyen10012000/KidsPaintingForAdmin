@@ -12,7 +12,6 @@ const initialState: IMytypeState = {
         typeId: 1, typeName: "Chì màu"
     }]
 };
-
 function mytypesReducer(state: IMytypeState = initialState, action: IActionBase): IMytypeState {
     switch (action.type) {
         case ADD_MYTYPE: {

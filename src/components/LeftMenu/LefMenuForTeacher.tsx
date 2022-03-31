@@ -31,22 +31,28 @@ const LeftMenuForTeacher: React.FC = () => {
                 <hr className="sidebar-divider my-0" />
 
                 <li className="nav-item active">
-
                     <Link className="nav-link" to="/teacher/home">
                         <i className="fas fa-fw fa-tachometer-alt"></i>
                         <span>Trang chủ</span>
                     </Link>
                 </li>
 
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/teacher/sigup-course`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Đăng ký lớp</span>
+                    </Link>
+                </li>
+
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
-                    Quản lý hệ thống
+                    Lớp
                 </div>
 
                 <li className="nav-item">
                     <Link className="nav-link" to={`/teacher/myclass`}>
                         <i className="fas fa-fw fa-warehouse"></i>
-                        <span>Lớp học</span>
+                        <span>Lớp dạy</span>
                     </Link>
                 </li>
                 <li className="nav-item">
@@ -56,23 +62,38 @@ const LeftMenuForTeacher: React.FC = () => {
                     </Link>
                 </li>
 
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/teacher/contest`}>
-                        <i className="fas fa-fw fa-warehouse"></i>
-                        <span>Cuộc thi</span>
-                    </Link>
-                </li>
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
-                    Mạng xã hội
+                    Cuộc thi
                 </div>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/teacher/social-media`}>
+                    <Link className="nav-link" to={`/teacher/contest`}>
                         <i className="fas fa-fw fa-warehouse"></i>
-                        <span>Mạng xã hội</span>
+                        <span>Cuộc thi chấm</span>
                     </Link>
                 </li>
+
+
+                <hr className="sidebar-divider" />
+                <div className="sidebar-heading">
+                    Tiện ích khác
+                </div>
+
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/teacher/onleave`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Nghỉ phép</span>
+                    </Link>
+                </li>
+
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/teacher/change-class`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Yêu cầu đổi lớp</span>
+                    </Link>
+                </li>
+
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
                     Quản lý tài khoản

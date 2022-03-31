@@ -2,7 +2,7 @@ import React, { Fragment, Dispatch, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import TopCard from "../../common/components/TopCard";
-import { IUserState, IStateType, IMyClassState, ICourseState, IContestState, IFeedBackState} from "../../store/models/root.interface";
+import { IStateType, IMyClassState, ICourseState, IContestState, IFeedBackState} from "../../store/models/root.interface";
 import MyClassListForKid from "../MyClass/MyClassListForKid";
 import { useParams } from "react-router";
 import { getDomain, getRestApiWithToken } from "../../common/util/RestAPI.util";
@@ -18,7 +18,6 @@ const Home: React.FC = () => {
   const { id } = useParams<role>()
   //console.log(id)
 
-  const users: IUserState = useSelector((state: IStateType) => state.users);
   const blogs: IFeedBackState = useSelector((state: IStateType) => state.feedbacks);
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
   const classs: IMyClassState = useSelector((state: IStateType) => state.myclass);
@@ -44,7 +43,7 @@ const Home: React.FC = () => {
           setTotalTeacher(0)
         })
       }
-  }, [])
+  })
 
   const numberTeacherCount: number = totalTeacher;
   const numberCoursesCount: number = courses.courses.length;

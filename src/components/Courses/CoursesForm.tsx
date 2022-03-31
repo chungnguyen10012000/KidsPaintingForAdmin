@@ -1,5 +1,5 @@
-import React, { useState, FormEvent, Dispatch, Fragment, useEffect } from "react";
-import { IStateType, ICourseState } from "../../store/models/root.interface";
+import React, { useState, FormEvent, Dispatch, Fragment } from "react";
+import { IStateType, ICourseState, IMytypeState, ILevelState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { ICourse, CourseModificationStatus } from "../../store/models/courses.interface";
 import TextInput from "../../common/components/TextInput";
@@ -32,7 +32,7 @@ const CoursesForm: React.FC = () => {
   const isCreate: boolean = (courses.modificationState === CourseModificationStatus.Create);
   
   if (!course || isCreate) {
-    course = { courseId: 0, courseName: "", courseDescription: "", courseLevel: "", courseType: "", coursePrice: 0, maxCourseParticipant: 0, sumOfSection: 0};
+    course = { courseId: 0, courseName: "", courseDescription: "", courseLevel: "", courseType: "", coursePrice: 0, maxCourseParticipant: 0, sumOfSection: 0, time: 'Thứ 2-4-6'};
   }
 
   const { quill, quillRef, Quill } = useQuill({
@@ -61,27 +61,15 @@ const CoursesForm: React.FC = () => {
     }
   }, [quill]);
 
-  const [mytype, setMyType] = useState<IMytype[]>([])
-
-  useEffect(() => {
-    fetch('http://localhost:8080/api/v1/typeArt')
-    .then(res => res.json())
-    .then(x => {
-      setMyType(x)
-    })
-  }, [])
-
-  const listMytype: IMytype[] = mytype
+  const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
   const listMytypes: string[] = []
-  listMytype.map((ele) => {
+  mytypes.mytypes.map((ele) => {
     return listMytypes.push(ele.typeName)
   })
 
-  const [mylevel, setMyLevel] = useState<ILevel[]>([])
-
-  const listLevel: ILevel[] = mylevel
+  const levels: ILevelState | null = useSelector((state: IStateType) => state.levels);
   const listLevels: string[] = []
-  listLevel.map((ele) => {
+  levels.levels.map((ele) => {
     return listLevels.push(ele.levelName)
   })
 
@@ -95,6 +83,7 @@ const CoursesForm: React.FC = () => {
     price: { error: "", value: course.coursePrice },
     amount: { error: "", value: course.maxCourseParticipant },
     sumOfSesson: { error: "", value: course.sumOfSection },
+    time: { error: "", value: course.time },
   });
 
   function hasFormValueChanged(model: OnChangeModel): void {
@@ -122,6 +111,7 @@ const CoursesForm: React.FC = () => {
         price: formState.price.value,
         amount: formState.amount.value,
         sumOfSesson: formState.sumOfSesson.value,
+        time: formState.time.value,
       }));
 
       dispatch(addNotification("Khóa học", `${formState.name.value} đã được thêm bởi bạn`));
@@ -211,6 +201,17 @@ const CoursesForm: React.FC = () => {
                   label="Số lượng buổi học"
                 />
               </div>
+              <div className="form-group">
+                  <SelectInput
+                    id="input_time"
+                    field="time"
+                    label="Thời gian"
+                    options={["Thứ 2-4-6", "Thứ 3-5-7"]}
+                    required={true}
+                    onChange={hasFormValueChanged}
+                    value={formState.time.value}
+                  />
+              </div> 
               <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
               <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Lưu</button>
             </form>

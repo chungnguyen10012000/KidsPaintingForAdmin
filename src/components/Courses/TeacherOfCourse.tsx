@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
 import { removeUser } from "../../store/actions/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
-import TeacherForm from "./TeacherForm";
 import { addNotification } from "../../store/actions/notifications.action";
 //import { getRestApiWithToken, getDomain, postRestApiWithToken } from "../../common/util/RestAPI.util";
 //import { Page } from "../../common/util/User.util";
@@ -14,8 +13,9 @@ import { addNotification } from "../../store/actions/notifications.action";
 const Teachers: React.FC = () => {
 
 
+
   const dispatch: Dispatch<any> = useDispatch();
-  dispatch(updateCurrentPath("Người dùng", "Danh sách"));
+  dispatch(updateCurrentPath("Giáo viên đăng ký", "Danh sách"));
   const users: IUser[] = useSelector((state: IStateType) => state.users.users);
 
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -51,7 +51,7 @@ const Teachers: React.FC = () => {
         <th scope="row">{ele.id}</th>
         <td>{ele.username}</td>
         <td>{ele.email}</td>
-        <td><button className="btn btn-success" onClick={() => removeTeacher(ele)}>Xóa</button> </td>
+        <td><button className="btn btn-success" onClick={() => removeTeacher(ele)}>Chấp nhận</button> </td>
       </tr>);
   });
 
@@ -61,7 +61,7 @@ const Teachers: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
-        <TopCard title="GIÁO VIÊN" text={users.length.toString()} icon="user" class="danger" />
+        <TopCard title="GIÁO VIÊN ĐĂNG KÝ" text={users.length.toString()} icon="user" class="danger" />
         <div className="col-xl-6 col-md-6 mb-4">
             <div className="card-body">
               <input
@@ -79,7 +79,7 @@ const Teachers: React.FC = () => {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách giáo viên</h6>
+              <h6 className="m-0 font-weight-bold text-green">Danh sách giáo viên đăng ký</h6>
               <div className="header-buttons">
               </div>
             </div>
@@ -102,9 +102,6 @@ const Teachers: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="row">
-        <TeacherForm />
       </div>
     </Fragment >
   );

@@ -1,28 +1,19 @@
 import React, { Fragment, Dispatch } from "react";
-import TopCard from "../../common/components/TopCard";
 import { IUser } from "../../store/models/user.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
 import { removeUser } from "../../store/actions/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
-import TeacherForm from "./TeacherForm";
 import { addNotification } from "../../store/actions/notifications.action";
 //import { getRestApiWithToken, getDomain, postRestApiWithToken } from "../../common/util/RestAPI.util";
 //import { Page } from "../../common/util/User.util";
 //import { RestApiAuth } from "../../common/components/RestApiAuth";
 
-const Teachers: React.FC = () => {
-
+const Request: React.FC = () => {
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Người dùng", "Danh sách"));
   const users: IUser[] = useSelector((state: IStateType) => state.users.users);
-
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const handleChange = (event: any) => {
-    setSearchTerm(event.target.value);
-  };
-  console.log(searchTerm)
 
   // useEffect(() => {
   //   let pathUsers = getDomain('user?role=ROLE_TEACHER')
@@ -51,35 +42,28 @@ const Teachers: React.FC = () => {
         <th scope="row">{ele.id}</th>
         <td>{ele.username}</td>
         <td>{ele.email}</td>
-        <td><button className="btn btn-success" onClick={() => removeTeacher(ele)}>Xóa</button> </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            <button className="btn btn-success" onClick={() => removeTeacher(ele)}>Chấp nhận</button> 
+        </td>
+        <td>
+            <button className="btn btn-success" onClick={() => removeTeacher(ele)}>Xóa</button>
+        </td>
       </tr>);
   });
 
   return (
     <Fragment>
-      <h1 className="h3 mb-2 text-gray-800">Giáo viên</h1>
+      <h1 className="h3 mb-2 text-gray-800">Yêu cầu</h1>
       <p className="mb-4">Thông tin chung</p>
-
-      <div className="row">
-        <TopCard title="GIÁO VIÊN" text={users.length.toString()} icon="user" class="danger" />
-        <div className="col-xl-6 col-md-6 mb-4">
-            <div className="card-body">
-              <input
-                type="text"
-                placeholder="Tìm kiếm"
-                value={searchTerm}
-                onChange={handleChange}
-                style={{width: '100%'}}
-              />
-            </div>
-        </div>
-      </div>
 
       <div className="row">
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách giáo viên</h6>
+              <h6 className="m-0 font-weight-bold text-green">Yêu cầu nghỉ dạy</h6>
               <div className="header-buttons">
               </div>
             </div>
@@ -91,7 +75,11 @@ const Teachers: React.FC = () => {
                       <th scope="col">#</th>
                       <th scope="col">Tên đăng nhập</th>
                       <th scope="col">Email</th>
-                      <th scope="col">Cấp quyền</th>
+                      <th scope="col">Lớp</th>
+                      <th scope="col">Thời gian nghỉ</th>
+                      <th scope="col">Thời gian dạy bù</th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -103,11 +91,38 @@ const Teachers: React.FC = () => {
           </div>
         </div>
       </div>
+
       <div className="row">
-        <TeacherForm />
+        <div className="col-xl-12 col-lg-12">
+          <div className="card shadow mb-4">
+            <div className="card-header py-3">
+              <h6 className="m-0 font-weight-bold text-green">Yêu cầu đổi lớp</h6>
+              <div className="header-buttons">
+              </div>
+            </div>
+            <div className="card-body">
+              <div className="table-responsive portlet">
+                <table className="table">
+                  <thead className="thead-light">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Tên đăng nhập</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Lớp hiện tại</th>
+                      <th scope="col">Lớp yêu cầu đổi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {userElements}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </Fragment >
   );
 };
 
-export default Teachers;
+export default Request;

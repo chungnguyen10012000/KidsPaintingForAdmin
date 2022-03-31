@@ -12,6 +12,8 @@ import { updateCurrentPath } from "../../store/actions/root.actions";
 import TypeList from "./TypeList";
 import LevelList from "./LevelList";
 
+import { useHistory, useParams } from "react-router-dom";
+
 import { ICourseState, IStateType, IRootPageStateType, IMytypeState, ILevelState } from "../../store/models/root.interface";
 
 import { CourseModificationStatus, ICourse } from "../../store/models/courses.interface";
@@ -22,8 +24,16 @@ import { removeMytype, clearSelectedMytype, changeSelectedMytype, setModificatio
 import { removeCourse, clearSelectedCourse, setModificationState, changeSelectedCourse } from "../../store/actions/courses.actions";
 import { removeLevel, clearSelectedLevel, changeSelectedLevel, setModificationStateLevel } from "../../store/actions/levels.actions";
 
+type role = {
+  id: string;
+};
+
 const Courses: React.FC = () => {
-  const [data, setData] = useState<ICourse[]>([])
+  let history = useHistory();
+
+  const { id } = useParams<role>()
+
+  let [isId, setIsId] = useState<number>(0)
 
   let [isCheck, setIsCheck] = useState('')
   const dispatch: Dispatch<any> = useDispatch();
@@ -53,6 +63,7 @@ const Courses: React.FC = () => {
   function onCourseSelect(course: ICourse): void {
     dispatch(changeSelectedCourse(course));
     dispatch(setModificationState(CourseModificationStatus.None));
+    setIsId(course.courseId)
   }
 
   function onMytypeSelect(mytype: IMytype): void {
@@ -120,6 +131,17 @@ const Courses: React.FC = () => {
                 </button>
                 <button className="btn btn-success btn-red" onClick={() => onCourseRemove()}>
                   <i className="fas fa fa-times"></i>
+                </button>
+                <button className="btn btn-success btn-blue" onClick={() => 
+                  {
+                    if (courses.selectedCourse){
+                      history.push({
+                        pathname: `/${id}/teacherofcourse`,
+                        state: { id : isId}
+                      })
+                    }
+                  }}>
+                  <i className="fas fa fa-info-circle"></i>
                 </button>
               </div>
             </div>
@@ -219,7 +241,6 @@ const Courses: React.FC = () => {
                 if (!levels.selectedLevel) {
                   return;
                 }
-                fetch(`http://localhost:8080/api/v1/level/${levels.selectedLevel.levelId}`, { method: 'DELETE' })
                 dispatch(addNotification("Mức độ", ` ${levels.selectedLevel.levelName} đã bị xóa khỏi hệ thống`));
                 dispatch(removeLevel(levels.selectedLevel.levelId));
                 dispatch(clearSelectedLevel());
@@ -247,7 +268,6 @@ const Courses: React.FC = () => {
                 if (!mytypes.selectedMytype) {
                   return;
                 }
-                fetch(`http://localhost:8080/api/v1/typeArt/${mytypes.selectedMytype.typeId}`, { method: 'DELETE' })
                 dispatch(addNotification("Thể loại", ` ${mytypes.selectedMytype.typeName} đã bị xóa khỏi hệ thống`));
                 dispatch(removeMytype(mytypes.selectedMytype.typeId));
                 dispatch(clearSelectedMytype());
@@ -276,7 +296,6 @@ const Courses: React.FC = () => {
                 if (!courses.selectedCourse) {
                   return;
                 }
-                fetch(`http://localhost:8080/api/v1/course/${courses.selectedCourse.courseId}`, { method: 'DELETE' })
                 dispatch(addNotification("Khóa học", ` ${courses.selectedCourse.courseName} đã bị xóa khỏi hệ thống`));
                 dispatch(removeCourse(courses.selectedCourse.courseId));
                 dispatch(clearSelectedCourse());

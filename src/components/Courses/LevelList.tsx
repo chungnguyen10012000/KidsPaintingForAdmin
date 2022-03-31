@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { IStateType, ILevelState } from "../../store/models/root.interface";
 import { ILevel } from "../../store/models/levels.interface";
@@ -10,7 +10,6 @@ export type levelListProps = {
 
 function TypeList(props: levelListProps): JSX.Element  {
 
-  const [data, setData] = useState<ILevel[]>([])
 
 
 

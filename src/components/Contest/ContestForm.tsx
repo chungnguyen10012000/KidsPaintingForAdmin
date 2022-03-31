@@ -33,7 +33,7 @@ const ContestForm: React.FC = () => {
   const isCreate: boolean = (contests.modificationState === ContestModificationStatus.Create);
   
   if (!contest || isCreate) {
-    contest = { id: 0, name: "", description: "", type: "", level: "", status: "", amount: 0, hasBeginDate: "", hasExpiryDate: ""};
+    contest = { id: 0, name: "", description: "", type: "", level: "", status: "", amount: 0, hasBeginDate: "", hasExpiryDate: "", teacher: ''};
   }
 
   const { quill, quillRef, Quill } = useQuill({
@@ -71,6 +71,8 @@ const ContestForm: React.FC = () => {
     return listLevels.push(ele.levelName)
   })
 
+  let listTeacher: string[] = ["Nguyen Chung", "Tran Binh"]
+
   const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
   const listMytype: IMytype[] = mytypes.mytypes
   const listMytypes: string[] = []
@@ -87,6 +89,7 @@ const ContestForm: React.FC = () => {
     amount: { error: "", value: contest.amount },
     hasBeginDate: { error: "", value: contest.hasBeginDate },
     hasExpiryDate: { error: "", value: contest.hasExpiryDate },
+    teacher: { error: "", value: contest.teacher },
   });
 
   function hasFormValueChanged(model: OnChangeModel): void {
@@ -115,6 +118,7 @@ const ContestForm: React.FC = () => {
         amount: formState.amount.value,
         hasBeginDate:  formState.hasBeginDate.value,
         hasExpiryDate: formState.hasExpiryDate.value,
+        teacher: formState.teacher.value,
       }));
 
       dispatch(addNotification("Cuộc thi", ` ${formState.name.value} chỉnh bởi bạn`));
@@ -191,6 +195,16 @@ const ContestForm: React.FC = () => {
                     onChange={hasFormValueChanged}
                     value={formState.status.value}
                   />
+              </div>
+              <div className="form-group">
+                <SelectInput id="input_teacher"
+                  field = "teacher"
+                  value={formState.teacher.value}
+                  onChange={hasFormValueChanged}
+                  required={true}
+                  label="Giáo viên chấm"
+                  options={listTeacher}
+                />
               </div>
               <div className="form-group">
                   <NumberInput id="input_amount"

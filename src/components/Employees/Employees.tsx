@@ -1,4 +1,4 @@
-import React, { Fragment, Dispatch, useEffect, useState } from "react";
+import React, { Fragment, Dispatch } from "react";
 import TopCard from "../../common/components/TopCard";
 import { IUser } from "../../store/models/user.interface";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,9 +7,6 @@ import { removeUser } from "../../store/actions/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import EmployeeForm from "./EmployeesForm";
 import { addNotification } from "../../store/actions/notifications.action";
-import { getDomain, getRestApiWithToken } from "../../common/util/RestAPI.util";
-import { RestApiAuth } from "../../common/components/RestApiAuth";
-import { Page } from "../../common/util/User.util";
 
 const Employees: React.FC = () => {
 

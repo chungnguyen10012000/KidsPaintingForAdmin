@@ -8,6 +8,7 @@ export interface IContest {
     amount: number;
     hasBeginDate: string;
     hasExpiryDate: string;
+    teacher: string;
 }
 
 export enum ContestModificationStatus {

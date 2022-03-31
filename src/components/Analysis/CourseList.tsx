@@ -9,7 +9,8 @@ export type courseListProps = {
 };
 
 function CoursesList(props: courseListProps): JSX.Element  {
-const courses: ICourseState = useSelector((state: IStateType) => state.courses);
+  const courses: ICourseState = useSelector((state: IStateType) => state.courses);
+
 
   
   const courseElements: (JSX.Element | null)[] = courses.courses.map(course => {
@@ -21,11 +22,6 @@ const courses: ICourseState = useSelector((state: IStateType) => state.courses);
       key={`course_${course.courseId}`}>
       <th scope="row">{course.courseId}</th>
       <td>{course.courseName}</td>
-      <td>{course.courseType}</td>
-      <td>{course.courseLevel}</td>
-      <td>{course.coursePrice}</td>
-      <td>{course.maxCourseParticipant}</td>
-      <td>{course.sumOfSection}</td>
     </tr>);
   });
 
@@ -37,11 +33,6 @@ const courses: ICourseState = useSelector((state: IStateType) => state.courses);
           <tr>
             <th scope="col">#</th>
             <th scope="col">Tên khóa học</th>
-            <th scope="col">Thể loại</th>
-            <th scope="col">Mức độ</th>
-            <th scope="col">Giá</th>
-            <th scope="col">Số học sinh tham gia tối đa</th>
-            <th scope="col">Số buổi học</th>
           </tr>
         </thead>
         <tbody>

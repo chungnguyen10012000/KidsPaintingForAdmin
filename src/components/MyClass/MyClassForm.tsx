@@ -1,5 +1,5 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
-import { IStateType, IMyClassState, ICourseState, IUserState } from "../../store/models/root.interface";
+import { IStateType, IMyClassState, ICourseState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { IMyClass, MyClassModificationStatus } from "../../store/models/myclass.interface";
 import TextInput from "../../common/components/TextInput";
@@ -8,7 +8,6 @@ import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import { OnChangeModel, IMyClassFormState } from "../../common/types/Form.types";
 import { ICourse } from "../../store/models/courses.interface";
-import { IUser } from "../../store/models/user.interface";
 import SelectInput from "../../common/components/Select";
 
 const MyClassForm: React.FC = () => {
@@ -29,12 +28,23 @@ const MyClassForm: React.FC = () => {
   })
 
 
-  const teachers: IUserState = useSelector((state: IStateType) => state.users);
-  const listTeacher: IUser[] = teachers.users
-  const listTeachers: string[] = []
-  listTeacher.map((ele) => {
-    return listTeachers.push(ele.username)
-  })
+  const LessonList: string[] = [
+  "Tiết 1 (06:00 - 06:50)", 
+  "Tiết 2 (07:00 - 07:50)", 
+  "Tiết 3 (08:00 - 08:50)",
+  "Tiết 4 (09:00 - 09:50)",
+  "Tiết 5 (10:00 - 10:50)",
+  "Tiết 6 (11:00 - 11:50)",
+  "Tiết 7 (12:00 - 12:50)",
+  "Tiết 8 (13:00 - 13:50)",
+  "Tiết 9 (14:00 - 14:50)",
+  "Tiết 10 (15:00 - 15:50)",
+  "Tiết 11 (16:00 - 16:50)",
+  "Tiết 12 (17:00 - 17:50)",
+  "Tiết 13 (18:00 - 18:50)",
+  "Tiết 14 (19:00 - 19:50)",
+  "Tiết 15 (20:00 - 20:50)",
+  ]
 
   const [formState, setFormState] = useState({
     name: { error: "", value: myclass.name },
@@ -120,10 +130,10 @@ const MyClassForm: React.FC = () => {
               </div>
               <div className="form-group">
                   <SelectInput
-                    id="input_teacher"
-                    field="teacher"
-                    label="Giáo viên giảng dạy"
-                    options={listTeachers}
+                    id="input_lesson"
+                    field="lesson"
+                    label="Tiết"
+                    options={LessonList}
                     required={true}
                     onChange={hasFormValueChanged}
                     value={formState.teacher_id.value}

@@ -21,6 +21,10 @@ import Sesson from "../Sesson/Sesson";
 import JitsiComponent from "../Lesson/VideoCall";
 import Blogs from "../Blogs/Blog";
 import BlogDetail from "../Blogs/BlogDetail";
+import Analysis from "../Analysis/Analysis";
+import SigupOfCourse from "../SigupOfTeacher/SigupOfTeacher";
+import Request from "../Teachers/Request";
+import OnLeave from "../OnLeave/OnLeave";
 
 import { useParams } from "react-router";
 import LeftMenuForEmployees from "../LeftMenu/LeftMenuForEmployees";
@@ -28,6 +32,9 @@ import Employees from "../Employees/Employees";
 import Schedule from "../Schedule/Schedule";
 import FeedBackDetail from "../FeedBack/FeedBackDetail"
 import ContestView from "../Contest/ContestView"
+import TeacherOfCourse from "../Courses/TeacherOfCourse"
+import Student from "../Student/Student"
+import ChangeClass from "../ChangeClass/ChangeClass"
 
 type role = {
   id: string;
@@ -49,14 +56,17 @@ const Admin: React.FC = () => {
               <Route path={`/:id/users`}><Users /></Route>
               <Route path={`/:id/teacher`}><Teachers /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
+              <Route path={`/:id/onleave`}><OnLeave /></Route>
               <Route path={`/:id/myclass`}><MyClass /></Route>
               <Route path={`/:id/lesson`}><Lesson /></Route>
+              <Route path={`/:id/sigup-course`}><SigupOfCourse /></Route>
               <Route path={`/:id/lesson-detail`}><LessonDetail /></Route>
               <Route path={`/:id/video-call`}><JitsiComponent /></Route>
               <Route path={`/:id/exercise`}><Exercises /></Route>
               <Route path={`/:id/exercise-grade`}><ExerciseGrade /></Route>
               <Route path={`/:id/submit-contest`}><ContestDetail /></Route>
               <Route path={`/:id/contest`}><Contest /></Route>
+              <Route path={`/:id/change-class`}><ChangeClass /></Route>
               <Route path={`/:id/home`}><Home /></Route>
               <Route path={`/:id/account`}><Account /></Route>
               <Route path={`/:id/schedule`}><Schedule /></Route>
@@ -81,6 +91,10 @@ const Admin: React.FC = () => {
                 <Route path={`/:id/users`}><Users /></Route>
                 <Route path={`/:id/feedbacks`}><FeedBack /></Route>
                 <Route path={`/:id/teacher`}><Teachers /></Route>
+                <Route path={`/:id/teacher-request`}><Request /></Route>
+                <Route path={`/:id/teacherofcourse`}><TeacherOfCourse /></Route>
+                <Route path={`/:id/student-request`}><Student /></Route>
+                <Route path={`/:id/analysis`}><Analysis /></Route>
                 <Route path={`/:id/employee`}><Employees /></Route>
                 <Route path={`/:id/courses`}><Courses /></Route>
                 <Route path={`/:id/myclass`}><MyClass /></Route>
@@ -112,8 +126,12 @@ const Admin: React.FC = () => {
               <Route path={`/:id/users`}><Users /></Route>
               <Route path={`/:id/feedbacks`}><FeedBack /></Route>
               <Route path={`/:id/teacher`}><Teachers /></Route>
+              <Route path={`/:id/teacher-request`}><Request /></Route>
+              <Route path={`/:id/student-request`}><Student /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
               <Route path={`/:id/blog`}><Blogs /></Route>
+              <Route path={`/:id/analysis`}><Analysis /></Route>
+              <Route path={`/:id/teacherofcourse`}><TeacherOfCourse /></Route>
               <Route path={`/:id/contest-detail`}><ContestView /></Route>
               <Route path={`/:id/blog-detail`}><BlogDetail /></Route>
               <Route path={`/:id/feedback-detail`}><FeedBackDetail /></Route>

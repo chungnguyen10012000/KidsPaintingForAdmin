@@ -7,10 +7,6 @@ import { editLevel, clearSelectedLevel, setModificationStateLevel, addLevel } fr
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, ILevelFormState } from "../../common/types/Form.types";
 
-interface data {
-  levelName: string;
-}
-
 const LevelForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const levels: ILevelState | null = useSelector((state: IStateType) => state.levels);
@@ -46,7 +42,7 @@ const LevelForm: React.FC = () => {
         name: formState.name.value,
       }));
 
-      dispatch(addNotification("Thể loại", `${formState.name.value} đã được lưu bởi bạn`));
+      dispatch(addNotification("Mức độ", `${formState.name.value} đã được lưu bởi bạn`));
       dispatch(clearSelectedLevel());
       dispatch(setModificationStateLevel(LevelModificationStatus.None));
     }
@@ -63,7 +59,7 @@ const LevelForm: React.FC = () => {
 
   function isFormInvalid(): boolean {
     return (formState.name.error || !formState.name.value) as boolean;
-}
+  }
 
   return (
     <Fragment>

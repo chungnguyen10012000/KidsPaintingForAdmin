@@ -1,15 +1,15 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { IUser, UserModificationStatus } from "../../store/models/user.interface";
-import TextInput from "../../common/components/TextInput";
 import { addUser, clearSelectedUser, setModificationState } from "../../store/actions/users.action";
 import { addNotification } from "../../store/actions/notifications.action";
-import { OnChangeModel, IUserFormState } from "../../common/types/Form.types";
+import { IUserFormState, OnChangeModel } from "../../common/types/Form.types";
+import TextInput from "../../common/components/TextInput";
 
 const EmployeeForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  let user: IUser  = {id: 0, firstName: '', lastName: '', avatar: '', username: '', userStatus: true, email: '', sex: '', dateOfDay: '', address: '', phone: '', password: ''}
-  
+  let user: IUser = { id: 0, firstName: '', lastName: '', avatar: '', username: '', userStatus: true, email: '', sex: '', dateOfDay: '', address: '', phone: '', password: '' }
+
 
   const [formState, setFormState] = useState({
     firstName: { error: "", value: user.firstName },
@@ -27,6 +27,7 @@ const EmployeeForm: React.FC = () => {
   function hasFormValueChanged(model: OnChangeModel): void {
     setFormState({ ...formState, [model.field]: { error: model.error, value: model.value } });
   }
+
 
   function saveUser(e: FormEvent<HTMLFormElement>): void {
     e.preventDefault();
@@ -47,10 +48,10 @@ const EmployeeForm: React.FC = () => {
         avatar: formState.avatar.value,
         email: formState.email.value,
         sex: formState.sex.value,
-        dateOfDay:  formState.dateOfDay.value,
-        address:  formState.address.value,
+        dateOfDay: formState.dateOfDay.value,
+        address: formState.address.value,
         phone: formState.phone.value,
-        password:  formState.password.value,
+        password: formState.password.value,
       }));
 
       dispatch(addNotification("Nhân viên ", ` ${formState.email.value} đã thêm bởi bạn`));
@@ -70,46 +71,52 @@ const EmployeeForm: React.FC = () => {
 
   function isFormInvalid(): boolean {
     return (formState.email.error
-       || !formState.email.value ) as boolean;
-}
+      || !formState.email.value) as boolean;
+  }
 
   return (
     <Fragment>
-      <div className="col-xl-7 col-lg-7">
+      <div className="col-xl-6 col-lg-6">
         <div className="card shadow mb-4">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-green"> {"Tạo"} thông tin tài khoản</h6>
           </div>
           <div className="card-body">
             <form onSubmit={saveUser}>
-            <div className="form-group">
-                <TextInput id="input_username"
-                  field = "username"
+              <div className="form-group">
+                <input type={"file"} accept={".csv"} />
+              </div>
+              <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
+              <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Lưu</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div className="col-xl-6 col-lg-6">
+        <div className="card shadow mb-4">
+          <div className="card-header py-3">
+            <h6 className="m-0 font-weight-bold text-green"> {"Tạo"} thông tin tài khoản</h6>
+          </div>
+          <div className="card-body">
+            <form onSubmit={saveUser}>
+              <div className="form-group">
+                <TextInput id="input_name"
                   value={formState.username.value}
+                  field="name"
                   onChange={hasFormValueChanged}
-                  required={false}
+                  required={true}
                   maxLength={10000}
-                  label="Tên đăng nhập*"
+                  label="Tên đăng nhập"
                   placeholder="" />
               </div>
               <div className="form-group">
-                <TextInput id="input_email"
-                field = "email"
-                  value={formState.email.value}
-                  onChange={hasFormValueChanged}
-                  required={false}
-                  maxLength={10000}
-                  label="Email"
-                  placeholder="" />
-              </div>
-              <div className="form-group">
-                <TextInput id="input_password"
-                field = "password"
+                <TextInput id="input_name"
                   value={formState.password.value}
+                  field="name"
                   onChange={hasFormValueChanged}
-                  required={false}
+                  required={true}
                   maxLength={10000}
-                  label="Mật khẩu*"
+                  label="Mật khẩu"
                   placeholder="" />
               </div>
               <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>

@@ -35,6 +35,7 @@ export interface ICourseFormState {
     level: IFormStateField<string>;
     amount: IFormStateField<number>; 
     sumOfSesson: IFormStateField<number>; 
+    time: IFormStateField<string>;
 }
 
 export interface IMytypeFormState {
@@ -82,6 +83,7 @@ export interface IContestFormState {
     amount: IFormStateField<number>;
     hasBeginDate: IFormStateField<string>;
     hasExpiryDate: IFormStateField<string>;
+    teacher: IFormStateField<string>;
 }
 
 export  interface IOrderFormState {

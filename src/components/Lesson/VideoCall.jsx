@@ -109,7 +109,6 @@ class JitsiComponent extends Component {
     }
 
     render() {
-        const { isAudioMuted, isVideoMuted } = this.state;
         return (
             <>
             <div id="jitsi-iframe"></div>

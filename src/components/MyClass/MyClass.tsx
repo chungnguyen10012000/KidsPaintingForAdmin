@@ -62,10 +62,11 @@ const MyClass: React.FC = () => {
         <p className="mb-4">Thông tin chung</p>
         <div className="row">
           <TopCard title="TỔNG SỐ LỚP HỌC" text={`${numberItemsCount}`} icon="box" class="primary" />
+          <TopCard title="TỔNG SỐ HỌC SINH" text={`${numberItemsCount}`} icon="box" class="primary" />
         </div>
   
         <div className="row">
-          <div className="col-xl-12 col-lg-12">
+          <div className="col-xl-6 col-lg-6">
             <div className="card shadow mb-4">
               <div className="card-header py-3">
                 <h6 className="m-0 font-weight-bold text-green">Danh sách lớp</h6>
@@ -144,7 +145,6 @@ const MyClass: React.FC = () => {
           || (myClass.modificationState === MyClassModificationStatus.Edit && myClass.selectedMyClass)) ?
           <MyClassForm /> : null}
       </div>
-
 
       <Popup
         className="popup-modal"
