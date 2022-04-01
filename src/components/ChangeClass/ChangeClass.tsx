@@ -106,7 +106,6 @@ const ChangeClass: React.FC = () => {
                 <td>{ele.username}</td>
                 <td>{ele.classPrent}</td>
                 <td>{ele.classGoal}</td>
-                <td></td>
                 <td>
                     <button className="btn btn-success" >Chấp nhận</button>
                 </td>
@@ -182,6 +181,8 @@ const ChangeClass: React.FC = () => {
                                             <th scope="col">Giáo viên yêu cầu đổi</th>
                                             <th scope="col">Lớp hiện tại</th>
                                             <th scope="col">Lớp yêu cầu đổi</th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>

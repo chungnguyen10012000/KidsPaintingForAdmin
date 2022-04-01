@@ -66,7 +66,7 @@ const MyClass: React.FC = () => {
         </div>
   
         <div className="row">
-          <div className="col-xl-6 col-lg-6">
+          <div className="col-xl-12 col-lg-12">
             <div className="card shadow mb-4">
               <div className="card-header py-3">
                 <h6 className="m-0 font-weight-bold text-green">Danh sách lớp</h6>
