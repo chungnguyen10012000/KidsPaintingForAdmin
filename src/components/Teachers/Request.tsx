@@ -9,6 +9,27 @@ import { addNotification } from "../../store/actions/notifications.action";
 //import { Page } from "../../common/util/User.util";
 //import { RestApiAuth } from "../../common/components/RestApiAuth";
 
+const data = [
+  {
+    "className": "CM-1",
+    "timeOff": "Tiết 7, Tiết 8 (04-02-2022)",
+    "timeAdd": "Tiết 7, Tiết 8 (04-06-2022)"
+  }, 
+  {
+    "className": "CM-2",
+    "timeOff": "Tiết 7, Tiết 8 (04-04-2022)",
+    "timeAdd": "Tiết 7, Tiết 8 (04-10-2022)"
+  }, 
+]
+
+const data_1 = [
+  {
+    "username": 'nvchung00',
+    "classPrent": "CM-1",
+    "classGoal": "CM-2"
+  }
+]
+
 const Request: React.FC = () => {
 
   const dispatch: Dispatch<any> = useDispatch();
@@ -35,21 +56,37 @@ const Request: React.FC = () => {
     dispatch(removeUser(teacher.id));
   }
 
-  const userElements: JSX.Element[] = users.map(ele => {
+  const userElements: JSX.Element[] = users.map((ele, index)=> {
     return (
       <tr className={`table-row`}
         key={`user_${ele.id}`}>
         <th scope="row">{ele.id}</th>
         <td>{ele.username}</td>
-        <td>{ele.email}</td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{data[index].className}</td>
+        <td>{data[index].timeOff}</td>
+        <td>{data[index].timeAdd}</td>
         <td>
             <button className="btn btn-success" onClick={() => removeTeacher(ele)}>Chấp nhận</button> 
         </td>
         <td>
-            <button className="btn btn-success" onClick={() => removeTeacher(ele)}>Xóa</button>
+            <button className="btn btn-danger" onClick={() => removeTeacher(ele)}>Xóa</button>
+        </td>
+      </tr>);
+  });
+
+  const changeClassElements: JSX.Element[] = data_1.map((ele, index)=> {
+    return (
+      <tr className={`table-row`}
+        key={`user_${index}`}>
+        <th scope="row">{index}</th>
+        <td>{ele.username}</td>
+        <td>{ele.classPrent}</td>
+        <td>{ele.classGoal}</td>
+        <td>
+            <button className="btn btn-success" >Chấp nhận</button> 
+        </td>
+        <td>
+            <button className="btn btn-danger" >Xóa</button>
         </td>
       </tr>);
   });
@@ -74,7 +111,6 @@ const Request: React.FC = () => {
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Tên đăng nhập</th>
-                      <th scope="col">Email</th>
                       <th scope="col">Lớp</th>
                       <th scope="col">Thời gian nghỉ</th>
                       <th scope="col">Thời gian dạy bù</th>
@@ -107,13 +143,14 @@ const Request: React.FC = () => {
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Tên đăng nhập</th>
-                      <th scope="col">Email</th>
                       <th scope="col">Lớp hiện tại</th>
                       <th scope="col">Lớp yêu cầu đổi</th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {userElements}
+                    {changeClassElements}
                   </tbody>
                 </table>
               </div>
