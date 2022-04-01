@@ -9,6 +9,14 @@ import { ICourse } from "../../store/models/courses.interface";
 import { IUser } from "../../store/models/user.interface";
 import SelectInput from "../../common/components/Select";
 
+const data_1 = [
+    {
+        "username": 'nvchung00',
+        "classPrent": "CM-1",
+        "classGoal": "CM-2"
+    }
+]
+
 const ChangeClass: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();
     const myClass: IMyClassState | null = useSelector((state: IStateType) => state.myclass);
@@ -25,26 +33,6 @@ const ChangeClass: React.FC = () => {
     listCourse.map((ele) => {
         return listCourses.push(ele.courseName)
     })
-
-
-/*     const teachers: IUserState = useSelector((state: IStateType) => state.users);
-    const LessonList: string[] = [
-        "Tiết 1 (06:00 - 06:50)",
-        "Tiết 2 (07:00 - 07:50)",
-        "Tiết 3 (08:00 - 08:50)",
-        "Tiết 4 (09:00 - 09:50)",
-        "Tiết 5 (10:00 - 10:50)",
-        "Tiết 6 (11:00 - 11:50)",
-        "Tiết 7 (12:00 - 12:50)",
-        "Tiết 8 (13:00 - 13:50)",
-        "Tiết 9 (14:00 - 14:50)",
-        "Tiết 10 (15:00 - 15:50)",
-        "Tiết 11 (16:00 - 16:50)",
-        "Tiết 12 (17:00 - 17:50)",
-        "Tiết 13 (18:00 - 18:50)",
-        "Tiết 14 (19:00 - 19:50)",
-        "Tiết 15 (20:00 - 20:50)",
-    ] */
 
     const classList: string[] = [
         "CM-1",
@@ -110,21 +98,20 @@ const ChangeClass: React.FC = () => {
 
     const users: IUser[] = useSelector((state: IStateType) => state.users.users);
 
-    const userElements: JSX.Element[] = users.map(ele => {
+    const userElements: JSX.Element[] = data_1.map((ele, index )=> {
         return (
             <tr className={`table-row`}
-                key={`user_${ele.id}`}>
-                <th scope="row">{ele.id}</th>
+                key={`user_${index + 1}`}>
+                <th scope="row">{index + 1}</th>
                 <td>{ele.username}</td>
-                <td>{ele.email}</td>
-                <td></td>
-                <td></td>
+                <td>{ele.classPrent}</td>
+                <td>{ele.classGoal}</td>
                 <td></td>
                 <td>
                     <button className="btn btn-success" >Chấp nhận</button>
                 </td>
                 <td>
-                    <button className="btn btn-success" >Xóa</button>
+                    <button className="btn btn-danger" >Xóa</button>
                 </td>
             </tr>);
     });
@@ -192,8 +179,7 @@ const ChangeClass: React.FC = () => {
                                     <thead className="thead-light">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Tên đăng nhập</th>
-                                            <th scope="col">Email</th>
+                                            <th scope="col">Giáo viên yêu cầu đổi</th>
                                             <th scope="col">Lớp hiện tại</th>
                                             <th scope="col">Lớp yêu cầu đổi</th>
                                         </tr>

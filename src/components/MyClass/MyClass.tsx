@@ -132,6 +132,17 @@ const MyClass: React.FC = () => {
                   }}>
                   <i className="fas fa fa-info-circle"></i>
                 </button>
+                <button className="btn btn-success btn-blue" onClick={() => 
+                  {
+                    if (myClass.selectedMyClass){
+                      history.push({
+                        pathname: '/admin/teacher-class',
+                        state: { id : isId}
+                      })
+                    }
+                  }}>
+                  <i className="fas fa fa-info-circle"></i>
+                </button>
               </div>
             </div>
             <div className="card-body">
