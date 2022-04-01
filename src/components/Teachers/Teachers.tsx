@@ -50,7 +50,6 @@ const Teachers: React.FC = () => {
         key={`user_${ele.id}`}>
         <th scope="row">{ele.id}</th>
         <td>{ele.username}</td>
-        <td>{ele.email}</td>
         <td><button className="btn btn-success" onClick={() => removeTeacher(ele)}>Xóa</button> </td>
       </tr>);
   });
@@ -90,7 +89,6 @@ const Teachers: React.FC = () => {
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Tên đăng nhập</th>
-                      <th scope="col">Email</th>
                       <th scope="col">Cấp quyền</th>
                     </tr>
                   </thead>
