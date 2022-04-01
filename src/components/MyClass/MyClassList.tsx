@@ -22,7 +22,6 @@ function MyClassList(props: myclassListProps): JSX.Element  {
       <th scope="row">{class_item.id}</th>
       <td>{class_item.name}</td>
       <td>{class_item.course}</td>
-      <td>{class_item.teacher_id}</td>
       <td>{class_item.amount}</td>
     </tr>);
   });
@@ -36,7 +35,6 @@ function MyClassList(props: myclassListProps): JSX.Element  {
             <th scope="col">#</th>
             <th scope="col">Tên lớp</th>
             <th scope="col">Thuộc khóa học</th>
-            <th scope="col">Giáo viên</th>
             <th scope="col">Số lượng tối đa học sinh</th>
           </tr>
         </thead>

@@ -12,13 +12,13 @@ import { addNotification } from "../../store/actions/notifications.action";
 const data = [
   {
     "className": "CM-1",
-    "timeOff": "Tiết 7, Tiết 8 (04-02-2022)",
-    "timeAdd": "Tiết 7, Tiết 8 (04-06-2022)"
+    "timeOff": "Tiết 7, Tiết 8 (2022-04-02)",
+    "timeAdd": "Tiết 7, Tiết 8 (2022-04-06)"
   }, 
   {
     "className": "CM-2",
-    "timeOff": "Tiết 7, Tiết 8 (04-04-2022)",
-    "timeAdd": "Tiết 7, Tiết 8 (04-10-2022)"
+    "timeOff": "Tiết 7, Tiết 8 (2022-04-06)",
+    "timeAdd": "Tiết 7, Tiết 8 (2022-04-08)"
   }, 
 ]
 

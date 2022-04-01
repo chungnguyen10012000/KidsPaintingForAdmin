@@ -1,15 +1,25 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IUser, UserModificationStatus } from "../../store/models/user.interface";
 import { addUser, clearSelectedUser, setModificationState } from "../../store/actions/users.action";
 import { addNotification } from "../../store/actions/notifications.action";
 import { IUserFormState, OnChangeModel } from "../../common/types/Form.types";
 import TextInput from "../../common/components/TextInput";
+import SelectInput from "../../common/components/Select";
+import { ICourseState, IStateType } from "../../store/models/root.interface";
+import { ICourse } from "../../store/models/courses.interface";
 
 const EmployeeForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   let user: IUser = { id: 0, firstName: '', lastName: '', avatar: '', username: '', userStatus: true, email: '', sex: '', dateOfDay: '', address: '', phone: '', password: '' }
 
+  const courses: ICourseState = useSelector((state: IStateType) => state.courses);
+
+  const listCourse: ICourse[] = courses.courses
+  const listCourses: string[] = []
+  listCourse.map((ele) => {
+    return listCourses.push(ele.courseName)
+  })
 
   const [formState, setFormState] = useState({
     firstName: { error: "", value: user.firstName },
@@ -110,14 +120,15 @@ const EmployeeForm: React.FC = () => {
                   placeholder="" />
               </div>
               <div className="form-group">
-                <TextInput id="input_name"
-                  value={formState.password.value}
-                  field="name"
-                  onChange={hasFormValueChanged}
-                  required={true}
-                  maxLength={10000}
-                  label="Mật khẩu"
-                  placeholder="" />
+                  <SelectInput
+                    id="input_course"
+                    field="course"
+                    label="Trình độ"
+                    options={listCourses}
+                    required={true}
+                    onChange={hasFormValueChanged}
+                    value={formState.avatar.value}
+                  />
               </div>
               <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
               <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Lưu</button>

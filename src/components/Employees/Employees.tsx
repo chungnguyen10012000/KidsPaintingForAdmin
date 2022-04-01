@@ -48,8 +48,7 @@ const Employees: React.FC = () => {
         key={`user_${user.id}`}>
         <th scope="row">{user.id}</th>
         <td>{user.username}</td>
-        <td>{user.email}</td>
-        <td><button className="btn btn-success" onClick={() => removeEmployee(user)}>Xóa</button> </td>
+        <td><button className="btn btn-danger" onClick={() => removeEmployee(user)}>Xóa</button> </td>
       </tr>);
   });
 
@@ -88,7 +87,6 @@ const Employees: React.FC = () => {
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Tên đăng nhập</th>
-                      <th scope="col">Email</th>
                       <th scope="col">Cấp quyền</th>
                     </tr>
                   </thead>
