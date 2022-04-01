@@ -8,6 +8,7 @@ import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IMyClassFormState } from "../../common/types/Form.types";
 import { ICourse } from "../../store/models/courses.interface";
 import SelectInput from "../../common/components/Select";
+import Popup from "reactjs-popup";
 
 const Student: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();
@@ -108,6 +109,12 @@ const Student: React.FC = () => {
             || !formState.name.value || !formState.course.value) as boolean;
     }
 
+    const [popup, setPopup] = useState(false);
+
+    function onSearch() {
+        setPopup(true);
+    }
+
     return (
         <Fragment>
             <div className="col-xl-7 col-lg-7">
@@ -118,13 +125,17 @@ const Student: React.FC = () => {
                     <div className="card-body">
                         <form onSubmit={saveUser}>
                             <div className="form-group">
+                                <button className="btn btn-success" onClick={() => onSearch()}>Tìm kiếm học viên</button>
+                            </div>
+                            <div className="form-group">
                                 <TextInput id="input_name"
                                     value={formState.name.value}
+                                    type="search"
                                     field="name"
                                     onChange={hasFormValueChanged}
                                     required={true}
                                     maxLength={20}
-                                    label="Tên đăng nhập/Email học viên"
+                                    label="Tên đăng nhập học viên"
                                     placeholder="" />
                             </div>
                             <div className="form-group">
@@ -155,6 +166,22 @@ const Student: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+            <Popup
+                className="popup-modal"
+                open={popup}
+                onClose={() => setPopup(false)}
+                closeOnDocumentClick
+            >
+                <div className="popup-modal">
+                    <div className="popup-title">
+                        Tìm kiếm học viên
+                    </div>
+                    <div className="popup-content">
+                        <input type="search" id="gsearch" name="gsearch" />
+                    </div>
+                </div>
+            </Popup>
         </Fragment>
     )
 };
