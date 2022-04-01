@@ -120,16 +120,6 @@ const TeacherForm: React.FC = () => {
                   placeholder="" />
               </div>
               <div className="form-group">
-                <TextInput id="input_name"
-                  value={formState.password.value}
-                  field="name"
-                  onChange={hasFormValueChanged}
-                  required={true}
-                  maxLength={10000}
-                  label="Mật khẩu"
-                  placeholder="" />
-              </div>
-              <div className="form-group">
                   <SelectInput
                     id="input_course"
                     field="course"
