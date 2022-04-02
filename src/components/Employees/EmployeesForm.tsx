@@ -80,9 +80,43 @@ const EmployeeForm: React.FC = () => {
   }
 
   function isFormInvalid(): boolean {
-    return (formState.email.error
-      || !formState.email.value) as boolean;
+    return (formState.username.error
+      || !formState.username.value) as boolean;
   }
+
+  const [csvFile, setCsvFile] = useState<any>();
+
+  const [csvArray, setCsvArray] = useState<any>([]);
+
+const processCSV = (str:string, delim=',') => {
+        const headers = str.slice(0,str.indexOf('\n')).split(delim);
+        const rows = str.slice(str.indexOf('\n')+1).split('\n');
+
+        const newArray = rows.map( row => {
+            const values = row.split(delim);
+            const eachObject = headers.reduce((obj: any, header, i) => {
+                obj[header] = values[i];
+                return obj;
+            }, {})
+            return eachObject;
+        })
+
+        setCsvArray(newArray)
+    }
+
+  const saveTeacherCSV = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const file = csvFile;
+    const reader = new FileReader();
+
+    reader.onload = function(e: any) {
+        const text = e.target.result;
+        console.log(text);
+        processCSV(text)
+    }
+
+    reader.readAsText(file);
+}
 
   return (
     <Fragment>
@@ -92,12 +126,40 @@ const EmployeeForm: React.FC = () => {
             <h6 className="m-0 font-weight-bold text-green"> {"Tạo"} thông tin tài khoản</h6>
           </div>
           <div className="card-body">
-            <form onSubmit={saveUser}>
+          <form id='csv-form' onSubmit={saveTeacherCSV}>
               <div className="form-group">
-                <input type={"file"} accept={".csv"} />
+                <input
+                  type={"file"}
+                  accept=".csv,.xlsx,.xls"
+                  id="csvFile"
+                  onChange={(e: any) => {
+                    setCsvFile(e.target.files[0])
+                }}
+                />
               </div>
               <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
-              <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Lưu</button>
+              <button type="submit" className={`btn btn-success left-margin`}>Lưu</button>
+              <br/>
+            <br/>
+            {csvArray.length>0 ? 
+            <>
+                <table>
+                    <thead>
+                        <th>Tên đăng nhập</th>
+                        <th>Trình dộ</th>
+                    </thead>
+                    <tbody>
+                        {
+                            csvArray.map((item: any, index: any) => (
+                                <tr key={index}>
+                                    <td>{item.username}</td>
+                                    <td>{item.level}</td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
+            </> : null}
             </form>
           </div>
         </div>
@@ -110,9 +172,9 @@ const EmployeeForm: React.FC = () => {
           <div className="card-body">
             <form onSubmit={saveUser}>
               <div className="form-group">
-                <TextInput id="input_name"
+                <TextInput id="input_username"
                   value={formState.username.value}
-                  field="name"
+                  field="username"
                   onChange={hasFormValueChanged}
                   required={true}
                   maxLength={10000}
