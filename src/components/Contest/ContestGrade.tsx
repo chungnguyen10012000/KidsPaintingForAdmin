@@ -10,7 +10,7 @@ import "quill/dist/quill.snow.css";
 
 
 
-const ExerciseGrade: React.FC = () => {
+const ContestGrade: React.FC = () => {
 
     let { id } = useLocation().state
 
@@ -20,7 +20,7 @@ const ExerciseGrade: React.FC = () => {
 
     return (
         <Fragment>
-            <h1 className="h3 mb-2 text-gray-800">Chấm điểm bài tập</h1>
+            <h1 className="h3 mb-2 text-gray-800">Chấm điểm cuộc thi</h1>
             <p className="mb-4">Thông tin chung</p>
 
             <div className="row">
@@ -45,4 +45,4 @@ const ExerciseGrade: React.FC = () => {
     )
 };
 
-export default ExerciseGrade;
+export default ContestGrade;

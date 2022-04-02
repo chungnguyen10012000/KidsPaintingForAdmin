@@ -74,7 +74,7 @@ const Contests: React.FC = () => {
                   {
                     if (contests.selectedContest){
                       history.push({
-                        pathname: '/teacher/exercise-grade',
+                        pathname: '/teacher/contest-grade',
                         state: { id : isId}
                       })
                     }
