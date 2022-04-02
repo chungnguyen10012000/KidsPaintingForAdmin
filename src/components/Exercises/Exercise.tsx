@@ -11,11 +11,14 @@ import { removeExercise, clearSelectedExercise, setModificationState,
   changeSelectedExercise } from "../../store/actions/exercise.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { ExerciseModificationStatus, IExercise } from "../../store/models/exercise.interface";
+import { useHistory } from "react-router-dom";
 
 
 const Exercises: React.FC = () => {
 
+  let history = useHistory();
 
+  const [idExercise, setIdExercise] = useState<number>(0)
 
   const dispatch: Dispatch<any> = useDispatch();
   const exercises: IExerciseState = useSelector((state: IStateType) => state.exercises);
@@ -31,6 +34,7 @@ const Exercises: React.FC = () => {
   function onExerciseSelect(product: IExercise): void {
     dispatch(changeSelectedExercise(product));
     dispatch(setModificationState(ExerciseModificationStatus.None));
+    setIdExercise(product.id)
   }
 
   function onExerciseRemove() {
@@ -63,6 +67,17 @@ const Exercises: React.FC = () => {
                 </button>
                 <button className="btn btn-success btn-red" onClick={() => onExerciseRemove()}>
                   <i className="fas fa fa-times"></i>
+                </button>
+                <button className="btn btn-success btn-blue" onClick={() => 
+                  {
+                    if (exercises.selectedExercise){
+                      history.push({
+                        pathname: `/teacher/exercise-grade`,
+                        state: {id: idExercise}
+                      })
+                    }
+                  }}>
+                  <i className="fas fa fa-info-circle"></i>
                 </button>
               </div>
             </div>

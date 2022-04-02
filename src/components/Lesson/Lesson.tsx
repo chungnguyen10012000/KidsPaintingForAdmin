@@ -12,6 +12,33 @@ import { ISesson } from '../../store/models/sesson.interface'
 
 //TODO: đánh giá điểm của lớp, bảng điểm từng thành viên lớp
 
+const data = [
+    {
+        "firstName": "Linh",
+        "LastName": "Nguyen"
+    },
+    {
+        "firstName": "Thanh",
+        "LastName": "Nguyen"
+    },
+    {
+        "firstName": "Khai",
+        "LastName": "Nguyen"
+    },
+    {
+        "firstName": "Trang",
+        "LastName": "Nguyen"
+    },
+    {
+        "firstName": "Vinh",
+        "LastName": "Nguyen"
+    },
+    {
+        "firstName": "Linh",
+        "LastName": "Le"
+    },
+]
+
 const Lesson: React.FC = () => {
 
     let location = useLocation()
@@ -23,7 +50,7 @@ const Lesson: React.FC = () => {
     const listSesson: ISesson[] = sessons.sessons
     const listSessons: string[] = []
     listSesson.map((ele) => {
-      return listSessons.push(ele.name)
+        return listSessons.push(ele.name)
     })
 
     const dispatch: Dispatch<any> = useDispatch();
@@ -31,11 +58,13 @@ const Lesson: React.FC = () => {
     const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
     let numberItemsCount: number = 0; // length lesson of class
     for (let index = 0; index < myClass.myclass.length; index++) {
-        if(myClass.myclass[index].id === id){
+        if (myClass.myclass[index].id === id) {
             numberItemsCount = myClass.myclass[index].amount
         }
-        
+
     }
+
+    let numberSessoonCount: number = sessons.sessons.length;
 
     useEffect(() => {
         dispatch(clearSelectedMyClass());
@@ -45,17 +74,32 @@ const Lesson: React.FC = () => {
     const myLessonElements: (JSX.Element | null)[] = listSesson.map((lesson_item, index) => {
         if (!lesson_item) { return null; }
         return (<tr className={`table-row ${(myClass.selectedMyClass && myClass.selectedMyClass.id === id) ? "selected" : ""}`}
-          onClick={() => {
-            history.push({
-                pathname: '/teacher/lesson-detail',
-                state: { id : lesson_item.id}
-            })
-          }}
-          key={`lesson_${lesson_item.id}`}>
-          <th scope="row">{index}</th>
-          <td>{lesson_item.name}</td>
+            onClick={() => {
+                history.push({
+                    pathname: '/teacher/lesson-detail',
+                    state: { id: lesson_item.id }
+                })
+            }}
+            key={`lesson_${lesson_item.id}`}>
+            <th scope="row">{index + 1}</th>
+            <td>{lesson_item.name}</td>
         </tr>);
-      });
+    });
+
+    const studentList: (JSX.Element | null)[] = data.map((lesson_item, index) => {
+        if (!lesson_item) { return null; }
+        return (<tr className={`table-row ${(myClass.selectedMyClass && myClass.selectedMyClass.id === id) ? "selected" : ""}`}
+            //   onClick={() => {
+            //     history.push({
+            //         pathname: '/teacher/lesson-detail',
+            //         state: { id : lesson_item.id}
+            //     })
+            //   }}
+            key={`lesson_${index}`}>
+            <th scope="row">{index + 1}</th>
+            <td>{lesson_item.firstName}</td>
+        </tr>);
+    });
     return (
         <Fragment>
             <h1 className="h3 mb-2 text-gray-800">Buổi học</h1>
@@ -105,12 +149,12 @@ const Lesson: React.FC = () => {
                                     <thead className="thead-light">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Buổi</th>
+                                            <th scope="col">Tên học viên</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {
-                                            myLessonElements
+                                            studentList
                                         }
                                     </tbody>
                                 </table>

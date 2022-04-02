@@ -13,6 +13,18 @@ const initialState: ISessonState = {
     },
     {
         id: 2, name: "Xây dựng bố cục", description: '...', startTime: '10:00', endTime: '12:00', currentDay: '10-11-2020'
+    },
+    {
+        id: 3, name: "Kiến thức cơ bản 2", description: '...', startTime: '9:00', endTime: '11:00', currentDay:  '10-10-2020'
+    },
+    {
+        id: 4, name: "Kiến thức cơ bản 3", description: '...', startTime: '9:00', endTime: '11:00', currentDay:  '10-10-2020'
+    },
+    {
+        id: 5, name: "Kiến thức cơ bản 4", description: '...', startTime: '9:00', endTime: '11:00', currentDay:  '10-10-2020'
+    },
+    {
+        id: 6, name: "Kiến thức cơ bản 5", description: '...', startTime: '9:00', endTime: '11:00', currentDay:  '10-10-2020'
     }]
 };
 
