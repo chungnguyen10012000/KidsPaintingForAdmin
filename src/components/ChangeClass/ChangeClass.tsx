@@ -6,7 +6,7 @@ import { editMyClass, clearSelectedMyClass, setModificationState, addMyClass } f
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IMyClassFormState } from "../../common/types/Form.types";
 import { ICourse } from "../../store/models/courses.interface";
-import { IUser } from "../../store/models/user.interface";
+//import { IUser } from "../../store/models/user.interface";
 import SelectInput from "../../common/components/Select";
 
 const data_1 = [
@@ -96,7 +96,7 @@ const ChangeClass: React.FC = () => {
             || !formState.name.value || !formState.course.value) as boolean;
     }
 
-    const users: IUser[] = useSelector((state: IStateType) => state.users.users);
+    //const users: IUser[] = useSelector((state: IStateType) => state.users.users);
 
     const userElements: JSX.Element[] = data_1.map((ele, index )=> {
         return (

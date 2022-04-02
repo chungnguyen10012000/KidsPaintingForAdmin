@@ -9,9 +9,14 @@ import { IStateType, ICourseState } from "../../store/models/root.interface";
 import { ICourse } from "../../store/models/courses.interface";
 import SelectInput from "../../common/components/Select";
 
+type teacherInfo = {
+  username: string;
+  level: string;
+};
+
 const TeacherForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  let user: IUser  = {id: 0, firstName: '', lastName: '', username: '', avatar: '', userStatus: true, email: '', sex: '', dateOfDay: '', address: '', phone: '', password: ''}
+  let user: IUser = { id: 0, firstName: '', lastName: '', username: '', avatar: '', userStatus: true, email: '', sex: '', dateOfDay: '', address: '', phone: '', password: '' }
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
 
   const listCourse: ICourse[] = courses.courses
@@ -32,6 +37,8 @@ const TeacherForm: React.FC = () => {
     phone: { error: "", value: user.phone },
     password: { error: "", value: user.password },
   });
+
+
 
   function hasFormValueChanged(model: OnChangeModel): void {
     setFormState({ ...formState, [model.field]: { error: model.error, value: model.value } });
@@ -58,10 +65,10 @@ const TeacherForm: React.FC = () => {
         avatar: formState.avatar.value,
         email: formState.email.value,
         sex: formState.sex.value,
-        dateOfDay:  formState.dateOfDay.value,
-        address:  formState.address.value,
+        dateOfDay: formState.dateOfDay.value,
+        address: formState.address.value,
         phone: formState.phone.value,
-        password:  formState.password.value,
+        password: formState.password.value,
       }));
 
       dispatch(addNotification("Giáo viên ", ` ${formState.email.value} đã thêm bởi bạn`));
@@ -80,8 +87,41 @@ const TeacherForm: React.FC = () => {
   }
 
   function isFormInvalid(): boolean {
-    return (formState.username.error || formState.password.error
-       || !formState.username.value  ) as boolean;
+    return (formState.username.error || !formState.username.value) as boolean;
+  }
+
+  const [csvFile, setCsvFile] = useState<any>();
+
+  const [csvArray, setCsvArray] = useState<any>([]);
+
+const processCSV = (str:string, delim=',') => {
+        const headers = str.slice(0,str.indexOf('\n')).split(delim);
+        const rows = str.slice(str.indexOf('\n')+1).split('\n');
+
+        const newArray = rows.map( row => {
+            const values = row.split(delim);
+            const eachObject = headers.reduce((obj: any, header, i) => {
+                obj[header] = values[i];
+                return obj;
+            }, {})
+            return eachObject;
+        })
+
+        setCsvArray(newArray)
+    }
+
+  const saveTeacherCSV = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const file = csvFile;
+    const reader = new FileReader();
+
+    reader.onload = function(e: any) {
+        const text = e.target.result;
+        console.log(text);
+        processCSV(text)
+    }
+
+    reader.readAsText(file);
 }
 
   return (
@@ -92,12 +132,40 @@ const TeacherForm: React.FC = () => {
             <h6 className="m-0 font-weight-bold text-green"> {"Tạo"} thông tin tài khoản</h6>
           </div>
           <div className="card-body">
-            <form onSubmit={saveUser}>
+            <form id='csv-form' onSubmit={saveTeacherCSV}>
               <div className="form-group">
-                <input type={"file"} accept={".csv"} />
+                <input
+                  type={"file"}
+                  accept=".csv,.xlsx,.xls"
+                  id="csvFile"
+                  onChange={(e: any) => {
+                    setCsvFile(e.target.files[0])
+                }}
+                />
               </div>
               <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
-              <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Lưu</button>
+              <button type="submit" className={`btn btn-success left-margin`}>Lưu</button>
+              <br/>
+            <br/>
+            {csvArray.length>0 ? 
+            <>
+                <table>
+                    <thead>
+                        <th>Tên đăng nhập</th>
+                        <th>Trình dộ</th>
+                    </thead>
+                    <tbody>
+                        {
+                            csvArray.map((item: any, index: any) => (
+                                <tr key={index}>
+                                    <td>{item.username}</td>
+                                    <td>{item.level}</td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
+            </> : null}
             </form>
           </div>
         </div>
@@ -110,9 +178,9 @@ const TeacherForm: React.FC = () => {
           <div className="card-body">
             <form onSubmit={saveUser}>
               <div className="form-group">
-                <TextInput id="input_name"
+                <TextInput id="input_username"
                   value={formState.username.value}
-                  field="name"
+                  field="username"
                   onChange={hasFormValueChanged}
                   required={true}
                   maxLength={10000}
@@ -120,15 +188,15 @@ const TeacherForm: React.FC = () => {
                   placeholder="" />
               </div>
               <div className="form-group">
-                  <SelectInput
-                    id="input_course"
-                    field="course"
-                    label="Trình độ"
-                    options={listCourses}
-                    required={true}
-                    onChange={hasFormValueChanged}
-                    value={formState.avatar.value}
-                  />
+                <SelectInput
+                  id="input_course"
+                  field="course"
+                  label="Trình độ"
+                  options={listCourses}
+                  required={true}
+                  onChange={hasFormValueChanged}
+                  value={formState.avatar.value}
+                />
               </div>
               <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
               <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Lưu</button>
