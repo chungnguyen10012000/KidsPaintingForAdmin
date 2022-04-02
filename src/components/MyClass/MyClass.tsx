@@ -141,7 +141,7 @@ const MyClass: React.FC = () => {
                       })
                     }
                   }}>
-                  <i className="fas fa fa-info-circle"></i>
+                  <i className="fas fa fa-user-plus"></i>
                 </button>
               </div>
             </div>

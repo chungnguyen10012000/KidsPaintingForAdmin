@@ -60,7 +60,7 @@ const Request: React.FC = () => {
     return (
       <tr className={`table-row`}
         key={`user_${ele.id}`}>
-        <th scope="row">{ele.id}</th>
+        <th scope="row">{index + 1}</th>
         <td>{ele.username}</td>
         <td>{data[index].className}</td>
         <td>{data[index].timeOff}</td>
@@ -78,7 +78,7 @@ const Request: React.FC = () => {
     return (
       <tr className={`table-row`}
         key={`user_${index}`}>
-        <th scope="row">{index}</th>
+        <th scope="row">{index + 1}</th>
         <td>{ele.username}</td>
         <td>{ele.classPrent}</td>
         <td>{ele.classGoal}</td>
