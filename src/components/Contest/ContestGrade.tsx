@@ -2,7 +2,7 @@ import React, { Fragment, Dispatch } from "react";
 import { useDispatch } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 
-import { useLocation } from "react-router-dom";
+//import { useLocation } from "react-router-dom";
 
 import "quill/dist/quill.snow.css";
 
@@ -12,7 +12,7 @@ import "quill/dist/quill.snow.css";
 
 const ContestGrade: React.FC = () => {
 
-    let { id } = useLocation().state
+    //let { id } = useLocation().state
 
     const dispatch: Dispatch<any> = useDispatch();
     dispatch(updateCurrentPath("Bài tập", "Danh sách nộp"));

@@ -105,7 +105,7 @@ const Lesson: React.FC = () => {
             <h1 className="h3 mb-2 text-gray-800">Buổi học</h1>
             <p className="mb-4">Thông tin chung</p>
             <div className="row">
-                <TopCard title="TỔNG SỐ BUỔI HỌC" text={`${numberItemsCount}`} icon="box" class="primary" />
+                <TopCard title="TỔNG SỐ BUỔI HỌC" text={`${numberSessoonCount}`} icon="box" class="primary" />
                 <TopCard title="TỔNG SỐ HỌC SINH" text={`${numberItemsCount}`} icon="box" class="primary" />
             </div>
 
