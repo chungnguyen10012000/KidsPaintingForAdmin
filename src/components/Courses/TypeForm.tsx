@@ -12,13 +12,13 @@ const TypeForm: React.FC = () => {
   const mytypes: IMytypeState | null = useSelector((state: IStateType) => state.mytypes);
   let mytype: IMytype | null = mytypes.selectedMytype;
   const isCreate: boolean = (mytypes.modificationState === MytypeModificationStatus.Create);
-  
+
   if (!mytype || isCreate) {
-  mytype = { typeId: 0, typeName: ""};
+    mytype = { typeId: 0, typeName: "" };
   }
 
   const [formState, setFormState] = useState({
-    name: { error: "", value: mytype.typeName },
+    typeName: { error: "", value: mytype.typeName },
   });
 
   function hasFormValueChanged(model: OnChangeModel): void {
@@ -39,10 +39,10 @@ const TypeForm: React.FC = () => {
     if (mytype) {
       dispatch(saveFn({
         ...mytype,
-        name: formState.name.value,
+        typeName: formState.typeName.value,
       }));
 
-      dispatch(addNotification("Thể loại", `${formState.name.value} đã được thêm bởi bạn`));
+      dispatch(addNotification("Thể loại", `${formState.typeName.value} đã được thêm bởi bạn`));
       dispatch(clearSelectedMytype());
       dispatch(setModificationStateMytype(MytypeModificationStatus.None));
     }
@@ -58,8 +58,8 @@ const TypeForm: React.FC = () => {
   }
 
   function isFormInvalid(): boolean {
-    return (formState.name.error || !formState.name.value) as boolean;
-}
+    return (formState.typeName.error || !formState.typeName.value) as boolean;
+  }
 
   return (
     <Fragment>
@@ -71,9 +71,9 @@ const TypeForm: React.FC = () => {
           <div className="card-body">
             <form onSubmit={saveUser}>
               <div className="form-group">
-                <TextInput id="input_name"
-                  value={formState.name.value}
-                  field="name"
+                <TextInput id="input_typeName"
+                  value={formState.typeName.value}
+                  field="typeName"
                   onChange={hasFormValueChanged}
                   required={true}
                   maxLength={100}

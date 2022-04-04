@@ -1,9 +1,9 @@
 import React, { Fragment, Dispatch } from "react";
 import TopCard from "../../common/components/TopCard";
-import { IUser } from "../../store/models/user.interface";
+import { IEmployee } from "../../store/models/employee.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
-import { removeUser } from "../../store/actions/users.action";
+import { removeEmployee } from "../../store/actions/employee.actions";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import EmployeeForm from "./EmployeesForm";
 import { addNotification } from "../../store/actions/notifications.action";
@@ -13,7 +13,7 @@ const Employees: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Nhân viên", "Danh sách"));
   
-  const users: IUser[] = useSelector((state: IStateType) => state.users.users);
+  const users: IEmployee[] = useSelector((state: IStateType) => state.employees.employees);
 
   const [searchTerm, setSearchTerm] = React.useState("");
   const handleChange = (event: any) => {
@@ -21,9 +21,9 @@ const Employees: React.FC = () => {
   };
   console.log(searchTerm)
 
-  function removeEmployee(Employee: IUser): void {
-    dispatch(addNotification("Nhân viên", ` ${Employee.email} đã bị xóa khỏi hệ thống`));
-    dispatch(removeUser(Employee.id)); 
+  function removeEmployees(employee: IEmployee): void {
+    dispatch(addNotification("Nhân viên", ` ${employee.username} đã bị xóa khỏi hệ thống`));
+    dispatch(removeEmployee(employee.id)); 
   }
 
   // const [listStaff, setListStaff] = useState<any[]>([])
@@ -48,7 +48,7 @@ const Employees: React.FC = () => {
         key={`user_${user.id}`}>
         <th scope="row">{user.id}</th>
         <td>{user.username}</td>
-        <td><button className="btn btn-danger" onClick={() => removeEmployee(user)}>Xóa</button> </td>
+        <td><button className="btn btn-danger" onClick={() => removeEmployees(user)}>Xóa</button> </td>
       </tr>);
   });
 

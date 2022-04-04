@@ -13,6 +13,7 @@ import { IExercise, ExerciseModificationStatus } from "./exercise.interface";
 import { IFeedBack, FeedBackModificationStatus } from "./feedback.interface";
 import { ISesson, SessonModificationStatus } from "./sesson.interface";
 import { IBlog, BlogModificationStatus } from "./blogs.innterface";
+import { IEmployee, EmployeeModificationStatus } from "./employee.interface";
 
 export interface IRootPageStateType {
     area: string;
@@ -39,6 +40,7 @@ export interface IStateType {
     feedbacks: IFeedBackState;
     sessons: ISessonState;
     blogs: IBlogState;
+    employees: IEmployeeState;
 }
 
 export interface IBlogState {
@@ -126,4 +128,11 @@ export interface IUserState {
     admins: IUser[];
     selectedUser: IUser | null;
     modificationState: UserModificationStatus;
+}
+
+export interface IEmployeeState {
+    employees: IEmployee[];
+    admins: IEmployee[];
+    selectedUser: IEmployee | null;
+    modificationState: EmployeeModificationStatus;
 }

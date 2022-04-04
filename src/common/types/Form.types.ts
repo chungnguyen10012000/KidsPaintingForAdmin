@@ -28,21 +28,21 @@ export interface IBlogFormState {
 }
 
 export interface ICourseFormState {
-    name: IFormStateField<string>;
-    description: IFormStateField<string>;
-    price: IFormStateField<number>; 
-    type: IFormStateField<string>;
-    level: IFormStateField<string>;
-    amount: IFormStateField<number>; 
+    courseName: IFormStateField<string>;
+    courseDescription: IFormStateField<string>;
+    coursePrice: IFormStateField<number>; 
+    courseType: IFormStateField<string>;
+    courseLevel: IFormStateField<string>;
+    maxCourseParticipant: IFormStateField<number>; 
     sumOfSesson: IFormStateField<number>; 
     time: IFormStateField<string>;
 }
 
 export interface IMytypeFormState {
-    name: IFormStateField<string>;
+    typeName: IFormStateField<string>;
 }
 export interface ILevelFormState {
-    name: IFormStateField<string>;
+    levelName: IFormStateField<string>;
 }
 
 export interface IMyClassFormState {

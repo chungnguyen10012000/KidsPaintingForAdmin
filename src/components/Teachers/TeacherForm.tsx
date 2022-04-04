@@ -71,7 +71,7 @@ const TeacherForm: React.FC = () => {
         password: formState.password.value,
       }));
 
-      dispatch(addNotification("Giáo viên ", ` ${formState.email.value} đã thêm bởi bạn`));
+      dispatch(addNotification("Giáo viên ", ` ${formState.username.value} đã thêm bởi bạn`));
       dispatch(clearSelectedUser());
       dispatch(setModificationState(UserModificationStatus.None));
     }
@@ -94,35 +94,57 @@ const TeacherForm: React.FC = () => {
 
   const [csvArray, setCsvArray] = useState<any>([]);
 
-const processCSV = (str:string, delim=',') => {
-        const headers = str.slice(0,str.indexOf('\n')).split(delim);
-        const rows = str.slice(str.indexOf('\n')+1).split('\n');
+  const processCSV = (str: string, delim = ',') => {
+    const headers = str.slice(0, str.indexOf('\n')).split(delim);
+    const rows = str.slice(str.indexOf('\n') + 1).split('\n');
 
-        const newArray = rows.map( row => {
-            const values = row.split(delim);
-            const eachObject = headers.reduce((obj: any, header, i) => {
-                obj[header] = values[i];
-                return obj;
-            }, {})
-            return eachObject;
-        })
-
-        setCsvArray(newArray)
-    }
+    const newArray = rows.map(row => {
+      const values = row.split(delim);
+      const eachObject = headers.reduce((obj: any, header, i) => {
+        obj[header] = values[i];
+        return obj;
+      }, {})
+      return eachObject;
+    })
+    setCsvArray(newArray)
+    csvArray.map((ele: any) => {
+      if (ele.username !== "") {
+        let x: IUserFormState = {
+          firstName: { error: "", value: user.firstName },
+          lastName: { error: "", value: user.lastName },
+          username: { error: "", value: ele.username },
+          avatar: { error: "", value: user.avatar },
+          email: { error: "", value: user.email },
+          sex: { error: "", value: user.sex },
+          dateOfDay: { error: "", value: user.dateOfDay },
+          address: { error: "", value: user.address },
+          phone: { error: "", value: user.phone },
+          password: { error: "", value: user.password },
+        };
+        console.log(ele.username)
+        let saveUserFn: Function = addUser;
+        console.log('add')
+        saveForm(x, saveUserFn);
+      }
+      return 0
+    })
+  }
 
   const saveTeacherCSV = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const file = csvFile;
     const reader = new FileReader();
 
-    reader.onload = function(e: any) {
-        const text = e.target.result;
-        console.log(text);
-        processCSV(text)
+    reader.onload = function (e: any) {
+      const text = e.target.result;
+      console.log(text);
+      processCSV(text)
     }
 
     reader.readAsText(file);
-}
+  }
+
+  console.log(csvArray.length)
 
   return (
     <Fragment>
@@ -140,32 +162,32 @@ const processCSV = (str:string, delim=',') => {
                   id="csvFile"
                   onChange={(e: any) => {
                     setCsvFile(e.target.files[0])
-                }}
+                  }}
                 />
               </div>
               <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
               <button type="submit" className={`btn btn-success left-margin`}>Lưu</button>
-              <br/>
-            <br/>
-            {csvArray.length>0 ? 
-            <>
-                <table>
+              <br />
+              <br />
+              {/*               {csvArray.length > 0 ?
+                <>
+                  <table>
                     <thead>
-                        <th>Tên đăng nhập</th>
-                        <th>Trình dộ</th>
+                      <th>Tên đăng nhập</th>
+                      <th>Trình dộ</th>
                     </thead>
                     <tbody>
-                        {
-                            csvArray.map((item: any, index: any) => (
-                                <tr key={index}>
-                                    <td>{item.username}</td>
-                                    <td>{item.level}</td>
-                                </tr>
-                            ))
-                        }
+                      {
+                        csvArray.map((item: any, index: any) => (
+                          <tr key={index}>
+                            <td>{item.username}</td>
+                            <td>{item.level}</td>
+                          </tr>
+                        ))
+                      }
                     </tbody>
-                </table>
-            </> : null}
+                  </table>
+                </> : null} */}
             </form>
           </div>
         </div>

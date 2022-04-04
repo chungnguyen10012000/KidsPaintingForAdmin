@@ -1,17 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { IStateType, IUserState } from "../../store/models/root.interface";
-import { IUser } from "../../store/models/user.interface";
+import { IStateType, IEmployeeState } from "../../store/models/root.interface";
+import { IEmployee } from "../../store/models/employee.interface";
 
 export type userListProps = {
-  onSelect?: (user: IUser) => void;
+  onSelect?: (user: IEmployee) => void;
   children?: React.ReactNode;
 };
 
 function EmployeeList(props: userListProps): JSX.Element  {
-  const users: IUserState = useSelector((state: IStateType) => state.users);
+  const users: IEmployeeState = useSelector((state: IStateType) => state.employees);
 
-  const userElements: (JSX.Element | null)[] = users.users.map(user => {
+  const userElements: (JSX.Element | null)[] = users.employees.map(user => {
     if (!user) { return null; }
     return (<tr className={`table-row ${(users.selectedUser && users.selectedUser.id === user.id) ? "selected" : ""}`}
       onClick={() => {
@@ -20,7 +20,6 @@ function EmployeeList(props: userListProps): JSX.Element  {
       key={`user_${user.id}`}>
       <th scope="row">{user.id}</th>
       <td>{user.username}</td>
-      <td>{user.email}</td>
     </tr>);
   });
 
@@ -32,7 +31,6 @@ function EmployeeList(props: userListProps): JSX.Element  {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Tên đăng nhập</th>
-            <th scope="col">Email</th>
           </tr>
         </thead>
         <tbody>

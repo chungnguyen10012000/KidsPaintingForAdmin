@@ -17,7 +17,7 @@ function coursesReducer(state: ICourseState = initialState, action: IActionBase)
     switch (action.type) {
         case ADD_COURSE: {
             let maxId: number = Math.max.apply(Math, state.courses.map(function(o) { return o.courseId; }));
-            action.course.id = maxId + 1;
+            action.course.courseId = maxId + 1;
             return { ...state, courses: [...state.courses, action.course]};
         }
         case EDIT_COURSE: {

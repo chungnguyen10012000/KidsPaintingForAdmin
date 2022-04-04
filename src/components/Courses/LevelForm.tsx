@@ -18,7 +18,7 @@ const LevelForm: React.FC = () => {
   }
 
   const [formState, setFormState] = useState({
-    name: { error: "", value: level.levelName },
+    levelName: { error: "", value: level.levelName },
   });
 
   function hasFormValueChanged(model: OnChangeModel): void {
@@ -39,10 +39,10 @@ const LevelForm: React.FC = () => {
     if (level) {
       dispatch(saveFn({
         ...level,
-        name: formState.name.value,
+        levelName: formState.levelName.value,
       }));
 
-      dispatch(addNotification("Mức độ", `${formState.name.value} đã được lưu bởi bạn`));
+      dispatch(addNotification("Mức độ", `${formState.levelName.value} đã được lưu bởi bạn`));
       dispatch(clearSelectedLevel());
       dispatch(setModificationStateLevel(LevelModificationStatus.None));
     }
@@ -58,7 +58,7 @@ const LevelForm: React.FC = () => {
   }
 
   function isFormInvalid(): boolean {
-    return (formState.name.error || !formState.name.value) as boolean;
+    return (formState.levelName.error || !formState.levelName.value) as boolean;
   }
 
   return (
@@ -71,9 +71,9 @@ const LevelForm: React.FC = () => {
           <div className="card-body">
             <form onSubmit={saveUser}>
               <div className="form-group">
-                <TextInput id="input_name"
-                  value={formState.name.value}
-                  field="name"
+                <TextInput id="input_levelName"
+                  value={formState.levelName.value}
+                  field="levelName"
                   onChange={hasFormValueChanged}
                   required={true}
                   maxLength={100}

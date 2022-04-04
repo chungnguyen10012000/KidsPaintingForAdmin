@@ -76,12 +76,12 @@ const CoursesForm: React.FC = () => {
   //console.log(listLevels)
 
   const [formState, setFormState] = useState({
-    name: { error: "", value: course.courseName },
-    description: { error: "", value: course.courseDescription },
-    type: { error: "", value: course.courseType },
-    level: { error: "", value: course.courseLevel },
-    price: { error: "", value: course.coursePrice },
-    amount: { error: "", value: course.maxCourseParticipant },
+    courseName: { error: "", value: course.courseName },
+    courseDescription: { error: "", value: course.courseDescription },
+    courseType: { error: "", value: course.courseType },
+    courseLevel: { error: "", value: course.courseLevel },
+    coursePrice: { error: "", value: course.coursePrice },
+    maxCourseParticipant: { error: "", value: course.maxCourseParticipant },
     sumOfSesson: { error: "", value: course.sumOfSection },
     time: { error: "", value: course.time },
   });
@@ -104,17 +104,17 @@ const CoursesForm: React.FC = () => {
     if (course) {
       dispatch(saveFn({
         ...course,
-        name: formState.name.value,
-        description: textHtml,
-        level: formState.level.value,
-        type: formState.type.value,
-        price: formState.price.value,
-        amount: formState.amount.value,
+        courseName: formState.courseName.value,
+        courseDescription: textHtml,
+        courseType: formState.courseType.value,
+        courseLevel: formState.courseLevel.value,
+        coursePrice: formState.coursePrice.value,
+        maxCourseParticipant: formState.maxCourseParticipant.value,
         sumOfSesson: formState.sumOfSesson.value,
         time: formState.time.value,
       }));
 
-      dispatch(addNotification("Khóa học", `${formState.name.value} đã được thêm bởi bạn`));
+      dispatch(addNotification("Khóa học", `${formState.courseName.value} đã được thêm bởi bạn`));
       dispatch(clearSelectedCourse());
       dispatch(setModificationState(CourseModificationStatus.None));
     }
@@ -130,8 +130,8 @@ const CoursesForm: React.FC = () => {
   }
 
   function isFormInvalid(): boolean {
-    return (formState.price.error
-      || formState.name.error || !formState.name.value ) as boolean;
+    return (formState.coursePrice.error
+      || formState.courseName.error || !formState.courseName.value ) as boolean;
 }
 
   return (
@@ -144,9 +144,9 @@ const CoursesForm: React.FC = () => {
           <div className="card-body">
             <form onSubmit={saveUser}>
               <div className="form-group">
-                <TextInput id="input_name"
-                  value={formState.name.value}
-                  field="name"
+                <TextInput id="input_courseName"
+                  value={formState.courseName.value}
+                  field="courseName"
                   onChange={hasFormValueChanged}
                   required={true}
                   maxLength={100}
@@ -157,9 +157,9 @@ const CoursesForm: React.FC = () => {
                 <div ref={quillRef} />
               </div>
               <div className="form-group">
-                <SelectInput id="input_type"
-                  field = "type"
-                  value={formState.type.value}
+                <SelectInput id="input_courseType"
+                  field = "courseType"
+                  value={formState.courseType.value}
                   onChange={hasFormValueChanged}
                   required={true}
                   label="Thể loại"
@@ -168,27 +168,27 @@ const CoursesForm: React.FC = () => {
               </div>
               <div className="form-group">
                   <SelectInput
-                    id="input_level"
-                    field="level"
+                    id="input_courseLevel"
+                    field="courseLevel"
                     label="Mức độ"
                     options={listLevels}
                     required={true}
                     onChange={hasFormValueChanged}
-                    value={formState.level.value}
+                    value={formState.courseLevel.value}
                   />
               </div> 
               <div className="form-group">
-                <NumberInput id="input_price"
-                  field = "price"
-                  value={formState.price.value}
+                <NumberInput id="input_coursePrice"
+                  field = "coursePrice"
+                  value={formState.coursePrice.value}
                   onChange={hasFormValueChanged}
                   label="Giá"
                 />
               </div>
               <div className="form-group">
-                <NumberInput id="input_amount"
-                  field = "amount"
-                  value={formState.amount.value}
+                <NumberInput id="input_maxCourseParticipant"
+                  field = "maxCourseParticipant"
+                  value={formState.maxCourseParticipant.value}
                   onChange={hasFormValueChanged}
                   label="Số lượng tối đa học viên"
                 />

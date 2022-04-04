@@ -16,6 +16,7 @@ const initialState: ILevelState = {
 function levelsReducer(state: ILevelState = initialState, action: IActionBase): ILevelState {
     switch (action.type) {
         case ADD_LEVEL: {
+            console.log('Them level')
             let maxId: number = Math.max.apply(Math, state.levels.map(function(o) { return o.levelId; }));
             action.level.levelId = maxId + 1;
             return { ...state, levels: [...state.levels, action.level]};
