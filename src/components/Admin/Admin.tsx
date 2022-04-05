@@ -37,6 +37,7 @@ import Student from "../Student/Student"
 import ChangeClass from "../ChangeClass/ChangeClass"
 import TeacherSigupClass from "../MyClass/TeacherSigupClass"
 import ContestGrade from "../Contest/ContestGrade"
+import SigupLevelTeacher from "../SigupLevelTeacher/SigupLevelTeacher"
 
 type role = {
   id: string;
@@ -61,7 +62,8 @@ const Admin: React.FC = () => {
               <Route path={`/:id/onleave`}><OnLeave /></Route>
               <Route path={`/:id/myclass`}><MyClass /></Route>
               <Route path={`/:id/lesson`}><Lesson /></Route>
-              <Route path={`/:id/sigup-course`}><SigupOfCourse /></Route>
+              <Route path={`/:id/sigup-class`}><SigupOfCourse /></Route>
+              <Route path={`/:id/sigup-course`}><SigupLevelTeacher /></Route>
               <Route path={`/:id/lesson-detail`}><LessonDetail /></Route>
               <Route path={`/:id/video-call`}><JitsiComponent /></Route>
               <Route path={`/:id/exercise`}><Exercises /></Route>

@@ -11,9 +11,9 @@ import SelectInput from "../../common/components/Select";
 
 const data_1 = [
     {
-        "username": 'nvchung00',
-        "classPrent": "CM-1",
-        "classGoal": "CM-2"
+        "username": 'binhtranh2k',
+        "classPrent": "CM-2",
+        "classGoal": "CM-1"
     }
 ]
 

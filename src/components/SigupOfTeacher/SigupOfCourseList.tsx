@@ -1,7 +1,16 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { IStateType, IMyClassState } from "../../store/models/root.interface";
+import React, { useState } from "react";
 import { IMyClass } from "../../store/models/myclass.interface";
+
+const data = [
+{
+  "name": "CM-2",
+  "amount": "6"
+},
+{
+  "name": "CM-3",
+  "amount": "6"
+}
+]
 
 export type myclassListProps = {
   onSelect?: (myclass: IMyClass) => void;
@@ -11,19 +20,25 @@ export type myclassListProps = {
 function SigupOfCourseList(props: myclassListProps): JSX.Element  {
 
 
-  const myClass: IMyClassState = useSelector((state: IStateType) => state.myclass);
+  const [checkSigup, setCheckSigup] = useState(false)
 
-  const myclassElements: (JSX.Element | null)[] = myClass.myclass.map(class_item => {
+  function getDisabledClass(): string {
+    return checkSigup ? "disabled" : "";
+  }
+
+  const myclassElements: (JSX.Element | null)[] = data.map((class_item, index) => {
     if (!class_item) { return null; }
-    return (<tr className={`table-row ${(myClass.selectedMyClass && myClass.selectedMyClass.id === class_item.id) ? "selected" : ""}`}
-      onClick={() => {
-        if(props.onSelect) props.onSelect(class_item);
-      }}
-      key={`class_${class_item.id}`}>
-      <th scope="row">{class_item.id}</th>
+    return (<tr className={`table-row`}
+      key={`class_${index}`}>
+      <th scope="row">{index + 1}</th>
       <td>{class_item.name}</td>
       <td>{class_item.amount}</td>
-      <td><button className="btn btn-success">Đăng ký</button> </td>
+      <td><button className={`btn btn-success left-margin ${getDisabledClass()}`} onClick={() => {
+        alert("Đăng ký thành công!")
+        setCheckSigup(true)
+        }}
+      >
+        Đăng ký</button> </td>
     </tr>);
   });
 

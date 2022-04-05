@@ -1,13 +1,10 @@
-import React, { Fragment, Dispatch, useState, useEffect } from "react";
+import React, { Fragment, Dispatch } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import TopCard from "../../common/components/TopCard";
-import { IStateType, IMyClassState, ICourseState, IContestState, IFeedBackState} from "../../store/models/root.interface";
+import { IStateType, IMyClassState, ICourseState, IContestState, IFeedBackState, IUserState, IEmployeeState} from "../../store/models/root.interface";
 import MyClassListForKid from "../MyClass/MyClassListForKid";
 import { useParams } from "react-router";
-import { getDomain, getRestApiWithToken } from "../../common/util/RestAPI.util";
-import { RestApiAuth } from "../../common/components/RestApiAuth";
-import { Page } from "../../common/util/User.util";
 
 type role = {
   id: string;
@@ -22,30 +19,15 @@ const Home: React.FC = () => {
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
   const classs: IMyClassState = useSelector((state: IStateType) => state.myclass);
   const contests: IContestState = useSelector((state: IStateType) => state.contest);
+  const teachers: IUserState = useSelector((state: IStateType) => state.users);
+  const employees: IEmployeeState = useSelector((state: IStateType) => state.employees);
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Trang chủ", ""));
 
-  const [totalTeacher, setTotalTeacher] = useState<number>(0)
-  
-  useEffect(() => {
-    let pathUsers = getDomain('user?role=ROLE_TEACHER')
-    let token: string | null = localStorage.getItem('access_token');
-    if (token != null && id !== 'teacher') {
-      getRestApiWithToken(pathUsers, token)
-        .then(res => {
-          return RestApiAuth(res);
-        })
-        .then( (data: Page) => {
-          setTotalTeacher(data.totalItems)
-        })
-        .catch(() => {
-          setTotalTeacher(0)
-        })
-      }
-  })
 
-  const numberTeacherCount: number = totalTeacher;
+  const numberTeacherCount: number = teachers.users.length;
+  const numberEmployeeCount: number = employees.employees.length;
   const numberCoursesCount: number = courses.courses.length;
   const numberClassCount: number = classs.myclass.length;
   const numberContestCount: number = contests.contest.length;
@@ -91,13 +73,12 @@ const Home: React.FC = () => {
       <div className="row">
         <TopCard title="TỔNG SỐ GIÁO VIÊN" text={`${numberTeacherCount}`} icon="user" class="primary" />
         <TopCard title="TỔNG SỐ KHÓA HỌC" text={`${numberCoursesCount}`} icon="warehouse" class="danger" />
+        <TopCard title="TỔNG SỐ NHÂN VIÊN" text={`${numberEmployeeCount}`} icon="warehouse" class="danger" />
       </div>
 
       <div className="row">
         <TopCard title="TỔNG SỐ LỚP HỌC" text={`${numberClassCount}`} icon="warehouse" class="danger" /> 
         <TopCard title="TỔNG SỐ CUỘC THI" text={`${numberContestCount}`} icon="box" class="primary" />
-      </div>
-      <div className="row">
         <TopCard title="TỔNG SỐ PHẢN HỒI" text={`${numberBlogAcceptCount}`} icon="warehouse" class="danger" /> 
       </div>
 

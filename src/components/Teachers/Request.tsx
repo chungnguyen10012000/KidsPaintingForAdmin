@@ -1,21 +1,19 @@
 import React, { Fragment, Dispatch } from "react";
-import { IUser } from "../../store/models/user.interface";
-import { useDispatch, useSelector } from "react-redux";
-import { IStateType } from "../../store/models/root.interface";
-import { removeUser } from "../../store/actions/users.action";
+import { useDispatch } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
-import { addNotification } from "../../store/actions/notifications.action";
 //import { getRestApiWithToken, getDomain, postRestApiWithToken } from "../../common/util/RestAPI.util";
 //import { Page } from "../../common/util/User.util";
 //import { RestApiAuth } from "../../common/components/RestApiAuth";
 
 const data = [
   {
+    "username": "teacher",
     "className": "CM-1",
     "timeOff": "Tiết 7, Tiết 8 (2022-04-02)",
     "timeAdd": "Tiết 7, Tiết 8 (2022-04-06)"
   }, 
   {
+    "username": "binhtranh2k",
     "className": "CM-2",
     "timeOff": "Tiết 7, Tiết 8 (2022-04-06)",
     "timeAdd": "Tiết 7, Tiết 8 (2022-04-08)"
@@ -24,9 +22,9 @@ const data = [
 
 const data_1 = [
   {
-    "username": 'nvchung00',
-    "classPrent": "CM-1",
-    "classGoal": "CM-2"
+    "username": 'binhtranh2k',
+    "classPrent": "CM-2",
+    "classGoal": "CM-1"
   }
 ]
 
@@ -34,7 +32,6 @@ const Request: React.FC = () => {
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Người dùng", "Danh sách"));
-  const users: IUser[] = useSelector((state: IStateType) => state.users.users);
 
   // useEffect(() => {
   //   let pathUsers = getDomain('user?role=ROLE_TEACHER')
@@ -51,25 +48,20 @@ const Request: React.FC = () => {
   // }, [])
 
 
-  function removeTeacher(teacher: IUser): void {
-    dispatch(addNotification("Giáo viên", ` ${teacher.email} đã bị xóa khỏi hệ thống`));
-    dispatch(removeUser(teacher.id));
-  }
-
-  const userElements: JSX.Element[] = users.map((ele, index)=> {
+  const userElements: JSX.Element[] = data.map((ele, index)=> {
     return (
       <tr className={`table-row`}
-        key={`user_${ele.id}`}>
+        key={`user_${index}`}>
         <th scope="row">{index + 1}</th>
         <td>{ele.username}</td>
-        <td>{data[index].className}</td>
-        <td>{data[index].timeOff}</td>
-        <td>{data[index].timeAdd}</td>
+        <td>{ele.className}</td>
+        <td>{ele.timeOff}</td>
+        <td>{ele.timeAdd}</td>
         <td>
-            <button className="btn btn-success" onClick={() => removeTeacher(ele)}>Chấp nhận</button> 
+            <button className="btn btn-success" >Chấp nhận</button> 
         </td>
         <td>
-            <button className="btn btn-danger" onClick={() => removeTeacher(ele)}>Xóa</button>
+            <button className="btn btn-danger">Xóa</button>
         </td>
       </tr>);
   });

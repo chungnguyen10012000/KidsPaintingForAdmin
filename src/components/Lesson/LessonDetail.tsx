@@ -77,7 +77,7 @@ const LessonDetail: React.FC = () => {
 
 
   <div className="row">
-    <div className="col-xl-6 col-lg-6">
+    <div className="col-xl-12 col-lg-12">
       <div className="card shadow mb-4">
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-green"> Danh sách bài tập</h6>
@@ -92,7 +92,7 @@ const LessonDetail: React.FC = () => {
               history.push('/teacher/exercise')
             }}
           >
-            Chỉnh sửa
+            Xem chi tiết
           </button>
         </div>
       </div>

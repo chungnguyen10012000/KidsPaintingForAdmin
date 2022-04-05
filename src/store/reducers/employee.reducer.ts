@@ -6,7 +6,7 @@ const initialState: IEmployeeState = {
     modificationState: EmployeeModificationStatus.None,
     selectedUser: null,
     employees: [
-        { id: 1, firstName: "Nguyễn", lastName: "A", email: "nvlong00@gmail.com", username: 'bk2k123', sex: "Nam", dateOfDay: "10/01/2000", address: "Thanh Hoa", phone: "0987123456", password: '123', userStatus: true, avatar: '' },
+        { id: 1, firstName: "Nguyễn", lastName: "A", email: "nvlong00@gmail.com", username: 'staff', sex: "Nam", dateOfDay: "10/01/2000", address: "Thanh Hoa", phone: "0987123456", password: '12345678aA@', userStatus: true, avatar: '' },
         { id: 2, firstName: "Trần", lastName: 'B', email: "ohmy@fr.pl", username: 'bk2k1123', sex: "Nam", dateOfDay: "4/10/2000", address: "Ho Chi Minh", phone: "0987123490", password: '123', userStatus: true, avatar: '' }
     ],
     admins: [
