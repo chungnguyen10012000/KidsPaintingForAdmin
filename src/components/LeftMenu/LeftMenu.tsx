@@ -57,6 +57,14 @@ const LeftMenu: React.FC = () => {
                     </Link>
                 </li>
 
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/admin/teacher-rating`}>
+                        <i className="fas fa-fw fa-user"></i>
+                        <span>Đánh giá</span>
+                    </Link>
+                </li>
+
+
                 
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">

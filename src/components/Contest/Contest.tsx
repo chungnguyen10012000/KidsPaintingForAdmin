@@ -12,6 +12,7 @@ import { removeContest, clearSelectedContest, setModificationState,
 import { addNotification } from "../../store/actions/notifications.action";
 import { ContestModificationStatus, IContest } from "../../store/models/contest.interface";
 import { useHistory, useParams } from "react-router-dom";
+import ContestNotOpen from "./ContestNotOpen"
 
 type role = {
   id: string;
@@ -154,6 +155,33 @@ const Contests: React.FC = () => {
         {((contests.modificationState === ContestModificationStatus.Create)
           || (contests.modificationState === ContestModificationStatus.Edit && contests.selectedContest)) ?
           <ContestForm /> : null}
+      </div>
+
+
+      <div className="row">
+        <div className="col-xl-12 col-lg-12">
+          <div className="card shadow mb-4">
+            <div className="card-header py-3">
+              <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi chưa mở</h6>
+            </div>
+            <div className="card-body">
+              <ContestNotOpen />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-xl-12 col-lg-12">
+          <div className="card shadow mb-4">
+            <div className="card-header py-3">
+              <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi đã kết thúc</h6>
+            </div>
+            <div className="card-body">
+              <ContestNotOpen />
+            </div>
+          </div>
+        </div>
       </div>
 
 

@@ -10,6 +10,8 @@ import {
 import { useLocation, useHistory } from 'react-router-dom';
 import { ISesson } from '../../store/models/sesson.interface'
 
+import OnLeave from "../OnLeave/OnLeave";
+
 //TODO: đánh giá điểm của lớp, bảng điểm từng thành viên lớp
 
 const data = [
@@ -102,7 +104,7 @@ const Lesson: React.FC = () => {
     });
     return (
         <Fragment>
-            <h1 className="h3 mb-2 text-gray-800">Buổi học</h1>
+            <h1 className="h3 mb-2 text-gray-800">Chi tiết lớp học</h1>
             <p className="mb-4">Thông tin chung</p>
             <div className="row">
                 <TopCard title="TỔNG SỐ BUỔI HỌC" text={`${numberSessoonCount}`} icon="box" class="primary" />
@@ -162,6 +164,9 @@ const Lesson: React.FC = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="row">
+                <OnLeave />                       
             </div>
         </Fragment >
     );

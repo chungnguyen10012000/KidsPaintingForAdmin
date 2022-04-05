@@ -201,17 +201,6 @@ const CoursesForm: React.FC = () => {
                   label="Số lượng buổi học"
                 />
               </div>
-              <div className="form-group">
-                  <SelectInput
-                    id="input_time"
-                    field="time"
-                    label="Thời gian"
-                    options={["Thứ 2-4-6", "Thứ 3-5-7"]}
-                    required={true}
-                    onChange={hasFormValueChanged}
-                    value={formState.time.value}
-                  />
-              </div> 
               <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
               <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Lưu</button>
             </form>

@@ -62,7 +62,7 @@ const ContestForm: React.FC = () => {
     }
   }, [quill]);
 
-  const listStatus = ['Còn hạn', 'Hết hạn']
+  const listStatus = ['true', 'false']
 
   const levels: ILevelState = useSelector((state: IStateType) => state.levels);
   const listLevel: ILevel[] = levels.levels

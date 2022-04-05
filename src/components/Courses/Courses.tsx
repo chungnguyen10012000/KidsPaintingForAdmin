@@ -12,7 +12,6 @@ import { updateCurrentPath } from "../../store/actions/root.actions";
 import TypeList from "./TypeList";
 import LevelList from "./LevelList";
 
-import { useHistory, useParams } from "react-router-dom";
 
 import { ICourseState, IStateType, IRootPageStateType, IMytypeState, ILevelState } from "../../store/models/root.interface";
 
@@ -29,11 +28,7 @@ type role = {
 };
 
 const Courses: React.FC = () => {
-  let history = useHistory();
 
-  const { id } = useParams<role>()
-
-  let [isId, setIsId] = useState<number>(0)
 
   let [isCheck, setIsCheck] = useState('')
   const dispatch: Dispatch<any> = useDispatch();
@@ -63,7 +58,6 @@ const Courses: React.FC = () => {
   function onCourseSelect(course: ICourse): void {
     dispatch(changeSelectedCourse(course));
     dispatch(setModificationState(CourseModificationStatus.None));
-    setIsId(course.courseId)
   }
 
   function onMytypeSelect(mytype: IMytype): void {
@@ -131,17 +125,6 @@ const Courses: React.FC = () => {
                 </button>
                 <button className="btn btn-success btn-red" onClick={() => onCourseRemove()}>
                   <i className="fas fa fa-times"></i>
-                </button>
-                <button className="btn btn-success btn-blue" onClick={() => 
-                  {
-                    if (courses.selectedCourse){
-                      history.push({
-                        pathname: `/${id}/teacherofcourse`,
-                        state: { id : isId}
-                      })
-                    }
-                  }}>
-                  <i className="fas fa fa-user-plus"></i>
                 </button>
               </div>
             </div>

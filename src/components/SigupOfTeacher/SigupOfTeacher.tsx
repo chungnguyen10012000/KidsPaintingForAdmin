@@ -6,7 +6,7 @@ import { IStateType, IRootPageStateType } from "../../store/models/root.interfac
 import { clearSelectedMyClass, setModificationState,
   changeSelectedMyClass } from "../../store/actions/myclass.actions";
 import { MyClassModificationStatus, IMyClass} from "../../store/models/myclass.interface";
-import SigupOfCourseList from "./SigupOfCourseList";
+import SigupOfCourseList from "./SigupOfClassList";
 
 const SigupOfCourse: React.FC = () => {
   //console.log(id)

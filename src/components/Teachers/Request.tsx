@@ -4,6 +4,7 @@ import { updateCurrentPath } from "../../store/actions/root.actions";
 //import { getRestApiWithToken, getDomain, postRestApiWithToken } from "../../common/util/RestAPI.util";
 //import { Page } from "../../common/util/User.util";
 //import { RestApiAuth } from "../../common/components/RestApiAuth";
+import TeacherOfCourse from "../Courses/TeacherOfCourse"
 
 const data = [
   {
@@ -150,6 +151,9 @@ const Request: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <TeacherOfCourse />
+
     </Fragment >
   );
 };

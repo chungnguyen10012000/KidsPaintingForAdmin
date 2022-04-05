@@ -88,13 +88,6 @@ const LeftMenuForTeacher: React.FC = () => {
                 </div>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/teacher/onleave`}>
-                        <i className="fas fa-fw fa-warehouse"></i>
-                        <span>Nghỉ phép</span>
-                    </Link>
-                </li>
-
-                <li className="nav-item">
                     <Link className="nav-link" to={`/teacher/change-class`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Yêu cầu đổi lớp</span>

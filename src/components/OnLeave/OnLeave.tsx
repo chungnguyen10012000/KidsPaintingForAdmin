@@ -46,16 +46,6 @@ const OnLeave: React.FC = () => {
         "Tiết 15 (20:00 - 20:50)",
     ]
 
-    const classList: string[] = [
-        "CM-1",
-        "CM-2",
-    ]
-
-    const courseList: string[] = [
-        "Khóa học chì màu dành cho trẻ 5-9 tuổi",
-        "Khóa học sơn dầu dành cho trẻ 9-12 tuổi",
-    ]
-
     const [formState, setFormState] = useState({
         name: { error: "", value: myclass.name },
         course: { error: "", value: myclass.course },
@@ -117,28 +107,6 @@ const OnLeave: React.FC = () => {
                     </div>
                     <div className="card-body">
                         <form onSubmit={saveUser}>
-                            <div className="form-group">
-                                <SelectInput
-                                    id="input_course"
-                                    field="course"
-                                    label="Khóa học"
-                                    options={courseList}
-                                    required={true}
-                                    onChange={hasFormValueChanged}
-                                    value={formState.course.value}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <SelectInput
-                                    id="input_lesson"
-                                    field="lesson"
-                                    label="Lớp"
-                                    options={classList}
-                                    required={true}
-                                    onChange={hasFormValueChanged}
-                                    value={formState.teacher_id.value}
-                                />
-                            </div>
                             <div className="form-group">
                                 <TextInput id="input_dateOfDay"
                                 value={formState.course.value}
