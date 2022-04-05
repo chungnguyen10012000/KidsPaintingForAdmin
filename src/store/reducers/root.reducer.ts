@@ -17,6 +17,7 @@ import feedbackReducer from "./feedback.reducer";
 import sessonsReducer from "./sesson.reducer";
 import blogReducer from "./blog.reducer";
 import employeeReducer from "./employee.reducer";
+import coursesForYearReducer from "./courseForYear.reducer";
 
 const initialState: IRootStateType = {
     page: {area: "home", subArea: ""}
@@ -49,6 +50,7 @@ const rootReducers: Reducer<IStateType> = combineReducers({
     sessons: sessonsReducer,
     blogs: blogReducer,
     employees: employeeReducer,
+    courseForYear: coursesForYearReducer,
 });
 
 

@@ -14,6 +14,7 @@ import { IFeedBack, FeedBackModificationStatus } from "./feedback.interface";
 import { ISesson, SessonModificationStatus } from "./sesson.interface";
 import { IBlog, BlogModificationStatus } from "./blogs.innterface";
 import { IEmployee, EmployeeModificationStatus } from "./employee.interface";
+import { ICourseForYear, CourseForYearModificationStatus } from "./courseForYear.interface";
 
 export interface IRootPageStateType {
     area: string;
@@ -41,6 +42,7 @@ export interface IStateType {
     sessons: ISessonState;
     blogs: IBlogState;
     employees: IEmployeeState;
+    courseForYear: ICourseForYearState;
 }
 
 export interface IBlogState {
@@ -102,6 +104,12 @@ export interface ICourseState {
     courses: ICourse[];
     selectedCourse: ICourse | null;
     modificationState: CourseModificationStatus;
+}
+
+export interface ICourseForYearState {
+    courseForYear: ICourseForYear[];
+    selectedCourseForYear: ICourseForYear | null;
+    modificationState: CourseForYearModificationStatus;
 }
 
 export interface IProductState {

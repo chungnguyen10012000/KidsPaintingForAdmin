@@ -13,15 +13,19 @@ import TypeList from "./TypeList";
 import LevelList from "./LevelList";
 
 
-import { ICourseState, IStateType, IRootPageStateType, IMytypeState, ILevelState } from "../../store/models/root.interface";
+import { ICourseState, IStateType, IRootPageStateType, IMytypeState, ILevelState, ICourseForYearState } from "../../store/models/root.interface";
 
 import { CourseModificationStatus, ICourse } from "../../store/models/courses.interface";
+import { CourseForYearModificationStatus, ICourseForYear } from "../../store/models/courseForYear.interface";
 import { MytypeModificationStatus, IMytype } from "../../store/models/mytypes.interface";
 import { LevelModificationStatus, ILevel } from "../../store/models/levels.interface";
 
 import { removeMytype, clearSelectedMytype, changeSelectedMytype, setModificationStateMytype } from "../../store/actions/mytypes.actions";
 import { removeCourse, clearSelectedCourse, setModificationState, changeSelectedCourse } from "../../store/actions/courses.actions";
 import { removeLevel, clearSelectedLevel, changeSelectedLevel, setModificationStateLevel } from "../../store/actions/levels.actions";
+import { removeCourseForYear, clearSelectedCourseForYear, setModificationStateCourseForYear, changeSelectedCourseForYear } from "../../store/actions/courseForYear.actions";
+import CoursesForYearForm from "./CourseForYearForm"
+import CoursesForYearList from "./CourseForYearList"
 
 type role = {
   id: string;
@@ -33,6 +37,7 @@ const Courses: React.FC = () => {
   let [isCheck, setIsCheck] = useState('')
   const dispatch: Dispatch<any> = useDispatch();
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
+  const courseForYear: ICourseForYearState = useSelector((state: IStateType) => state.courseForYear);
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
   const numberItemsCount: number = courses.courses.length;
   const [popup, setPopup] = useState(false);
@@ -52,12 +57,18 @@ const Courses: React.FC = () => {
     dispatch(clearSelectedCourse());
     dispatch(clearSelectedLevel());
     dispatch(clearSelectedMytype());
+    dispatch(clearSelectedCourseForYear());
     dispatch(updateCurrentPath("Khóa học", "Danh sách"));
   }, [path.area, dispatch]);
 
   function onCourseSelect(course: ICourse): void {
     dispatch(changeSelectedCourse(course));
     dispatch(setModificationState(CourseModificationStatus.None));
+  }
+
+  function onCourseForYearSelect(course: ICourseForYear): void {
+    dispatch(changeSelectedCourseForYear(course));
+    dispatch(setModificationStateCourseForYear(CourseForYearModificationStatus.None));
   }
 
   function onMytypeSelect(mytype: IMytype): void {
@@ -76,6 +87,12 @@ const Courses: React.FC = () => {
     }
   }
 
+  function onCourseForYearRemove() {
+    if (courseForYear.selectedCourseForYear) {
+      setPopup(true);
+    }
+  }
+
   function onMytypeRemove() {
     if (mytypes.selectedMytype) {
       setPopup1(true);
@@ -87,7 +104,7 @@ const Courses: React.FC = () => {
       setPopup2(true);
     }
   }
-  //console.log(isCheck)
+  
 
   return (
     <Fragment>
@@ -147,29 +164,28 @@ const Courses: React.FC = () => {
               <h6 className="m-0 font-weight-bold text-green">Danh sách khóa học theo kì</h6>
               <div className="header-buttons">
                 <button className="btn btn-success btn-green" id="0" onClick={() =>{
-                  setIsCheck('1')
-                  dispatch(setModificationState(CourseModificationStatus.Create))}}>
+                  dispatch(setModificationStateCourseForYear(CourseForYearModificationStatus.Create))}}>
                   <i className="fas fa fa-plus"></i>
                 </button>
                 <button className="btn btn-success btn-blue" onClick={() =>
-                  dispatch(setModificationState(CourseModificationStatus.Edit))}>
+                  dispatch(setModificationStateCourseForYear(CourseForYearModificationStatus.Edit))}>
                   <i className="fas fa fa-pen"></i>
                 </button>
-                <button className="btn btn-success btn-red" onClick={() => onCourseRemove()}>
+                <button className="btn btn-success btn-red" onClick={() => onCourseForYearRemove()}>
                   <i className="fas fa fa-times"></i>
                 </button>
               </div>
             </div>
             <div className="card-body">
-              <CoursesList
-                onSelect={onCourseSelect}
+              <CoursesForYearList
+                onSelect={onCourseForYearSelect}
               />
             </div>
           </div>
         </div>
-        {((courses.modificationState === CourseModificationStatus.Create && isCheck === '1')
-          || (courses.modificationState === CourseModificationStatus.Edit && courses.selectedCourse)) ?
-          <CoursesForm /> : null}
+        {((courseForYear.modificationState === CourseForYearModificationStatus.Create )
+          || (courseForYear.modificationState === CourseForYearModificationStatus.Edit && courseForYear.selectedCourseForYear)) ?
+          <CoursesForYearForm /> : null}
       </div>
 
       <div className="row">

@@ -38,6 +38,12 @@ export interface ICourseFormState {
     time: IFormStateField<string>;
 }
 
+export interface ICourseForYearFormState {
+    courseName: IFormStateField<string>;
+    semester: IFormStateField<string>;
+    time: IFormStateField<string>;
+}
+
 export interface IMytypeFormState {
     typeName: IFormStateField<string>;
 }
