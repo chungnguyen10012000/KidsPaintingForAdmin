@@ -140,7 +140,37 @@ const Courses: React.FC = () => {
           <CoursesForm /> : null}
       </div>
 
-
+      <div className="row">
+        <div className="col-xl-12 col-lg-12">
+          <div className="card shadow mb-4">
+            <div className="card-header py-3">
+              <h6 className="m-0 font-weight-bold text-green">Danh sách khóa học theo kì</h6>
+              <div className="header-buttons">
+                <button className="btn btn-success btn-green" id="0" onClick={() =>{
+                  setIsCheck('1')
+                  dispatch(setModificationState(CourseModificationStatus.Create))}}>
+                  <i className="fas fa fa-plus"></i>
+                </button>
+                <button className="btn btn-success btn-blue" onClick={() =>
+                  dispatch(setModificationState(CourseModificationStatus.Edit))}>
+                  <i className="fas fa fa-pen"></i>
+                </button>
+                <button className="btn btn-success btn-red" onClick={() => onCourseRemove()}>
+                  <i className="fas fa fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div className="card-body">
+              <CoursesList
+                onSelect={onCourseSelect}
+              />
+            </div>
+          </div>
+        </div>
+        {((courses.modificationState === CourseModificationStatus.Create && isCheck === '1')
+          || (courses.modificationState === CourseModificationStatus.Edit && courses.selectedCourse)) ?
+          <CoursesForm /> : null}
+      </div>
 
       <div className="row">
         <div className="col-xl-12 col-lg-12">
