@@ -6,7 +6,7 @@ export interface ICourse {
     courseLevel: string;
     coursePrice: number;
     maxCourseParticipant: number;
-    sumOfSection: number;
+    sumOfSesson: number;
     time: string;
 }
 

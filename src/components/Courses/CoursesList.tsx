@@ -25,7 +25,7 @@ const courses: ICourseState = useSelector((state: IStateType) => state.courses);
       <td>{course.courseLevel}</td>
       <td>{course.coursePrice}</td>
       <td>{course.maxCourseParticipant}</td>
-      <td>{course.sumOfSection}</td>
+      <td>{course.sumOfSesson}</td>
     </tr>);
   });
 

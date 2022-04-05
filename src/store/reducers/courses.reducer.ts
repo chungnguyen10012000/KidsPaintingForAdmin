@@ -9,7 +9,7 @@ const initialState: ICourseState = {
     modificationState: CourseModificationStatus.None,
     selectedCourse: null,
     courses: [{
-        courseId: 1, courseName: "Khóa học chì màu dành cho trẻ 5-9 tuổi",  courseLevel: '5-9 tuổi', courseType: 'Chì màu', courseDescription: '<p></p>', coursePrice: 2000000, maxCourseParticipant: 25, sumOfSection: 25, time: "Thứ 2-4-6"
+        courseId: 1, courseName: "Khóa học chì màu dành cho trẻ 5-9 tuổi",  courseLevel: '5-9 tuổi', courseType: 'Chì màu', courseDescription: '<p></p>', coursePrice: 2000000, maxCourseParticipant: 25, sumOfSesson: 25, time: "Thứ 2-4-6"
     }]
 };
 

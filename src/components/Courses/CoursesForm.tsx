@@ -32,7 +32,7 @@ const CoursesForm: React.FC = () => {
   const isCreate: boolean = (courses.modificationState === CourseModificationStatus.Create);
   
   if (!course || isCreate) {
-    course = { courseId: 0, courseName: "", courseDescription: "", courseLevel: "", courseType: "", coursePrice: 0, maxCourseParticipant: 0, sumOfSection: 0, time: 'Thứ 2-4-6'};
+    course = { courseId: 0, courseName: "", courseDescription: "", courseLevel: "", courseType: "", coursePrice: 0, maxCourseParticipant: 0, sumOfSesson: 0, time: 'Thứ 2-4-6'};
   }
 
   const { quill, quillRef, Quill } = useQuill({
@@ -82,7 +82,7 @@ const CoursesForm: React.FC = () => {
     courseLevel: { error: "", value: course.courseLevel },
     coursePrice: { error: "", value: course.coursePrice },
     maxCourseParticipant: { error: "", value: course.maxCourseParticipant },
-    sumOfSesson: { error: "", value: course.sumOfSection },
+    sumOfSesson: { error: "", value: course.sumOfSesson },
     time: { error: "", value: course.time },
   });
 
