@@ -38,6 +38,7 @@ import ChangeClass from "../ChangeClass/ChangeClass"
 import TeacherSigupClass from "../MyClass/TeacherSigupClass"
 import ContestGrade from "../Contest/ContestGrade"
 import SigupLevelTeacher from "../SigupLevelTeacher/SigupLevelTeacher"
+import StarRatingForAdmin from "../StarRating/StarRatingForAdmin";
 
 type role = {
   id: string;
@@ -97,6 +98,7 @@ const Admin: React.FC = () => {
                 <Route path={`/:id/feedbacks`}><FeedBack /></Route>
                 <Route path={`/:id/teacher`}><Teachers /></Route>
                 <Route path={`/:id/teacher-class`}><TeacherSigupClass /></Route>
+                <Route path={`/:id/teacher-rating`}><StarRatingForAdmin /></Route>
                 <Route path={`/:id/teacher-request`}><Request /></Route>
                 <Route path={`/:id/teacherofcourse`}><TeacherOfCourse /></Route>
                 <Route path={`/:id/student-request`}><Student /></Route>
@@ -137,6 +139,7 @@ const Admin: React.FC = () => {
               <Route path={`/:id/student-request`}><Student /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
               <Route path={`/:id/blog`}><Blogs /></Route>
+              <Route path={`/:id/teacher-rating`}><StarRatingForAdmin /></Route>
               <Route path={`/:id/analysis`}><Analysis /></Route>
               <Route path={`/:id/teacherofcourse`}><TeacherOfCourse /></Route>
               <Route path={`/:id/contest-detail`}><ContestView /></Route>
