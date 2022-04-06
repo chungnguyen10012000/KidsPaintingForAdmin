@@ -13,6 +13,7 @@ import { addNotification } from "../../store/actions/notifications.action";
 import { ContestModificationStatus, IContest } from "../../store/models/contest.interface";
 import { useHistory, useParams } from "react-router-dom";
 import ContestNotOpen from "./ContestNotOpen"
+import ContestEnd from "./ContestEnd"
 
 type role = {
   id: string;
@@ -31,12 +32,6 @@ const Contests: React.FC = () => {
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
   const numberItemsCount: number = contests.contest.length;
   const [popup, setPopup] = useState(false);
-  const [searchTerm, setSearchTerm] = React.useState("");
-  
-  const handleChange = (event: any) => {
-    setSearchTerm(event.target.value);
-  };
-  console.log(searchTerm)
 
   useEffect(() => {
     dispatch(clearSelectedContest());
@@ -101,30 +96,30 @@ const Contests: React.FC = () => {
       <h1 className="h3 mb-2 text-gray-800">Cuộc thi</h1>
       <p className="mb-4">Thông tin chung</p>
       <div className="row">
-        <TopCard title="TỔNG SỐ CUỘC THI" text={`${numberItemsCount}`} icon="box" class="primary" />
-        <div className="col-xl-6 col-md-6 mb-4">
-            <div className="card-body">
-              <input
-                type="text"
-                placeholder="Tìm kiếm"
-                value={searchTerm}
-                onChange={handleChange}
-                style={{width: '100%'}}
-              />
-            </div>
-        </div>
+        <TopCard title="TỔNG SỐ CUỘC THI ĐANG MỞ" text={`${numberItemsCount}`} icon="box" class="primary" />
+        <TopCard title="TỔNG SỐ CUỘC THI CHƯA MỞ" text={`${numberItemsCount}`} icon="box" class="primary" />
+        <TopCard title="TỔNG SỐ CUỘC THI ĐÃ KẾT THÚC" text={`${numberItemsCount}`} icon="box" class="primary" />
+      </div>
+
+      <div className="row">
+      <div className="col-xl-12 col-lg-12">
+      <button className="btn btn-success btn-green btn-create" onClick={() =>
+          dispatch(setModificationState(ContestModificationStatus.Create))}>
+          <i className="fas fa fa-plus"></i>
+          Tạo cuộc thi
+        </button>
+      </div>
+      
+        {((contests.modificationState === ContestModificationStatus.Create)) ?
+          <ContestForm /> : null}
       </div>
 
       <div className="row">
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi</h6>
+              <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi đang mở</h6>
               <div className="header-buttons">
-                <button className="btn btn-success btn-green" onClick={() =>
-                  dispatch(setModificationState(ContestModificationStatus.Create))}>
-                  <i className="fas fa fa-plus"></i>
-                </button>
                 <button className="btn btn-success btn-blue" onClick={() =>
                   dispatch(setModificationState(ContestModificationStatus.Edit))}>
                   <i className="fas fa fa-pen"></i>
@@ -152,8 +147,7 @@ const Contests: React.FC = () => {
             </div>
           </div>
         </div>
-        {((contests.modificationState === ContestModificationStatus.Create)
-          || (contests.modificationState === ContestModificationStatus.Edit && contests.selectedContest)) ?
+        {((contests.modificationState === ContestModificationStatus.Edit && contests.selectedContest)) ?
           <ContestForm /> : null}
       </div>
 
@@ -178,7 +172,7 @@ const Contests: React.FC = () => {
               <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi đã kết thúc</h6>
             </div>
             <div className="card-body">
-              <ContestNotOpen />
+              <ContestEnd />
             </div>
           </div>
         </div>

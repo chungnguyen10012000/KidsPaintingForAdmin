@@ -4,7 +4,6 @@ import { IUser, UserModificationStatus } from "./user.interface";
 import { IOrder } from "./order.interface";
 import { IAccount } from "./account.interface";
 import { ICourse, CourseModificationStatus } from "./courses.interface";
-import { IClass, ClassModificationStatus } from "./class.interface";
 import { IContest, ContestModificationStatus } from "./contest.interface";
 import { IMyClass, MyClassModificationStatus } from "./myclass.interface";
 import { IMytype, MytypeModificationStatus } from "./mytypes.interface";
@@ -14,7 +13,6 @@ import { IFeedBack, FeedBackModificationStatus } from "./feedback.interface";
 import { ISesson, SessonModificationStatus } from "./sesson.interface";
 import { IBlog, BlogModificationStatus } from "./blogs.innterface";
 import { IEmployee, EmployeeModificationStatus } from "./employee.interface";
-import { ICourseForYear, CourseForYearModificationStatus } from "./courseForYear.interface";
 
 export interface IRootPageStateType {
     area: string;
@@ -29,7 +27,6 @@ export interface IStateType {
     products: IProductState;
     notifications: INotificationState;
     courses: ICourseState;
-    class: IClassState;
     myclass: IMyClassState;
     contest: IContestState;
     users: IUserState;
@@ -42,7 +39,6 @@ export interface IStateType {
     sessons: ISessonState;
     blogs: IBlogState;
     employees: IEmployeeState;
-    courseForYear: ICourseForYearState;
 }
 
 export interface IBlogState {
@@ -94,22 +90,10 @@ export interface IContestState {
     modificationState: ContestModificationStatus;
 }
 
-export interface IClassState {
-    class: IClass[];
-    selectedClass: IClass | null;
-    modificationState: ClassModificationStatus;
-}
-
 export interface ICourseState {
     courses: ICourse[];
     selectedCourse: ICourse | null;
     modificationState: CourseModificationStatus;
-}
-
-export interface ICourseForYearState {
-    courseForYear: ICourseForYear[];
-    selectedCourseForYear: ICourseForYear | null;
-    modificationState: CourseForYearModificationStatus;
 }
 
 export interface IProductState {

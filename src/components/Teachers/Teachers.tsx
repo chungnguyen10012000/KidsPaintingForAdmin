@@ -7,9 +7,6 @@ import { removeUser } from "../../store/actions/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import TeacherForm from "./TeacherForm";
 import { addNotification } from "../../store/actions/notifications.action";
-//import { getRestApiWithToken, getDomain, postRestApiWithToken } from "../../common/util/RestAPI.util";
-//import { Page } from "../../common/util/User.util";
-//import { RestApiAuth } from "../../common/components/RestApiAuth";
 
 const Teachers: React.FC = () => {
 
@@ -17,26 +14,6 @@ const Teachers: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Người dùng", "Danh sách"));
   const users: IUser[] = useSelector((state: IStateType) => state.users.users);
-
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const handleChange = (event: any) => {
-    setSearchTerm(event.target.value);
-  };
-  console.log(searchTerm)
-
-  // useEffect(() => {
-  //   let pathUsers = getDomain('user?role=ROLE_TEACHER')
-  //   let token: string | null = localStorage.getItem('access_token');
-  //   if (token != null) {
-  //     getRestApiWithToken(pathUsers, token)
-  //       .then(res => {
-  //         return RestApiAuth(res);
-  //       })
-  //       .then( (data: Page) => {
-  //         setListUser(data.items)
-  //       })
-  //     }
-  // }, [])
 
 
   function removeTeacher(teacher: IUser): void {
@@ -61,17 +38,6 @@ const Teachers: React.FC = () => {
 
       <div className="row">
         <TopCard title="GIÁO VIÊN" text={users.length.toString()} icon="user" class="danger" />
-        <div className="col-xl-6 col-md-6 mb-4">
-            <div className="card-body">
-              <input
-                type="text"
-                placeholder="Tìm kiếm"
-                value={searchTerm}
-                onChange={handleChange}
-                style={{width: '100%'}}
-              />
-            </div>
-        </div>
       </div>
 
       <div className="row">

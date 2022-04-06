@@ -7,7 +7,6 @@ import userReducer from "./users.reducer";
 import orderReducer from "./order.reducer";
 import accountReducer from "./account.reducer";
 import courseReducer from "./courses.reducer";
-import classReducer from "./class.reducer";
 import contestReducer from "./contest.reducer";
 import myclasssReducer from "./myclass.reducer";
 import mytypesReducer from "./mytypes.reducer";
@@ -17,7 +16,6 @@ import feedbackReducer from "./feedback.reducer";
 import sessonsReducer from "./sesson.reducer";
 import blogReducer from "./blog.reducer";
 import employeeReducer from "./employee.reducer";
-import coursesForYearReducer from "./courseForYear.reducer";
 
 const initialState: IRootStateType = {
     page: {area: "home", subArea: ""}
@@ -38,7 +36,6 @@ const rootReducers: Reducer<IStateType> = combineReducers({
     notifications: notificationReducer,
     courses: courseReducer,
     myclass: myclasssReducer,
-    class: classReducer,
     contest: contestReducer,
     users: userReducer,
     orders: orderReducer,
@@ -50,7 +47,6 @@ const rootReducers: Reducer<IStateType> = combineReducers({
     sessons: sessonsReducer,
     blogs: blogReducer,
     employees: employeeReducer,
-    courseForYear: coursesForYearReducer,
 });
 
 

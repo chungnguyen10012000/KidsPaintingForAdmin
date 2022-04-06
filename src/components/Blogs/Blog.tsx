@@ -29,12 +29,7 @@ const Blogs: React.FC = () => {
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
   const numberItemsCount: number = blogs.blogs.length;
   const [popup, setPopup] = useState(false);
-  
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const handleChange = (event: any) => {
-    setSearchTerm(event.target.value);
-  };
-  console.log(searchTerm)
+
 
   useEffect(() => {
     dispatch(clearSelectedBlog());
@@ -60,17 +55,6 @@ const Blogs: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
       <div className="row">
         <TopCard title="TỔNG SỐ Blog" text={`${numberItemsCount}`} icon="box" class="primary" />
-        <div className="col-xl-6 col-md-6 mb-4">
-            <div className="card-body">
-              <input
-                type="text"
-                placeholder="Tìm kiếm"
-                value={searchTerm}
-                onChange={handleChange}
-                style={{width: '100%'}}
-              />
-            </div>
-        </div>
       </div>
 
       <div className="row">

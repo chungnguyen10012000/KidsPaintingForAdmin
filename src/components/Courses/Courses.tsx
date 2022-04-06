@@ -13,19 +13,15 @@ import TypeList from "./TypeList";
 import LevelList from "./LevelList";
 
 
-import { ICourseState, IStateType, IRootPageStateType, IMytypeState, ILevelState, ICourseForYearState } from "../../store/models/root.interface";
+import { ICourseState, IStateType, IRootPageStateType, IMytypeState, ILevelState } from "../../store/models/root.interface";
 
 import { CourseModificationStatus, ICourse } from "../../store/models/courses.interface";
-import { CourseForYearModificationStatus, ICourseForYear } from "../../store/models/courseForYear.interface";
 import { MytypeModificationStatus, IMytype } from "../../store/models/mytypes.interface";
 import { LevelModificationStatus, ILevel } from "../../store/models/levels.interface";
 
 import { removeMytype, clearSelectedMytype, changeSelectedMytype, setModificationStateMytype } from "../../store/actions/mytypes.actions";
 import { removeCourse, clearSelectedCourse, setModificationState, changeSelectedCourse } from "../../store/actions/courses.actions";
 import { removeLevel, clearSelectedLevel, changeSelectedLevel, setModificationStateLevel } from "../../store/actions/levels.actions";
-import { removeCourseForYear, clearSelectedCourseForYear, setModificationStateCourseForYear, changeSelectedCourseForYear } from "../../store/actions/courseForYear.actions";
-import CoursesForYearForm from "./CourseForYearForm"
-import CoursesForYearList from "./CourseForYearList"
 
 type role = {
   id: string;
@@ -37,7 +33,6 @@ const Courses: React.FC = () => {
   let [isCheck, setIsCheck] = useState('')
   const dispatch: Dispatch<any> = useDispatch();
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
-  const courseForYear: ICourseForYearState = useSelector((state: IStateType) => state.courseForYear);
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
   const numberItemsCount: number = courses.courses.length;
   const [popup, setPopup] = useState(false);
@@ -47,17 +42,10 @@ const Courses: React.FC = () => {
   const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
   const levels: ILevelState = useSelector((state: IStateType) => state.levels)
 
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const handleChange = (event: any) => {
-    setSearchTerm(event.target.value);
-  };
-  console.log(searchTerm)
-
   useEffect(() => {
     dispatch(clearSelectedCourse());
     dispatch(clearSelectedLevel());
     dispatch(clearSelectedMytype());
-    dispatch(clearSelectedCourseForYear());
     dispatch(updateCurrentPath("Khóa học", "Danh sách"));
   }, [path.area, dispatch]);
 
@@ -66,10 +54,6 @@ const Courses: React.FC = () => {
     dispatch(setModificationState(CourseModificationStatus.None));
   }
 
-  function onCourseForYearSelect(course: ICourseForYear): void {
-    dispatch(changeSelectedCourseForYear(course));
-    dispatch(setModificationStateCourseForYear(CourseForYearModificationStatus.None));
-  }
 
   function onMytypeSelect(mytype: IMytype): void {
     dispatch(changeSelectedMytype(mytype));
@@ -83,12 +67,6 @@ const Courses: React.FC = () => {
 
   function onCourseRemove() {
     if (courses.selectedCourse) {
-      setPopup(true);
-    }
-  }
-
-  function onCourseForYearRemove() {
-    if (courseForYear.selectedCourseForYear) {
       setPopup(true);
     }
   }
@@ -112,17 +90,6 @@ const Courses: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
       <div className="row">
         <TopCard title="TỔNG SỐ KHÓA HỌC" text={`${numberItemsCount}`} icon="box" class="primary" />
-        <div className="col-xl-6 col-md-6 mb-4">
-          <div className="card-body">
-              <input
-                type="text"
-                placeholder="Tìm kiếm"
-                value={searchTerm}
-                onChange={handleChange}
-                style={{width: '100%'}}
-              />
-          </div>
-        </div>
       </div>
 
       <div className="row">
@@ -155,37 +122,6 @@ const Courses: React.FC = () => {
         {((courses.modificationState === CourseModificationStatus.Create && isCheck === '1')
           || (courses.modificationState === CourseModificationStatus.Edit && courses.selectedCourse)) ?
           <CoursesForm /> : null}
-      </div>
-
-      <div className="row">
-        <div className="col-xl-12 col-lg-12">
-          <div className="card shadow mb-4">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách khóa học theo kì</h6>
-              <div className="header-buttons">
-                <button className="btn btn-success btn-green" id="0" onClick={() =>{
-                  dispatch(setModificationStateCourseForYear(CourseForYearModificationStatus.Create))}}>
-                  <i className="fas fa fa-plus"></i>
-                </button>
-                <button className="btn btn-success btn-blue" onClick={() =>
-                  dispatch(setModificationStateCourseForYear(CourseForYearModificationStatus.Edit))}>
-                  <i className="fas fa fa-pen"></i>
-                </button>
-                <button className="btn btn-success btn-red" onClick={() => onCourseForYearRemove()}>
-                  <i className="fas fa fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <div className="card-body">
-              <CoursesForYearList
-                onSelect={onCourseForYearSelect}
-              />
-            </div>
-          </div>
-        </div>
-        {((courseForYear.modificationState === CourseForYearModificationStatus.Create )
-          || (courseForYear.modificationState === CourseForYearModificationStatus.Edit && courseForYear.selectedCourseForYear)) ?
-          <CoursesForYearForm /> : null}
       </div>
 
       <div className="row">

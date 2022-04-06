@@ -11,6 +11,12 @@
     width: 40px;
 }
 
+.btn-create {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 140px !important;
+}
+
 .btn-blue {
     background-color: lightblue !important;
     border-color: lightblue !important;

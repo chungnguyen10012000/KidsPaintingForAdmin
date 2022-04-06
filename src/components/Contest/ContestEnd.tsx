@@ -7,7 +7,7 @@ type role = {
     id: string;
 };
 
-function ContestNotOpen(): JSX.Element {
+function ContestEnd(): JSX.Element {
 
     const { id } = useParams<role>()
     let history = useHistory();
@@ -63,4 +63,4 @@ function ContestNotOpen(): JSX.Element {
     );
 }
 
-export default ContestNotOpen;
+export default ContestEnd;
