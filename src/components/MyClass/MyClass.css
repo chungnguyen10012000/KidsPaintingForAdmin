@@ -4,6 +4,11 @@
     top: 8px;
 }
 
+.checked {
+    color: orange;
+}
+
+
 .btn-green {
     background-color: cadetblue !important;
     border-color: cadetblue !important;

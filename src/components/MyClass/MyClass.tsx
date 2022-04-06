@@ -14,6 +14,7 @@ import { MyClassModificationStatus, IMyClass} from "../../store/models/myclass.i
 import { useParams } from "react-router";
 import MyClassListForKid from "./MyClassListForKid";
 import { useHistory } from "react-router-dom";
+import MyClassWasTeachList from "./MyClassWasTeachList"
 
 type role = {
   id: string;
@@ -81,6 +82,19 @@ const MyClass: React.FC = () => {
             </div>
           </div>
         </div>
+
+        <div className="row">
+        <div className="col-xl-12 col-lg-12">
+          <div className="card shadow mb-4">
+            <div className="card-header py-3">
+              <h6 className="m-0 font-weight-bold text-green">Danh sách lớp đã dạy</h6>
+            </div>
+            <div className="card-body">
+              <MyClassWasTeachList />
+            </div>
+          </div>
+        </div>
+      </div>
       </Fragment >
     );
   }
