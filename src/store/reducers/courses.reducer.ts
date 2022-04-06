@@ -21,7 +21,7 @@ function coursesReducer(state: ICourseState = initialState, action: IActionBase)
             return { ...state, courses: [...state.courses, action.course]};
         }
         case EDIT_COURSE: {
-            const foundIndex: number = state.courses.findIndex(pr => pr.courseId === action.course.id);
+            const foundIndex: number = state.courses.findIndex(pr => pr.courseId === action.course.courseId);
             let courses: ICourse[] = state.courses;
             courses[foundIndex] = action.course;
             return { ...state, courses: courses };
