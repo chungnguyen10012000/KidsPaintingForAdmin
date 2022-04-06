@@ -51,6 +51,7 @@ function SigupLevelTeacherList(props: myclassListProps): JSX.Element {
                         <th scope="col">Tên lớp</th>
                         <th scope="col">Số lượng tối đa học sinh</th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
