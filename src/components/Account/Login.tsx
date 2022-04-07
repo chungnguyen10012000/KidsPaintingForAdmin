@@ -1,17 +1,17 @@
-import React, { useState, FormEvent, Dispatch } from "react";
+import React, { useState, FormEvent } from "react";
 import { useHistory } from "react-router";
 import { OnChangeModel } from "../../common/types/Form.types";
-import { useDispatch } from "react-redux";
-import { login } from "../../store/actions/account.actions";
+//import { useDispatch } from "react-redux";
+// import { login } from "../../store/actions/account.actions";
 import TextInput from "../../common/components/TextInput";
-import jwtDecode from "jwt-decode";
-import { JwtType } from '../../common/types/Jwt.types'
-import { getDomain } from "../../common/util/RestAPI.util";
+// import jwtDecode from "jwt-decode";
+// import { JwtType } from '../../common/types/Jwt.types'
+// import { getDomain } from "../../common/util/RestAPI.util";
 
 
 const Login: React.FC = () => {
-  let role: string[] = []
-  const dispatch: Dispatch<any> = useDispatch();
+  //let role: string[] = []
+  //const dispatch: Dispatch<any> = useDispatch();
   let history = useHistory();
 
   const [formState, setFormState] = useState({
@@ -25,7 +25,21 @@ const Login: React.FC = () => {
 
   function submit(e: FormEvent<HTMLFormElement>) {
     if(isFormInvalid()) { return; }
-    let pathAuth = getDomain('auth')
+    if (formState.email.value === "admin"){
+      alert('Quản trị viên đăng nhập thành công!')
+      history.push({pathname: '/admin/home', state: {isAdmin: true}})
+    }
+    else if (formState.email.value === "staff"){
+      alert('Nhân viên đăng nhập thành công!')
+      history.push({pathname: '/employee/home', state: {isAdmin: 'employee'}})
+    }
+    else if (formState.email.value === "teacher"){
+      alert('Giáo viên đăng nhập thành công!')
+      history.push({pathname: '/teacher/home', state: {isAdmin: false}})
+    }
+
+    localStorage.setItem('email', formState.email.value)
+/*     let pathAuth = getDomain('auth')
     fetch(pathAuth, {
       method: 'POST',
       headers: {
@@ -69,7 +83,7 @@ const Login: React.FC = () => {
       .catch(() => {
         alert('Đăng nhập không thành công!')
       })
-    e.preventDefault();
+    e.preventDefault(); */
   }
 
   function isFormInvalid() {
