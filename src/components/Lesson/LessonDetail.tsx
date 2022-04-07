@@ -7,6 +7,7 @@ import { useQuill } from 'react-quilljs';
 import BlotFormatter from 'quill-blot-formatter';
 import 'quill/dist/quill.snow.css';
 import JitsiComponent from "./VideoCall";
+import SelectInput from "../../common/components/Select";
 
 
 
@@ -38,6 +39,9 @@ const LessonDetail: React.FC = () => {
     }
   }, [quill]);
 
+  const listPage = ["1", "2", "3", "Nhiều hơn"]
+  const [page, setPage] = useState("1")
+
   console.log(textHtml)
   const [onCall, setOnCall] = useState(false)
   return (
@@ -47,79 +51,91 @@ const LessonDetail: React.FC = () => {
 
       <div className="row">
         {
-        onCall ?
-          (
-            <div className="col-xl-12 col-lg-12">
-              <div className="card shadow mb-12">
-                <JitsiComponent />
-              </div>
-            </div>
-          ) :
-          (
-            <div className="col-xl-6 col-lg-6">
-              <div className="card shadow mb-6">
-                <div className="card-header py-12">
-                  <h6 className="m-0 font-weight-bold text-green">Link giảng dạy</h6>
-                </div>
-                <div className="card-body">
-                  <button
-                    className={`btn btn-primary btn-user btn-block py-6`}
-                    onClick={() => setOnCall(true)}
-                  >
-                    Tham gia ngay
-                  </button>
+          onCall ?
+            (
+              <div className="col-xl-12 col-lg-12">
+                <div className="card shadow mb-12">
+                  <JitsiComponent />
                 </div>
               </div>
+            ) :
+            (
+              <div className="col-xl-6 col-lg-6">
+                <div className="card shadow mb-6">
+                  <div className="card-header py-12">
+                    <h6 className="m-0 font-weight-bold text-green">Link giảng dạy</h6>
+                  </div>
+                  <div className="card-body">
+                    <button
+                      className={`btn btn-primary btn-user btn-block py-6`}
+                      onClick={() => setOnCall(true)}
+                    >
+                      Tham gia ngay
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )
+        }
+      </div>
+
+
+      <div className="row">
+        <div className="col-xl-12 col-lg-12">
+          <div className="card shadow mb-4">
+            <div className="card-header py-3">
+              <h6 className="m-0 font-weight-bold text-green"> Danh sách bài tập</h6>
             </div>
-      )
-            }
-    </div>
-
-
-  <div className="row">
-    <div className="col-xl-12 col-lg-12">
-      <div className="card shadow mb-4">
-        <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-green"> Danh sách bài tập</h6>
-        </div>
-        <div className="card-body">
-          {
-            <ExerciseList />
-          }
-          <button
-            className={`btn btn-primary btn-user btn-block`}
-            onClick={() => {
-              history.push('/teacher/exercise')
-            }}
-          >
-            Xem chi tiết
-          </button>
+            <div className="card-body">
+              {
+                <ExerciseList />
+              }
+              <button
+                className={`btn btn-primary btn-user btn-block`}
+                onClick={() => {
+                  history.push('/teacher/exercise')
+                }}
+              >
+                Xem chi tiết
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div className="row">
-    <div className="col-xl-12 col-lg-12">
-      <div className="card shadow mb-12">
-        <div className="card-header py-12">
-          <h6 className="m-0 font-weight-bold text-green"> Soạn giáo án</h6>
-        </div>
-        <div className="card-body">
-          {
-            <div ref={quillRef} style={{minHeight: 200}}/>
-          }
-          <button
-            className={`btn btn-primary btn-user btn-block`}
-            onClick={() => {
-              alert(textHtml)
-            }}
-          >
-            Gửi
-          </button>
+      <div className="row">
+        <div className="col-xl-12 col-lg-12">
+          <div className="card shadow mb-12">
+            <div className="card-header py-12">
+              <h6 className="m-0 font-weight-bold text-green"> Soạn giáo án</h6>
+            </div>
+            <div className="card-body">
+              <form>
+              <div className="form-group">
+                <SelectInput id="input_page"
+                  field = "page"
+                  required={true}
+                  value={page}
+                  onChange={(x: any) => {setPage(x)}}
+                  label="Trang"
+                  options={listPage}
+                />
+              </div>
+                <div className="form-group">
+                  <div ref={quillRef} style={{ minHeight: 200 }} />
+                </div>
+              </form>
+              <button
+                className={`btn btn-primary btn-user btn-block`}
+                onClick={() => {
+                  alert(textHtml)
+                }}
+              >
+                Gửi
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
     </Fragment >
   )
 };
