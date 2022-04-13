@@ -10,15 +10,13 @@ export type userListProps = {
 
 function AccountList(props: userListProps): JSX.Element  {
   const users: IUserState = useSelector((state: IStateType) => state.users);
+  console.log(users)
 
-  const userElements: (JSX.Element | null)[] = users.admins.map(admin_item => {
+  const userElements: (JSX.Element | null)[] = users.users.map( (admin_item, index) => {
     if (!admin_item) { return null; }
-    return (<tr className={`table-row ${(users.selectedUser&& users.selectedUser.id === admin_item.id) ? "selected" : ""}`}
-      onClick={() => {
-        if(props.onSelect) props.onSelect(admin_item);
-      }}
-      key={`admin_${admin_item.id}`}>
-      <th scope="row">{admin_item.id}</th>
+    return (<tr className={`table-row`}
+      key={`admin_${index}`}>
+      <th scope="row">{index}</th>
       <td>{admin_item.username}</td>
       <td>{admin_item.email}</td>
       <td>{admin_item.sex}</td>

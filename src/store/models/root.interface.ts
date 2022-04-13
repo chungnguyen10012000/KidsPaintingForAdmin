@@ -125,7 +125,8 @@ export interface INotificationState {
 
 export interface IUserState {
     users: IUser[];
-    admins: IUser[];
+    loading: boolean;
+    error: any;
     selectedUser: IUser | null;
     modificationState: UserModificationStatus;
 }

@@ -1,17 +1,32 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
-import { IStateType, IUserState } from "../../store/models/root.interface";
-import { useSelector, useDispatch } from "react-redux";
+//import { IStateType, IUserState } from "../../store/models/root.interface";
+import { useDispatch } from "react-redux";
 import { IUser, UserModificationStatus } from "../../store/models/user.interface";
 import TextInput from "../../common/components/TextInput";
-import { editUser, clearSelectedUser, setModificationState } from "../../store/actions/users.action";
+import { editUser, clearSelectedUser, setModificationState } from "../../store/actions/users/users.action";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IUserFormState } from "../../common/types/Form.types";
 import SelectInput from "../../common/components/Select";
 
 const AccountForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  const users: IUserState | null = useSelector((state: IStateType) => state.users);
-  let user: IUser  = users.admins[0]
+  //const users: IUserState | null = useSelector((state: IStateType) => state.users);
+  let user: IUser | null = {
+    id: 0, firstName: "", 
+    lastName: "", 
+    avatar: "", 
+    email: "", 
+    sex: "", 
+    dateOfDay: "", 
+    address: "", 
+    phone: "", 
+    password: "",  
+    username:"", 
+    userStatus: true
+  }
+
+
+
   
 
   const [formState, setFormState] = useState({

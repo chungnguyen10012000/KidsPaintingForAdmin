@@ -3,7 +3,7 @@ import TopCard from "../../common/components/TopCard";
 import { IUser } from "../../store/models/user.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
-import { addUser, removeUser } from "../../store/actions/users.action";
+import { addUser, removeUser } from "../../store/actions/users/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 
 const Users: React.FC = () => {
@@ -12,7 +12,7 @@ const Users: React.FC = () => {
   dispatch(updateCurrentPath("Người dùng", "Danh sách"));
   
   const users: IUser[] = useSelector((state: IStateType) => state.users.users);
-  const admins: IUser[] = useSelector((state: IStateType) => state.users.admins);
+  const admins: IUser[] = useSelector((state: IStateType) => state.users.users);
 
   function setUserAdmin(user: IUser): void {
     dispatch(addUser(user));

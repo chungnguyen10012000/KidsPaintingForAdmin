@@ -3,16 +3,15 @@ import TopCard from "../../common/components/TopCard";
 import { IUser } from "../../store/models/user.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
-import { removeUser } from "../../store/actions/users.action";
+import { removeUser } from "../../store/actions/users/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import TeacherForm from "./TeacherForm";
 import { addNotification } from "../../store/actions/notifications.action";
 
 const Teachers: React.FC = () => {
 
-
   const dispatch: Dispatch<any> = useDispatch();
-  dispatch(updateCurrentPath("Người dùng", "Danh sách"));
+  dispatch(updateCurrentPath("Giáo viên", "Danh sách"));
   const users: IUser[] = useSelector((state: IStateType) => state.users.users);
 
 
@@ -21,7 +20,7 @@ const Teachers: React.FC = () => {
     dispatch(removeUser(teacher.id));
   }
 
-  const userElements: JSX.Element[] = users.map(ele => {
+  const userElements: JSX.Element[] = users.map( ele => {
     return (
       <tr className={`table-row`}
         key={`user_${ele.id}`}>

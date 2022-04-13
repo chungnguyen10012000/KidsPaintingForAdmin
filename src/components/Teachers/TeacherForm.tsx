@@ -1,7 +1,7 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IUser, UserModificationStatus } from "../../store/models/user.interface";
-import { addUser, clearSelectedUser, setModificationState } from "../../store/actions/users.action";
+import { addUser, clearSelectedUser, setModificationState } from "../../store/actions/users/users.action";
 import { addNotification } from "../../store/actions/notifications.action";
 import { IUserFormState, OnChangeModel } from "../../common/types/Form.types";
 import TextInput from "../../common/components/TextInput";

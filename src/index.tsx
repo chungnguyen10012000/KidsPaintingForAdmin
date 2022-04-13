@@ -7,6 +7,10 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import {Provider} from "react-redux";
 import store from "./store/store";
+import { configureFakeBackend } from "./common/fake-backend/FakeBackend"
+
+
+configureFakeBackend();
 
 
 

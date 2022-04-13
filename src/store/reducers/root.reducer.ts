@@ -3,7 +3,7 @@ import { UPDATE_CURRENT_PATH } from "../actions/root.actions";
 import { IRootStateType, IActionBase, IStateType } from "../models/root.interface";
 import productsReducer from "./products.reducer";
 import notificationReducer from "./notification.reducer";
-import userReducer from "./users.reducer";
+import userReducer from "./users/users.reducer";
 import orderReducer from "./order.reducer";
 import accountReducer from "./account.reducer";
 import courseReducer from "./courses.reducer";

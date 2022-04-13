@@ -1,4 +1,4 @@
-import { IUser, UserModificationStatus } from "../models/user.interface";
+import { IUser, UserModificationStatus } from "../../models/user.interface";
 
 export const EDIT_USER: string = "EDIT_USER";
 export const ADD_USER: string = "ADD_USER";
@@ -6,6 +6,29 @@ export const REMOVE_USER: string = "REMOVE_USER";
 export const SET_MODIFICATION_STATE: string = "SET_MODIFICATION_STATE";
 export const CHANGE_USER_PENDING_EDIT: string = "CHANGE_USER_PENDING_EDIT";
 export const CLEAR_USER_PENDING_EDIT: string = "CLEAR_USER_PENDING_EDIT";
+export const FETCH_DATA_REQUEST: string = "FETCH_DATA_REQUEST";
+export const FETCH_DATA_SUCCESS: string = "FETCH_DATA_SUCCESS";
+export const FETCH_DATA_ERROR: string = "FETCH_DATA_ERROR";
+
+export function fetchDataRequest() {
+    return {
+        type: FETCH_DATA_REQUEST
+    };
+}
+
+export function fetchDataSuccess(user: IUser) {
+    return {
+        type: FETCH_DATA_SUCCESS,
+        user
+    };
+}
+
+export function fetchDataError(error: any) {
+    return {
+        type: FETCH_DATA_ERROR,
+        payload: { error }
+    };
+}
 
 export function addUser(user: IUser): IAddUserActionType {
     return { type: ADD_USER, user: user };
@@ -36,7 +59,7 @@ export function clearSelectedUser(): IClearSelectedUserActionType {
 interface IEditUserActionType { type: string, user: IUser };
 interface IAddUserActionType { type: string, user: IUser };
 interface IRemoveUserActionType { type: string, id: number };
-interface ISetModificationStateActionUser { type: string, value:  UserModificationStatus};
+interface ISetModificationStateActionUser { type: string, value: UserModificationStatus };
 interface IChangeSelectedUserActionType { type: string, user: IUser };
 interface IClearSelectedUserActionType { type: string };
 

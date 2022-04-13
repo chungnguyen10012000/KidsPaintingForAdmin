@@ -49,6 +49,13 @@ const Request: React.FC = () => {
   //     }
   // }, [])
 
+/*   fetch("/api/v1/user", {
+    method: "GET"
+  })
+    .then ( (res: any) => res.json())
+    .then (data => console.log(data)) */
+
+
 
   const userElements: JSX.Element[] = data.map((ele, index)=> {
     return (

@@ -10,7 +10,7 @@ const Profile: React.FC = () => {
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
   const classs: IMyClassState = useSelector((state: IStateType) => state.myclass);
   const contests: IContestState = useSelector((state: IStateType) => state.contest);
-  const numberItemsCount: number = users.admins.length;
+  const numberItemsCount: number = users.users.length;
   const numberCoursesCount: number = courses.courses.length;
   const numberClassCount: number = classs.myclass.length;
   const numberContestCount: number = contests.contest.length;
