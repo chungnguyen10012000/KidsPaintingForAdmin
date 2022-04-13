@@ -15,20 +15,31 @@
 
 
 ##TODO
-- Add super admin (WRITE_ART, WRITE_LESSON_TIME)
-- Edit account (view detail, update detail, change password)
-- Merge teacher, staff (selection edit)
-- Rate star course (not teacher)
-- Change class ( search course, class)
-- Create art (level, type)
-- Create schedule 
-- Selection schedule. add lesson time for semester course
-- Edit statistical (economy) - add for home 
-- Add semester course teacher register (button random student, button accept)
-- Edit course, contest (table => list)
-- Edit contest (contest end, not open => remove => recognize with color)
-- Edit feedback (preview)
-- Edit blog (preview, REVIEW_BLOG)
+- Admin:
+    - Add super admin (WRITE_ART, WRITE_LESSON_TIME)
+    - Edit account (view detail, update detail, change  password)
+    - Merge teacher, staff (selection edit)
+    - Rate star course (not teacher)
+    - Change class ( search course, class)
+    - Create art (level, type)
+    - Create schedule 
+    - Selection schedule. add lesson time for semester  course
+    - Edit statistical (economy) - add for home 
+    - Add semester course teacher register (button random   student, button accept)
+    - Edit course, contest (table => list)
+    - Edit contest (contest end, not open => remove =>  recognize with color)
+    - Edit feedback (preview)
+    - Edit blog (preview, REVIEW_BLOG)
+- Teacher
+    - Edit register semester course
+    - Edit register course for teaching (course resigested for color,  button register course => table search course => detail)
+    - List class -> add for home
+    - Edit cancel lesson (selection lesson time start -> end)
+    - Edit sesson (button select sesson template)
+    - Create page templagte sesson
+    - Remove link
+    - Edit register change class (selection -> search)
+    - Remove change class
 
 
 ## ROLE
