@@ -30,6 +30,7 @@
     - Edit contest (contest end, not open => remove =>  recognize with color)
     - Edit feedback (preview)
     - Edit blog (preview, REVIEW_BLOG)
+    - Add view notification
 - Teacher
     - Edit register semester course
     - Edit register course for teaching (course resigested for color,  button register course => table search course => detail)
@@ -40,6 +41,7 @@
     - Remove link
     - Edit register change class (selection -> search)
     - Remove change class
+    - Add view notification
 
 
 ## ROLE
