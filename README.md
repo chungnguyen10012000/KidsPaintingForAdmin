@@ -16,7 +16,7 @@
 
 ##TODO
 - Admin:
-    - Add super admin (WRITE_ART, WRITE_LESSON_TIME)
+    - Add super admin (WRITE_ART, WRITE_LESSON_TIME) (*)
     - Edit account (view detail, update detail, change  password) (*)
     - Merge teacher, staff (selection edit) (*)
     - Rate star course (not teacher) (*)
@@ -25,7 +25,7 @@
     - Create schedule 
     - Selection schedule. add lesson time for semester  course
     - Edit statistical (economy) - add for home 
-    - Add semester course teacher register (button random   student, button accept)
+    - Add semester course teacher register (button random student, button accept) (*)
     - Edit course, contest (table => list)
     - Edit contest (contest end, not open => remove =>  recognize with color) (*)
     - Edit feedback (preview)

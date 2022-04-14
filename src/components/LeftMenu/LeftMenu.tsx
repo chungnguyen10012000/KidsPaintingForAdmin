@@ -82,6 +82,13 @@ const LeftMenu: React.FC = () => {
                 </li>
 
                 <li className="nav-item">
+                    <Link className="nav-link" to={`/admin/arrange-class`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Xếp lớp</span>
+                    </Link>
+                </li>
+
+                <li className="nav-item">
                     <Link className="nav-link" to={`/admin/myclass`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Lớp học</span>

@@ -83,6 +83,13 @@ const LeftMenuForSuperAdmin: React.FC = () => {
                     </Link>
                 </li>
 
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/super-admin/arrange-class`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Xếp lớp</span>
+                    </Link>
+                </li>
+
 
                 <li className="nav-item">
                     <Link className="nav-link" to={`/super-admin/myclass`}>
