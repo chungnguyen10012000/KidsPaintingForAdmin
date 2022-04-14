@@ -15,6 +15,8 @@ import { IBlog, BlogModificationStatus } from "./blogs.innterface";
 import { IEmployee, EmployeeModificationStatus } from "./employee.interface";
 import { ICourseSemester, CourseSemesterModificationStatus } from "./course_for_semester.interface";
 import { ILessonTime, LessonTimeModificationStatus } from "./lesson_time.interface";
+import { ISchedule, ScheduleModificationStatus  } from "./schedule.interface";
+import { IScheduleItem, ScheduleItemModificationStatus } from "./schedule_item.interface";
 
 export interface IRootPageStateType {
     area: string;
@@ -43,12 +45,26 @@ export interface IStateType {
     employees: IEmployeeState;
     courseSemeters: ICourseSemesterState;
     lessonTimes: ILessonTimeState;
+    schedules: IScheduleState;
+    scheduleItems: IScheduleItemState;
 }
 
 export interface ICourseSemesterState {
     courseSemesters: ICourseSemester[];
     selectedCourseSemester: ICourseSemester | null;
     modificationState: CourseSemesterModificationStatus;
+}
+
+export interface IScheduleState {
+    schedules: ISchedule[];
+    selectedSchedule: ISchedule | null;
+    modificationState: ScheduleModificationStatus;
+}
+
+export interface IScheduleItemState {
+    scheduleItems: IScheduleItem[];
+    selectedScheduleItem: IScheduleItem | null;
+    modificationState: ScheduleItemModificationStatus;
 }
 
 export interface ILessonTimeState {

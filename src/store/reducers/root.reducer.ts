@@ -18,6 +18,8 @@ import blogReducer from "./blog.reducer";
 import employeeReducer from "./employee.reducer";
 import coursesSemesterReducer from "./course_for_semester.reducer";
 import lessonTimesReducer from "./lesson_time/lesson_time.reducer";
+import schedulesReducer from "./schedule/schedule.reducer";
+import scheduleItemsReducer from "./schedule/schedule_item.reducer";
 
 const initialState: IRootStateType = {
     page: {area: "home", subArea: ""}
@@ -51,6 +53,8 @@ const rootReducers: Reducer<IStateType> = combineReducers({
     employees: employeeReducer,
     courseSemeters: coursesSemesterReducer,
     lessonTimes: lessonTimesReducer,
+    schedules: schedulesReducer,
+    scheduleItems: scheduleItemsReducer
 });
 
 

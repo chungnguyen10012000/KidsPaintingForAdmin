@@ -49,6 +49,17 @@ export interface ILessonTimeFormState {
     end_time: IFormStateField<string>;
 }
 
+export interface IScheduleFormState {
+    name: IFormStateField<string>;
+    description: IFormStateField<string>;
+}
+
+export interface IScheduleItemFormState {
+    schedule_id: IFormStateField<number>;
+    lesson_time: IFormStateField<string>;
+    date_of_week: IFormStateField<number>;
+}
+
 export interface IMytypeFormState {
     typeName: IFormStateField<string>;
 }
