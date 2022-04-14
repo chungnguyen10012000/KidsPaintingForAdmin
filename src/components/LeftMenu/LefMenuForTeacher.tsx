@@ -40,7 +40,7 @@ const LeftMenuForTeacher: React.FC = () => {
                 <li className="nav-item">
                     <Link className="nav-link" to={`/teacher/sigup-class`}>
                         <i className="fas fa-fw fa-warehouse"></i>
-                        <span>Đăng ký lớp</span>
+                        <span>Đăng ký khóa học</span>
                     </Link>
                 </li>
 

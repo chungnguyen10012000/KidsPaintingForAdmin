@@ -5,6 +5,7 @@ import TopCard from "../../common/components/TopCard";
 import { IStateType, IMyClassState, ICourseState, IContestState, IFeedBackState, IUserState, IEmployeeState} from "../../store/models/root.interface";
 import MyClassListForKid from "../MyClass/MyClassListForKid";
 import { useParams } from "react-router";
+import MyClassWasTeachList from "../MyClass/MyClassWasTeachList";
 
 type role = {
   id: string;
@@ -56,6 +57,19 @@ const Home: React.FC = () => {
             </div>
           </div>
 
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-xl-12 col-lg-12">
+          <div className="card shadow mb-4">
+            <div className="card-header py-3">
+              <h6 className="m-0 font-weight-bold text-green">Danh sách lớp đã dạy</h6>
+            </div>
+            <div className="card-body">
+              <MyClassWasTeachList />
+            </div>
+          </div>
         </div>
       </div>
 

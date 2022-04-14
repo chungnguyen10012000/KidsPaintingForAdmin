@@ -36,12 +36,6 @@ function SigupOfCourseList(props: myclassListProps): JSX.Element  {
       <td><button className={`btn btn-warning left-margin`}
       >
         Xem chi tiết</button> </td>
-      <td><button className={`btn btn-success left-margin ${getDisabledClass()}`} onClick={() => {
-        alert("Đăng ký thành công!")
-        setCheckSigup(true)
-        }}
-      >
-        Đăng ký</button> </td>
     </tr>);
   });
 
@@ -52,8 +46,9 @@ function SigupOfCourseList(props: myclassListProps): JSX.Element  {
         <thead className="thead-light">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Tên lớp</th>
-            <th scope="col">Số lượng tối đa học sinh</th>
+            <th scope="col">Tên khóa học</th>
+            <th scope="col">Thể loại</th>
+            <th scope="col">Trình độ</th>
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>

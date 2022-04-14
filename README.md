@@ -32,13 +32,13 @@
     - Edit blog (preview, REVIEW_BLOG)
     - Add view notification (*)
 - Teacher
-    - Edit register semester course
-    - Edit register course for teaching (course resigested for color,  button register course => table search course => detail)
-    - List class -> add for home
+    - Edit register semester course (*)
+    - Edit register course for teaching (course resigested for color,  button register course => table search course => detail) (*)
+    - List class -> add for home (*)
     - Edit cancel lesson (selection lesson time start -> end)
     - Edit sesson (button select sesson template)
     - Create page templagte sesson
-    - Remove link
+    - Remove link (*)
     - Remove change class (*)
     - Add view notification (*)
 

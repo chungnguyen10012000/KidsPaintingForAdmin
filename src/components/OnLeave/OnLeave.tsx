@@ -29,21 +29,9 @@ const OnLeave: React.FC = () => {
 
     //const teachers: IUserState = useSelector((state: IStateType) => state.users);
     const LessonList: string[] = [
-        "Tiết 1 (06:00 - 06:50)",
-        "Tiết 2 (07:00 - 07:50)",
-        "Tiết 3 (08:00 - 08:50)",
-        "Tiết 4 (09:00 - 09:50)",
-        "Tiết 5 (10:00 - 10:50)",
-        "Tiết 6 (11:00 - 11:50)",
-        "Tiết 7 (12:00 - 12:50)",
-        "Tiết 8 (13:00 - 13:50)",
-        "Tiết 9 (14:00 - 14:50)",
-        "Tiết 10 (15:00 - 15:50)",
-        "Tiết 11 (16:00 - 16:50)",
-        "Tiết 12 (17:00 - 17:50)",
-        "Tiết 13 (18:00 - 18:50)",
-        "Tiết 14 (19:00 - 19:50)",
-        "Tiết 15 (20:00 - 20:50)",
+        "Buổi 1",
+        "Buổi 2",
+        "Buổi 3",
     ]
 
     const [formState, setFormState] = useState({
@@ -108,21 +96,10 @@ const OnLeave: React.FC = () => {
                     <div className="card-body">
                         <form onSubmit={saveUser}>
                             <div className="form-group">
-                                <TextInput id="input_dateOfDay"
-                                value={formState.course.value}
-                                field="dateOfDay"
-                                onChange={hasFormValueChanged}
-                                required={true}
-                                maxLength={20}
-                                type="date"
-                                label="Ngày nghỉ"
-                                placeholder="" />
-                            </div>
-                            <div className="form-group">
                                 <SelectInput
                                     id="input_lesson"
                                     field="lesson"
-                                    label="Tiết nghỉ"
+                                    label="Buổi nghỉ"
                                     options={LessonList}
                                     required={true}
                                     onChange={hasFormValueChanged}

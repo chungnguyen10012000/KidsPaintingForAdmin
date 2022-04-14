@@ -19,7 +19,7 @@ const SigupOfCourse: React.FC = () => {
 
   useEffect(() => {
     dispatch(clearSelectedMyClass());
-    dispatch(updateCurrentPath("Lớp", "Danh sách"));
+    dispatch(updateCurrentPath("Khóa học", "Danh sách"));
   }, [path.area, dispatch]);
 
   function onMyClassSelect(myClass: IMyClass): void {
@@ -36,7 +36,7 @@ const SigupOfCourse: React.FC = () => {
           <div className="col-xl-12 col-lg-12">
             <div className="card shadow mb-4">
               <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-green">Danh sách lớp</h6>
+                <h6 className="m-0 font-weight-bold text-green">Danh sách khóa học</h6>
                 <div className="header-buttons">
                 </div>
               </div>
