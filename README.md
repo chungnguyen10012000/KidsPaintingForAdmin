@@ -39,7 +39,6 @@
     - Edit sesson (button select sesson template)
     - Create page templagte sesson
     - Remove link
-    - Edit register change class (selection -> search)
     - Remove change class (*)
     - Add view notification (*)
 

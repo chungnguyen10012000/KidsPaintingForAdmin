@@ -49,36 +49,6 @@ const LessonDetail: React.FC = () => {
       <h1 className="h3 mb-2 text-gray-800">Chi tiết buổi học</h1>
       <p className="mb-4">Thông tin chung</p>
 
-      <div className="row">
-        {
-          onCall ?
-            (
-              <div className="col-xl-12 col-lg-12">
-                <div className="card shadow mb-12">
-                  <JitsiComponent />
-                </div>
-              </div>
-            ) :
-            (
-              <div className="col-xl-6 col-lg-6">
-                <div className="card shadow mb-6">
-                  <div className="card-header py-12">
-                    <h6 className="m-0 font-weight-bold text-green">Link giảng dạy</h6>
-                  </div>
-                  <div className="card-body">
-                    <button
-                      className={`btn btn-primary btn-user btn-block py-6`}
-                      onClick={() => setOnCall(true)}
-                    >
-                      Tham gia ngay
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )
-        }
-      </div>
-
 
       <div className="row">
         <div className="col-xl-12 col-lg-12">
