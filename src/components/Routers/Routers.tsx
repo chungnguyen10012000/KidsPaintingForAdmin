@@ -31,7 +31,6 @@ import FeedBackDetail from "../FeedBack/FeedBackDetail"
 import ContestView from "../Contest/ContestView"
 import TeacherOfCourse from "../Courses/TeacherOfCourse"
 import Student from "../Student/Student"
-import ChangeClass from "../ChangeClass/ChangeClass"
 import TeacherSigupClass from "../MyClass/TeacherSigupClass"
 import ContestGrade from "../Contest/ContestGrade"
 import SigupLevelTeacher from "../SigupLevelTeacher/SigupLevelTeacher"
@@ -78,7 +77,6 @@ const Routers: React.FC = () => {
               <Route path={`/:id/contest-grade`}><ContestGrade /></Route>
               <Route path={`/:id/submit-contest`}><ContestDetail /></Route>
               <Route path={`/:id/contest`}><Contest /></Route>
-              <Route path={`/:id/change-class`}><ChangeClass /></Route>
               <Route path={`/:id/home`}><Home /></Route>
               <Route path={`/:id/account`}><Account /></Route>
               <Route path={`/:id/schedule`}><Schedule /></Route>

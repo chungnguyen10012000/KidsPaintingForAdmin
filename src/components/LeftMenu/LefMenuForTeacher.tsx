@@ -81,19 +81,6 @@ const LeftMenuForTeacher: React.FC = () => {
                     </Link>
                 </li>
 
-
-                <hr className="sidebar-divider" />
-                <div className="sidebar-heading">
-                    Tiện ích khác
-                </div>
-
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/teacher/change-class`}>
-                        <i className="fas fa-fw fa-warehouse"></i>
-                        <span>Yêu cầu đổi lớp</span>
-                    </Link>
-                </li>
-
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
                     Quản lý tài khoản
