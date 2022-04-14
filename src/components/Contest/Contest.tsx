@@ -12,8 +12,6 @@ import { removeContest, clearSelectedContest, setModificationState,
 import { addNotification } from "../../store/actions/notifications.action";
 import { ContestModificationStatus, IContest } from "../../store/models/contest.interface";
 import { useHistory, useParams } from "react-router-dom";
-import ContestNotOpen from "./ContestNotOpen"
-import ContestEnd from "./ContestEnd"
 
 type role = {
   id: string;
@@ -102,6 +100,19 @@ const Contests: React.FC = () => {
       </div>
 
       <div className="row">
+          <div className="col-xl-12 col-lg-12">
+            <div className="card shadow mb-4">
+              <div className="card-header py-3">
+                <h6 className="m-0 font-weight-bold text-green">Lưu ý</h6>
+              </div>
+              <div className="card-body">
+                <p>Những cuộc thi đã kết thúc được tô màu đỏ</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <div className="row">
       <div className="col-xl-12 col-lg-12">
       <button className="btn btn-success btn-green btn-create" onClick={() =>
           dispatch(setModificationState(ContestModificationStatus.Create))}>
@@ -118,7 +129,7 @@ const Contests: React.FC = () => {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi đang mở</h6>
+              <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi</h6>
               <div className="header-buttons">
                 <button className="btn btn-success btn-blue" onClick={() =>
                   dispatch(setModificationState(ContestModificationStatus.Edit))}>
@@ -152,31 +163,6 @@ const Contests: React.FC = () => {
       </div>
 
 
-      <div className="row">
-        <div className="col-xl-12 col-lg-12">
-          <div className="card shadow mb-4">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi chưa mở</h6>
-            </div>
-            <div className="card-body">
-              <ContestNotOpen />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-xl-12 col-lg-12">
-          <div className="card shadow mb-4">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi đã kết thúc</h6>
-            </div>
-            <div className="card-body">
-              <ContestEnd />
-            </div>
-          </div>
-        </div>
-      </div>
 
 
       <Popup

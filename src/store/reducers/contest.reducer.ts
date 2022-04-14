@@ -8,10 +8,16 @@ import { IContest, ContestModificationStatus } from "../models/contest.interface
 const initialState: IContestState = {
     modificationState: ContestModificationStatus.None,
     selectedContest: null,
-    contest: [{
-        id: 1, name: "Cuộc thi vẽ tranh gia đình", description: "<p></p>",
-        type: "chì màu", level: "5-9 tuổi", status: "", amount: 50, hasBeginDate: "2022-04-18", hasExpiryDate: "2022-04-30", teacher: ''
-    }]
+    contest: [
+        {
+            id: 1, name: "Cuộc thi vẽ tranh gia đình", description: "<p></p>",
+            type: "chì màu", level: "5-9 tuổi", status: "", amount: 50, hasBeginDate: "2022-04-18", hasExpiryDate: "2022-04-30", teacher: ''
+        },
+        {
+            id: 2, name: "Cuộc thi vẽ tranh thú cưng", description: "<p></p>",
+            type: "Sơn dầu", level: "5-16 tuổi", status: "a", amount: 50, hasBeginDate: "2022-04-18", hasExpiryDate: "2022-04-30", teacher: ''
+        }
+    ]
 };
 
 function contestReducer(state: IContestState = initialState, action: IActionBase): IContestState {

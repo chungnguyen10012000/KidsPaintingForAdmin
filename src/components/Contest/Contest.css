@@ -24,6 +24,10 @@
     width: 40px;
 }
 
+.contest-end {
+    background-color:#FF0000 !important;
+}
+
 .btn-red {
     background-color: indianred !important;
     border-color: indianred !important;

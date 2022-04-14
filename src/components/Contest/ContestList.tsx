@@ -13,6 +13,21 @@ function ContestList(props: productListProps): JSX.Element  {
 
   const productElements: (JSX.Element | null)[] = contests.contest.map(contest_item => {
     if (!contest_item) { return null; }
+    else if (contest_item.status === ""){
+      return (<tr className={`table-row contest-end ${(contests.selectedContest&& contests.selectedContest.id === contest_item.id) ? "selected" : ""}`}
+      onClick={() => {
+        if(props.onSelect) props.onSelect(contest_item);
+      }}
+      key={`contest_${contest_item.id}`}>
+      <th scope="row">{contest_item.id}</th>
+      <td>{contest_item.name}</td>
+      <td>{contest_item.type}</td>
+      <td>{contest_item.level}</td>
+      <td>{contest_item.amount}</td>
+      <td>{contest_item.hasBeginDate}</td>
+      <td>{contest_item.hasExpiryDate}</td>
+    </tr>);
+    }
     return (<tr className={`table-row ${(contests.selectedContest&& contests.selectedContest.id === contest_item.id) ? "selected" : ""}`}
       onClick={() => {
         if(props.onSelect) props.onSelect(contest_item);
