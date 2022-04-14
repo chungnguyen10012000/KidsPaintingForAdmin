@@ -184,43 +184,6 @@ const Courses: React.FC = () => {
             <CourseSemesterForm /> : null}
         </div>
 
-        <div className="row">
-          <div className="col-xl-12 col-lg-12">
-            <div className="card shadow mb-4">
-              <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-green">Danh sách loại hình </h6>
-
-              </div>
-              <div className="card-body">
-                <TypeList
-                  onSelect={onMytypeSelect}
-                />
-              </div>
-            </div>
-          </div>
-          {((mytypes.modificationState === MytypeModificationStatus.Create && isCheck === '2')
-            || (mytypes.modificationState === MytypeModificationStatus.Edit && mytypes.selectedMytype)) ?
-            <TypeForm /> : null}
-        </div>
-
-
-        <div className="row">
-          <div className="col-xl-12 col-lg-12">
-            <div className="card shadow mb-4">
-              <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-green">Danh sách mức độ </h6>
-              </div>
-              <div className="card-body">
-                <LevelList
-                  onSelect={onLevelSelect}
-                />
-              </div>
-            </div>
-          </div>
-          {((levels.modificationState === LevelModificationStatus.Create && isCheck === '3')
-            || (levels.modificationState === LevelModificationStatus.Edit && levels.selectedLevel)) ?
-            <LevelForm /> : null}
-        </div>
 
         <Popup
           className="popup-modal"
@@ -378,43 +341,7 @@ const Courses: React.FC = () => {
           <CourseSemesterForm /> : null}
       </div>
 
-      <div className="row">
-        <div className="col-xl-12 col-lg-12">
-          <div className="card shadow mb-4">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách loại hình </h6>
 
-            </div>
-            <div className="card-body">
-              <TypeList
-                onSelect={onMytypeSelect}
-              />
-            </div>
-          </div>
-        </div>
-        {((mytypes.modificationState === MytypeModificationStatus.Create && isCheck === '2')
-          || (mytypes.modificationState === MytypeModificationStatus.Edit && mytypes.selectedMytype)) ?
-          <TypeForm /> : null}
-      </div>
-
-
-      <div className="row">
-        <div className="col-xl-12 col-lg-12">
-          <div className="card shadow mb-4">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách mức độ </h6>
-            </div>
-            <div className="card-body">
-              <LevelList
-                onSelect={onLevelSelect}
-              />
-            </div>
-          </div>
-        </div>
-        {((levels.modificationState === LevelModificationStatus.Create && isCheck === '3')
-          || (levels.modificationState === LevelModificationStatus.Edit && levels.selectedLevel)) ?
-          <LevelForm /> : null}
-      </div>
 
       <Popup
         className="popup-modal"

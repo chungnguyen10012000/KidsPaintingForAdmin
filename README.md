@@ -27,10 +27,10 @@
     - Edit statistical (economy) - add for home 
     - Add semester course teacher register (button random   student, button accept)
     - Edit course, contest (table => list)
-    - Edit contest (contest end, not open => remove =>  recognize with color)
+    - Edit contest (contest end, not open => remove =>  recognize with color) (*)
     - Edit feedback (preview)
     - Edit blog (preview, REVIEW_BLOG)
-    - Add view notification
+    - Add view notification (*)
 - Teacher
     - Edit register semester course
     - Edit register course for teaching (course resigested for color,  button register course => table search course => detail)

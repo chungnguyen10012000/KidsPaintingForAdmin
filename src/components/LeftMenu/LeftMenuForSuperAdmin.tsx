@@ -108,6 +108,12 @@ const LeftMenuForSuperAdmin: React.FC = () => {
                     Quản lý tài khoản
                 </div>
                 <li className="nav-item">
+                    <Link className="nav-link" to={`/super-admin/notification`}>
+                        <i className="fas fa-fw fa-bell"></i>
+                        <span>Thông báo</span>
+                    </Link>
+                </li>
+                <li className="nav-item">
                     <Link className="nav-link" to={`/super-admin/account`}>
                         <i className="fas fa-fw fa-user-circle"></i>
                         <span>Tài khoản</span>

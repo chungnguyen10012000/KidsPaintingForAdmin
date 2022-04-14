@@ -7,7 +7,6 @@ import Users from "../Users/Users";
 import AddUser from "../AddUser/AddUser";
 import Home from "../Home/Home";
 import Contest from "../Contest/Contest"
-import Notifications from "../../common/components/Notification";
 import Courses from "../Courses/Courses";
 import MyClass from "../MyClass/MyClass";
 import Account from "../Account/account";
@@ -41,6 +40,8 @@ import LeftMenuForSuperAdmin from "../LeftMenu/LeftMenuForSuperAdmin";
 import Art from "../Art/Art";
 import EditInfo from "../Account/EditInfo";
 import ChangePassword from "../Account/ChangePassword";
+import Notification from "../Notification/Notification"
+import Notifications from "../../common/components/Notification"
 
 type role = {
   id: string;
@@ -66,6 +67,7 @@ const Routers: React.FC = () => {
               <Route path={`/:id/courses`}><Courses /></Route>
               <Route path={`/:id/onleave`}><OnLeave /></Route>
               <Route path={`/:id/myclass`}><MyClass /></Route>
+              <Route path={`/:id/notification`}><Notification /></Route>
               <Route path={`/:id/lesson`}><Lesson /></Route>
               <Route path={`/:id/sigup-class`}><SigupOfCourse /></Route>
               <Route path={`/:id/sigup-course`}><SigupLevelTeacher /></Route>
@@ -101,6 +103,7 @@ const Routers: React.FC = () => {
                 <Route path={`/:id/users`}><Users /></Route>
                 <Route path={`/:id/edit-info`}><EditInfo /></Route>
                 <Route path={`/:id/change-password`}><ChangePassword /></Route>
+                <Route path={`/:id/notification`}><Notification /></Route>
                 <Route path={`/:id/feedbacks`}><FeedBack /></Route>
                 <Route path={`/:id/add-user`}><AddUser /></Route>
                 <Route path={`/:id/teacher-class`}><TeacherSigupClass /></Route>
@@ -139,6 +142,7 @@ const Routers: React.FC = () => {
                 <Route path={`/:id/users`}><Users /></Route>
                 <Route path={`/:id/edit-info`}><EditInfo /></Route>
                 <Route path={`/:id/change-password`}><ChangePassword /></Route>
+                <Route path={`/:id/notification`}><Notification /></Route>
                 <Route path={`/:id/feedbacks`}><FeedBack /></Route>
                 <Route path={`/:id/add-user`}><AddUser /></Route>
                 <Route path={`/:id/teacher-class`}><TeacherSigupClass /></Route>
@@ -177,6 +181,7 @@ const Routers: React.FC = () => {
               <Route path={`/:id/users`}><Users /></Route>
               <Route path={`/:id/edit-info`}><EditInfo /></Route>
               <Route path={`/:id/change-password`}><ChangePassword /></Route>
+              <Route path={`/:id/notification`}><Notification /></Route>
               <Route path={`/:id/feedbacks`}><FeedBack /></Route>
               <Route path={`/:id/add-user`}><AddUser /></Route>
               <Route path={`/:id/teacher-class`}><TeacherSigupClass /></Route>
