@@ -72,6 +72,25 @@ const LessonDetail: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <div className="row">
+        <div className="col-xl-6 col-lg-6">
+          <div className="card shadow mb-12">
+            <div className="card-header py-12">
+              <h6 className="m-0 font-weight-bold text-green"> Buổi học mẫu</h6>
+            </div>
+            <div className="card-body text-center">
+            <button  
+                className="btn btn-warning"
+
+              >
+                Áp dụng
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="row">
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-12">
