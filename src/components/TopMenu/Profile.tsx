@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import TopCard from "../../common/components/TopCard";
 import { IUserState, IStateType, IMyClassState, ICourseState, IContestState} from "../../store/models/root.interface";
-import ProductList from "../Teachers/TeachersList";
+import UserList from "../AddUser/UserList";
 
 const Profile: React.FC = () => {
   const users: IUserState = useSelector((state: IStateType) => state.users);
@@ -41,7 +41,7 @@ const Profile: React.FC = () => {
               <h6 className="m-0 font-weight-bold text-green">Danh sách giáo viên</h6>
             </div>
             <div className="card-body">
-              <ProductList />
+              <UserList />
             </div>
           </div>
 

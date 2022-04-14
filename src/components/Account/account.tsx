@@ -8,8 +8,18 @@ import {  IStateType, IRootPageStateType } from "../../store/models/root.interfa
 import { setModificationState, changeSelectedUser, clearSelectedUser } from "../../store/actions/users/users.action";
 import { UserModificationStatus, IUser } from "../../store/models/user.interface";
 import { fetchProducts } from "../../store/actions/users/fetchDataUser";
+import { useHistory, useParams } from "react-router-dom";
+
+type role = {
+  id: string;
+};
 
 const Account: React.FC = () => {
+
+  const { id } = useParams<role>()
+
+  let history = useHistory();
+  
   const dispatch: Dispatch<any> = useDispatch();
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
 
@@ -46,7 +56,35 @@ const Account: React.FC = () => {
             </div>
           </div>
         </div>
-          <AccountForm />
+      </div>
+
+      <div className="row">
+        <div className="col-xl-6 col-lg-6 text-center">
+              <button  
+                className="btn btn-success" 
+                onClick={() => 
+                  {
+                      history.push({
+                        pathname: `/${id}/edit-info`,
+                      })
+                  }}
+              >
+                Chỉnh thông tin
+              </button>
+        </div>
+        <div className="col-xl-6 col-lg-6 text-center">
+              <button  
+                className="btn btn-warning"
+                onClick={() => 
+                  {
+                      history.push({
+                        pathname: `/${id}/change-password`,
+                      })
+                  }}
+              >
+                Thay đổi mật khẩu
+              </button>
+        </div>
       </div>
     </Fragment >
   );

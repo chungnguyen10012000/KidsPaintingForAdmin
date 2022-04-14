@@ -37,6 +37,10 @@ const Login: React.FC = () => {
       alert('Giáo viên đăng nhập thành công!')
       history.push({pathname: '/teacher/home', state: {isAdmin: false}})
     }
+    else if (formState.email.value === "super-admin"){
+      alert('Super Admin đăng nhập thành công!')
+      history.push({pathname: '/super-admin/home', state: {isAdmin: false}})
+    }
 
     localStorage.setItem('email', formState.email.value)
 /*     let pathAuth = getDomain('auth')

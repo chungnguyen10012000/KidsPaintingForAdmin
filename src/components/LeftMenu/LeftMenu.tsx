@@ -40,13 +40,13 @@ const LeftMenu: React.FC = () => {
 
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
-                    Quản lý giáo viên
+                    Quản lý người dùng
                 </div>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/teacher`}>
+                    <Link className="nav-link" to={`/admin/add-user`}>
                         <i className="fas fa-fw fa-user"></i>
-                        <span>Thêm giáo viên</span>
+                        <span>Thêm người dùng</span>
                     </Link>
                 </li>
 
@@ -56,17 +56,8 @@ const LeftMenu: React.FC = () => {
                         <span>Yêu cầu</span>
                     </Link>
                 </li>
-
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/teacher-rating`}>
-                        <i className="fas fa-fw fa-user"></i>
-                        <span>Đánh giá</span>
-                    </Link>
-                </li>
-
-
                 
-                <hr className="sidebar-divider" />
+{/*                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
                     Quản lý học viên
                 </div>
@@ -76,7 +67,7 @@ const LeftMenu: React.FC = () => {
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Yêu cầu</span>
                     </Link>
-                </li>
+                </li> */}
 
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
@@ -87,13 +78,6 @@ const LeftMenu: React.FC = () => {
                     <Link className="nav-link" to={`/admin/courses`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Khoá học</span>
-                    </Link>
-                </li>
-
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/analysis`}>
-                        <i className="fas fa-fw fa-warehouse"></i>
-                        <span>Thống kê</span>
                     </Link>
                 </li>
 
@@ -122,16 +106,7 @@ const LeftMenu: React.FC = () => {
                         <span>Blog</span>
                     </Link>
                 </li>
-                <hr className="sidebar-divider" />
-                <div className="sidebar-heading">
-                    Quản lý nhân viên
-                </div>
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/admin/employee`}>
-                        <i className="fas fa-fw fa-user-circle"></i>
-                        <span>Nhân viên</span>
-                    </Link>
-                </li>
+
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
                     Quản lý tài khoản

@@ -8,7 +8,7 @@ import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IUserFormState } from "../../common/types/Form.types";
 import SelectInput from "../../common/components/Select";
 
-const AccountForm: React.FC = () => {
+const ChangePassword: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   //const users: IUserState | null = useSelector((state: IStateType) => state.users);
   let user: IUser | null = {
@@ -104,95 +104,37 @@ const AccountForm: React.FC = () => {
           <div className="card-body">
             <form onSubmit={saveUser}>
               <div className="form-group">
-                <input id="input_avatar"
-                  type="file"
-                  value={formState.avatar.value}
-                  onChange={() => hasFormValueChanged}
-                  placeholder="Chọn ảnh đại diện" />
-              </div>
-              <div className="form-group">
-                <TextInput id="input_firstName"
-                  value={formState.firstName.value}
-                  field="firstName"
-                  onChange={hasFormValueChanged}
-                  required={true}
-                  maxLength={10000}
-                  label="Họ"
-                  placeholder="" />
-              </div>
-              <div className="form-group">
-                <TextInput id="input_lastName"
-                  value={formState.lastName.value}
-                  field="lastName"
-                  onChange={hasFormValueChanged}
-                  required={true}
-                  maxLength={10000}
-                  label="Tên"
-                  placeholder="" />
-              </div>
-              <div className="form-group">
-                <TextInput id="input_email"
-                field = "email"
-                  value={formState.email.value}
-                  onChange={hasFormValueChanged}
-                  required={false}
-                  maxLength={10000}
-                  label="Email"
-                  placeholder="" />
-              </div>
-              <div className="form-group">
-                <TextInput id="input_username"
-                field = "username"
-                  value={formState.username.value}
-                  onChange={hasFormValueChanged}
-                  required={false}
-                  maxLength={10000}
-                  label="Tên đăng nhập"
-                  placeholder="" />
-              </div>
-              <div className="form-group">
-                <SelectInput
-                    id="input_sex"
-                    field="sex"
-                    label="Giới tính"
-                    options={["Nam", "Nữ", "Không xác định"]}
-                    required={true}
-                    onChange={hasFormValueChanged}
-                    value={formState.sex.value}
-                  />
-              </div>
-              <div className="form-group">
-                <TextInput id="input_dateOfDay"
-                  value={formState.dateOfDay.value}
-                  field="dateOfDay"
-                  onChange={hasFormValueChanged}
-                  required={true}
-                  maxLength={20}
-                  label=""
-                  placeholder="" />
-              </div>
-              <div className="form-group">
-                <TextInput id="input_address"
-                field = "address"
-                  value={formState.address.value}
+                <TextInput id="input_password"
+                  field = "password"
+                  value={formState.password.value}
                   onChange={hasFormValueChanged}
                   required={false}
                   maxLength={100}
-                  label="Địa chỉ"
+                  label="Mật khẩu cũ"
                   placeholder="" />
               </div>
               <div className="form-group">
-                <TextInput id="input_phone"
-                  field = "phone"
-                  value={formState.phone.value}
+                <TextInput id="input_password"
+                  field = "password"
+                  value={formState.password.value}
                   onChange={hasFormValueChanged}
                   required={false}
                   maxLength={100}
-                  label="Số điện thoại"
+                  label="Mật khẩu mới"
                   placeholder="" />
               </div>
-              <button className="btn btn-danger" onClick={() => cancelForm()}>Cancel</button>
-              <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Save</button>
+              <div className="form-group">
+                <TextInput id="input_password"
+                  field = "password"
+                  value={formState.password.value}
+                  onChange={hasFormValueChanged}
+                  required={false}
+                  maxLength={100}
+                  label="Xác nhận mật khẩu mới"
+                  placeholder="" />
+              </div>
+              <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
+              <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Lưu</button>
             </form>
           </div>
         </div>
@@ -201,4 +143,4 @@ const AccountForm: React.FC = () => {
   );
 };
 
-export default AccountForm;
+export default ChangePassword;

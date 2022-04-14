@@ -1,7 +1,7 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IEmployee, EmployeeModificationStatus } from "../../store/models/employee.interface";
-import { addEmployee, clearSelectedEmployee, setModificationState } from "../../store/actions/employee.actions";
+import { IUser, UserModificationStatus } from "../../store/models/user.interface";
+import { addUser, clearSelectedUser, setModificationState } from "../../store/actions/users/users.action";
 import { addNotification } from "../../store/actions/notifications.action";
 import { IUserFormState, OnChangeModel } from "../../common/types/Form.types";
 import TextInput from "../../common/components/TextInput";
@@ -14,9 +14,9 @@ type teacherInfo = {
   level: string;
 };
 
-const EmployeeForm: React.FC = () => {
+const AddUserForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  let user: IEmployee = { id: 0, firstName: '', lastName: '', username: '', avatar: '', userStatus: true, email: '', sex: '', dateOfDay: '', address: '', phone: '', password: '' }
+  let user: IUser = { id: 0, firstName: '', lastName: '', username: '', avatar: '', userStatus: true, email: '', sex: '', dateOfDay: '', address: '', phone: '', password: '' }
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
 
   const listCourse: ICourse[] = courses.courses
@@ -51,7 +51,7 @@ const EmployeeForm: React.FC = () => {
       return;
     }
 
-    let saveUserFn: Function = addEmployee;
+    let saveUserFn: Function = addUser;
     saveForm(formState, saveUserFn);
   }
 
@@ -72,13 +72,13 @@ const EmployeeForm: React.FC = () => {
       }));
 
       dispatch(addNotification("Giáo viên ", ` ${formState.username.value} đã thêm bởi bạn`));
-      dispatch(clearSelectedEmployee());
-      dispatch(setModificationState(EmployeeModificationStatus.None));
+      dispatch(clearSelectedUser());
+      dispatch(setModificationState(UserModificationStatus.None));
     }
   }
 
   function cancelForm(): void {
-    dispatch(setModificationState(EmployeeModificationStatus.None));
+    dispatch(setModificationState(UserModificationStatus.None));
   }
 
   function getDisabledClass(): string {
@@ -122,7 +122,7 @@ const EmployeeForm: React.FC = () => {
           password: { error: "", value: user.password },
         };
         console.log(ele.username)
-        let saveUserFn: Function = addEmployee;
+        let saveUserFn: Function = addUser;
         console.log('add')
         saveForm(x, saveUserFn);
       }
@@ -230,4 +230,4 @@ const EmployeeForm: React.FC = () => {
   );
 };
 
-export default EmployeeForm;
+export default AddUserForm;

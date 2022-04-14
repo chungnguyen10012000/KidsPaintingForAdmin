@@ -1,22 +1,25 @@
-import React, { Fragment, Dispatch } from "react";
+import React, { Fragment, Dispatch, useState } from "react";
 import TopCard from "../../common/components/TopCard";
 import { IUser } from "../../store/models/user.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
 import { removeUser } from "../../store/actions/users/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
-import TeacherForm from "./TeacherForm";
+import TeacherForm from "./AddUserForm";
 import { addNotification } from "../../store/actions/notifications.action";
+import SelectInput from "../../common/components/Select";
 
-const Teachers: React.FC = () => {
+const AddUser: React.FC = () => {
+
+  const [typeUser, setTypeUser] = useState("Giáo viên")
 
   const dispatch: Dispatch<any> = useDispatch();
-  dispatch(updateCurrentPath("Giáo viên", "Danh sách"));
+  dispatch(updateCurrentPath("Người dùng", ""));
   const users: IUser[] = useSelector((state: IStateType) => state.users.users);
 
 
   function removeTeacher(teacher: IUser): void {
-    dispatch(addNotification("Giáo viên", ` ${teacher.email} đã bị xóa khỏi hệ thống`));
+    dispatch(addNotification("Người dùng", ` ${teacher.email} đã bị xóa khỏi hệ thống`));
     dispatch(removeUser(teacher.id));
   }
 
@@ -40,10 +43,32 @@ const Teachers: React.FC = () => {
       </div>
 
       <div className="row">
+      <div className="col-xl-12 col-lg-12">
+          <div className="card shadow mb-4">
+            <div className="card-body">
+            <form >
+              <div className="form-group">
+                <SelectInput
+                  id="input_course"
+                  field="course"
+                  label="Loại"
+                  options={["Giáo viên", "Nhân viên"]}
+                  required={true}
+                  onChange={(text: string) => setTypeUser(text)}
+                  value={typeUser}
+                />
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{/*       <div className="row">
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách giáo viên</h6>
+              <h6 className="m-0 font-weight-bold text-green">Danh sách người dùng</h6>
               <div className="header-buttons">
               </div>
             </div>
@@ -65,7 +90,8 @@ const Teachers: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+
       <div className="row">
         <TeacherForm />
       </div>
@@ -73,4 +99,4 @@ const Teachers: React.FC = () => {
   );
 };
 
-export default Teachers;
+export default AddUser;

@@ -8,7 +8,7 @@ import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IUserFormState } from "../../common/types/Form.types";
 import SelectInput from "../../common/components/Select";
 
-const AccountForm: React.FC = () => {
+const EditInfo: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   //const users: IUserState | null = useSelector((state: IStateType) => state.users);
   let user: IUser | null = {
@@ -99,7 +99,7 @@ const AccountForm: React.FC = () => {
       <div className="col-xl-12 col-lg-12">
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-green"> {"Sửa"} thông tin tài khoản</h6>
+            <h6 className="m-0 font-weight-bold text-green"> Thay đổi mật khẩu tài khoản</h6>
           </div>
           <div className="card-body">
             <form onSubmit={saveUser}>
@@ -191,8 +191,8 @@ const AccountForm: React.FC = () => {
                   label="Số điện thoại"
                   placeholder="" />
               </div>
-              <button className="btn btn-danger" onClick={() => cancelForm()}>Cancel</button>
-              <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Save</button>
+              <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
+              <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Lưu</button>
             </form>
           </div>
         </div>
@@ -201,4 +201,4 @@ const AccountForm: React.FC = () => {
   );
 };
 
-export default AccountForm;
+export default EditInfo;

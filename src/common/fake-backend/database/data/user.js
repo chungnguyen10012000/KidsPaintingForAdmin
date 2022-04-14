@@ -47,4 +47,16 @@ export const listUser = [
         "address":  "Ho Chi Minh",
         "phone":  "0989439678",
     },
+    {
+        "userID": "4",
+        "username": "super-admin",
+        "email": "super-admin@gmail.com",
+        "password": "123",
+        "firstName": "Thao",
+        "lastName": "Tran",
+        "dateOfBirth": "2000-01-10",
+        "sex": "Nữ",
+        "address":  "Ho Chi Minh",
+        "phone":  "0989439678",
+    },
 ]

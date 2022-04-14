@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 
-const LeftMenuForEmployees: React.FC = () => {
+const LeftMenuForSuperAdmin: React.FC = () => {
 
     let [leftMenuVisibility, setLeftMenuVisibility] = useState(false);
 
@@ -32,7 +32,7 @@ const LeftMenuForEmployees: React.FC = () => {
 
                 <li className="nav-item active">
 
-                    <Link className="nav-link" to="/employee/home">
+                    <Link className="nav-link" to="/super-admin/home">
                         <i className="fas fa-fw fa-tachometer-alt"></i>
                         <span>Trang chủ</span>
                     </Link>
@@ -40,24 +40,22 @@ const LeftMenuForEmployees: React.FC = () => {
 
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
-                    Quản lý giáo viên
+                    Quản lý người dùng
                 </div>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/employee/add-user`}>
+                    <Link className="nav-link" to={`/super-admin/add-user`}>
                         <i className="fas fa-fw fa-user"></i>
-                        <span>Thêm giáo viên</span>
+                        <span>Thêm người dùng</span>
                     </Link>
                 </li>
 
-
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/employee/teacher-request`}>
+                    <Link className="nav-link" to={`/super-admin/teacher-request`}>
                         <i className="fas fa-fw fa-user"></i>
                         <span>Yêu cầu</span>
                     </Link>
                 </li>
-
 
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
@@ -65,43 +63,52 @@ const LeftMenuForEmployees: React.FC = () => {
                 </div>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/employee/courses`}>
+                    <Link className="nav-link" to={`/super-admin/art`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Mỹ thuật</span>
+                    </Link>
+                </li>
+
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/super-admin/courses`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Khoá học</span>
                     </Link>
                 </li>
 
+
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/employee/myclass`}>
+                    <Link className="nav-link" to={`/super-admin/myclass`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Lớp học</span>
                     </Link>
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/employee/contest`}>
+                    <Link className="nav-link" to={`/super-admin/contest`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Cuộc thi</span>
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/employee/feedbacks`}>
+                    <Link className="nav-link" to={`/super-admin/feedbacks`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Phản hồi</span>
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/employee/blog`}>
+                    <Link className="nav-link" to={`/super-admin/blog`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Blog</span>
                     </Link>
                 </li>
+
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
                     Quản lý tài khoản
                 </div>
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/employee/account`}>
+                    <Link className="nav-link" to={`/super-admin/account`}>
                         <i className="fas fa-fw fa-user-circle"></i>
                         <span>Tài khoản</span>
                     </Link>
@@ -111,4 +118,4 @@ const LeftMenuForEmployees: React.FC = () => {
     );
 };
 
-export default LeftMenuForEmployees;
+export default LeftMenuForSuperAdmin;

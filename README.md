@@ -17,11 +17,11 @@
 ##TODO
 - Admin:
     - Add super admin (WRITE_ART, WRITE_LESSON_TIME)
-    - Edit account (view detail, update detail, change  password)
-    - Merge teacher, staff (selection edit)
-    - Rate star course (not teacher)
+    - Edit account (view detail, update detail, change  password) (*)
+    - Merge teacher, staff (selection edit) (*)
+    - Rate star course (not teacher) (*)
     - Change class ( search course, class)
-    - Create art (level, type)
+    - Create art (level, type) (*)
     - Create schedule 
     - Selection schedule. add lesson time for semester  course
     - Edit statistical (economy) - add for home 

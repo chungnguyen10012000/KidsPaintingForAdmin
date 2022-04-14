@@ -1,17 +1,18 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { IStateType, IEmployeeState } from "../../store/models/root.interface";
-import { IEmployee } from "../../store/models/employee.interface";
+import { IStateType, IUserState } from "../../store/models/root.interface";
+import { IUser } from "../../store/models/user.interface";
+import { getDomain } from "../../common/util/RestAPI.util";
 
 export type userListProps = {
-  onSelect?: (user: IEmployee) => void;
+  onSelect?: (user: IUser) => void;
   children?: React.ReactNode;
 };
 
-function EmployeeList(props: userListProps): JSX.Element  {
-  const users: IEmployeeState = useSelector((state: IStateType) => state.employees);
+function UserList(props: userListProps): JSX.Element  {
+  const users: IUserState = useSelector((state: IStateType) => state.users);
 
-  const userElements: (JSX.Element | null)[] = users.employees.map(user => {
+  const userElements: (JSX.Element | null)[] = users.users.map(user => {
     if (!user) { return null; }
     return (<tr className={`table-row ${(users.selectedUser && users.selectedUser.id === user.id) ? "selected" : ""}`}
       onClick={() => {
@@ -42,4 +43,4 @@ function EmployeeList(props: userListProps): JSX.Element  {
   );
 }
 
-export default EmployeeList;
+export default UserList;

@@ -4,7 +4,7 @@ import LeftMenuForTeacher from "../LeftMenu/LefMenuForTeacher";
 import TopMenu from "../TopMenu/TopMenu";
 import { Switch, Route } from "react-router";
 import Users from "../Users/Users";
-import Teachers from "../Teachers/Teachers";
+import AddUser from "../AddUser/AddUser";
 import Home from "../Home/Home";
 import Contest from "../Contest/Contest"
 import Notifications from "../../common/components/Notification";
@@ -21,14 +21,12 @@ import Sesson from "../Sesson/Sesson";
 import JitsiComponent from "../Lesson/VideoCall";
 import Blogs from "../Blogs/Blog";
 import BlogDetail from "../Blogs/BlogDetail";
-import Analysis from "../Analysis/Analysis";
 import SigupOfCourse from "../SigupOfTeacher/SigupOfTeacher";
-import Request from "../Teachers/Request";
+import RequestForTeacher from "../Request/Teacher";
 import OnLeave from "../OnLeave/OnLeave";
 
 import { useParams } from "react-router";
 import LeftMenuForEmployees from "../LeftMenu/LeftMenuForEmployees";
-import Employees from "../Employees/Employees";
 import Schedule from "../Schedule/Schedule";
 import FeedBackDetail from "../FeedBack/FeedBackDetail"
 import ContestView from "../Contest/ContestView"
@@ -39,12 +37,16 @@ import TeacherSigupClass from "../MyClass/TeacherSigupClass"
 import ContestGrade from "../Contest/ContestGrade"
 import SigupLevelTeacher from "../SigupLevelTeacher/SigupLevelTeacher"
 import StarRatingForAdmin from "../StarRating/StarRatingForAdmin";
+import LeftMenuForSuperAdmin from "../LeftMenu/LeftMenuForSuperAdmin";
+import Art from "../Art/Art";
+import EditInfo from "../Account/EditInfo";
+import ChangePassword from "../Account/ChangePassword";
 
 type role = {
   id: string;
 };
 
-const Admin: React.FC = () => {
+const Routers: React.FC = () => {
   const { id } = useParams<role>()
   //console.log(id)
   if (id === "teacher"){
@@ -58,7 +60,9 @@ const Admin: React.FC = () => {
           <div className="container-fluid">
             <Switch>
               <Route path={`/:id/users`}><Users /></Route>
-              <Route path={`/:id/teacher`}><Teachers /></Route>
+              <Route path={`/:id/edit-info`}><EditInfo /></Route>
+              <Route path={`/:id/change-password`}><ChangePassword /></Route>
+              <Route path={`/:id/add-user`}><AddUser /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
               <Route path={`/:id/onleave`}><OnLeave /></Route>
               <Route path={`/:id/myclass`}><MyClass /></Route>
@@ -95,15 +99,54 @@ const Admin: React.FC = () => {
             <div className="container-fluid">
               <Switch>
                 <Route path={`/:id/users`}><Users /></Route>
+                <Route path={`/:id/edit-info`}><EditInfo /></Route>
+                <Route path={`/:id/change-password`}><ChangePassword /></Route>
                 <Route path={`/:id/feedbacks`}><FeedBack /></Route>
-                <Route path={`/:id/teacher`}><Teachers /></Route>
+                <Route path={`/:id/add-user`}><AddUser /></Route>
                 <Route path={`/:id/teacher-class`}><TeacherSigupClass /></Route>
                 <Route path={`/:id/teacher-rating`}><StarRatingForAdmin /></Route>
-                <Route path={`/:id/teacher-request`}><Request /></Route>
+                <Route path={`/:id/teacher-request`}><RequestForTeacher /></Route>
                 <Route path={`/:id/teacherofcourse`}><TeacherOfCourse /></Route>
                 <Route path={`/:id/student-request`}><Student /></Route>
-                <Route path={`/:id/analysis`}><Analysis /></Route>
-                <Route path={`/:id/employee`}><Employees /></Route>
+                <Route path={`/:id/courses`}><Courses /></Route>
+                <Route path={`/:id/myclass`}><MyClass /></Route>
+                <Route path={`/:id/blog`}><Blogs /></Route>
+                <Route path={`/:id/contest-detail`}><ContestView /></Route>
+                <Route path={`/:id/blog-detail`}><BlogDetail /></Route>
+                <Route path={`/:id/feedback-detail`}><FeedBackDetail /></Route>
+                <Route path={`/:id/sesson`}><Sesson /></Route>
+                <Route path={`/:id/contest`}><Contest /></Route>
+                <Route path={`/:id/home`}><Home /></Route>
+                <Route path={`/:id/account`}><Account /></Route>
+              </Switch>
+            </div>
+          </div>
+        </div>
+      </Fragment>
+    );
+  }
+
+  else if (id === "super-admin"){
+    return (
+      <Fragment>
+        <Notifications />
+        <LeftMenuForSuperAdmin />
+        <div id="content-wrapper" className="d-flex flex-column">
+          <div id="content">
+            <TopMenu />
+            <div className="container-fluid">
+              <Switch>
+                <Route path={`/:id/users`}><Users /></Route>
+                <Route path={`/:id/edit-info`}><EditInfo /></Route>
+                <Route path={`/:id/change-password`}><ChangePassword /></Route>
+                <Route path={`/:id/feedbacks`}><FeedBack /></Route>
+                <Route path={`/:id/add-user`}><AddUser /></Route>
+                <Route path={`/:id/teacher-class`}><TeacherSigupClass /></Route>
+                <Route path={`/:id/teacher-rating`}><StarRatingForAdmin /></Route>
+                <Route path={`/:id/teacher-request`}><RequestForTeacher /></Route>
+                <Route path={`/:id/teacherofcourse`}><TeacherOfCourse /></Route>
+                <Route path={`/:id/student-request`}><Student /></Route>
+                <Route path={`/:id/art`}><Art /></Route>
                 <Route path={`/:id/courses`}><Courses /></Route>
                 <Route path={`/:id/myclass`}><MyClass /></Route>
                 <Route path={`/:id/blog`}><Blogs /></Route>
@@ -132,15 +175,16 @@ const Admin: React.FC = () => {
           <div className="container-fluid">
             <Switch>
               <Route path={`/:id/users`}><Users /></Route>
+              <Route path={`/:id/edit-info`}><EditInfo /></Route>
+              <Route path={`/:id/change-password`}><ChangePassword /></Route>
               <Route path={`/:id/feedbacks`}><FeedBack /></Route>
-              <Route path={`/:id/teacher`}><Teachers /></Route>
+              <Route path={`/:id/add-user`}><AddUser /></Route>
               <Route path={`/:id/teacher-class`}><TeacherSigupClass /></Route>
-              <Route path={`/:id/teacher-request`}><Request /></Route>
+              <Route path={`/:id/teacher-request`}><RequestForTeacher /></Route>
               <Route path={`/:id/student-request`}><Student /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
               <Route path={`/:id/blog`}><Blogs /></Route>
               <Route path={`/:id/teacher-rating`}><StarRatingForAdmin /></Route>
-              <Route path={`/:id/analysis`}><Analysis /></Route>
               <Route path={`/:id/teacherofcourse`}><TeacherOfCourse /></Route>
               <Route path={`/:id/contest-detail`}><ContestView /></Route>
               <Route path={`/:id/blog-detail`}><BlogDetail /></Route>
@@ -158,4 +202,4 @@ const Admin: React.FC = () => {
 
 };
 
-export default Admin;
+export default Routers;

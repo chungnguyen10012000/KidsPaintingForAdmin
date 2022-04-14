@@ -30,7 +30,7 @@ const data_1 = [
   }
 ]
 
-const Request: React.FC = () => {
+const RequestForTeacher: React.FC = () => {
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Người dùng", "Danh sách"));
@@ -75,23 +75,6 @@ const Request: React.FC = () => {
       </tr>);
   });
 
-  const changeClassElements: JSX.Element[] = data_1.map((ele, index)=> {
-    return (
-      <tr className={`table-row`}
-        key={`user_${index}`}>
-        <th scope="row">{index + 1}</th>
-        <td>{ele.username}</td>
-        <td>{ele.classPrent}</td>
-        <td>{ele.classGoal}</td>
-        <td>
-            <button className="btn btn-success" >Chấp nhận</button> 
-        </td>
-        <td>
-            <button className="btn btn-danger" >Xóa</button>
-        </td>
-      </tr>);
-  });
-
   return (
     <Fragment>
       <h1 className="h3 mb-2 text-gray-800">Yêu cầu</h1>
@@ -129,37 +112,6 @@ const Request: React.FC = () => {
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-xl-12 col-lg-12">
-          <div className="card shadow mb-4">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Yêu cầu đổi lớp</h6>
-              <div className="header-buttons">
-              </div>
-            </div>
-            <div className="card-body">
-              <div className="table-responsive portlet">
-                <table className="table">
-                  <thead className="thead-light">
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Tên đăng nhập</th>
-                      <th scope="col">Lớp hiện tại</th>
-                      <th scope="col">Lớp yêu cầu đổi</th>
-                      <th scope="col"></th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {changeClassElements}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <TeacherOfCourse />
 
       <TeacherSigupClass />
@@ -168,4 +120,4 @@ const Request: React.FC = () => {
   );
 };
 
-export default Request;
+export default RequestForTeacher;
