@@ -40,13 +40,13 @@ const LeftMenuForEmployees: React.FC = () => {
 
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
-                    Quản lý giáo viên
+                    Quản lý người dùng
                 </div>
 
                 <li className="nav-item">
                     <Link className="nav-link" to={`/employee/add-user`}>
                         <i className="fas fa-fw fa-user"></i>
-                        <span>Thêm giáo viên</span>
+                        <span>Thêm người dùng</span>
                     </Link>
                 </li>
 

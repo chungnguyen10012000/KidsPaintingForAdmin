@@ -20,6 +20,7 @@ function BlogList(props: productListProps): JSX.Element  {
       key={`blog_${blog_item.id}`}>
       <th scope="row">{blog_item.id}</th>
       <td>{blog_item.name}</td>
+      <td><p>{blog_item.description}</p></td>
     </tr>);
   });
 
@@ -31,6 +32,7 @@ function BlogList(props: productListProps): JSX.Element  {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Tên blog</th>
+            <th scope="col">Nội dung</th>
           </tr>
         </thead>
         <tbody>
