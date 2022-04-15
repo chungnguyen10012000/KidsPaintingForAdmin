@@ -1,11 +1,12 @@
-import React, { Fragment, Dispatch } from "react";
-import { useDispatch } from "react-redux";
+import React, { Fragment, Dispatch, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import SelectInput from "../../common/components/Select";
 import { updateCurrentPath } from "../../store/actions/root.actions";
+import { ISemesterState, IStateType } from "../../store/models/root.interface";
 //import { getRestApiWithToken, getDomain, postRestApiWithToken } from "../../common/util/RestAPI.util";
 //import { Page } from "../../common/util/User.util";
 //import { RestApiAuth } from "../../common/components/RestApiAuth";
-import TeacherOfCourse from "../Courses/TeacherOfCourse"
-import TeacherSigupClass from "../MyClass/TeacherSigupClass";
+
 
 const data = [
     {
@@ -40,6 +41,22 @@ const ArrangeClass: React.FC = () => {
         .then ( (res: any) => res.json())
         .then (data => console.log(data)) */
 
+    const [semester, setSemester] = useState<any>()
+
+    const semesters: ISemesterState = useSelector((state: IStateType) => state.semesters);
+
+    let semesterList: string[] = []
+    semesters.semesters.map((ele) => {
+        semesterList.push(ele.name)
+    })
+
+    const [isCheck, setIsCheck] = useState(false)
+
+    function getDisabledClass(): string {
+        console.log(isCheck)
+        return isCheck ? "" : "disabled";
+    }
+
 
 
     const userElements: JSX.Element[] = data.map((ele, index) => {
@@ -49,8 +66,12 @@ const ArrangeClass: React.FC = () => {
                 <th scope="row">{index + 1}</th>
                 <td>{ele.name}</td>
                 <td>10</td>
+                <td>Ha Viet Dung</td>
                 <td>
-                    <button className="btn btn-success" >Xếp ngẫu nhiên</button>
+                    <button className="btn btn-success" onClick={() => {setIsCheck(true)}}>Random</button>
+                </td>
+                <td>
+                    <button className={`btn btn-success ${getDisabledClass()}`} >Xếp</button>
                 </td>
 
             </tr>);
@@ -64,8 +85,40 @@ const ArrangeClass: React.FC = () => {
             <div className="row">
                 <div className="col-xl-12 col-lg-12">
                     <div className="card shadow mb-4">
+                        <div className="card-body">
+                            <form >
+                                <div className="form-group">
+                                    <SelectInput
+                                        id="input_course"
+                                        field="course"
+                                        label="Loại"
+                                        options={semesterList}
+                                        required={true}
+                                        onChange={(text: string) => setSemester(text)}
+                                        value={semester}
+                                    />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-xl-12 col-lg-12">
+                    <div className="card  mb-4">
+                        <div className="card-body">
+                            <button className="btn btn-success" >Xếp ngẫu nhiên</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-xl-12 col-lg-12">
+                    <div className="card shadow mb-4">
                         <div className="card-header py-3">
-                            <h6 className="m-0 font-weight-bold text-green"></h6>
+                            <h6 className="m-0 font-weight-bold text-green">Danh sách khóa học chưa xếp</h6>
                             <div className="header-buttons">
                             </div>
                         </div>
@@ -76,7 +129,8 @@ const ArrangeClass: React.FC = () => {
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Tên khóa học</th>
-                                            <th scope="col">Số lượng giáo viên đăng ký</th>
+                                            <th scope="col">Số lượng học viên chưa xếp</th>
+                                            <th scope="col">Giáo viên đăng ký</th>
                                             <th scope="col"></th>
                                             <th scope="col"></th>
                                         </tr>

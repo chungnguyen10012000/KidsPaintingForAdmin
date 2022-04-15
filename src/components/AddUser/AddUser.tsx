@@ -23,10 +23,10 @@ const AddUser: React.FC = () => {
     dispatch(removeUser(teacher.id));
   }
 
-  const userElements: JSX.Element[] = users.map( ele => {
+  const userElements: JSX.Element[] = users.map( (ele, index) => {
     return (
       <tr className={`table-row`}
-        key={`user_${ele.id}`}>
+        key={`user_${index}`}>
         <th scope="row">{ele.id}</th>
         <td>{ele.username}</td>
         <td><button className="btn btn-danger" onClick={() => removeTeacher(ele)}>Xóa</button> </td>
@@ -35,11 +35,12 @@ const AddUser: React.FC = () => {
 
   return (
     <Fragment>
-      <h1 className="h3 mb-2 text-gray-800">Giáo viên</h1>
+      <h1 className="h3 mb-2 text-gray-800">Thêm người dùng</h1>
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
         <TopCard title="GIÁO VIÊN" text={users.length.toString()} icon="user" class="danger" />
+        <TopCard title="NHÂN VIÊN" text={users.length.toString()} icon="user" class="danger" />
       </div>
 
       <div className="row">
@@ -63,8 +64,7 @@ const AddUser: React.FC = () => {
           </div>
         </div>
       </div>
-
-{/*       <div className="row">
+      <div className="row">
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
@@ -90,7 +90,7 @@ const AddUser: React.FC = () => {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
       <div className="row">
         <TeacherForm />

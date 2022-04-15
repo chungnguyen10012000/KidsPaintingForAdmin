@@ -12,13 +12,13 @@ export type userListProps = {
 function UserList(props: userListProps): JSX.Element  {
   const users: IUserState = useSelector((state: IStateType) => state.users);
 
-  const userElements: (JSX.Element | null)[] = users.users.map(user => {
+  const userElements: (JSX.Element | null)[] = users.users.map((user, index) => {
     if (!user) { return null; }
     return (<tr className={`table-row ${(users.selectedUser && users.selectedUser.id === user.id) ? "selected" : ""}`}
       onClick={() => {
         if(props.onSelect) props.onSelect(user);
       }}
-      key={`user_${user.id}`}>
+      key={index}>
       <th scope="row">{user.id}</th>
       <td>{user.username}</td>
     </tr>);

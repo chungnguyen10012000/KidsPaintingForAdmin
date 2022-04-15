@@ -17,6 +17,7 @@ import { ICourseSemester, CourseSemesterModificationStatus } from "./course_for_
 import { ILessonTime, LessonTimeModificationStatus } from "./lesson_time.interface";
 import { ISchedule, ScheduleModificationStatus  } from "./schedule.interface";
 import { IScheduleItem, ScheduleItemModificationStatus } from "./schedule_item.interface";
+import { ISemester, SemesterModificationStatus } from "./semester.interface";
 
 export interface IRootPageStateType {
     area: string;
@@ -47,6 +48,13 @@ export interface IStateType {
     lessonTimes: ILessonTimeState;
     schedules: IScheduleState;
     scheduleItems: IScheduleItemState;
+    semesters: ISemesterState;
+}
+
+export interface ISemesterState {
+    semesters: ISemester[];
+    selectedSemester: ISemester | null;
+    modificationState: SemesterModificationStatus;
 }
 
 export interface ICourseSemesterState {

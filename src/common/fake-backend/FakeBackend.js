@@ -1,4 +1,5 @@
 import { getTeacher } from "./handler/GET/GetUser";
+import { PostUser } from "./handler/POST/PostUser";
 
 
 const path = "/api/v1"
@@ -19,7 +20,7 @@ export function configureFakeBackend() {
                     case url.endsWith(`${path}/auth`) && method === 'POST':
                         return null;
                     case url.endsWith(`${path}/user`) && method === 'POST':
-                        return null;
+                        return PostUser(created);
                     case url.endsWith(`${path}/user`) && method === 'GET':
                         return getTeacher(ok);
                     case url.match(new RegExp('/user/\\d+$')) && method === 'GET':
@@ -37,7 +38,11 @@ export function configureFakeBackend() {
 
             // helper function
             function ok(body) {
-                resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(body)), json: () => Promise.resolve(body) });
+                resolve({status: 200, ok: true, text: () => Promise.resolve(JSON.stringify(body)), json: () => Promise.resolve(body) });
+            }
+
+            function created(body) {
+                resolve({status: 201, ok: true, text: () => Promise.resolve(JSON.stringify(body)), json: () => Promise.resolve(body) });
             }
 
             function unauthorized() {

@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import TopCard from "../../common/components/TopCard";
 import { IStateType, IMyClassState, ICourseState, IContestState, IFeedBackState, IUserState, IEmployeeState} from "../../store/models/root.interface";
-import MyClassListForKid from "../MyClass/MyClassListForKid";
 import { useParams } from "react-router";
-import MyClassWasTeachList from "../MyClass/MyClassWasTeachList";
 
 type role = {
   id: string;
@@ -53,7 +51,7 @@ const Home: React.FC = () => {
               <h6 className="m-0 font-weight-bold text-green">Danh sách lớp</h6>
             </div>
             <div className="card-body">
-              <MyClassListForKid />
+              
             </div>
           </div>
 
@@ -67,7 +65,7 @@ const Home: React.FC = () => {
               <h6 className="m-0 font-weight-bold text-green">Danh sách lớp đã dạy</h6>
             </div>
             <div className="card-body">
-              <MyClassWasTeachList />
+              
             </div>
           </div>
         </div>

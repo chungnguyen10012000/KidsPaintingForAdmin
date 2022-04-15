@@ -72,6 +72,7 @@ const AccountForm: React.FC = () => {
         password:  formState.password.value,
       }));
 
+
       dispatch(addNotification("Thông tin cá nhân", ` ${formState.email.value} đã sửa bởi bạn`));
       dispatch(clearSelectedUser());
       dispatch(setModificationState(UserModificationStatus.None));

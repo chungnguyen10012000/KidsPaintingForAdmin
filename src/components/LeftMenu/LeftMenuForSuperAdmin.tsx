@@ -63,6 +63,13 @@ const LeftMenuForSuperAdmin: React.FC = () => {
                 </div>
 
                 <li className="nav-item">
+                    <Link className="nav-link" to={`/super-admin/semester`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Học kì</span>
+                    </Link>
+                </li>
+
+                <li className="nav-item">
                     <Link className="nav-link" to={`/super-admin/lesson-time`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Tiết học</span>
@@ -94,14 +101,6 @@ const LeftMenuForSuperAdmin: React.FC = () => {
                     <Link className="nav-link" to={`/super-admin/arrange-class`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Xếp lớp</span>
-                    </Link>
-                </li>
-
-
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/super-admin/myclass`}>
-                        <i className="fas fa-fw fa-warehouse"></i>
-                        <span>Lớp học</span>
                     </Link>
                 </li>
 

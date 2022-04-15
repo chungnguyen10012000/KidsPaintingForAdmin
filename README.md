@@ -31,6 +31,12 @@
     - Edit feedback (preview)
     - Edit blog (preview, REVIEW_BLOG)
     - Add view notification (*)
+    - Manual arrange (*)
+    - Create semester (*)
+    - Select semester for arrange class (*)
+    - Review semester (admin, super-admin)
+    - Notification top menu (da xem, chua xem)
+    - Search, paging
 - Teacher
     - Edit register semester course (*)
     - Edit register course for teaching (course resigested for color,  button register course => table search course => detail) (*)

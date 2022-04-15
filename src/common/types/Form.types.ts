@@ -44,6 +44,12 @@ export interface ICourseSemesterFormState {
     timeLesson: IFormStateField<string>;
 }
 
+export interface ISemesterFormState {
+    name: IFormStateField<string>;
+    description: IFormStateField<string>;
+    year: IFormStateField<string>;
+}
+
 export interface ILessonTimeFormState {
     start_time: IFormStateField<string>;
     end_time: IFormStateField<string>;

@@ -8,6 +8,7 @@ import TextInput from "../../common/components/TextInput";
 import { IStateType, ICourseState } from "../../store/models/root.interface";
 import { ICourse } from "../../store/models/courses.interface";
 import SelectInput from "../../common/components/Select";
+import { postUser } from "../../store/actions/users/postUser";
 
 type teacherInfo = {
   username: string;
@@ -70,6 +71,20 @@ const AddUserForm: React.FC = () => {
         phone: formState.phone.value,
         password: formState.password.value,
       }));
+
+      dispatch(postUser({
+        ...user,
+        firstName: formState.firstName.value,
+        lastName: formState.lastName.value,
+        username: formState.username.value,
+        avatar: formState.avatar.value,
+        email: formState.email.value,
+        sex: formState.sex.value,
+        dateOfDay: formState.dateOfDay.value,
+        address: formState.address.value,
+        phone: formState.phone.value,
+        password: formState.password.value,
+      }))
 
       dispatch(addNotification("Giáo viên ", ` ${formState.username.value} đã thêm bởi bạn`));
       dispatch(clearSelectedUser());
@@ -137,15 +152,11 @@ const AddUserForm: React.FC = () => {
 
     reader.onload = function (e: any) {
       const text = e.target.result;
-      console.log(text);
       processCSV(text)
     }
 
     reader.readAsText(file);
   }
-
-  console.log(csvArray.length)
-
   return (
     <Fragment>
       <div className="col-xl-6 col-lg-6">
