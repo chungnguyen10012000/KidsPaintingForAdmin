@@ -94,8 +94,7 @@ const Contests: React.FC = () => {
       <h1 className="h3 mb-2 text-gray-800">Cuộc thi</h1>
       <p className="mb-4">Thông tin chung</p>
       <div className="row">
-        <TopCard title="TỔNG SỐ CUỘC THI ĐANG MỞ" text={`${numberItemsCount}`} icon="box" class="primary" />
-        <TopCard title="TỔNG SỐ CUỘC THI CHƯA MỞ" text={`${numberItemsCount}`} icon="box" class="primary" />
+        <TopCard title="TỔNG SỐ CUỘC THI" text={`${numberItemsCount}`} icon="box" class="primary" />
         <TopCard title="TỔNG SỐ CUỘC THI ĐÃ KẾT THÚC" text={`${numberItemsCount}`} icon="box" class="primary" />
       </div>
 

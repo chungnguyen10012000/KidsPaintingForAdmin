@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { useHistory, useParams } from "react-router-dom";
+import "./Feedback.css"
 
 type role = {
   id: string;
@@ -19,27 +20,28 @@ const FeedBack: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Phản hồi", "Danh sách"));
   
-  const blogs: IFeedBack[] = useSelector((state: IStateType) => state.feedbacks.feedbacks);
+  const feedbacks: IFeedBack[] = useSelector((state: IStateType) => state.feedbacks.feedbacks);
 
 
-  const blogElements: JSX.Element[] = blogs.map(blog => {
+  const blogElements: JSX.Element[] = feedbacks.map(feedback => {
 
     return (
       <tr className={`table-row`}
-        key={`blog_${blog.id}`}>
-        <th scope="row">{blog.id}</th>
-        <td>{blog.email}</td>
+        key={`blog_${feedback.id}`}>
+        <th scope="row">{feedback.id}</th>
+        <td>{feedback.email}</td>
+        <td><p>{feedback.description}</p></td>
         <td><button className="btn btn-success" onClick={() => {
             if (id === 'admin'){
               history.push({
                 pathname: '/admin/feedback-detail',
-                state: { id : blog.id}
+                state: { id : feedback.id}
               })
             }
             else if (id === "employee"){
               history.push({
                 pathname: '/employee/feedback-detail',
-                state: { id : blog.id}
+                state: { id : feedback.id}
               })
             }
           }}>Xem chi tiết</button> </td>
@@ -53,7 +55,7 @@ const FeedBack: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
-        <TopCard title="PHẢN HỒI" text={blogs.length.toString()} icon="user" class="danger" />
+        <TopCard title="PHẢN HỒI" text={feedbacks.length.toString()} icon="user" class="danger" />
       </div>
 
       <div className="row">
@@ -71,6 +73,7 @@ const FeedBack: React.FC = () => {
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Email</th>
+                      <th scope="col">Nội dung</th>
                     </tr>
                   </thead>
                   <tbody id="xxx">

@@ -6,8 +6,8 @@ const initialState: IFeedBackState = {
     modificationState: FeedBackModificationStatus.None,
     selectedFeedback: null,
     feedbacks: [
-        { id: 1, email: "nvlong00@gmail.com", description: 'hello'},
-        { id: 2, email: "ohmy@fr.pl", description: 'hello2' }
+        { id: 1, email: "nvlong00@gmail.com", description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa'},
+        { id: 2, email: "ohmy@fr.pl", description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa' }
     ],
     feedbackAccept: [
         { id: 3, email: "jcrock@em.pl", description: '' },
