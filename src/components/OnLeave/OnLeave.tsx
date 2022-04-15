@@ -2,7 +2,6 @@ import React, { useState, FormEvent, Dispatch, Fragment } from "react";
 import { IStateType, IMyClassState, ICourseState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { IMyClass, MyClassModificationStatus } from "../../store/models/myclass.interface";
-import TextInput from "../../common/components/TextInput";
 import { editMyClass, clearSelectedMyClass, setModificationState, addMyClass } from "../../store/actions/myclass.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IMyClassFormState } from "../../common/types/Form.types";

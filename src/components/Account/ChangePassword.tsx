@@ -6,7 +6,6 @@ import TextInput from "../../common/components/TextInput";
 import { editUser, clearSelectedUser, setModificationState } from "../../store/actions/users/users.action";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IUserFormState } from "../../common/types/Form.types";
-import SelectInput from "../../common/components/Select";
 
 const ChangePassword: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();

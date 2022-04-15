@@ -47,7 +47,7 @@ const ArrangeClass: React.FC = () => {
 
     let semesterList: string[] = []
     semesters.semesters.map((ele) => {
-        semesterList.push(ele.name)
+        return semesterList.push(ele.name)
     })
 
     const [isCheck, setIsCheck] = useState(false)

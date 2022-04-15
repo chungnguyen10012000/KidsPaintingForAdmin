@@ -1,6 +1,6 @@
 import { IScheduleState, IActionBase } from "../../models/root.interface";
 import { ADD_SCHEDULE, CHANGE_SCHEDULE_PENDING_EDIT, EDIT_SCHEDULE, REMOVE_SCHEDULE,
-    CLEAR_SCHEDULE_PENDING_EDIT, SET_MODIFICATION_STATE, CHANGE_SCHEDULE_AMOUNT} from "../../actions/schedule/schedule.actions";
+    CLEAR_SCHEDULE_PENDING_EDIT, SET_MODIFICATION_STATE} from "../../actions/schedule/schedule.actions";
 import { ISchedule, ScheduleModificationStatus } from "../../models/schedule.interface";
 
 

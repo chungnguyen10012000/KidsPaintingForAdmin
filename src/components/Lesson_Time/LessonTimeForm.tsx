@@ -5,10 +5,7 @@ import { ILessonTime, LessonTimeModificationStatus } from "../../store/models/le
 import TextInput from "../../common/components/TextInput";
 import { editLessonTime, clearSelectedLessonTime, setModificationState, addLessonTime } from "../../store/actions/lesson_time/lesson_time.actions";
 import { addNotification } from "../../store/actions/notifications.action";
-import NumberInput from "../../common/components/NumberInput";
 import { OnChangeModel, ILessonTimeFormState } from "../../common/types/Form.types";
-import { ICourse } from "../../store/models/courses.interface";
-import SelectInput from "../../common/components/Select";
 
 const LessonTimeForm: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();

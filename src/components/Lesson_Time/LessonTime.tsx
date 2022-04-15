@@ -13,19 +13,12 @@ import {
 } from "../../store/actions/lesson_time/lesson_time.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { LessonTimeModificationStatus, ILessonTime } from "../../store/models/lesson_time.interface";
-import { useParams } from "react-router";
-import { useHistory } from "react-router-dom";
 
 type role = {
     id: string;
 };
 
 const LessonTime: React.FC = () => {
-    const { id } = useParams<role>()
-    //console.log(id)
-    let isId: number = 0;
-
-    let history = useHistory();
 
     const dispatch: Dispatch<any> = useDispatch();
     const lessonTimes: ILessonTimeState = useSelector((state: IStateType) => state.lessonTimes);
@@ -47,7 +40,6 @@ const LessonTime: React.FC = () => {
     function onLessonTimeSelect(lessonTime: ILessonTime): void {
         dispatch(changeSelectedLessonTime(lessonTime));
         dispatch(setModificationState(LessonTimeModificationStatus.None));
-        isId = lessonTime.id
     }
 
     function onLessonTimeRemove() {

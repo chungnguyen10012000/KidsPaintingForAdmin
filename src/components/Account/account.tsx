@@ -1,6 +1,5 @@
 import React, { Fragment, Dispatch, useEffect } from "react";
 import AccountList from "./AccountList";
-import AccountForm from "./AccountForm"
 import "./Account.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";

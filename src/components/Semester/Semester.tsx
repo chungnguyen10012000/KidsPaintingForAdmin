@@ -13,20 +13,12 @@ import {
 } from "../../store/actions/semester/semester.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { SemesterModificationStatus, ISemester } from "../../store/models/semester.interface";
-import { useParams } from "react-router";
-import { useHistory } from "react-router-dom";
 
 type role = {
     id: string;
 };
 
 const Semester: React.FC = () => {
-    const { id } = useParams<role>()
-    //console.log(id)
-    let isId: number = 0;
-
-    let history = useHistory();
-
     const dispatch: Dispatch<any> = useDispatch();
     const semesters: ISemesterState = useSelector((state: IStateType) => state.semesters);
     const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
@@ -47,7 +39,6 @@ const Semester: React.FC = () => {
     function onSemesterSelect(semester: ISemester): void {
         dispatch(changeSelectedSemester(semester));
         dispatch(setModificationState(SemesterModificationStatus.None));
-        isId = semester.id
     }
 
     function onSemesterRemove() {

@@ -13,16 +13,14 @@ import LevelList from "./LevelList";
 
 import { ICourseState, ICourseSemesterState, IStateType, IRootPageStateType, IMytypeState, ILevelState } from "../../store/models/root.interface";
 
-import { CourseModificationStatus, ICourse } from "../../store/models/courses.interface";
 import { MytypeModificationStatus, IMytype } from "../../store/models/mytypes.interface";
 import { LevelModificationStatus, ILevel } from "../../store/models/levels.interface";
 
 import { removeMytype, clearSelectedMytype, changeSelectedMytype, setModificationStateMytype } from "../../store/actions/mytypes.actions";
-import { removeCourse, clearSelectedCourse, setModificationState, changeSelectedCourse } from "../../store/actions/courses.actions";
+import { removeCourse, clearSelectedCourse } from "../../store/actions/courses.actions";
 import { removeLevel, clearSelectedLevel, changeSelectedLevel, setModificationStateLevel } from "../../store/actions/levels.actions";
 
-import { CourseSemesterModificationStatus, ICourseSemester } from "../../store/models/course_for_semester.interface";
-import { removeCourseSemester, clearSelectedCourseSemester, setModificationStateSemester, changeSelectedCourseSemester } from "../../store/actions/course_for_semester.actions";
+import { removeCourseSemester, clearSelectedCourseSemester} from "../../store/actions/course_for_semester.actions";
 
 
 type role = {
@@ -56,17 +54,6 @@ const Art: React.FC = () => {
         dispatch(updateCurrentPath("Khóa học", "Danh sách"));
     }, [path.area, dispatch]);
 
-    function onCourseSelect(course: ICourse): void {
-        dispatch(changeSelectedCourse(course));
-        dispatch(setModificationState(CourseModificationStatus.None));
-    }
-
-    function onCourseSemesterSelect(courseSemester: ICourseSemester): void {
-        dispatch(changeSelectedCourseSemester(courseSemester));
-        dispatch(setModificationStateSemester(CourseSemesterModificationStatus.None));
-    }
-
-
     function onMytypeSelect(mytype: IMytype): void {
         dispatch(changeSelectedMytype(mytype));
         dispatch(setModificationStateMytype(MytypeModificationStatus.None));
@@ -75,18 +62,6 @@ const Art: React.FC = () => {
     function onLevelSelect(level: ILevel): void {
         dispatch(changeSelectedLevel(level));
         dispatch(setModificationStateLevel(LevelModificationStatus.None));
-    }
-
-    function onCourseRemove() {
-        if (courses.selectedCourse) {
-            setPopup(true);
-        }
-    }
-
-    function onCourseSemesterRemove() {
-        if (courseSemesters.selectedCourseSemester) {
-            setPopup3(true);
-        }
     }
 
     function onMytypeRemove() {

@@ -13,8 +13,6 @@ import {
 } from "../../store/actions/schedule/schedule.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { ScheduleModificationStatus, ISchedule } from "../../store/models/schedule.interface";
-import { useParams } from "react-router";
-import { useHistory } from "react-router-dom";
 import { ScheduleItemModificationStatus, IScheduleItem } from "../../store/models/schedule_item.interface";
 import { changeSelectedScheduleItem, clearSelectedScheduleItem, removeScheduleItem, setModificationStateItem } from "../../store/actions/schedule/schedule_item.actions";
 import CalendarItemForm from "./CalendarItemForm";
@@ -25,11 +23,6 @@ type role = {
 };
 
 const Calendar: React.FC = () => {
-    const { id } = useParams<role>()
-    //console.log(id)
-    let isId: number = 0;
-
-    let history = useHistory();
 
     const dispatch: Dispatch<any> = useDispatch();
     const schedules: IScheduleState = useSelector((state: IStateType) => state.schedules);
@@ -55,13 +48,11 @@ const Calendar: React.FC = () => {
     function onScheduleSelect(schedule: ISchedule): void {
         dispatch(changeSelectedSchedule(schedule));
         dispatch(setModificationState(ScheduleModificationStatus.None));
-        isId = schedule.id
     }
 
     function onScheduleItemSelect(schedule: IScheduleItem): void {
         dispatch(changeSelectedScheduleItem(schedule));
         dispatch(setModificationStateItem(ScheduleItemModificationStatus.None));
-        isId = schedule.id
     }
 
     function onScheduleRemove() {

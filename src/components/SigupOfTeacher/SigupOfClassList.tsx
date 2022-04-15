@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { IMyClass } from "../../store/models/myclass.interface";
 
 const data = [
@@ -18,13 +18,6 @@ export type myclassListProps = {
 };
 
 function SigupOfCourseList(props: myclassListProps): JSX.Element  {
-
-
-  const [checkSigup, setCheckSigup] = useState(false)
-
-  function getDisabledClass(): string {
-    return checkSigup ? "disabled" : "";
-  }
 
   const myclassElements: (JSX.Element | null)[] = data.map((class_item, index) => {
     if (!class_item) { return null; }

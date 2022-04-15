@@ -5,10 +5,7 @@ import { ISchedule, ScheduleModificationStatus } from "../../store/models/schedu
 import TextInput from "../../common/components/TextInput";
 import { editSchedule, clearSelectedSchedule, setModificationState, addSchedule } from "../../store/actions/schedule/schedule.actions";
 import { addNotification } from "../../store/actions/notifications.action";
-import NumberInput from "../../common/components/NumberInput";
 import { OnChangeModel, IScheduleFormState } from "../../common/types/Form.types";
-import { ICourse } from "../../store/models/courses.interface";
-import SelectInput from "../../common/components/Select";
 
 const CalendarForm: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();

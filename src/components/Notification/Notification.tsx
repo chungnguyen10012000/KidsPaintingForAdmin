@@ -1,10 +1,6 @@
 import React, { Fragment, Dispatch } from "react";
-import TopCard from "../../common/components/TopCard";
-import { IFeedBack } from "../../store/models/feedback.interface";
-import { useDispatch, useSelector } from "react-redux";
-import { IStateType } from "../../store/models/root.interface";
+import { useDispatch } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
-import { useHistory, useParams } from "react-router-dom";
 
 type role = {
     id: string;
@@ -12,14 +8,8 @@ type role = {
 
 const Notification: React.FC = () => {
 
-    const { id } = useParams<role>()
-
-    let history = useHistory();
-
     const dispatch: Dispatch<any> = useDispatch();
     dispatch(updateCurrentPath("Thông báo", "Danh sách"));
-
-    const blogs: IFeedBack[] = useSelector((state: IStateType) => state.feedbacks.feedbacks);
 
 
 

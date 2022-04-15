@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { IStateType, IScheduleItemState, IScheduleState } from "../../store/models/root.interface";
 import { IScheduleItem } from "../../store/models/schedule_item.interface";

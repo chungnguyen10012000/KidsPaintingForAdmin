@@ -21,14 +21,6 @@ const data = [
   }, 
 ]
 
-const data_1 = [
-  {
-    "username": 'binhtranh2k',
-    "classPrent": "CM-2",
-    "classGoal": "CM-1"
-  }
-]
-
 const RequestForTeacher: React.FC = () => {
 
   const dispatch: Dispatch<any> = useDispatch();

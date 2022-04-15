@@ -8,8 +8,9 @@ const path = "/api/v1"
 export function configureFakeBackend() {
     let realFetch = window.fetch;
     window.fetch = function (url, opts) {
-        const { method, headers } = opts;
-        const body = opts.body && JSON.parse(opts.body);
+        //const { method, headers } = opts;
+        const { method } = opts;
+        //const body = opts.body && JSON.parse(opts.body);
 
         return new Promise((resolve, reject) => {
             // wrap in timeout to simulate server api call
@@ -45,13 +46,13 @@ export function configureFakeBackend() {
                 resolve({status: 201, ok: true, text: () => Promise.resolve(JSON.stringify(body)), json: () => Promise.resolve(body) });
             }
 
-            function unauthorized() {
+           /*  function unauthorized() {
                 resolve({ status: 401, text: () => Promise.resolve(JSON.stringify({ message: 'Unauthorized' })) });
             }
 
             function error(message) {
                 resolve({ status: 400, text: () => Promise.resolve(JSON.stringify({ message })) });
-            }
+            } */
             
         })
     }

@@ -1,6 +1,6 @@
 import { ILessonTimeState, IActionBase } from "../../models/root.interface";
 import { ADD_LESSON_TIME, CHANGE_LESSON_TIME_PENDING_EDIT, EDIT_LESSON_TIME, REMOVE_LESSON_TIME,
-    CLEAR_LESSON_TIME_PENDING_EDIT, SET_MODIFICATION_STATE, CHANGE_LESSON_TIME_AMOUNT} from "../../actions/lesson_time/lesson_time.actions";
+    CLEAR_LESSON_TIME_PENDING_EDIT, SET_MODIFICATION_STATE } from "../../actions/lesson_time/lesson_time.actions";
 import { ILessonTime, LessonTimeModificationStatus } from "../../models/lesson_time.interface";
 
 

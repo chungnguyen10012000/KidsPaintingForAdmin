@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import { useQuill } from 'react-quilljs';
 import BlotFormatter from 'quill-blot-formatter';
 import 'quill/dist/quill.snow.css';
-import JitsiComponent from "./VideoCall";
 import SelectInput from "../../common/components/Select";
 
 
@@ -41,9 +40,6 @@ const LessonDetail: React.FC = () => {
 
   const listPage = ["1", "2", "3", "Nhiều hơn"]
   const [page, setPage] = useState("1")
-
-  console.log(textHtml)
-  const [onCall, setOnCall] = useState(false)
   return (
     <Fragment>
       <h1 className="h3 mb-2 text-gray-800">Chi tiết buổi học</h1>

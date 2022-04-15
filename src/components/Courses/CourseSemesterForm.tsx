@@ -2,7 +2,6 @@ import React, { useState, FormEvent, Dispatch, Fragment } from "react";
 import { IStateType, ICourseState, ICourseSemesterState, IScheduleState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { ICourseSemester, CourseSemesterModificationStatus } from "../../store/models/course_for_semester.interface";
-import TextInput from "../../common/components/TextInput";
 import { editCourseSemester, clearSelectedCourseSemester, setModificationStateSemester, addCourseSemester } from "../../store/actions/course_for_semester.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import SelectInput from "../../common/components/Select";
@@ -20,10 +19,6 @@ export type mytypeListProps = {
     children?: React.ReactNode;
 };
 
-const LessonList: string[] = [
-    "Thứ 2-4-6", 
-    "Thứ 3-5-7", 
-    ]
 
 const CourseSemesterForm: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();

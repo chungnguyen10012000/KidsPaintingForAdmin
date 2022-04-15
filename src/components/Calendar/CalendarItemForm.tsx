@@ -7,7 +7,6 @@ import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import { OnChangeModel, IScheduleItemFormState } from "../../common/types/Form.types";
 import SelectInput from "../../common/components/SelectInput";
-import { ISchedule, ScheduleModificationStatus } from "../../store/models/schedule.interface";
 
 type Options = {
     name: string;
@@ -23,13 +22,13 @@ const CalendarItemForm: React.FC = () => {
     let listSchedule: Options[] = [];
     schedules2.schedules.map(ele => {
         let item: Options = {"name": ele.name, "value": ele.id}
-        listSchedule.push(item)
+        return listSchedule.push(item)
     })
 
     let listLessonTime: Options[] = [];
     lessonTimes.lessonTimes.map(ele => {
         let item: Options = {"name":ele.start_time + " => " + ele.end_time, "value": ele.start_time + " => " + ele.end_time }
-        listLessonTime.push(item)
+        return listLessonTime.push(item)
     })
 
     let schedule: IScheduleItem | null = schedules.selectedScheduleItem;

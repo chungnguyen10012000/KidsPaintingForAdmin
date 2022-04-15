@@ -1,16 +1,12 @@
 import React, { Fragment, Dispatch, useState, useEffect } from "react";
 import CoursesList from "./CoursesList";
 import CoursesForm from "./CoursesForm";
-import TypeForm from "../Art/TypeForm";
-import LevelForm from "../Art/LevelForm";
 import TopCard from "../../common/components/TopCard";
 import "./Courses.css";
 import { useDispatch, useSelector } from "react-redux";
 import Popup from "reactjs-popup";
 import { addNotification } from "../../store/actions/notifications.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
-import TypeList from "../Art/TypeList";
-import LevelList from "../Art/LevelList";
 import CoursesSemesterList from "./CourseSemesterList";
 import CourseSemesterForm from "./CourseSemesterForm";
 
@@ -18,12 +14,10 @@ import CourseSemesterForm from "./CourseSemesterForm";
 import { ICourseState, ICourseSemesterState, IStateType, IRootPageStateType, IMytypeState, ILevelState } from "../../store/models/root.interface";
 
 import { CourseModificationStatus, ICourse } from "../../store/models/courses.interface";
-import { MytypeModificationStatus, IMytype } from "../../store/models/mytypes.interface";
-import { LevelModificationStatus, ILevel } from "../../store/models/levels.interface";
 
-import { removeMytype, clearSelectedMytype, changeSelectedMytype, setModificationStateMytype } from "../../store/actions/mytypes.actions";
+import { removeMytype, clearSelectedMytype } from "../../store/actions/mytypes.actions";
 import { removeCourse, clearSelectedCourse, setModificationState, changeSelectedCourse } from "../../store/actions/courses.actions";
-import { removeLevel, clearSelectedLevel, changeSelectedLevel, setModificationStateLevel } from "../../store/actions/levels.actions";
+import { removeLevel, clearSelectedLevel } from "../../store/actions/levels.actions";
 
 import { CourseSemesterModificationStatus, ICourseSemester } from "../../store/models/course_for_semester.interface";
 import { removeCourseSemester, clearSelectedCourseSemester, setModificationStateSemester, changeSelectedCourseSemester } from "../../store/actions/course_for_semester.actions";
@@ -73,17 +67,6 @@ const Courses: React.FC = () => {
     dispatch(setModificationStateSemester(CourseSemesterModificationStatus.None));
   }
 
-
-  function onMytypeSelect(mytype: IMytype): void {
-    dispatch(changeSelectedMytype(mytype));
-    dispatch(setModificationStateMytype(MytypeModificationStatus.None));
-  }
-
-  function onLevelSelect(level: ILevel): void {
-    dispatch(changeSelectedLevel(level));
-    dispatch(setModificationStateLevel(LevelModificationStatus.None));
-  }
-
   function onCourseRemove() {
     if (courses.selectedCourse) {
       setPopup(true);
@@ -93,18 +76,6 @@ const Courses: React.FC = () => {
   function onCourseSemesterRemove() {
     if (courseSemesters.selectedCourseSemester) {
       setPopup3(true);
-    }
-  }
-
-  function onMytypeRemove() {
-    if (mytypes.selectedMytype) {
-      setPopup1(true);
-    }
-  }
-
-  function onLevelRemove() {
-    if (levels.selectedLevel) {
-      setPopup2(true);
     }
   }
 
