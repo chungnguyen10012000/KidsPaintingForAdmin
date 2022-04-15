@@ -6,8 +6,13 @@ import { editScheduleItem, clearSelectedScheduleItem, setModificationStateItem, 
 import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import { OnChangeModel, IScheduleItemFormState } from "../../common/types/Form.types";
-import SelectInput from "../../common/components/Select";
+import SelectInput from "../../common/components/SelectInput";
 import { ISchedule, ScheduleModificationStatus } from "../../store/models/schedule.interface";
+
+type Options = {
+    name: string;
+    value: any;
+}
 
 const CalendarItemForm: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();
@@ -15,14 +20,16 @@ const CalendarItemForm: React.FC = () => {
     const schedules2: IScheduleState | null = useSelector((state: IStateType) => state.schedules);
     const lessonTimes: ILessonTimeState = useSelector((state: IStateType) => state.lessonTimes);
 
-    let listSchedule: string[] = [];
+    let listSchedule: Options[] = [];
     schedules2.schedules.map(ele => {
-        listSchedule.push(ele.name)
+        let item: Options = {"name": ele.name, "value": ele.id}
+        listSchedule.push(item)
     })
 
-    let listLessonTime: string[] = [];
+    let listLessonTime: Options[] = [];
     lessonTimes.lessonTimes.map(ele => {
-        listLessonTime.push(ele.start_time + " => " + ele.end_time)
+        let item: Options = {"name":ele.start_time + " => " + ele.end_time, "value": ele.start_time + " => " + ele.end_time }
+        listLessonTime.push(item)
     })
 
     let schedule: IScheduleItem | null = schedules.selectedScheduleItem;
@@ -72,11 +79,11 @@ const CalendarItemForm: React.FC = () => {
 
     function getDisabledScheduleItem(): string {
         let isError: boolean = isFormInvalid();
-        console.log("go to disable")
         return isError ? "disabled" : "";
     }
 
     function isFormInvalid(): boolean {
+        console.log("id: ",formState.schedule_id.value)
         return (formState.lesson_time.error || formState.date_of_week.error
             || !formState.lesson_time.value || !formState.date_of_week.value) as boolean;
     }
@@ -90,6 +97,17 @@ const CalendarItemForm: React.FC = () => {
                     </div>
                     <div className="card-body">
                         <form onSubmit={saveUser}>
+                            <div className="form-group">
+                                <SelectInput
+                                    id="input_schedule_id"
+                                    field="schedule_id"
+                                    label="Thuộc lịch"
+                                    options={listSchedule}
+                                    required={true}
+                                    onChange={hasFormValueChanged}
+                                    value={formState.schedule_id.value}
+                                />
+                            </div>
                             <div className="form-group">
                                 <SelectInput
                                     id="input_lesson_time"

@@ -1,5 +1,5 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
-import { IStateType, ICourseState, ICourseSemesterState } from "../../store/models/root.interface";
+import { IStateType, ICourseState, ICourseSemesterState, IScheduleState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { ICourseSemester, CourseSemesterModificationStatus } from "../../store/models/course_for_semester.interface";
 import TextInput from "../../common/components/TextInput";
@@ -28,6 +28,12 @@ const LessonList: string[] = [
 const CourseSemesterForm: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();
     const courses: ICourseState | null = useSelector((state: IStateType) => state.courses);
+    const schedules: IScheduleState | null = useSelector((state: IStateType) => state.schedules);
+
+    const listSchedule: string[] = []
+    schedules.schedules.map((ele) => {
+        return listSchedule.push(ele.name)
+    })
     const listCourses: string[] = []
     courses.courses.map((ele) => {
         return listCourses.push(ele.courseName)
@@ -113,23 +119,12 @@ const CourseSemesterForm: React.FC = () => {
                                 <SelectInput
                                     id="input_time"
                                     field="time"
-                                    label="Thời gian học"
-                                    options={LessonList}
+                                    label="Lịch học"
+                                    options={listSchedule}
                                     required={true}
                                     onChange={hasFormValueChanged}
                                     value={formState.time.value}
                                 />
-                            </div>
-                            <div className="form-group">
-                                <TextInput id="input_timeLesson"
-                                    field="timeLesson"
-                                    type="date"
-                                    value={formState.timeLesson.value}
-                                    onChange={hasFormValueChanged}
-                                    required={false}
-                                    maxLength={100}
-                                    label="Thời gian bắt đầu"
-                                    placeholder="" />
                             </div>
                             <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
                             <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Lưu</button>

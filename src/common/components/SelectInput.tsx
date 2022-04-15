@@ -23,9 +23,9 @@ function SelectInput(props: SelectProps): JSX.Element {
         setValue(elementValue);
     }
 
-    const getOptions: (JSX.Element | null)[] = props.options.map((option: any, index: number) => {
+    const getOptions: (JSX.Element | null)[] = props.options.map( (option: any, index:number) => {
         return (
-            <option key={index} value={`${option}`}>{option}</option>
+            <option key={index} value={option.value}>{option.name}</option>
         )
     });
 

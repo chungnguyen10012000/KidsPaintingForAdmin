@@ -20,10 +20,10 @@
     - Edit account (view detail, update detail, change  password) (*)
     - Merge teacher, staff (selection edit) (*)
     - Rate star course (not teacher) (*)
-    - Change class ( search course, class)
+    - Change class (search course, class)
     - Create art (level, type) (*)
-    - Create schedule 
-    - Selection schedule. add lesson time for semester  course
+    - Create schedule  (*)
+    - Selection schedule. add lesson time for semester  course (*)
     - Edit statistical (economy) - add for home 
     - Add semester course teacher register (button random student, button accept) (*)
     - Edit course, contest (table => list)

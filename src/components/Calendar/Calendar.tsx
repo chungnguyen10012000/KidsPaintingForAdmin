@@ -212,7 +212,7 @@ const Calendar: React.FC = () => {
                                 dispatch(addNotification("Lịch", ` đã bị xóa khỏi hệ thống`));
                                 dispatch(removeScheduleItem(scheduleItems.selectedScheduleItem.id));
                                 dispatch(clearSelectedScheduleItem());
-                                setPopup(false);
+                                setPopup1(false);
                             }}>Xóa
                         </button>
                     </div>
