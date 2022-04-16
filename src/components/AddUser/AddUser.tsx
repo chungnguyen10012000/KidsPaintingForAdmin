@@ -33,6 +33,18 @@ const AddUser: React.FC = () => {
       </tr>);
   });
 
+  let listUser: string[] = []
+
+  if (localStorage.getItem('role') === "super-admin"){
+    listUser = ['Quản trị viên', 'Nhân viên', 'Giáo viên']
+  }
+  else if (localStorage.getItem('role') === "admin"){
+    listUser = ['Nhân viên', 'Giáo viên']
+  }
+  else if (localStorage.getItem('role') === 'staff'){
+    listUser = ['Giáo viên']
+  }
+
   return (
     <Fragment>
       <h1 className="h3 mb-2 text-gray-800">Thêm người dùng</h1>
@@ -53,7 +65,7 @@ const AddUser: React.FC = () => {
                   id="input_course"
                   field="course"
                   label="Loại"
-                  options={["Giáo viên", "Nhân viên"]}
+                  options={listUser}
                   required={true}
                   onChange={(text: string) => setTypeUser(text)}
                   value={typeUser}

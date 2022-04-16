@@ -51,7 +51,7 @@ const LeftMenuForSuperAdmin: React.FC = () => {
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/super-admin/teacher-request`}>
+                    <Link className="nav-link" to={`/super-admin/request`}>
                         <i className="fas fa-fw fa-user"></i>
                         <span>Yêu cầu</span>
                     </Link>

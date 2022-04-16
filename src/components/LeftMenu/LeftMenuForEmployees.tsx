@@ -52,7 +52,7 @@ const LeftMenuForEmployees: React.FC = () => {
 
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/employee/teacher-request`}>
+                    <Link className="nav-link" to={`/employee/request`}>
                         <i className="fas fa-fw fa-user"></i>
                         <span>Yêu cầu</span>
                     </Link>

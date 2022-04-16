@@ -1,10 +1,11 @@
 import React, { Fragment, Dispatch } from "react";
 import { useDispatch } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
+import ReviewBlog from "./ReviewBlog";
 //import { getRestApiWithToken, getDomain, postRestApiWithToken } from "../../common/util/RestAPI.util";
 //import { Page } from "../../common/util/User.util";
 //import { RestApiAuth } from "../../common/components/RestApiAuth";
-import TeacherOfCourse from "../Courses/TeacherOfCourse"
+import TeacherOfCourse from "./TeacherOfCourse"
 
 const data = [
   {
@@ -104,6 +105,14 @@ const RequestForTeacher: React.FC = () => {
       </div>
 
       <TeacherOfCourse />
+
+      {
+        function () {
+          if (localStorage.getItem('role') === 'admin' || localStorage.getItem('role') === 'super-admin'){
+            return <ReviewBlog />
+          }
+        } ()
+      }
 
     </Fragment >
   );

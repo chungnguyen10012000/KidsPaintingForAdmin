@@ -1,18 +1,12 @@
-import React, { useState, FormEvent } from "react";
-import { useHistory } from "react-router";
+import React, { useState, FormEvent, Dispatch } from "react";
 import { OnChangeModel } from "../../common/types/Form.types";
-//import { useDispatch } from "react-redux";
-// import { login } from "../../store/actions/account.actions";
 import TextInput from "../../common/components/TextInput";
-// import jwtDecode from "jwt-decode";
-// import { JwtType } from '../../common/types/Jwt.types'
-// import { getDomain } from "../../common/util/RestAPI.util";
+import { login } from "../../store/actions/users/login";
+import { useDispatch } from "react-redux";
 
 
 const Login: React.FC = () => {
-  //let role: string[] = []
-  //const dispatch: Dispatch<any> = useDispatch();
-  let history = useHistory();
+  const dispatch: Dispatch<any> = useDispatch();
 
   const [formState, setFormState] = useState({
     email: { error: "", value: "" },
@@ -25,24 +19,12 @@ const Login: React.FC = () => {
 
   function submit(e: FormEvent<HTMLFormElement>) {
     if(isFormInvalid()) { return; }
-    if (formState.email.value === "admin"){
-      alert('Quản trị viên đăng nhập thành công!')
-      history.push({pathname: '/admin/home', state: {isAdmin: true}})
-    }
-    else if (formState.email.value === "staff"){
-      alert('Nhân viên đăng nhập thành công!')
-      history.push({pathname: '/employee/home', state: {isAdmin: 'employee'}})
-    }
-    else if (formState.email.value === "teacher"){
-      alert('Giáo viên đăng nhập thành công!')
-      history.push({pathname: '/teacher/home', state: {isAdmin: false}})
-    }
-    else if (formState.email.value === "super-admin"){
-      alert('Super Admin đăng nhập thành công!')
-      history.push({pathname: '/super-admin/home', state: {isAdmin: false}})
-    }
+    dispatch(login({
+      "username":formState.email.value,
+      "password": formState.password.value
+    }))
 
-    localStorage.setItem('email', formState.email.value)
+    e.preventDefault();
 /*     let pathAuth = getDomain('auth')
     fetch(pathAuth, {
       method: 'POST',

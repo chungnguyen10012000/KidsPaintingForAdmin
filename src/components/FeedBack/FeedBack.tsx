@@ -4,7 +4,7 @@ import { IFeedBack } from "../../store/models/feedback.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
 import { updateCurrentPath } from "../../store/actions/root.actions";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./Feedback.css"
 
 type role = {
@@ -12,8 +12,6 @@ type role = {
 };
 
 const FeedBack: React.FC = () => {
-
-  const { id } = useParams<role>()
 
   let history = useHistory();
 
@@ -32,18 +30,10 @@ const FeedBack: React.FC = () => {
         <td>{feedback.email}</td>
         <td><p>{feedback.description}</p></td>
         <td><button className="btn btn-success" onClick={() => {
-            if (id === 'admin'){
               history.push({
-                pathname: '/admin/feedback-detail',
+                pathname: `/${localStorage.getItem('role')}/feedback-detail`,
                 state: { id : feedback.id}
               })
-            }
-            else if (id === "employee"){
-              history.push({
-                pathname: '/employee/feedback-detail',
-                state: { id : feedback.id}
-              })
-            }
           }}>Xem chi tiết</button> </td>
         {/* <td><button className="btn btn-danger" > {isCheckView === true ? 'Đã xem' : 'Chưa xem'}</button> </td> */}
       </tr>);

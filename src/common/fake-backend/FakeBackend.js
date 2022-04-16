@@ -1,5 +1,6 @@
 import { getTeacher } from "./handler/GET/GetUser";
 import { PostUser } from "./handler/POST/PostUser";
+import { login } from "./handler/POST/login";
 
 
 const path = "/api/v1"
@@ -8,9 +9,9 @@ const path = "/api/v1"
 export function configureFakeBackend() {
     let realFetch = window.fetch;
     window.fetch = function (url, opts) {
-        //const { method, headers } = opts;
+        // const { method, headers } = opts;
         const { method } = opts;
-        //const body = opts.body && JSON.parse(opts.body);
+        const body = opts.body && JSON.parse(opts.body);
 
         return new Promise((resolve, reject) => {
             // wrap in timeout to simulate server api call
@@ -19,15 +20,102 @@ export function configureFakeBackend() {
             function handleRoute() {
                 switch (true) {
                     case url.endsWith(`${path}/auth`) && method === 'POST':
-                        return null;
+                        return login(body, created);
                     case url.endsWith(`${path}/user`) && method === 'POST':
                         return PostUser(created);
                     case url.endsWith(`${path}/user`) && method === 'GET':
                         return getTeacher(ok);
                     case url.match(new RegExp('/user/\\d+$')) && method === 'GET':
-                        console.log(url)
                         return getTeacher(ok);
-                    case url.match(/\/user\/\d+$/) && method === 'DELETE':
+                    case url.match(new RegExp('/user/\\d+$')) && method === 'DELETE':
+                        return null;
+                    case url.endsWith('/semester') && method === "GET": 
+                        return null;
+                    case url.endsWith('/semester') && method === "POST":
+                        return null;
+                    case url.endsWith(new RegExp('/semester/\\d+$')) && method === "DELETE":
+                        return null;
+                    case url.endsWith(new RegExp('/semester/\\d+$')) && method === "PUT":
+                        return null;
+                    case url.endsWith('/lesson-time') && method === "GET": 
+                        return null;
+                    case url.endsWith('/lesson-time') && method === "POST":
+                        return null;
+                    case url.endsWith(new RegExp('/lesson-time/\\d+$')) && method === "DELETE":
+                        return null;
+                    case url.endsWith(new RegExp('/lesson-time/\\d+$')) && method === "PUT":
+                        return null;
+                    case url.endsWith('/schedule') && method === "GET": 
+                        return null;
+                    case url.endsWith('/schedule') && method === "POST":
+                        return null;
+                    case url.endsWith(new RegExp('/schedule/\\d+$')) && method === "DELETE":
+                        return null;
+                    case url.endsWith(new RegExp('/schedule/\\d+$')) && method === "PUT":
+                        return null;
+                    case url.endsWith('/schedule-item') && method === "GET": 
+                        return null;
+                    case url.endsWith('/schedule-item') && method === "POST":
+                        return null;
+                    case url.endsWith(new RegExp('/schedule-item/\\d+$')) && method === "DELETE":
+                        return null;
+                    case url.endsWith(new RegExp('/schedule-item/\\d+$')) && method === "PUT":
+                        return null;
+                    case url.endsWith('/art-type') && method === "GET": 
+                        return null;
+                    case url.endsWith('/art-type') && method === "POST":
+                        return null;
+                    case url.endsWith(new RegExp('/art-type/\\d+$')) && method === "DELETE":
+                        return null;
+                    case url.endsWith(new RegExp('/art-type/\\d+$')) && method === "PUT":
+                        return null;
+                    case url.endsWith('/art-level') && method === "GET": 
+                        return null;
+                    case url.endsWith('/art-level') && method === "POST":
+                        return null;
+                    case url.endsWith(new RegExp('/art-level/\\d+$')) && method === "DELETE":
+                        return null;
+                    case url.endsWith(new RegExp('/art-level/\\d+$')) && method === "PUT":
+                        return null;
+                    case url.endsWith('/course') && method === "GET": 
+                        return null;
+                    case url.endsWith('/course') && method === "POST":
+                        return null;
+                    case url.endsWith(new RegExp('/course/\\d+$')) && method === "DELETE":
+                        return null;
+                    case url.endsWith(new RegExp('/course/\\d+$')) && method === "PUT":
+                        return null;
+                    case url.endsWith('/course-semester') && method === "GET": 
+                        return null;
+                    case url.endsWith('/course-semester') && method === "POST":
+                        return null;
+                    case url.endsWith(new RegExp('/course-semester/\\d+$')) && method === "DELETE":
+                        return null;
+                    case url.endsWith(new RegExp('/course-semester/\\d+$')) && method === "PUT":
+                        return null;
+                    case url.endsWith('/contest') && method === "GET": 
+                        return null;
+                    case url.endsWith('/contest') && method === "POST":
+                        return null;
+                    case url.endsWith(new RegExp('/contest/\\d+$')) && method === "DELETE":
+                        return null;
+                    case url.endsWith(new RegExp('/contest/\\d+$')) && method === "PUT":
+                        return null;
+                    case url.endsWith('/feedback') && method === "GET": 
+                        return null;
+                    case url.endsWith('/feedback') && method === "POST":
+                        return null;
+                    case url.endsWith(new RegExp('/feedback/\\d+$')) && method === "DELETE":
+                        return null;
+                    case url.endsWith(new RegExp('/feedback/\\d+$')) && method === "PUT":
+                        return null;
+                    case url.endsWith('/blog') && method === "GET": 
+                        return null;
+                    case url.endsWith('/blog') && method === "POST":
+                        return null;
+                    case url.endsWith(new RegExp('/blog/\\d+$')) && method === "DELETE":
+                        return null;
+                    case url.endsWith(new RegExp('/blog/\\d+$')) && method === "PUT":
                         return null;
                     default:
                         // pass through any requests not handled above
