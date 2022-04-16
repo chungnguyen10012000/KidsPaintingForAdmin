@@ -1,64 +1,95 @@
 export function login(body, created) {
     if (body.username === "super-admin"){
-        const res = [
+/*         const res = [
             {
                 "username": "super-admin",
-                "role": "super-admin",
-                "permission": [
-                            "WRITE_ART_TYPE", "WRITE_ART_LEVEL", "WRITE_LESSON_TIME", "READ_USER", 
-                            "WRITE_ADMIN", "READ_ADMIN", "READ_STAFF", "WRITE_STAFF", "READ_COURSE", 
-                            "WRITE_COURSE", "READ_CONTEST", "WRITE_CONTEST", "REVIEW_SEMESTER", 
-                            "REVIEW BLOG", "READ_STUDENT", "READ_TEACHER", "WRITE_TEACHER", "WRITE_CLASS",
-                            "READ_CLASS", "WRITE_SCHEDULE", "READ_SCHEDULE", "READ_FEEDBACK",
-                            "READ_BLOG", "READ_BLOG"
-                        ]
+                "sub": "super-admin detail",
+                "authorities": 
+                    [
+                        "ROLE_SUPER_ADMIN", "WRITE_ART_TYPE", "WRITE_ART_LEVEL", "WRITE_LESSON_TIME", "READ_USER", 
+                        "WRITE_ADMIN", "READ_ADMIN", "READ_STAFF", "WRITE_STAFF", "READ_COURSE", 
+                        "WRITE_COURSE", "READ_CONTEST", "WRITE_CONTEST", "REVIEW_SEMESTER", 
+                        "REVIEW BLOG", "READ_STUDENT", "READ_TEACHER", "WRITE_TEACHER", "WRITE_CLASS",
+                        "READ_CLASS", "WRITE_SCHEDULE", "READ_SCHEDULE", "READ_FEEDBACK",
+                        "READ_BLOG", "READ_BLOG"
+                    ]
             }
-        ]
+        ] */
+
+        const res =
+            {
+                "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1cGVyLWFkbWluIiwic3ViIjoic3VwZXItYWRtaW4gZGV0YWlsIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9TVVBFUl9BRE1JTiIsIldSSVRFX0FSVF9UWVBFIiwiV1JJVEVfQVJUX0xFVkVMIiwiV1JJVEVfTEVTU09OX1RJTUUiLCJSRUFEX1VTRVIiLCJXUklURV9BRE1JTiIsIlJFQURfQURNSU4iLCJSRUFEX1NUQUZGIiwiV1JJVEVfU1RBRkYiLCJSRUFEX0NPVVJTRSIsIldSSVRFX0NPVVJTRSIsIlJFQURfQ09OVEVTVCIsIldSSVRFX0NPTlRFU1QiLCJSRVZJRVdfU0VNRVNURVIiLCJSRVZJRVcgQkxPRyIsIlJFQURfU1RVREVOVCIsIlJFQURfVEVBQ0hFUiIsIldSSVRFX1RFQUNIRVIiLCJXUklURV9DTEFTUyIsIlJFQURfQ0xBU1MiLCJXUklURV9TQ0hFRFVMRSIsIlJFQURfU0NIRURVTEUiLCJSRUFEX0ZFRURCQUNLIiwiUkVBRF9CTE9HIiwiUkVBRF9CTE9HIl19.Xa-6V7oN-w38YrZ7EimtrrtWrYy9a2I9LZNjvaW54oY",
+                "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1cGVyLWFkbWluIiwic3ViIjoic3VwZXItYWRtaW4gZGV0YWlsIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9TVVBFUl9BRE1JTiIsIldSSVRFX0FSVF9UWVBFIiwiV1JJVEVfQVJUX0xFVkVMIiwiV1JJVEVfTEVTU09OX1RJTUUiLCJSRUFEX1VTRVIiLCJXUklURV9BRE1JTiIsIlJFQURfQURNSU4iLCJSRUFEX1NUQUZGIiwiV1JJVEVfU1RBRkYiLCJSRUFEX0NPVVJTRSIsIldSSVRFX0NPVVJTRSIsIlJFQURfQ09OVEVTVCIsIldSSVRFX0NPTlRFU1QiLCJSRVZJRVdfU0VNRVNURVIiLCJSRVZJRVcgQkxPRyIsIlJFQURfU1RVREVOVCIsIlJFQURfVEVBQ0hFUiIsIldSSVRFX1RFQUNIRVIiLCJXUklURV9DTEFTUyIsIlJFQURfQ0xBU1MiLCJXUklURV9TQ0hFRFVMRSIsIlJFQURfU0NIRURVTEUiLCJSRUFEX0ZFRURCQUNLIiwiUkVBRF9CTE9HIiwiUkVBRF9CTE9HIl19.Xa-6V7oN-w38YrZ7EimtrrtWrYy9a2I9LZNjvaW54oY"
+            }
+
         return created(res)
     }
     else if (body.username === "admin"){
-        const res = [
+/*         const res = [
             {
                 "username": "admin",
-                "role": "admin",
-                "permission": [
-                            "READ_STAFF", "WRITE_STAFF", "READ_COURSE", "WRITE_COURSE", 
-                            "READ_CONTEST", "WRITE_CONTEST", "REVIEW_SEMESTER", "REVIEW BLOG",
-                            "READ_STUDENT", "READ_TEACHER", "WRITE_TEACHER", "WRITE_CLASS",
-                            "READ_CLASS", "WRITE_SCHEDULE", "READ_SCHEDULE", "READ_FEEDBACK",
-                            "READ_BLOG", "READ_BLOG"
-                        ]
+                "sub": "admin detail",
+                "authorities": 
+                    [
+                        "ROLE_ADMIN", "READ_STAFF", "WRITE_STAFF", "READ_COURSE", "WRITE_COURSE", 
+                        "READ_CONTEST", "WRITE_CONTEST", "REVIEW_SEMESTER", "REVIEW BLOG",
+                        "READ_STUDENT", "READ_TEACHER", "WRITE_TEACHER", "WRITE_CLASS",
+                        "READ_CLASS", "WRITE_SCHEDULE", "READ_SCHEDULE", "READ_FEEDBACK",
+                        "READ_BLOG", "READ_BLOG"
+                    ]
             }
-        ]
-        return created(res)
+        ] */
+        const res =
+        {
+            "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwic3ViIjoiYWRtaW4gZGV0YWlsIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiIsIlJFQURfU1RBRkYiLCJXUklURV9TVEFGRiIsIlJFQURfQ09VUlNFIiwiV1JJVEVfQ09VUlNFIiwiUkVBRF9DT05URVNUIiwiV1JJVEVfQ09OVEVTVCIsIlJFVklFV19TRU1FU1RFUiIsIlJFVklFVyBCTE9HIiwiUkVBRF9TVFVERU5UIiwiUkVBRF9URUFDSEVSIiwiV1JJVEVfVEVBQ0hFUiIsIldSSVRFX0NMQVNTIiwiUkVBRF9DTEFTUyIsIldSSVRFX1NDSEVEVUxFIiwiUkVBRF9TQ0hFRFVMRSIsIlJFQURfRkVFREJBQ0siLCJSRUFEX0JMT0ciLCJSRUFEX0JMT0ciXX0.LJ1nmhEh8uyDIl3fcQQDecCbdKYNCABtsJrLkNPyTtc",
+            "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwic3ViIjoiYWRtaW4gZGV0YWlsIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiIsIlJFQURfU1RBRkYiLCJXUklURV9TVEFGRiIsIlJFQURfQ09VUlNFIiwiV1JJVEVfQ09VUlNFIiwiUkVBRF9DT05URVNUIiwiV1JJVEVfQ09OVEVTVCIsIlJFVklFV19TRU1FU1RFUiIsIlJFVklFVyBCTE9HIiwiUkVBRF9TVFVERU5UIiwiUkVBRF9URUFDSEVSIiwiV1JJVEVfVEVBQ0hFUiIsIldSSVRFX0NMQVNTIiwiUkVBRF9DTEFTUyIsIldSSVRFX1NDSEVEVUxFIiwiUkVBRF9TQ0hFRFVMRSIsIlJFQURfRkVFREJBQ0siLCJSRUFEX0JMT0ciLCJSRUFEX0JMT0ciXX0.LJ1nmhEh8uyDIl3fcQQDecCbdKYNCABtsJrLkNPyTtc"
+        }
+
+    return created(res)
     }
 
     else if (body.username === "staff") {
-        const res = [
+/*         const res = [
             {
                 "username": "staff",
-                "role": "employee",
-                "permission": [
-                            "READ_STUDENT", "READ_TEACHER", "WRITE_TEACHER", "WRITE_CLASS",
-                            "READ_CLASS", "WRITE_SCHEDULE", "READ_SCHEDULE", "READ_FEEDBACK",
-                            "READ_BLOG", "READ_BLOG"
-                        ]
+                "sub": "staff detail",
+                "authorities": 
+                    [
+                        "ROLE_STAFF","READ_STUDENT", "READ_TEACHER", "WRITE_TEACHER", "WRITE_CLASS",
+                        "READ_CLASS", "WRITE_SCHEDULE", "READ_SCHEDULE", "READ_FEEDBACK",
+                        "READ_BLOG", "READ_BLOG"
+                    ]
             }
-        ]
+        ] */
+
+        const res =
+        {
+            "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN0YWZmIiwic3ViIjoic3RhZmYgZGV0YWlsIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9TVEFGRiIsIlJFQURfU1RVREVOVCIsIlJFQURfVEVBQ0hFUiIsIldSSVRFX1RFQUNIRVIiLCJXUklURV9DTEFTUyIsIlJFQURfQ0xBU1MiLCJXUklURV9TQ0hFRFVMRSIsIlJFQURfU0NIRURVTEUiLCJSRUFEX0ZFRURCQUNLIiwiUkVBRF9CTE9HIiwiUkVBRF9CTE9HIl19.y1mo6J8RhjdFYypGrUpQzkuLqz6WrxE18bEARq7ybmg",
+            "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN0YWZmIiwic3ViIjoic3RhZmYgZGV0YWlsIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9TVEFGRiIsIlJFQURfU1RVREVOVCIsIlJFQURfVEVBQ0hFUiIsIldSSVRFX1RFQUNIRVIiLCJXUklURV9DTEFTUyIsIlJFQURfQ0xBU1MiLCJXUklURV9TQ0hFRFVMRSIsIlJFQURfU0NIRURVTEUiLCJSRUFEX0ZFRURCQUNLIiwiUkVBRF9CTE9HIiwiUkVBRF9CTE9HIl19.y1mo6J8RhjdFYypGrUpQzkuLqz6WrxE18bEARq7ybmg"
+        }
+        
         return created(res)
     }
     else if (body.username === "teacher") {
-        const res = [
+/*         const res = [
             {
                 "username": "teacher",
-                "role": "teacher",
-                "permission": [
-                            "READ_STUDENT", "SIGN_SEMESTER_COURSE", "SIGN_LEVEL", "VIEW_SCHEDULE",
-                            "GRADE_CONTEST", "WRITE_EXERCISE", "GRADE_EXERCISE", "SIGN_OFF_LESSON",
-                            "WRITE_TUTORIAL"
-                        ]
+                "sub": "staff detail",
+                "authorities": 
+                    [
+                        "ROLE_TEACHER", "READ_STUDENT", "SIGN_SEMESTER_COURSE", "SIGN_LEVEL", "VIEW_SCHEDULE",
+                        "GRADE_CONTEST", "WRITE_EXERCISE", "GRADE_EXERCISE", "SIGN_OFF_LESSON",
+                        "WRITE_TUTORIAL"
+                    ]
             }
         ]
+        return created(res) */
+        const res =
+        {
+            "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlYWNoZXIiLCJzdWIiOiJzdGFmZiBkZXRhaWwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RFQUNIRVIiLCJSRUFEX1NUVURFTlQiLCJTSUdOX1NFTUVTVEVSX0NPVVJTRSIsIlNJR05fTEVWRUwiLCJWSUVXX1NDSEVEVUxFIiwiR1JBREVfQ09OVEVTVCIsIldSSVRFX0VYRVJDSVNFIiwiR1JBREVfRVhFUkNJU0UiLCJTSUdOX09GRl9MRVNTT04iLCJXUklURV9UVVRPUklBTCJdfQ.dKC0zSe9JDtDDHAxpX_r9WdZu-S6_kFEBtA3DwzlNfs",
+            "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlYWNoZXIiLCJzdWIiOiJzdGFmZiBkZXRhaWwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RFQUNIRVIiLCJSRUFEX1NUVURFTlQiLCJTSUdOX1NFTUVTVEVSX0NPVVJTRSIsIlNJR05fTEVWRUwiLCJWSUVXX1NDSEVEVUxFIiwiR1JBREVfQ09OVEVTVCIsIldSSVRFX0VYRVJDSVNFIiwiR1JBREVfRVhFUkNJU0UiLCJTSUdOX09GRl9MRVNTT04iLCJXUklURV9UVVRPUklBTCJdfQ.dKC0zSe9JDtDDHAxpX_r9WdZu-S6_kFEBtA3DwzlNfs"
+        }
+        
         return created(res)
     }
 }

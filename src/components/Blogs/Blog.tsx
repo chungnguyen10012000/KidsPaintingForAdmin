@@ -8,10 +8,11 @@ import { updateCurrentPath } from "../../store/actions/root.actions";
 import { IBlogState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
 import Popup from "reactjs-popup";
 import { removeBlog, clearSelectedBlog, setModificationState,
-  changeSelectedBlog } from "../../store/actions/blogs.actions";
+  changeSelectedBlog } from "../../store/actions/blog/blogs.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { BlogModificationStatus, IBlog } from "../../store/models/blogs.innterface";
 import { useHistory, useParams } from "react-router-dom";
+import { getBlog } from "../../store/actions/blog/getBlog";
 
 type role = {
   id: string;
@@ -29,6 +30,10 @@ const Blogs: React.FC = () => {
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
   const numberItemsCount: number = blogs.blogs.length;
   const [popup, setPopup] = useState(false);
+
+  useEffect(() => {
+    dispatch(getBlog())
+  }, [dispatch])
 
 
   useEffect(() => {
@@ -48,7 +53,6 @@ const Blogs: React.FC = () => {
     }
   }
 
-  console.log(description)
   return (
     <Fragment>
       <h1 className="h3 mb-2 text-gray-800">Blog</h1>

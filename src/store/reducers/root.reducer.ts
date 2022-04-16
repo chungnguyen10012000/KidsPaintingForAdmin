@@ -14,7 +14,7 @@ import levelsReducer from "./levels.reducer";
 import exercisesReducer from "./exercise.reducer";
 import feedbackReducer from "./feedback.reducer";
 import sessonsReducer from "./sesson.reducer";
-import blogReducer from "./blog.reducer";
+import blogReducer from "./blog/blog.reducer";
 import employeeReducer from "./employee.reducer";
 import coursesSemesterReducer from "./course_for_semester.reducer";
 import lessonTimesReducer from "./lesson_time/lesson_time.reducer";

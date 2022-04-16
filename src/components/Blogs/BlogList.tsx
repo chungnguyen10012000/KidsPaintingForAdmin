@@ -11,16 +11,15 @@ export type productListProps = {
 function BlogList(props: productListProps): JSX.Element  {
   const blogs: IBlogState = useSelector((state: IStateType) => state.blogs);
 
-  const productElements: (JSX.Element | null)[] = blogs.blogs.map(blog_item => {
+  const productElements: (JSX.Element | null)[] = blogs.blogs.map((blog_item, index) => {
     if (!blog_item) { return null; }
     return (<tr className={`table-row ${(blogs.selectedBlog&& blogs.selectedBlog.id === blog_item.id) ? "selected" : ""}`}
       onClick={() => {
         if(props.onSelect) props.onSelect(blog_item);
       }}
-      key={`blog_${blog_item.id}`}>
-      <th scope="row">{blog_item.id}</th>
+      key={`blog_${index}`}>
+      <th scope="row">{index}</th>
       <td>{blog_item.name}</td>
-      <td><p>{blog_item.description}</p></td>
     </tr>);
   });
 
@@ -32,7 +31,6 @@ function BlogList(props: productListProps): JSX.Element  {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Tên blog</th>
-            <th scope="col">Nội dung</th>
           </tr>
         </thead>
         <tbody>

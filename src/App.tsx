@@ -10,11 +10,6 @@ import { AccountRoute } from "./common/components/AccountRoute";
 
 
 const App: React.FC = () => {
-  fetch('/sesson.txt', {
-    method: "GET"
-  })
-    .then(res => res.text())
-    .then(data => console.log(data))
   return (
     <div className="App" id="wrapper">
       <Router>

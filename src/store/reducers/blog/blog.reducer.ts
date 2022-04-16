@@ -1,22 +1,25 @@
-import { IBlogState, IActionBase } from "../models/root.interface";
+import { IBlogState, IActionBase } from "../../models/root.interface";
 import { ADD_BLOG, CHANGE_BLOG_PENDING_EDIT, EDIT_BLOG, REMOVE_BLOG,
-    CLEAR_BLOG_PENDING_EDIT, SET_MODIFICATION_STATE, CHANGE_BLOG_AMOUNT} from "../actions/blogs.actions";
-import { IBlog, BlogModificationStatus } from "../models/blogs.innterface";
+    CLEAR_BLOG_PENDING_EDIT, SET_MODIFICATION_STATE, CHANGE_BLOG_AMOUNT, REMOVE_BLOG_ALL, INITIAL_BLOG} from "../../actions/blog/blogs.actions";
+import { IBlog, BlogModificationStatus } from "../../models/blogs.innterface";
 
 
 
 const initialState: IBlogState = {
     modificationState: BlogModificationStatus.None,
     selectedBlog: null,
-    blogs: [{
-        id: 1, name: "Hello", description: "<p></p>",
-    }]
+    blogs: []
 };
 
 function blogReducer(state: IBlogState = initialState, action: IActionBase): IBlogState {
     switch (action.type) {
+        case INITIAL_BLOG: {
+            let maxId: number = 0;
+            action.blog.id = maxId + 1;
+            return { ...state, blogs: [...state.blogs, action.blog]};
+        }
         case ADD_BLOG: {
-            let maxId: number = Math.max.apply(Math, state.blogs.map(function(o) { return o.id; }));
+            let maxId: number =  Math.max.apply(Math, state.blogs.map(function(o) { return o.id; }));
             action.blog.id = maxId + 1;
             return { ...state, blogs: [...state.blogs, action.blog]};
         }
@@ -28,6 +31,9 @@ function blogReducer(state: IBlogState = initialState, action: IActionBase): IBl
         }
         case REMOVE_BLOG: {
             return { ...state, blogs: state.blogs.filter(pr => pr.id !== action.id) };
+        }
+        case REMOVE_BLOG_ALL: {
+            return { ...state, blogs: [] };
         }
         case CHANGE_BLOG_PENDING_EDIT: {
             return { ...state, selectedBlog: action.blog };

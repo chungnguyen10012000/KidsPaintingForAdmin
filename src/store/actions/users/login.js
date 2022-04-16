@@ -1,5 +1,6 @@
 import { fetchDataRequest, fetchDataSuccess, fetchDataError } from "./users.action";
 import { history } from "../../../common/helper/history";
+import jwt_decode from "jwt-decode";
 
 export function login(data) {
     return dispatch => {
@@ -18,13 +19,31 @@ export function login(data) {
             })
             .then (data => {
                 dispatch(fetchDataSuccess(data))
-                alert(`${data[0].username} đăng nhập thành công!`)
-                localStorage.setItem('email', data[0].role)
-                localStorage.setItem('permission', data[0].permission)
-                localStorage.setItem('role', data[0].role)
-                history.push({pathname: `/${data[0].role}/home`, state: {isAdmin: false}})
+                alert(`Đăng nhập thành công!`)
+                //console.log(data)
+                var x = data
+                console.log(x.accessToken)
+                var decoded = jwt_decode(x.accessToken)
+                //console.log(decoded)
+                localStorage.setItem('email', decoded.username)
+                localStorage.setItem('authorities', decoded.authorities)
+                localStorage.setItem('role', decoded.authorities[0])
+                if (decoded.authorities[0] === "ROLE_ADMIN"){
+                    history.push({pathname: '/admin/home', state: {isAdmin: "admin"}})
+                }
+                else if (decoded.authorities[0] === "ROLE_SUPER_ADMIN"){
+                    history.push({pathname: '/super-admin/home', state: {isAdmin: "super-admin"}})
+                }
+                else if (decoded.authorities[0] === "ROLE_STAFF"){
+                    history.push({pathname: '/staff/home', state: {isAdmin: "employee"}})
+                }
+                else if (decoded.authorities[0] === "ROLE_STAFF"){
+                    history.push({pathname: '/employee/home', state: {isAdmin: "employee"}})
+                }
+                else if (decoded.authorities[0] === "ROLE_TEACHER"){
+                    history.push({pathname: '/teacher/home', state: {isAdmin: "teacher"}})
+                }
                 window.location.reload(false)
-                console.log(data)
             })
             .catch(error => {
                 dispatch(fetchDataError(error));

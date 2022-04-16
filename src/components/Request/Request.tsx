@@ -108,7 +108,7 @@ const RequestForTeacher: React.FC = () => {
 
       {
         function () {
-          if (localStorage.getItem('role') === 'admin' || localStorage.getItem('role') === 'super-admin'){
+          if (localStorage.getItem('role') === 'ROLE_ADMIN' || localStorage.getItem('role') === 'ROLE_SUPER_ADMIN'){
             return <ReviewBlog />
           }
         } ()

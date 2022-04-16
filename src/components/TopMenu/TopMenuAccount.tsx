@@ -35,7 +35,7 @@ function TopMenuAccount(): JSX.Element {
           localStorage.removeItem('refresh_token')
           localStorage.removeItem('rememberMe')
           localStorage.removeItem('permission')
-          localStorage.removeItem('role')
+          localStorage.removeItem('authorities')
         }}
         href="/login" 
         data-toggle="modal"

@@ -3,7 +3,7 @@ import { IStateType, IBlogState  } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { IBlog, BlogModificationStatus } from "../../store/models/blogs.innterface";
 import TextInput from "../../common/components/TextInput";
-import { editBlog, clearSelectedBlog, setModificationState, addBlog } from "../../store/actions/blogs.actions";
+import { editBlog, clearSelectedBlog, setModificationState, addBlog } from "../../store/actions/blog/blogs.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IBlogFormState } from "../../common/types/Form.types";
 
@@ -13,6 +13,7 @@ import { IMytype } from "../../store/models/mytypes.interface";
 import { useQuill } from 'react-quilljs';
 import BlotFormatter from 'quill-blot-formatter';
 import 'quill/dist/quill.snow.css';
+import { postBlog } from "../../store/actions/blog/postBlog";
 
 export type levelListProps = {
   onSelect?: (level: ILevel) => void;
@@ -31,7 +32,7 @@ const BlogForm: React.FC = () => {
   const isCreate: boolean = (blogs.modificationState === BlogModificationStatus.Create);
   
   if (!blog || isCreate) {
-    blog = { id: 0, name: "", description: ""};
+    blog = { id: 0, name: "", description: "", image_url: ""};
   }
 
   const { quill, quillRef, Quill } = useQuill({
@@ -82,7 +83,7 @@ const BlogForm: React.FC = () => {
 
   function saveForm(formState: IBlogFormState, saveFn: Function): void {
     if (blog) {
-      dispatch(saveFn({
+      dispatch(postBlog({
         ...blog,
         name: formState.name.value,
         description: textHtml,

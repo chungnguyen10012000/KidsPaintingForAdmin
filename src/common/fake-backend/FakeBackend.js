@@ -1,6 +1,8 @@
 import { getTeacher } from "./handler/GET/GetUser";
 import { PostUser } from "./handler/POST/PostUser";
 import { login } from "./handler/POST/login";
+import { getBlog } from "./handler/GET/GetBlog";
+import { postBlog } from "./handler/POST/postBlog";
 
 
 const path = "/api/v1"
@@ -33,89 +35,89 @@ export function configureFakeBackend() {
                         return null;
                     case url.endsWith('/semester') && method === "POST":
                         return null;
-                    case url.endsWith(new RegExp('/semester/\\d+$')) && method === "DELETE":
+                    case url.match(new RegExp('/semester/\\d+$')) && method === "DELETE":
                         return null;
-                    case url.endsWith(new RegExp('/semester/\\d+$')) && method === "PUT":
+                    case url.match(new RegExp('/semester/\\d+$')) && method === "PUT":
                         return null;
                     case url.endsWith('/lesson-time') && method === "GET": 
                         return null;
                     case url.endsWith('/lesson-time') && method === "POST":
                         return null;
-                    case url.endsWith(new RegExp('/lesson-time/\\d+$')) && method === "DELETE":
+                    case url.match(new RegExp('/lesson-time/\\d+$')) && method === "DELETE":
                         return null;
-                    case url.endsWith(new RegExp('/lesson-time/\\d+$')) && method === "PUT":
+                    case url.match(new RegExp('/lesson-time/\\d+$')) && method === "PUT":
                         return null;
                     case url.endsWith('/schedule') && method === "GET": 
                         return null;
                     case url.endsWith('/schedule') && method === "POST":
                         return null;
-                    case url.endsWith(new RegExp('/schedule/\\d+$')) && method === "DELETE":
+                    case url.match(new RegExp('/schedule/\\d+$')) && method === "DELETE":
                         return null;
-                    case url.endsWith(new RegExp('/schedule/\\d+$')) && method === "PUT":
+                    case url.match(new RegExp('/schedule/\\d+$')) && method === "PUT":
                         return null;
                     case url.endsWith('/schedule-item') && method === "GET": 
                         return null;
                     case url.endsWith('/schedule-item') && method === "POST":
                         return null;
-                    case url.endsWith(new RegExp('/schedule-item/\\d+$')) && method === "DELETE":
+                    case url.match(new RegExp('/schedule-item/\\d+$')) && method === "DELETE":
                         return null;
-                    case url.endsWith(new RegExp('/schedule-item/\\d+$')) && method === "PUT":
+                    case url.match(new RegExp('/schedule-item/\\d+$')) && method === "PUT":
                         return null;
                     case url.endsWith('/art-type') && method === "GET": 
                         return null;
                     case url.endsWith('/art-type') && method === "POST":
                         return null;
-                    case url.endsWith(new RegExp('/art-type/\\d+$')) && method === "DELETE":
+                    case url.match(new RegExp('/art-type/\\d+$')) && method === "DELETE":
                         return null;
-                    case url.endsWith(new RegExp('/art-type/\\d+$')) && method === "PUT":
+                    case url.match(new RegExp('/art-type/\\d+$')) && method === "PUT":
                         return null;
                     case url.endsWith('/art-level') && method === "GET": 
                         return null;
                     case url.endsWith('/art-level') && method === "POST":
                         return null;
-                    case url.endsWith(new RegExp('/art-level/\\d+$')) && method === "DELETE":
+                    case url.match(new RegExp('/art-level/\\d+$')) && method === "DELETE":
                         return null;
-                    case url.endsWith(new RegExp('/art-level/\\d+$')) && method === "PUT":
+                    case url.match(new RegExp('/art-level/\\d+$')) && method === "PUT":
                         return null;
                     case url.endsWith('/course') && method === "GET": 
                         return null;
                     case url.endsWith('/course') && method === "POST":
                         return null;
-                    case url.endsWith(new RegExp('/course/\\d+$')) && method === "DELETE":
+                    case url.match(new RegExp('/course/\\d+$')) && method === "DELETE":
                         return null;
-                    case url.endsWith(new RegExp('/course/\\d+$')) && method === "PUT":
+                    case url.match(new RegExp('/course/\\d+$')) && method === "PUT":
                         return null;
                     case url.endsWith('/course-semester') && method === "GET": 
                         return null;
                     case url.endsWith('/course-semester') && method === "POST":
                         return null;
-                    case url.endsWith(new RegExp('/course-semester/\\d+$')) && method === "DELETE":
+                    case url.match(new RegExp('/course-semester/\\d+$')) && method === "DELETE":
                         return null;
-                    case url.endsWith(new RegExp('/course-semester/\\d+$')) && method === "PUT":
+                    case url.match(new RegExp('/course-semester/\\d+$')) && method === "PUT":
                         return null;
                     case url.endsWith('/contest') && method === "GET": 
                         return null;
                     case url.endsWith('/contest') && method === "POST":
                         return null;
-                    case url.endsWith(new RegExp('/contest/\\d+$')) && method === "DELETE":
+                    case url.match(new RegExp('/contest/\\d+$')) && method === "DELETE":
                         return null;
-                    case url.endsWith(new RegExp('/contest/\\d+$')) && method === "PUT":
+                    case url.match(new RegExp('/contest/\\d+$')) && method === "PUT":
                         return null;
                     case url.endsWith('/feedback') && method === "GET": 
                         return null;
                     case url.endsWith('/feedback') && method === "POST":
                         return null;
-                    case url.endsWith(new RegExp('/feedback/\\d+$')) && method === "DELETE":
+                    case url.match(new RegExp('/feedback/\\d+$')) && method === "DELETE":
                         return null;
-                    case url.endsWith(new RegExp('/feedback/\\d+$')) && method === "PUT":
+                    case url.match(new RegExp('/feedback/\\d+$')) && method === "PUT":
                         return null;
                     case url.endsWith('/blog') && method === "GET": 
-                        return null;
+                        return getBlog(ok);
                     case url.endsWith('/blog') && method === "POST":
+                        return postBlog(body, created);
+                    case url.match(new RegExp('/blog/\\d+$')) && method === "DELETE":
                         return null;
-                    case url.endsWith(new RegExp('/blog/\\d+$')) && method === "DELETE":
-                        return null;
-                    case url.endsWith(new RegExp('/blog/\\d+$')) && method === "PUT":
+                    case url.match(new RegExp('/blog/\\d+$')) && method === "PUT":
                         return null;
                     default:
                         // pass through any requests not handled above
@@ -134,7 +136,7 @@ export function configureFakeBackend() {
                 resolve({status: 201, ok: true, text: () => Promise.resolve(JSON.stringify(body)), json: () => Promise.resolve(body) });
             }
 
-           /*  function unauthorized() {
+            /*  function unauthorized() {
                 resolve({ status: 401, text: () => Promise.resolve(JSON.stringify({ message: 'Unauthorized' })) });
             }
 
