@@ -1,4 +1,4 @@
-import React, { Fragment, Dispatch, useState } from "react";
+import React, { Fragment, Dispatch, useState, useEffect } from "react";
 import TopCard from "../../common/components/TopCard";
 import { IUser } from "../../store/models/user.interface";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import { updateCurrentPath } from "../../store/actions/root.actions";
 import TeacherForm from "./AddUserForm";
 import { addNotification } from "../../store/actions/notifications.action";
 import SelectInput from "../../common/components/Select";
+import { fetchProducts } from "../../store/actions/users/fetchDataUser";
 
 const AddUser: React.FC = () => {
 
@@ -23,6 +24,10 @@ const AddUser: React.FC = () => {
     dispatch(removeUser(teacher.id));
   }
 
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [dispatch])
+
   const userElements: JSX.Element[] = users.map( (ele, index) => {
     return (
       <tr className={`table-row`}
@@ -35,13 +40,13 @@ const AddUser: React.FC = () => {
 
   let listUser: string[] = []
 
-  if (localStorage.getItem('role') === "super-admin"){
+  if (localStorage.getItem('role') === "ROLE_SUPER_ADMIN"){
     listUser = ['Quản trị viên', 'Nhân viên', 'Giáo viên']
   }
-  else if (localStorage.getItem('role') === "admin"){
+  else if (localStorage.getItem('role') === "ROLE_ADMIN"){
     listUser = ['Nhân viên', 'Giáo viên']
   }
-  else if (localStorage.getItem('role') === 'staff'){
+  else if (localStorage.getItem('role') === 'ROLE_STAFF'){
     listUser = ['Giáo viên']
   }
 
