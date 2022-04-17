@@ -1,11 +1,11 @@
-import { fetchDataRequest, fetchDataSuccess, fetchDataError, removeBlogAll, addBlog, initialBlog } from "./blogs.actions";
+import { fetchDataRequest, fetchDataSuccess, fetchDataError, editBlog } from "./blogs.actions";
 
-export function postBlog(data) {
+export function putBlog(id, data) {
     return dispatch => {
         dispatch(fetchDataRequest());
         fetch(
-                "/api/v1/blog", {
-                    method: "POST",
+                `/api/v1/blog/${id}`, {
+                    method: "PUT",
                     body: JSON.stringify(data)
                 }
             )
@@ -17,8 +17,9 @@ export function postBlog(data) {
             })
             .then (data => {
                 console.log(data)
+                console.log(id)
                 dispatch(fetchDataSuccess(data))
-                dispatch(addBlog(data))
+                dispatch(editBlog(data))
             })
             .catch(error => {
                 dispatch(fetchDataError(error));

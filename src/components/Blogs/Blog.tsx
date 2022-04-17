@@ -13,6 +13,7 @@ import { addNotification } from "../../store/actions/notifications.action";
 import { BlogModificationStatus, IBlog } from "../../store/models/blogs.innterface";
 import { useHistory, useParams } from "react-router-dom";
 import { getBlog } from "../../store/actions/blog/getBlog";
+import { deleteBlog } from "../../store/actions/blog/deleteBlog";
 
 type role = {
   id: string;
@@ -122,7 +123,7 @@ const Blogs: React.FC = () => {
                   return;
                 }
                 dispatch(addNotification("Blog", ` ${blogs.selectedBlog.name} đã bị xóa khỏi hệ thống`));
-                dispatch(removeBlog(blogs.selectedBlog.id));
+                dispatch(deleteBlog(blogs.selectedBlog.id));
                 dispatch(clearSelectedBlog());
                 setPopup(false);
               }}>Xóa

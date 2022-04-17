@@ -6,6 +6,7 @@ import { IStateType } from "../../store/models/root.interface";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { useHistory } from "react-router-dom";
 import "./Feedback.css"
+import { getFeedback } from "../../store/actions/feedback/getFeedback";
 
 type role = {
   id: string;
@@ -17,6 +18,7 @@ const FeedBack: React.FC = () => {
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Phản hồi", "Danh sách"));
+  dispatch(getFeedback())
   
   const feedbacks: IFeedBack[] = useSelector((state: IStateType) => state.feedbacks.feedbacks);
 
@@ -28,12 +30,27 @@ const FeedBack: React.FC = () => {
         key={`blog_${feedback.id}`}>
         <th scope="row">{feedback.id}</th>
         <td>{feedback.email}</td>
-        <td><p>{feedback.description}</p></td>
+        <td><p>{feedback.content}</p></td>
         <td><button className="btn btn-success" onClick={() => {
+            if (localStorage.getItem('role') == "ROLE_SUPER_ADMIN"){
               history.push({
-                pathname: `/${localStorage.getItem('role')}/feedback-detail`,
+                pathname: `/super-admin/feedback-detail`,
                 state: { id : feedback.id}
               })
+            }
+            else if (localStorage.getItem('role') == "ROLE_ADMIN"){
+              history.push({
+                pathname: `/admin/feedback-detail`,
+                state: { id : feedback.id}
+              })
+            }
+
+            else if (localStorage.getItem('role') == "ROLE_STAFF"){
+              history.push({
+                pathname: `/employee/feedback-detail`,
+                state: { id : feedback.id}
+              })
+            }
           }}>Xem chi tiết</button> </td>
         {/* <td><button className="btn btn-danger" > {isCheckView === true ? 'Đã xem' : 'Chưa xem'}</button> </td> */}
       </tr>);

@@ -12,7 +12,7 @@ import myclasssReducer from "./myclass.reducer";
 import mytypesReducer from "./mytypes.reducer";
 import levelsReducer from "./levels.reducer";
 import exercisesReducer from "./exercise.reducer";
-import feedbackReducer from "./feedback.reducer";
+import feedbackReducer from "./feedback/feedback.reducer";
 import sessonsReducer from "./sesson.reducer";
 import blogReducer from "./blog/blog.reducer";
 import employeeReducer from "./employee.reducer";

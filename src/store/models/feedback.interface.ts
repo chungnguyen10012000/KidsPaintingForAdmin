@@ -1,7 +1,7 @@
 export interface IFeedBack {
     id: number;
     email: string;
-    description: string;
+    content: string;
 }
 
 export enum FeedBackModificationStatus {

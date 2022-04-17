@@ -1,5 +1,5 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
-import { IStateType, IBlogState  } from "../../store/models/root.interface";
+import { IStateType, IBlogState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { IBlog, BlogModificationStatus } from "../../store/models/blogs.innterface";
 import TextInput from "../../common/components/TextInput";
@@ -14,6 +14,7 @@ import { useQuill } from 'react-quilljs';
 import BlotFormatter from 'quill-blot-formatter';
 import 'quill/dist/quill.snow.css';
 import { postBlog } from "../../store/actions/blog/postBlog";
+import { putBlog } from "../../store/actions/blog/putBlog";
 
 export type levelListProps = {
   onSelect?: (level: ILevel) => void;
@@ -30,9 +31,9 @@ const BlogForm: React.FC = () => {
   const blogs: IBlogState | null = useSelector((state: IStateType) => state.blogs);
   let blog: IBlog | null = blogs.selectedBlog;
   const isCreate: boolean = (blogs.modificationState === BlogModificationStatus.Create);
-  
+
   if (!blog || isCreate) {
-    blog = { id: 0, name: "", description: "", image_url: ""};
+    blog = { id: 0, name: "", description: "", image_url: "" };
   }
 
   const { quill, quillRef, Quill } = useQuill({
@@ -83,11 +84,21 @@ const BlogForm: React.FC = () => {
 
   function saveForm(formState: IBlogFormState, saveFn: Function): void {
     if (blog) {
-      dispatch(postBlog({
-        ...blog,
-        name: formState.name.value,
-        description: textHtml,
-      }));
+      if (saveFn === addBlog) {
+        dispatch(postBlog({
+          ...blog,
+          name: formState.name.value,
+          description: textHtml,
+        }));
+      }
+      else {
+        dispatch(putBlog(blog.id, {
+          ...blog,
+          name: formState.name.value,
+          description: textHtml,
+        }));
+      }
+
 
       dispatch(addNotification("Blog", ` ${formState.name.value} chỉnh bởi bạn`));
       dispatch(clearSelectedBlog());
@@ -105,8 +116,8 @@ const BlogForm: React.FC = () => {
   }
 
   function isFormInvalid(): boolean {
-    return (formState.name.error  || !formState.name.value ) as boolean;
-}
+    return (formState.name.error || !formState.name.value) as boolean;
+  }
 
   return (
     <Fragment>

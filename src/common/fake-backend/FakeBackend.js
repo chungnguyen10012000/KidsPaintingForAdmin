@@ -3,6 +3,9 @@ import { PostUser } from "./handler/POST/PostUser";
 import { login } from "./handler/POST/login";
 import { getBlog } from "./handler/GET/GetBlog";
 import { postBlog } from "./handler/POST/postBlog";
+import { putBlog } from "./handler/PUT/putBlog";
+import { deleteBlog } from "./handler/DELETE/deleteBlog";
+import { getFeedback } from "./handler/GET/GetFeedback";
 
 
 const path = "/api/v1"
@@ -104,7 +107,7 @@ export function configureFakeBackend() {
                     case url.match(new RegExp('/contest/\\d+$')) && method === "PUT":
                         return null;
                     case url.endsWith('/feedback') && method === "GET": 
-                        return null;
+                        return getFeedback(ok);
                     case url.endsWith('/feedback') && method === "POST":
                         return null;
                     case url.match(new RegExp('/feedback/\\d+$')) && method === "DELETE":
@@ -116,9 +119,9 @@ export function configureFakeBackend() {
                     case url.endsWith('/blog') && method === "POST":
                         return postBlog(body, created);
                     case url.match(new RegExp('/blog/\\d+$')) && method === "DELETE":
-                        return null;
+                        return deleteBlog(deleted);
                     case url.match(new RegExp('/blog/\\d+$')) && method === "PUT":
-                        return null;
+                        return putBlog(body, created);
                     default:
                         // pass through any requests not handled above
                         return realFetch(url, opts)
@@ -134,6 +137,10 @@ export function configureFakeBackend() {
 
             function created(body) {
                 resolve({status: 201, ok: true, text: () => Promise.resolve(JSON.stringify(body)), json: () => Promise.resolve(body) });
+            }
+
+            function deleted() {
+                resolve({status: 202, ok: true, text: () => Promise.resolve(JSON.stringify(body)), json: () => Promise.resolve(body) });
             }
 
             /*  function unauthorized() {

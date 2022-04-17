@@ -95,7 +95,6 @@ export interface ISessonState {
 
 export interface IFeedBackState {
     feedbacks: IFeedBack[];
-    feedbackAccept: IFeedBack[];
     selectedFeedback: IFeedBack | null;
     modificationState: FeedBackModificationStatus;
 }

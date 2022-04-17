@@ -33,7 +33,7 @@ const FeedBackDetail: React.FC = () => {
                             if (blogs[index].id === id){
                                 return (
                                     <div>
-                                        {blogs[index].description}
+                                        {blogs[index].content}
                                     </div>
                                 )
                             }                          
