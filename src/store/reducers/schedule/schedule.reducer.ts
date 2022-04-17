@@ -1,6 +1,6 @@
 import { IScheduleState, IActionBase } from "../../models/root.interface";
 import { ADD_SCHEDULE, CHANGE_SCHEDULE_PENDING_EDIT, EDIT_SCHEDULE, REMOVE_SCHEDULE,
-    CLEAR_SCHEDULE_PENDING_EDIT, SET_MODIFICATION_STATE} from "../../actions/schedule/schedule.actions";
+    CLEAR_SCHEDULE_PENDING_EDIT, SET_MODIFICATION_STATE, REMOVE_SCHEDULE_ALL, INITIAL_SCHEDULE} from "../../actions/schedule/schedule.actions";
 import { ISchedule, ScheduleModificationStatus } from "../../models/schedule.interface";
 
 
@@ -8,13 +8,16 @@ import { ISchedule, ScheduleModificationStatus } from "../../models/schedule.int
 const initialState: IScheduleState = {
     modificationState: ScheduleModificationStatus.None,
     selectedSchedule: null,
-    schedules: [{
-        id: 1, name: "XXX", creator_id: '1', description: '', createTime: '', updateTime: ''
-    }]
+    schedules: []
 };
 
 function schedulesReducer(state: IScheduleState = initialState, action: IActionBase): IScheduleState {
     switch (action.type) {
+        case INITIAL_SCHEDULE: {
+            let maxId: number = 0;
+            action.schedule.id = maxId + 1;
+            return { ...state, schedules : [...state.schedules, action.schedule]};
+        }
         case ADD_SCHEDULE: {
             let maxId: number = Math.max.apply(Math, state.schedules.map(function(o) { return o.id; }));
             action.schedule.id = maxId + 1;
@@ -28,6 +31,9 @@ function schedulesReducer(state: IScheduleState = initialState, action: IActionB
         }
         case REMOVE_SCHEDULE: {
             return { ...state, schedules: state.schedules.filter(pr => pr.id !== action.id) };
+        }
+        case REMOVE_SCHEDULE_ALL: {
+            return { ...state, schedules: [] };
         }
         case CHANGE_SCHEDULE_PENDING_EDIT: {
             return { ...state, selectedSchedule: action.schedule };

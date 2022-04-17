@@ -15,13 +15,20 @@ import { ICourseState, ICourseSemesterState, IStateType, IRootPageStateType, IMy
 
 import { CourseModificationStatus, ICourse } from "../../store/models/courses.interface";
 
-import { removeMytype, clearSelectedMytype } from "../../store/actions/mytypes.actions";
-import { removeCourse, clearSelectedCourse, setModificationState, changeSelectedCourse } from "../../store/actions/courses.actions";
-import { removeLevel, clearSelectedLevel } from "../../store/actions/levels.actions";
+import { removeMytype, clearSelectedMytype } from "../../store/actions/art_type/mytypes.actions";
+import { removeCourse, clearSelectedCourse, setModificationState, changeSelectedCourse } from "../../store/actions/course/courses.actions";
+import { removeLevel, clearSelectedLevel } from "../../store/actions/art_level/levels.actions";
 
 import { CourseSemesterModificationStatus, ICourseSemester } from "../../store/models/course_for_semester.interface";
-import { removeCourseSemester, clearSelectedCourseSemester, setModificationStateSemester, changeSelectedCourseSemester } from "../../store/actions/course_for_semester.actions";
+import { removeCourseSemester, clearSelectedCourseSemester, setModificationStateSemester, changeSelectedCourseSemester } from "../../store/actions/course_semester/course_for_semester.actions";
 import { useParams } from "react-router-dom";
+import { getCourse } from "../../store/actions/course/getCourse";
+import { deleteCourse } from "../../store/actions/course/deleteCourse";
+import { getArtType } from "../../store/actions/art_type/getArtType";
+import { getLevel } from "../../store/actions/art_level/getLevel";
+import { getSchedule } from "../../store/actions/schedule/getSchedule";
+import { getCourseSemester } from "../../store/actions/course_semester/getCourseSemester";
+import { deleteCourseSemester } from "../../store/actions/course_semester/deleteCourseSemester";
 
 
 type role = {
@@ -48,6 +55,26 @@ const Courses: React.FC = () => {
 
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
   const numberItemsCount: number = courses.courses.length;
+
+  useEffect(() => {
+    dispatch(getCourse())
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getCourseSemester())
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getArtType())
+  }, [dispatch])
+  
+  useEffect(() => {
+    dispatch(getLevel())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getSchedule())
+  }, [dispatch])
 
   useEffect(() => {
     dispatch(clearSelectedCourse());
@@ -174,7 +201,7 @@ const Courses: React.FC = () => {
                     return;
                   }
                   dispatch(addNotification("Khóa học theo kỳ", `Đã bị xóa khỏi hệ thống`));
-                  dispatch(removeCourseSemester(courseSemesters.selectedCourseSemester.courseId));
+                  dispatch(deleteCourseSemester(courseSemesters.selectedCourseSemester.id));
                   dispatch(clearSelectedCourseSemester());
                   setPopup3(false);
                 }}>Xóa
@@ -183,32 +210,6 @@ const Courses: React.FC = () => {
           </div>
         </Popup>
 
-        <Popup
-          className="popup-modal"
-          open={popup2}
-          onClose={() => setPopup2(false)}
-          closeOnDocumentClick
-        >
-          <div className="popup-modal">
-            <div className="popup-title">
-              Bạn chắc chắn?
-            </div>
-            <div className="popup-content">
-              <button type="button"
-                className="btn btn-danger"
-                onClick={() => {
-                  if (!levels.selectedLevel) {
-                    return;
-                  }
-                  dispatch(addNotification("Mức độ", ` ${levels.selectedLevel.levelName} đã bị xóa khỏi hệ thống`));
-                  dispatch(removeLevel(levels.selectedLevel.levelId));
-                  dispatch(clearSelectedLevel());
-                  setPopup2(false);
-                }}>Xóa
-              </button>
-            </div>
-          </div>
-        </Popup>
 
         <Popup
           className="popup-modal"
@@ -227,8 +228,8 @@ const Courses: React.FC = () => {
                   if (!mytypes.selectedMytype) {
                     return;
                   }
-                  dispatch(addNotification("Thể loại", ` ${mytypes.selectedMytype.typeName} đã bị xóa khỏi hệ thống`));
-                  dispatch(removeMytype(mytypes.selectedMytype.typeId));
+                  dispatch(addNotification("Thể loại", ` ${mytypes.selectedMytype.name} đã bị xóa khỏi hệ thống`));
+                  dispatch(removeMytype(mytypes.selectedMytype.id));
                   dispatch(clearSelectedMytype());
                   setPopup1(false);
                 }}>Xóa
@@ -255,8 +256,8 @@ const Courses: React.FC = () => {
                   if (!courses.selectedCourse) {
                     return;
                   }
-                  dispatch(addNotification("Khóa học", ` ${courses.selectedCourse.courseName} đã bị xóa khỏi hệ thống`));
-                  dispatch(removeCourse(courses.selectedCourse.courseId));
+                  dispatch(addNotification("Khóa học", ` ${courses.selectedCourse.name} đã bị xóa khỏi hệ thống`));
+                  dispatch(deleteCourse(courses.selectedCourse.id));
                   dispatch(clearSelectedCourse());
                   setPopup(false);
                 }}>Xóa
@@ -332,63 +333,9 @@ const Courses: React.FC = () => {
                   return;
                 }
                 dispatch(addNotification("Khóa học theo kỳ", `Đã bị xóa khỏi hệ thống`));
-                dispatch(removeCourseSemester(courseSemesters.selectedCourseSemester.courseId));
+                dispatch(removeCourseSemester(courseSemesters.selectedCourseSemester.id));
                 dispatch(clearSelectedCourseSemester());
                 setPopup3(false);
-              }}>Xóa
-            </button>
-          </div>
-        </div>
-      </Popup>
-
-      <Popup
-        className="popup-modal"
-        open={popup2}
-        onClose={() => setPopup2(false)}
-        closeOnDocumentClick
-      >
-        <div className="popup-modal">
-          <div className="popup-title">
-            Bạn chắc chắn?
-          </div>
-          <div className="popup-content">
-            <button type="button"
-              className="btn btn-danger"
-              onClick={() => {
-                if (!levels.selectedLevel) {
-                  return;
-                }
-                dispatch(addNotification("Mức độ", ` ${levels.selectedLevel.levelName} đã bị xóa khỏi hệ thống`));
-                dispatch(removeLevel(levels.selectedLevel.levelId));
-                dispatch(clearSelectedLevel());
-                setPopup2(false);
-              }}>Xóa
-            </button>
-          </div>
-        </div>
-      </Popup>
-
-      <Popup
-        className="popup-modal"
-        open={popup1}
-        onClose={() => setPopup1(false)}
-        closeOnDocumentClick
-      >
-        <div className="popup-modal">
-          <div className="popup-title">
-            Bạn chắc chắn?
-          </div>
-          <div className="popup-content">
-            <button type="button"
-              className="btn btn-danger"
-              onClick={() => {
-                if (!mytypes.selectedMytype) {
-                  return;
-                }
-                dispatch(addNotification("Thể loại", ` ${mytypes.selectedMytype.typeName} đã bị xóa khỏi hệ thống`));
-                dispatch(removeMytype(mytypes.selectedMytype.typeId));
-                dispatch(clearSelectedMytype());
-                setPopup1(false);
               }}>Xóa
             </button>
           </div>
@@ -413,8 +360,8 @@ const Courses: React.FC = () => {
                 if (!courses.selectedCourse) {
                   return;
                 }
-                dispatch(addNotification("Khóa học", ` ${courses.selectedCourse.courseName} đã bị xóa khỏi hệ thống`));
-                dispatch(removeCourse(courses.selectedCourse.courseId));
+                dispatch(addNotification("Khóa học", ` ${courses.selectedCourse.name} đã bị xóa khỏi hệ thống`));
+                dispatch(removeCourse(courses.selectedCourse.id));
                 dispatch(clearSelectedCourse());
                 setPopup(false);
               }}>Xóa

@@ -12,20 +12,20 @@ function CoursesList(props: courseListProps): JSX.Element  {
 const courses: ICourseState = useSelector((state: IStateType) => state.courses);
 
   
-  const courseElements: (JSX.Element | null)[] = courses.courses.map(course => {
+  const courseElements: (JSX.Element | null)[] = courses.courses.map((course, index) => {
     if (!course) { return null; }
-    return (<tr className={`table-row ${(courses.selectedCourse && courses.selectedCourse.courseId === course.courseId) ? "selected" : ""}`}
+    return (<tr className={`table-row ${(courses.selectedCourse && courses.selectedCourse.id === course.id) ? "selected" : ""}`}
       onClick={() => {
         if(props.onSelect) props.onSelect(course);
       }}
-      key={`course_${course.courseId}`}>
-      <th scope="row">{course.courseId}</th>
-      <td>{course.courseName}</td>
-      <td>{course.courseType}</td>
-      <td>{course.courseLevel}</td>
-      <td>{course.coursePrice}</td>
-      <td>{course.maxCourseParticipant}</td>
-      <td>{course.sumOfSesson}</td>
+      key={`course_${course.id}`}>
+      <th scope="row">{index}</th>
+      <td>{course.name}</td>
+      <td>{course.art_level_id}</td>
+      <td>{course.art_type_id}</td>
+      <td>{course.price}</td>
+      <td>{course.max_participant}</td>
+      <td>{course.sum_of_section}</td>
     </tr>);
   });
 

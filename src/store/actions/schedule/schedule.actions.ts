@@ -7,6 +7,39 @@ export const CHANGE_SCHEDULE_AMOUNT: string = "CHANGE_SCHEDULE_AMOUNT";
 export const CHANGE_SCHEDULE_PENDING_EDIT: string = "CHANGE_SCHEDULE_PENDING_EDIT";
 export const CLEAR_SCHEDULE_PENDING_EDIT: string = "CLEAR_SCHEDULE_PENDING_EDIT";
 export const SET_MODIFICATION_STATE: string = "SET_MODIFICATION_STATE";
+export const FETCH_DATA_REQUEST: string = "FETCH_DATA_REQUEST";
+export const FETCH_DATA_SUCCESS: string = "FETCH_DATA_SUCCESS";
+export const FETCH_DATA_ERROR: string = "FETCH_DATA_ERROR";
+export const REMOVE_SCHEDULE_ALL: string = "REMOVE_SCHEDULE_ALL";
+export const INITIAL_SCHEDULE: string = "INITIAL_SCHEDULE";
+
+export function fetchDataRequest() {
+    return {
+        type: FETCH_DATA_REQUEST
+    };
+}
+
+export function fetchDataSuccess(schedule: ISchedule) {
+    return {
+        type: FETCH_DATA_SUCCESS,
+        schedule
+    };
+}
+
+export function fetchDataError(error: any) {
+    return {
+        type: FETCH_DATA_ERROR,
+        payload: { error }
+    };
+}
+
+export function initialSchedule(schedule: ISchedule): IInitialScheduleActionType {
+    return { type: INITIAL_SCHEDULE, schedule: schedule };
+}
+
+export function removeScheduleAll(): IRemoveScheduleAllActionType {
+    return { type: REMOVE_SCHEDULE_ALL };
+}
 
 export function addSchedule(schedule: ISchedule): IAddScheduleActionType {
     return { type: ADD_SCHEDULE, schedule: schedule };
@@ -48,3 +81,5 @@ interface IChangeSelectedScheduleActionType { type: string, schedule: ISchedule 
 interface IClearSelectedScheduleActionType { type: string };
 interface ISetModificationStateActionType { type: string, value:  ScheduleModificationStatus};
 interface IChangeScheduleAmountType {type: string, id: number, amount: number};
+interface IRemoveScheduleAllActionType { type: string }
+interface IInitialScheduleActionType {type: string, schedule: ISchedule}

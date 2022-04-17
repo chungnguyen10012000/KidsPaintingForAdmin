@@ -6,6 +6,9 @@ import TextInput from "../../common/components/TextInput";
 import { editSemester, clearSelectedSemester, setModificationState, addSemester } from "../../store/actions/semester/semester.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, ISemesterFormState } from "../../common/types/Form.types";
+import NumberInput from "../../common/components/NumberInput";
+import { postSemester } from "../../store/actions/semester/postSemester";
+import { putSemester } from "../../store/actions/semester/putSemester";
 
 const SemesterForm: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();
@@ -14,13 +17,16 @@ const SemesterForm: React.FC = () => {
     const isCreate: boolean = (semesters.modificationState === SemesterModificationStatus.Create);
 
     if (!semester || isCreate) {
-        semester = { id: 1, name: "", year: '', description: ''};
+        semester = { id: 1, name: "", year: '', description: '', number: 1, start_time: '', end_time: '' };
     }
 
     const [formState, setFormState] = useState({
         name: { error: "", value: semester.name },
         year: { error: "", value: semester.year },
         description: { error: "", value: semester.description },
+        number: { error: "", value: semester.number },
+        start_time: { error: "", value: semester.start_time },
+        end_time: { error: "", value: semester.end_time },
     });
 
     function hasFormValueChanged(model: OnChangeModel): void {
@@ -39,12 +45,29 @@ const SemesterForm: React.FC = () => {
 
     function saveForm(formState: ISemesterFormState, saveFn: Function): void {
         if (semester) {
-            dispatch(saveFn({
-                ...semester,
-                name: formState.name.value,
-                year: formState.year.value,
-                description: formState.description.value,
-            }));
+            if(saveFn == addSemester){
+                dispatch(postSemester({
+                    ...semester,
+                    name: formState.name.value,
+                    year: formState.year.value,
+                    description: formState.description.value,
+                    number: formState.number.value,
+                    start_time: formState.start_time.value,
+                    end_time: formState.end_time.value,
+                }));
+            }
+            else {
+                dispatch(putSemester(semester.id, {
+                    ...semester,
+                    name: formState.name.value,
+                    year: formState.year.value,
+                    description: formState.description.value,
+                    number: formState.number.value,
+                    start_time: formState.start_time.value,
+                    end_time: formState.end_time.value,
+                }));
+            }
+            
 
             dispatch(addNotification("Học kì ", `${formState.name.value} đã được thêm bởi bạn`));
             dispatch(clearSelectedSemester());
@@ -82,9 +105,18 @@ const SemesterForm: React.FC = () => {
                                     field="name"
                                     onChange={hasFormValueChanged}
                                     required={true}
-                                    maxLength={20}
+                                    maxLength={20000}
                                     label="Tên"
                                     placeholder="" />
+                            </div>
+                            <div className="form-group">
+                                <NumberInput id="input_number"
+                                    value={formState.number.value}
+                                    field="number"
+                                    onChange={hasFormValueChanged}
+                                    max={1000}
+                                    min={0}
+                                    label="Kì" />
                             </div>
                             <div className="form-group">
                                 <TextInput id="input_year"
@@ -92,7 +124,7 @@ const SemesterForm: React.FC = () => {
                                     field="year"
                                     onChange={hasFormValueChanged}
                                     required={true}
-                                    maxLength={20}
+                                    maxLength={200}
                                     label="Năm học"
                                     placeholder="" />
                             </div>
@@ -104,6 +136,28 @@ const SemesterForm: React.FC = () => {
                                     required={true}
                                     maxLength={2000}
                                     label="Miêu tả"
+                                    placeholder="" />
+                            </div>
+                            <div className="form-group">
+                                <TextInput id="input_start_time"
+                                    value={formState.start_time.value}
+                                    field="start_time"
+                                    type="date"
+                                    onChange={hasFormValueChanged}
+                                    required={true}
+                                    maxLength={2000}
+                                    label="Thời gian bắt đầu"
+                                    placeholder="" />
+                            </div>
+                            <div className="form-group">
+                                <TextInput id="input_end_time"
+                                    value={formState.end_time.value}
+                                    field="end_time"
+                                    type="date"
+                                    onChange={hasFormValueChanged}
+                                    required={true}
+                                    maxLength={2000}
+                                    label="Thời gian kết thúc"
                                     placeholder="" />
                             </div>
                             <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>

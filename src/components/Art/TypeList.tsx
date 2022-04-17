@@ -12,15 +12,15 @@ function TypeList(props: mytypeListProps): JSX.Element  {
   const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
 
 
-  const mytypeElements: (JSX.Element | null)[] = mytypes.mytypes.map(mytype => {
+  const mytypeElements: (JSX.Element | null)[] = mytypes.mytypes.map( (mytype, index) => {
     if (!mytype) { return null; }
-    return (<tr className={`table-row ${(mytypes.selectedMytype && mytypes.selectedMytype.typeId === mytype.typeId) ? "selected" : ""}`}
+    return (<tr className={`table-row ${(mytypes.selectedMytype && mytypes.selectedMytype.id === mytype.id) ? "selected" : ""}`}
       onClick={() => {
         if(props.onSelect) props.onSelect(mytype);
       }}
-      key={`mytype_${mytype.typeId}`}>
-      <th scope="row">{mytype.typeId}</th>
-      <td>{mytype.typeName}</td>
+      key={`mytype_${index}`}>
+      <th scope="row">{index}</th>
+      <td>{mytype.name}</td>
     </tr>);
   });
 

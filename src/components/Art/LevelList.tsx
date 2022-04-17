@@ -19,13 +19,13 @@ function TypeList(props: levelListProps): JSX.Element  {
 
   const levelElements: (JSX.Element | null)[] = levels.levels.map(level => {
     if (!level) { return null; }
-    return (<tr className={`table-row ${(levels.selectedLevel && levels.selectedLevel.levelId === level.levelId) ? "selected" : ""}`}
+    return (<tr className={`table-row ${(levels.selectedLevel && levels.selectedLevel.id === level.id) ? "selected" : ""}`}
       onClick={() => {
         if(props.onSelect) props.onSelect(level);
       }}
-      key={`level_${level.levelId}`}>
-      <th scope="row">{level.levelId}</th>
-      <td>{level.levelName}</td>
+      key={`level_${level.id}`}>
+      <th scope="row">{level.id}</th>
+      <td>{level.name}</td>
     </tr>);
   });
 

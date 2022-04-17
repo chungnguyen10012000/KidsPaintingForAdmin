@@ -2,13 +2,13 @@ export interface IContest {
     id: number;
     name: string;
     description: string;
-    type: string;
-    level: string;
-    status: string;
-    amount: number;
-    hasBeginDate: string;
-    hasExpiryDate: string;
-    teacher: string;
+    art_level_id: number;
+    art_type_id: number;
+    is_enabled: boolean;
+    max_participant: number;
+    image_url: string;
+    start_time: string;
+    end_time: string;
 }
 
 export enum ContestModificationStatus {

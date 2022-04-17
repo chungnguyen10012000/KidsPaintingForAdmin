@@ -22,7 +22,7 @@ const OnLeave: React.FC = () => {
     const listCourse: ICourse[] = courses.courses
     const listCourses: string[] = []
     listCourse.map((ele) => {
-        return listCourses.push(ele.courseName)
+        return listCourses.push(ele.name)
     })
 
 

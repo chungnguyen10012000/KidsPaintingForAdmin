@@ -3,11 +3,11 @@ import { IStateType, IContestState, ILevelState, IMytypeState  } from "../../sto
 import { useSelector, useDispatch } from "react-redux";
 import { IContest, ContestModificationStatus } from "../../store/models/contest.interface";
 import TextInput from "../../common/components/TextInput";
-import { editContest, clearSelectedContest, setModificationState, addContest } from "../../store/actions/contest.actions";
+import { editContest, clearSelectedContest, setModificationState, addContest } from "../../store/actions/contest/contest.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import { OnChangeModel, IContestFormState } from "../../common/types/Form.types";
-import SelectInput from "../../common/components/Select";
+import SelectInput from "../../common/components/SelectInput";
 
 import { ILevel } from "../../store/models/levels.interface";
 import { IMytype } from "../../store/models/mytypes.interface";
@@ -15,11 +15,18 @@ import { IMytype } from "../../store/models/mytypes.interface";
 import { useQuill } from 'react-quilljs';
 import BlotFormatter from 'quill-blot-formatter';
 import 'quill/dist/quill.snow.css';
+import { postContest } from "../../store/actions/contest/postContest";
+import { putContest } from "../../store/actions/contest/putContest";
 
 export type levelListProps = {
   onSelect?: (level: ILevel) => void;
   children?: React.ReactNode;
 };
+
+type Options = {
+  name: string;
+  value: any;
+}
 
 export type mytypeListProps = {
   onSelect?: (mytype: IMytype) => void;
@@ -33,7 +40,7 @@ const ContestForm: React.FC = () => {
   const isCreate: boolean = (contests.modificationState === ContestModificationStatus.Create);
   
   if (!contest || isCreate) {
-    contest = { id: 0, name: "", description: "", type: "", level: "", status: "", amount: 0, hasBeginDate: "", hasExpiryDate: "", teacher: ''};
+    contest = { id: 0, name: "", image_url: "", description: "", art_level_id: 0, art_type_id: 0, is_enabled: false, max_participant: 0, start_time: "", end_time: ""};
   }
 
   const { quill, quillRef, Quill } = useQuill({
@@ -62,38 +69,41 @@ const ContestForm: React.FC = () => {
     }
   }, [quill]);
 
-  const listStatus = ['true', 'false']
+  const listStatus: Options[] = []
+  listStatus.push({"name": "true", value: true})
+  listStatus.push({"name": "false", value: false})
 
   const levels: ILevelState = useSelector((state: IStateType) => state.levels);
   const listLevel: ILevel[] = levels.levels
-  const listLevels: string[] = []
+  const listLevels:  Options[] = [];
   listLevel.map((ele) => {
-    return listLevels.push(ele.levelName)
+    let item: Options = {"name": ele.name, "value": ele.id}
+    return listLevels.push(item)
   })
-
-  let listTeacher: string[] = ["Nguyen Chung", "Tran Binh"]
 
   const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
   const listMytype: IMytype[] = mytypes.mytypes
-  const listMytypes: string[] = []
+  const listMytypes: Options[] = [];
   listMytype.map((ele) => {
-    return listMytypes.push(ele.typeName)
+    let item: Options = {"name": ele.name, "value": ele.id}
+    return listMytypes.push(item)
   })
 
   const [formState, setFormState] = useState({
     name: { error: "", value: contest.name },
     description: { error: "", value: contest.description },
-    type: { error: "", value: contest.type },
-    level: { error: "", value: contest.level },
-    status: { error: "", value: contest.status },
-    amount: { error: "", value: contest.amount },
-    hasBeginDate: { error: "", value: contest.hasBeginDate },
-    hasExpiryDate: { error: "", value: contest.hasExpiryDate },
-    teacher: { error: "", value: contest.teacher },
+    art_type_id: { error: "", value: contest.art_type_id },
+    art_level_id: { error: "", value: contest.art_level_id },
+    is_enabled: { error: "", value: contest.is_enabled },
+    max_participant: { error: "", value: contest.max_participant },
+    start_time: { error: "", value: contest.start_time },
+    end_time: { error: "", value: contest.end_time },
+    image_url: { error: "", value: contest.image_url },
   });
 
   function hasFormValueChanged(model: OnChangeModel): void {
     setFormState({ ...formState, [model.field]: { error: model.error, value: model.value } });
+    console.log('form-contet', formState)
   }
 
   function saveUser(e: FormEvent<HTMLFormElement>): void {
@@ -108,18 +118,35 @@ const ContestForm: React.FC = () => {
 
   function saveForm(formState: IContestFormState, saveFn: Function): void {
     if (contest) {
-      dispatch(saveFn({
-        ...contest,
-        name: formState.name.value,
-        description: textHtml,
-        type: formState.type.value,
-        level:  formState.level.value,
-        status:  formState.status.value,
-        amount: formState.amount.value,
-        hasBeginDate:  formState.hasBeginDate.value,
-        hasExpiryDate: formState.hasExpiryDate.value,
-        teacher: formState.teacher.value,
-      }));
+      if (saveFn === addContest){
+        dispatch(postContest({
+          ...contest,
+          name: formState.name.value,
+          description: textHtml,
+          art_type_id: formState.art_type_id.value,
+          art_level_id:  formState.art_level_id.value,
+          is_enabled:  formState.is_enabled.value,
+          max_participant: formState.max_participant.value,
+          start_time:  formState.start_time.value,
+          end_time: formState.end_time.value,
+          image_url: formState.image_url.value,
+        }));
+      }
+      else {
+        dispatch(putContest(contest.id, {
+          ...contest,
+          name: formState.name.value,
+          description: textHtml,
+          art_type_id: formState.art_type_id.value,
+          art_level_id:  formState.art_level_id.value,
+          is_enabled:  formState.is_enabled.value,
+          max_participant: formState.max_participant.value,
+          start_time:  formState.start_time.value,
+          end_time: formState.end_time.value,
+          image_url: formState.image_url.value,
+        }));
+      }
+      
 
       dispatch(addNotification("Cuộc thi", ` ${formState.name.value} chỉnh bởi bạn`));
       dispatch(clearSelectedContest());
@@ -137,9 +164,7 @@ const ContestForm: React.FC = () => {
   }
 
   function isFormInvalid(): boolean {
-    return (formState.amount.error 
-      || formState.name.error || formState.type.error || formState.level.error || formState.status.error || formState.hasBeginDate.error || formState.hasExpiryDate.error
-      || formState.level.error || !formState.name.value || !formState.type.value) as boolean;
+    return (formState.max_participant.error || !formState.art_type_id.value) as boolean;
 }
 
   return (
@@ -165,9 +190,9 @@ const ContestForm: React.FC = () => {
                 <div ref={quillRef} />
               </div>
               <div className="form-group">
-                <SelectInput id="input_type"
-                  field = "type"
-                  value={formState.type.value}
+                <SelectInput id="input_art_type_id"
+                  field = "art_type_id"
+                  value={formState.art_type_id.value}
                   onChange={hasFormValueChanged}
                   required={true}
                   label="Thể loại"
@@ -176,50 +201,50 @@ const ContestForm: React.FC = () => {
               </div>
               <div className="form-group">
                   <SelectInput
-                    id="input_level"
-                    field="level"
+                    id="input_art_level_id"
+                    field="art_level_id"
                     label="Mức độ"
                     options={listLevels}
                     required={true}
                     onChange={hasFormValueChanged}
-                    value={formState.level.value}
+                    value={formState.art_level_id.value}
                   />
               </div>
-              <div className="form-group">
+               <div className="form-group">
                   <SelectInput
-                    id="input_status"
-                    field="status"
+                    id="input_is_enabled"
+                    field="is_enabled"
                     label="Trạng thái"
                     options={listStatus}
                     required={true}
                     onChange={hasFormValueChanged}
-                    value={formState.status.value}
+                    value={formState.is_enabled.value}
                   />
-              </div>
+              </div> 
               <div className="form-group">
-                <SelectInput id="input_teacher"
-                  field = "teacher"
-                  value={formState.teacher.value}
+                <TextInput id="input_image_url"
+                  field = "image_url"
+                  value={formState.image_url.value}
                   onChange={hasFormValueChanged}
-                  required={true}
-                  label="Giáo viên chấm"
-                  options={listTeacher}
-                />
+                  required={false}
+                  maxLength={100}
+                  label="Ảnh đại diện"
+                  placeholder="" />
               </div>
               <div className="form-group">
-                  <NumberInput id="input_amount"
-                    value={formState.amount.value}
-                    field="amount"
+                  <NumberInput id="input_max_participant"
+                    value={formState.max_participant.value}
+                    field="max_participant"
                     onChange={hasFormValueChanged}
                     max={1000}
                     min={0}
                     label="Số lượng tối đa tham gia" />
               </div>
               <div className="form-group">
-                <TextInput id="input_hasBeginDate"
-                  field = "hasBeginDate"
+                <TextInput id="input_start_time"
+                  field = "start_time"
                   type="date"
-                  value={formState.hasBeginDate.value}
+                  value={formState.start_time.value}
                   onChange={hasFormValueChanged}
                   required={false}
                   maxLength={100}
@@ -227,10 +252,10 @@ const ContestForm: React.FC = () => {
                   placeholder="" />
               </div>
               <div className="form-group">
-                <TextInput id="input_hasExpiryDate"
-                  field = "hasExpiryDate"
+                <TextInput id="input_end_time"
+                  field = "end_time"
                   type="date"
-                  value={formState.hasExpiryDate.value}
+                  value={formState.end_time.value}
                   onChange={hasFormValueChanged}
                   required={false}
                   maxLength={100}

@@ -7,6 +7,8 @@ import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import { OnChangeModel, IScheduleItemFormState } from "../../common/types/Form.types";
 import SelectInput from "../../common/components/SelectInput";
+import { postScheduleItem } from "../../store/actions/schedule/postScheduleItem";
+import { putScheduleItem } from "../../store/actions/schedule/putScheduleItem";
 
 type Options = {
     name: string;
@@ -27,7 +29,7 @@ const CalendarItemForm: React.FC = () => {
 
     let listLessonTime: Options[] = [];
     lessonTimes.lessonTimes.map(ele => {
-        let item: Options = {"name":ele.start_time + " => " + ele.end_time, "value": ele.start_time + " => " + ele.end_time }
+        let item: Options = {"name":ele.start_time + " => " + ele.end_time, "value": ele.id }
         return listLessonTime.push(item)
     })
 
@@ -35,7 +37,7 @@ const CalendarItemForm: React.FC = () => {
     const isCreate: boolean = (schedules.modificationState === ScheduleItemModificationStatus.Create);
 
     if (!schedule || isCreate) {
-        schedule = { id: 1, schedule_id: 1, lesson_time: "", date_of_week: 1 };
+        schedule = { id: 1, schedule_id: 1, lesson_time: 1, date_of_week: 1 };
     }
 
     const [formState, setFormState] = useState({
@@ -60,11 +62,21 @@ const CalendarItemForm: React.FC = () => {
 
     function saveForm(formState: IScheduleItemFormState, saveFn: Function): void {
         if (schedule) {
-            dispatch(saveFn({
-                ...schedule,
-                lesson_time: formState.lesson_time.value,
-                date_of_week: formState.date_of_week.value,
-            }));
+            if (saveFn == addScheduleItem){
+                dispatch(postScheduleItem({
+                    ...schedule,
+                    lesson_time: formState.lesson_time.value,
+                    date_of_week: formState.date_of_week.value,
+                }));
+            }
+            else {
+                dispatch(putScheduleItem(schedule.id, {
+                    ...schedule,
+                    lesson_time: formState.lesson_time.value,
+                    date_of_week: formState.date_of_week.value,
+                }));
+            }
+
 
             dispatch(addNotification("Lịch học ", ` đã được thêm bởi bạn`));
             dispatch(clearSelectedScheduleItem());

@@ -1,6 +1,6 @@
 export interface IMytype {
-    typeId: number;
-    typeName: string;
+    id: number;
+    name: string;
 }
 
 export enum MytypeModificationStatus {

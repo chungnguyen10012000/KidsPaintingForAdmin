@@ -28,26 +28,29 @@ export interface IBlogFormState {
 }
 
 export interface ICourseFormState {
-    courseName: IFormStateField<string>;
-    courseDescription: IFormStateField<string>;
-    coursePrice: IFormStateField<number>; 
-    courseType: IFormStateField<string>;
-    courseLevel: IFormStateField<string>;
-    maxCourseParticipant: IFormStateField<number>; 
-    sumOfSesson: IFormStateField<number>; 
-    time: IFormStateField<string>;
+    name: IFormStateField<string>;
+    description: IFormStateField<string>;
+    price: IFormStateField<number>; 
+    art_type_id: IFormStateField<number>;
+    art_level_id: IFormStateField<number>;
+    max_participant: IFormStateField<number>; 
+    sum_of_section: IFormStateField<number>; 
+    image_url: IFormStateField<string>;
+    is_enabled: IFormStateField<boolean>;
 }
 
 export interface ICourseSemesterFormState {
-    courseTemplate: IFormStateField<string>;
-    time: IFormStateField<string>;
-    timeLesson: IFormStateField<string>;
+    course_id: IFormStateField<number>;
+    schedule_id: IFormStateField<number>;
 }
 
 export interface ISemesterFormState {
     name: IFormStateField<string>;
     description: IFormStateField<string>;
     year: IFormStateField<string>;
+    number: IFormStateField<number>;
+    start_time: IFormStateField<string>;
+    end_time: IFormStateField<string>;
 }
 
 export interface ILessonTimeFormState {
@@ -62,15 +65,15 @@ export interface IScheduleFormState {
 
 export interface IScheduleItemFormState {
     schedule_id: IFormStateField<number>;
-    lesson_time: IFormStateField<string>;
+    lesson_time: IFormStateField<number>;
     date_of_week: IFormStateField<number>;
 }
 
 export interface IMytypeFormState {
-    typeName: IFormStateField<string>;
+    name: IFormStateField<string>;
 }
 export interface ILevelFormState {
-    levelName: IFormStateField<string>;
+    name: IFormStateField<string>;
 }
 
 export interface IMyClassFormState {
@@ -105,13 +108,13 @@ export interface IClassFormState {
 export interface IContestFormState {
     name: IFormStateField<string>;
     description: IFormStateField<string>;
-    type: IFormStateField<string>;
-    level: IFormStateField<string>;
-    status: IFormStateField<string>;
-    amount: IFormStateField<number>;
-    hasBeginDate: IFormStateField<string>;
-    hasExpiryDate: IFormStateField<string>;
-    teacher: IFormStateField<string>;
+    art_type_id: IFormStateField<number>;
+    art_level_id: IFormStateField<number>;
+    is_enabled: IFormStateField<boolean>;
+    max_participant: IFormStateField<number>;
+    start_time: IFormStateField<string>;
+    end_time: IFormStateField<string>;
+    image_url: IFormStateField<string>;
 }
 
 export  interface IOrderFormState {

@@ -14,15 +14,14 @@ function CoursesSemesterList(props: courseListProps): JSX.Element {
 
     const courseElements: (JSX.Element | null)[] = courseSemester.courseSemesters.map(course => {
         if (!course) { return null; }
-        return (<tr className={`table-row ${(courseSemester.selectedCourseSemester && courseSemester.selectedCourseSemester.courseId === course.courseId) ? "selected" : ""}`}
+        return (<tr className={`table-row ${(courseSemester.selectedCourseSemester && courseSemester.selectedCourseSemester.id === course.id) ? "selected" : ""}`}
             onClick={() => {
                 if (props.onSelect) props.onSelect(course);
             }}
-            key={`course_${course.courseId}`}>
-            <th scope="row">{course.courseId}</th>
-            <td>{course.courseTemplate}</td>
-            <td>{course.time}</td>
-            <td>{course.timeLesson}</td>
+            key={`course_${course.id}`}>
+            <th scope="row">{course.id}</th>
+            <td>{course.course_id}</td>
+            <td>{course.schedule_id}</td>
         </tr>);
     });
 
@@ -34,8 +33,7 @@ function CoursesSemesterList(props: courseListProps): JSX.Element {
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Khóa học</th>
-                        <th scope="col">Thời gian</th>
-                        <th scope="col">Thời gian bắt đầu</th>
+                        <th scope="col">Thuộc lịch</th>
                     </tr>
                 </thead>
                 <tbody>

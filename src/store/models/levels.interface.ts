@@ -1,6 +1,6 @@
 export interface ILevel {
-    levelId: number;
-    levelName: string;
+    id: number;
+    name: string;
 }
 
 export enum LevelModificationStatus {

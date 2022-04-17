@@ -16,11 +16,15 @@ import { ICourseState, ICourseSemesterState, IStateType, IRootPageStateType, IMy
 import { MytypeModificationStatus, IMytype } from "../../store/models/mytypes.interface";
 import { LevelModificationStatus, ILevel } from "../../store/models/levels.interface";
 
-import { removeMytype, clearSelectedMytype, changeSelectedMytype, setModificationStateMytype } from "../../store/actions/mytypes.actions";
-import { removeCourse, clearSelectedCourse } from "../../store/actions/courses.actions";
-import { removeLevel, clearSelectedLevel, changeSelectedLevel, setModificationStateLevel } from "../../store/actions/levels.actions";
+import { removeMytype, clearSelectedMytype, changeSelectedMytype, setModificationStateMytype } from "../../store/actions/art_type/mytypes.actions";
+import { removeCourse, clearSelectedCourse } from "../../store/actions/course/courses.actions";
+import { removeLevel, clearSelectedLevel, changeSelectedLevel, setModificationStateLevel } from "../../store/actions/art_level/levels.actions";
 
-import { removeCourseSemester, clearSelectedCourseSemester} from "../../store/actions/course_for_semester.actions";
+import { removeCourseSemester, clearSelectedCourseSemester} from "../../store/actions/course_semester/course_for_semester.actions";
+import { getArtType } from "../../store/actions/art_type/getArtType";
+import { deleteArtType } from "../../store/actions/art_type/deleteArtType";
+import { getLevel } from "../../store/actions/art_level/getLevel";
+import { deleteLevel } from "../../store/actions/art_level/deleteLevel";
 
 
 type role = {
@@ -45,6 +49,12 @@ const Art: React.FC = () => {
 
     const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
     const numberItemsCount: number = courses.courses.length;
+    useEffect(() => {
+        dispatch(getArtType())
+    }, [dispatch])
+    useEffect(() => {
+        dispatch(getLevel())
+    }, [dispatch])
 
     useEffect(() => {
         dispatch(clearSelectedCourse());
@@ -172,7 +182,7 @@ const Art: React.FC = () => {
                                     return;
                                 }
                                 dispatch(addNotification("Khóa học theo kỳ", `Đã bị xóa khỏi hệ thống`));
-                                dispatch(removeCourseSemester(courseSemesters.selectedCourseSemester.courseId));
+                                dispatch(removeCourseSemester(courseSemesters.selectedCourseSemester.id));
                                 dispatch(clearSelectedCourseSemester());
                                 setPopup3(false);
                             }}>Xóa
@@ -198,8 +208,8 @@ const Art: React.FC = () => {
                                 if (!levels.selectedLevel) {
                                     return;
                                 }
-                                dispatch(addNotification("Mức độ", ` ${levels.selectedLevel.levelName} đã bị xóa khỏi hệ thống`));
-                                dispatch(removeLevel(levels.selectedLevel.levelId));
+                                dispatch(addNotification("Mức độ", ` ${levels.selectedLevel.name} đã bị xóa khỏi hệ thống`));
+                                dispatch(deleteLevel(levels.selectedLevel.id));
                                 dispatch(clearSelectedLevel());
                                 setPopup2(false);
                             }}>Xóa
@@ -225,8 +235,8 @@ const Art: React.FC = () => {
                                 if (!mytypes.selectedMytype) {
                                     return;
                                 }
-                                dispatch(addNotification("Thể loại", ` ${mytypes.selectedMytype.typeName} đã bị xóa khỏi hệ thống`));
-                                dispatch(removeMytype(mytypes.selectedMytype.typeId));
+                                dispatch(addNotification("Thể loại", ` ${mytypes.selectedMytype.name} đã bị xóa khỏi hệ thống`));
+                                dispatch(deleteArtType(mytypes.selectedMytype.id));
                                 dispatch(clearSelectedMytype());
                                 setPopup1(false);
                             }}>Xóa
@@ -253,8 +263,8 @@ const Art: React.FC = () => {
                                 if (!courses.selectedCourse) {
                                     return;
                                 }
-                                dispatch(addNotification("Khóa học", ` ${courses.selectedCourse.courseName} đã bị xóa khỏi hệ thống`));
-                                dispatch(removeCourse(courses.selectedCourse.courseId));
+                                dispatch(addNotification("Khóa học", ` ${courses.selectedCourse.name} đã bị xóa khỏi hệ thống`));
+                                dispatch(removeCourse(courses.selectedCourse.id));
                                 dispatch(clearSelectedCourse());
                                 setPopup(false);
                             }}>Xóa

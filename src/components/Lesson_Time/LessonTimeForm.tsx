@@ -6,6 +6,8 @@ import TextInput from "../../common/components/TextInput";
 import { editLessonTime, clearSelectedLessonTime, setModificationState, addLessonTime } from "../../store/actions/lesson_time/lesson_time.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, ILessonTimeFormState } from "../../common/types/Form.types";
+import { postLessonTime } from "../../store/actions/lesson_time/postLessonTime";
+import { putLessonTime } from "../../store/actions/lesson_time/putLessonTime";
 
 const LessonTimeForm: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();
@@ -38,11 +40,21 @@ const LessonTimeForm: React.FC = () => {
 
     function saveForm(formState: ILessonTimeFormState, saveFn: Function): void {
         if (lessonTime) {
-            dispatch(saveFn({
-                ...lessonTime,
-                start_time: formState.start_time.value,
-                end_time: formState.end_time.value,
-            }));
+            if (saveFn === addLessonTime){
+                dispatch(postLessonTime({
+                    ...lessonTime,
+                    start_time: formState.start_time.value,
+                    end_time: formState.end_time.value,
+                }));
+            }
+            else {
+                dispatch(putLessonTime(lessonTime.id, {
+                    ...lessonTime,
+                    start_time: formState.start_time.value,
+                    end_time: formState.end_time.value,
+                }));
+            }
+
 
             dispatch(addNotification("Tiết ", `từ ${formState.start_time.value} đến ${formState.end_time.value} đã được thêm bởi bạn`));
             dispatch(clearSelectedLessonTime());

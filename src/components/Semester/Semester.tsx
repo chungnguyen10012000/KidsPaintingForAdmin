@@ -13,6 +13,9 @@ import {
 } from "../../store/actions/semester/semester.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { SemesterModificationStatus, ISemester } from "../../store/models/semester.interface";
+import { getSemester } from "../../store/actions/semester/getSemester";
+import { deleteContest } from "../../store/actions/contest/deleteContest";
+import { deleteSemester } from "../../store/actions/semester/deleteSemester";
 
 type role = {
     id: string;
@@ -32,8 +35,12 @@ const Semester: React.FC = () => {
     console.log(searchTerm)
 
     useEffect(() => {
+        dispatch(getSemester())
+    }, [dispatch])
+
+    useEffect(() => {
         dispatch(clearSelectedSemester());
-        dispatch(updateCurrentPath("Lớp", "Danh sách"));
+        dispatch(updateCurrentPath("Học kì", "Danh sách"));
     }, [path.area, dispatch]);
 
     function onSemesterSelect(semester: ISemester): void {
@@ -49,10 +56,10 @@ const Semester: React.FC = () => {
 
     return (
         <Fragment>
-            <h1 className="h3 mb-2 text-gray-800">Tiết học</h1>
+            <h1 className="h3 mb-2 text-gray-800">Học kì</h1>
             <p className="mb-4">Thông tin chung</p>
             <div className="row">
-                <TopCard title="TỔNG SỐ TIẾT HỌC" text={`${numberItemsCount}`} icon="box" class="primary" />
+                <TopCard title="TỔNG SỐ HỌC KÌ" text={`${numberItemsCount}`} icon="box" class="primary" />
                 <div className="col-xl-6 col-md-6 mb-4">
                     <div className="card-body">
                         <input
@@ -70,7 +77,7 @@ const Semester: React.FC = () => {
                 <div className="col-xl-12 col-lg-12">
                     <div className="card shadow mb-4">
                         <div className="card-header py-3">
-                            <h6 className="m-0 font-weight-bold text-green">Danh sách tiết học</h6>
+                            <h6 className="m-0 font-weight-bold text-green">Danh sách học kì</h6>
                             <div className="header-buttons">
                                 <button className="btn btn-success btn-green" onClick={() =>
                                     dispatch(setModificationState(SemesterModificationStatus.Create))}>
@@ -115,7 +122,7 @@ const Semester: React.FC = () => {
                                     return;
                                 }
                                 dispatch(addNotification("Học kì", ` ${semesters.selectedSemester.name} đã bị xóa khỏi hệ thống`));
-                                dispatch(removeSemester(semesters.selectedSemester.id));
+                                dispatch(deleteSemester(semesters.selectedSemester.id));
                                 dispatch(clearSelectedSemester());
                                 setPopup(false);
                             }}>Xóa

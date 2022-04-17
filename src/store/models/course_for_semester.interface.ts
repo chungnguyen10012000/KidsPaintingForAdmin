@@ -1,8 +1,7 @@
 export interface ICourseSemester {
-    courseId: number;
-    courseTemplate: string;
-    time: string;
-    timeLesson: string;
+    id: number;
+    course_id: number;
+    schedule_id: number;
 }
 
 export enum CourseSemesterModificationStatus {

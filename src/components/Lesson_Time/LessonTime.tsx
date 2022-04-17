@@ -13,6 +13,8 @@ import {
 } from "../../store/actions/lesson_time/lesson_time.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { LessonTimeModificationStatus, ILessonTime } from "../../store/models/lesson_time.interface";
+import { getLessonTime } from "../../store/actions/lesson_time/getLessonTime";
+import { deleteLessonTime } from "../../store/actions/lesson_time/deleteLessonTime";
 
 type role = {
     id: string;
@@ -31,6 +33,10 @@ const LessonTime: React.FC = () => {
         setSearchTerm(event.target.value);
     };
     console.log(searchTerm)
+
+    useEffect(() => {
+        dispatch(getLessonTime())
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(clearSelectedLessonTime());
@@ -116,7 +122,7 @@ const LessonTime: React.FC = () => {
                                     return;
                                 }
                                 dispatch(addNotification("Tiết", ` từ ${lessonTimes.selectedLessonTime.start_time} đến ${lessonTimes.selectedLessonTime.end_time}  đã bị xóa khỏi hệ thống`));
-                                dispatch(removeLessonTime(lessonTimes.selectedLessonTime.id));
+                                dispatch(deleteLessonTime(lessonTimes.selectedLessonTime.id));
                                 dispatch(clearSelectedLessonTime());
                                 setPopup(false);
                             }}>Xóa

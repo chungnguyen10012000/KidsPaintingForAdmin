@@ -1,6 +1,6 @@
 import { ILessonTimeState, IActionBase } from "../../models/root.interface";
 import { ADD_LESSON_TIME, CHANGE_LESSON_TIME_PENDING_EDIT, EDIT_LESSON_TIME, REMOVE_LESSON_TIME,
-    CLEAR_LESSON_TIME_PENDING_EDIT, SET_MODIFICATION_STATE } from "../../actions/lesson_time/lesson_time.actions";
+    CLEAR_LESSON_TIME_PENDING_EDIT, SET_MODIFICATION_STATE, INITIAL_LESSON_TIME, REMOVE_LESSON_TIME_ALL } from "../../actions/lesson_time/lesson_time.actions";
 import { ILessonTime, LessonTimeModificationStatus } from "../../models/lesson_time.interface";
 
 
@@ -8,13 +8,16 @@ import { ILessonTime, LessonTimeModificationStatus } from "../../models/lesson_t
 const initialState: ILessonTimeState = {
     modificationState: LessonTimeModificationStatus.None,
     selectedLessonTime: null,
-    lessonTimes: [
-        {id: 1, start_time: "08:00", end_time: "09:00"}
-    ]
+    lessonTimes: []
 };
 
 function lessonTimesReducer(state: ILessonTimeState = initialState, action: IActionBase): ILessonTimeState {
     switch (action.type) {
+        case INITIAL_LESSON_TIME: {
+            let maxId: number = 0;
+            action.lessontime.id = maxId + 1;
+            return { ...state, lessonTimes : [...state.lessonTimes, action.lessontime]};
+        }
         case ADD_LESSON_TIME: {
             let maxId: number = Math.max.apply(Math, state.lessonTimes.map(function(o) { return o.id; }));
             action.lessontime.id = maxId + 1;
@@ -28,6 +31,9 @@ function lessonTimesReducer(state: ILessonTimeState = initialState, action: IAct
         }
         case REMOVE_LESSON_TIME: {
             return { ...state, lessonTimes: state.lessonTimes.filter(pr => pr.id !== action.id) };
+        }
+        case REMOVE_LESSON_TIME_ALL: {
+            return { ...state, lessonTimes: [] };
         }
         case CHANGE_LESSON_TIME_PENDING_EDIT: {
             return { ...state, selectedLessonTime: action.lessontime };

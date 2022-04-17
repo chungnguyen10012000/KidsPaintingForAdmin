@@ -17,6 +17,11 @@ import { ScheduleItemModificationStatus, IScheduleItem } from "../../store/model
 import { changeSelectedScheduleItem, clearSelectedScheduleItem, removeScheduleItem, setModificationStateItem } from "../../store/actions/schedule/schedule_item.actions";
 import CalendarItemForm from "./CalendarItemForm";
 import CalendarItemList from "./CalendarItemList";
+import { getSchedule } from "../../store/actions/schedule/getSchedule";
+import { deleteSchedule } from "../../store/actions/schedule/deleteSchedule";
+import { getScheduleItem } from "../../store/actions/schedule/getScheduleItem";
+import { deleteScheduleItem } from "../../store/actions/schedule/deleteScheduleItem";
+import { getLessonTime } from "../../store/actions/lesson_time/getLessonTime";
 
 type role = {
     id: string;
@@ -38,6 +43,18 @@ const Calendar: React.FC = () => {
         setSearchTerm(event.target.value);
     };
     console.log(searchTerm)
+
+    useEffect(() => {
+        dispatch(getSchedule())
+    }, [ dispatch]);
+
+    useEffect(() => {
+        dispatch(getScheduleItem())
+    }, [ dispatch]);
+
+    useEffect(() => {
+        dispatch(getLessonTime())
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(clearSelectedSchedule());
@@ -153,7 +170,7 @@ const Calendar: React.FC = () => {
                 {((scheduleItems.modificationState === ScheduleItemModificationStatus.Create && isCheck === '4')
                     || (scheduleItems.modificationState === ScheduleItemModificationStatus.Edit && scheduleItems.selectedScheduleItem)) ?
                     <CalendarItemForm /> : null}
-            </div>
+            </div> 
 
             <Popup
                 className="popup-modal"
@@ -173,7 +190,7 @@ const Calendar: React.FC = () => {
                                     return;
                                 }
                                 dispatch(addNotification("Lịch", ` ${schedules.selectedSchedule.name} đã bị xóa khỏi hệ thống`));
-                                dispatch(removeSchedule(schedules.selectedSchedule.id));
+                                dispatch(deleteSchedule(schedules.selectedSchedule.id));
                                 dispatch(clearSelectedSchedule());
                                 setPopup(false);
                             }}>Xóa
@@ -201,7 +218,7 @@ const Calendar: React.FC = () => {
                                     return;
                                 }
                                 dispatch(addNotification("Lịch", ` đã bị xóa khỏi hệ thống`));
-                                dispatch(removeScheduleItem(scheduleItems.selectedScheduleItem.id));
+                                dispatch(deleteScheduleItem(scheduleItems.selectedScheduleItem.id));
                                 dispatch(clearSelectedScheduleItem());
                                 setPopup1(false);
                             }}>Xóa

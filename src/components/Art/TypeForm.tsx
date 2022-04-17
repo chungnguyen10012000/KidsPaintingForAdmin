@@ -3,9 +3,11 @@ import { IStateType, IMytypeState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { IMytype, MytypeModificationStatus } from "../../store/models/mytypes.interface";
 import TextInput from "../../common/components/TextInput";
-import { editMytype, clearSelectedMytype, setModificationStateMytype, addMytype } from "../../store/actions/mytypes.actions";
+import { editMytype, clearSelectedMytype, setModificationStateMytype, addMytype } from "../../store/actions/art_type/mytypes.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IMytypeFormState } from "../../common/types/Form.types";
+import { postArtType } from "../../store/actions/art_type/postArtType";
+import { putArtType } from "../../store/actions/art_type/putArtType";
 
 const TypeForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
@@ -14,11 +16,11 @@ const TypeForm: React.FC = () => {
   const isCreate: boolean = (mytypes.modificationState === MytypeModificationStatus.Create);
 
   if (!mytype || isCreate) {
-    mytype = { typeId: 0, typeName: "" };
+    mytype = { id: 0, name: "" };
   }
 
   const [formState, setFormState] = useState({
-    typeName: { error: "", value: mytype.typeName },
+    name: { error: "", value: mytype.name },
   });
 
   function hasFormValueChanged(model: OnChangeModel): void {
@@ -37,12 +39,20 @@ const TypeForm: React.FC = () => {
 
   function saveForm(formState: IMytypeFormState, saveFn: Function): void {
     if (mytype) {
-      dispatch(saveFn({
-        ...mytype,
-        typeName: formState.typeName.value,
-      }));
+      if (saveFn === addMytype){
+        dispatch(postArtType({
+          ...mytype,
+          name: formState.name.value,
+        }));
+      }
+      else {
+        dispatch(putArtType(mytype.id,{
+          ...mytype,
+          name: formState.name.value,
+        }));
+      }
 
-      dispatch(addNotification("Thể loại", `${formState.typeName.value} đã được thêm bởi bạn`));
+      dispatch(addNotification("Thể loại", `${formState.name.value} đã được thêm bởi bạn`));
       dispatch(clearSelectedMytype());
       dispatch(setModificationStateMytype(MytypeModificationStatus.None));
     }
@@ -58,7 +68,7 @@ const TypeForm: React.FC = () => {
   }
 
   function isFormInvalid(): boolean {
-    return (formState.typeName.error || !formState.typeName.value) as boolean;
+    return (formState.name.error || !formState.name.value) as boolean;
   }
 
   return (
@@ -71,9 +81,9 @@ const TypeForm: React.FC = () => {
           <div className="card-body">
             <form onSubmit={saveUser}>
               <div className="form-group">
-                <TextInput id="input_typeName"
-                  value={formState.typeName.value}
-                  field="typeName"
+                <TextInput id="input_name"
+                  value={formState.name.value}
+                  field="name"
                   onChange={hasFormValueChanged}
                   required={true}
                   maxLength={100}

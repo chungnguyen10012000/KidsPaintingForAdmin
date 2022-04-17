@@ -6,6 +6,8 @@ import TextInput from "../../common/components/TextInput";
 import { editSchedule, clearSelectedSchedule, setModificationState, addSchedule } from "../../store/actions/schedule/schedule.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IScheduleFormState } from "../../common/types/Form.types";
+import { postSchedule } from "../../store/actions/schedule/postSchedule";
+import { putSchedule } from "../../store/actions/schedule/putSchedule";
 
 const CalendarForm: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();
@@ -14,7 +16,7 @@ const CalendarForm: React.FC = () => {
     const isCreate: boolean = (schedules.modificationState === ScheduleModificationStatus.Create);
 
     if (!schedule || isCreate) {
-        schedule = { id: 1, creator_id: "", description: "", createTime: "", updateTime: "", name: ""};
+        schedule = { id: 1, creator_id: "", description: "",  name: ""};
     }
 
     const [formState, setFormState] = useState({
@@ -38,11 +40,21 @@ const CalendarForm: React.FC = () => {
 
     function saveForm(formState: IScheduleFormState, saveFn: Function): void {
         if (schedule) {
-            dispatch(saveFn({
-                ...schedule,
-                name: formState.name.value,
-                description: formState.description.value,
-            }));
+            if (saveFn == addSchedule) {
+                dispatch(postSchedule({
+                    ...schedule,
+                    name: formState.name.value,
+                    description: formState.description.value,
+                }));
+            }
+            else {
+                dispatch(putSchedule(schedule.id, {
+                    ...schedule,
+                    name: formState.name.value,
+                    description: formState.description.value,
+                }));
+            }
+
 
             dispatch(addNotification("Lịch học ", `${formState.name.value} đã được thêm bởi bạn`));
             dispatch(clearSelectedSchedule());

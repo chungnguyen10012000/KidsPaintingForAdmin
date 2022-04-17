@@ -6,7 +6,7 @@ import { IStateType, IRootPageStateType } from "../../store/models/root.interfac
 import {
     clearSelectedCourse, setModificationState,
     changeSelectedCourse
-} from "../../store/actions/courses.actions";
+} from "../../store/actions/course/courses.actions";
 import { CourseModificationStatus, ICourse } from "../../store/models/courses.interface";
 import SigupLevelTeacherList from "./SigupLevelTeacherList";
 

@@ -6,6 +6,42 @@ import { postBlog } from "./handler/POST/postBlog";
 import { putBlog } from "./handler/PUT/putBlog";
 import { deleteBlog } from "./handler/DELETE/deleteBlog";
 import { getFeedback } from "./handler/GET/GetFeedback";
+import { getArtType } from "./handler/GET/GetArtType";
+import { postArtType } from "./handler/POST/postArtType";
+import { putArtType } from "./handler/PUT/putArtType";
+import { deleteArtType } from "./handler/DELETE/deleteArtType";
+import { getLevel } from "./handler/GET/GetLevel";
+import { postLevel } from "./handler/POST/postLevel"
+import { putLevel } from "./handler/PUT/putLevel";
+import { deleteLevel } from "./handler/DELETE/deleteLevel";
+import { getContest } from "./handler/GET/GetContest";
+import { postContest } from "./handler/POST/postContest";
+import { deleteContest } from "./handler/DELETE/deleteContest";
+import { putContest } from "./handler/PUT/putContest";
+import { getSemester } from "./handler/GET/GetSemester";
+import { postSemester } from "./handler/POST/postSemester";
+import { deleteSemester } from "./handler/DELETE/deleteSemester";
+import { putSemester } from "./handler/PUT/putSemester";
+import { deleteLessonTime } from "./handler/DELETE/deleteLessonTime";
+import { putLessonTime } from "./handler/PUT/putLessonTime";
+import { postLessonTime } from "./handler/POST/postLessonTime";
+import { getLessonTime } from "./handler/GET/GetLessonTime";
+import { getSchedule } from "./handler/GET/GetSchedule";
+import { postSchedule } from "./handler/POST/postSchedule";
+import { deleteSchedule } from "./handler/DELETE/deleteSchedule";
+import { putSchedule } from "./handler/PUT/putSchedule";
+import { getScheduleItem } from "./handler/GET/GetScheduleItem";
+import { postScheduleItem } from "./handler/POST/postScheduleItem";
+import { deleteScheduleItem } from "./handler/DELETE/deleteScheduleItem";
+import { putScheduleItem } from "./handler/PUT/putScheduleItem";
+import { getCourse } from "./handler/GET/GetCourse";
+import { postCourse } from "./handler/POST/postCourse";
+import { deleteCourse } from "./handler/DELETE/deleteCourse";
+import { putCourse } from "./handler/PUT/putCourse";
+import { getCourseSemester } from "./handler/GET/GetCourseSemester";
+import { postCourseSemester } from "./handler/POST/postCourseSemester";
+import { deleteCourseSemester } from "./handler/DELETE/deleteCourseSemester";
+import { putCourseSemester } from "./handler/PUT/putCourseSemester";
 
 
 const path = "/api/v1"
@@ -35,77 +71,77 @@ export function configureFakeBackend() {
                     case url.match(new RegExp('/user/\\d+$')) && method === 'DELETE':
                         return null;
                     case url.endsWith('/semester') && method === "GET": 
-                        return null;
+                        return getSemester(ok);
                     case url.endsWith('/semester') && method === "POST":
-                        return null;
+                        return postSemester(body, created);
                     case url.match(new RegExp('/semester/\\d+$')) && method === "DELETE":
-                        return null;
+                        return deleteSemester(deleted);
                     case url.match(new RegExp('/semester/\\d+$')) && method === "PUT":
-                        return null;
+                        return putSemester(body, created);
                     case url.endsWith('/lesson-time') && method === "GET": 
-                        return null;
+                        return getLessonTime(ok);
                     case url.endsWith('/lesson-time') && method === "POST":
-                        return null;
+                        return postLessonTime(body, created);
                     case url.match(new RegExp('/lesson-time/\\d+$')) && method === "DELETE":
-                        return null;
+                        return deleteLessonTime(deleted);
                     case url.match(new RegExp('/lesson-time/\\d+$')) && method === "PUT":
-                        return null;
+                        return putLessonTime(body, created);
                     case url.endsWith('/schedule') && method === "GET": 
-                        return null;
+                        return getSchedule(ok);
                     case url.endsWith('/schedule') && method === "POST":
-                        return null;
+                        return postSchedule(body, created);
                     case url.match(new RegExp('/schedule/\\d+$')) && method === "DELETE":
-                        return null;
+                        return deleteSchedule(deleted);
                     case url.match(new RegExp('/schedule/\\d+$')) && method === "PUT":
-                        return null;
+                        return putSchedule(body, created);
                     case url.endsWith('/schedule-item') && method === "GET": 
-                        return null;
+                        return getScheduleItem(ok);
                     case url.endsWith('/schedule-item') && method === "POST":
-                        return null;
+                        return postScheduleItem(body,created);
                     case url.match(new RegExp('/schedule-item/\\d+$')) && method === "DELETE":
-                        return null;
+                        return deleteScheduleItem(deleted);
                     case url.match(new RegExp('/schedule-item/\\d+$')) && method === "PUT":
-                        return null;
+                        return putScheduleItem(body, created);
                     case url.endsWith('/art-type') && method === "GET": 
-                        return null;
+                        return getArtType(ok);
                     case url.endsWith('/art-type') && method === "POST":
-                        return null;
+                        return postArtType(body,created);
                     case url.match(new RegExp('/art-type/\\d+$')) && method === "DELETE":
-                        return null;
+                        return deleteArtType(deleted);
                     case url.match(new RegExp('/art-type/\\d+$')) && method === "PUT":
-                        return null;
+                        return putArtType(body, created);
                     case url.endsWith('/art-level') && method === "GET": 
-                        return null;
+                        return getLevel(ok);
                     case url.endsWith('/art-level') && method === "POST":
-                        return null;
+                        return postLevel(body, created);
                     case url.match(new RegExp('/art-level/\\d+$')) && method === "DELETE":
-                        return null;
+                        return deleteLevel(deleted);
                     case url.match(new RegExp('/art-level/\\d+$')) && method === "PUT":
-                        return null;
+                        return putLevel(body, created);
                     case url.endsWith('/course') && method === "GET": 
-                        return null;
+                        return getCourse(ok);
                     case url.endsWith('/course') && method === "POST":
-                        return null;
+                        return postCourse(body,created);
                     case url.match(new RegExp('/course/\\d+$')) && method === "DELETE":
-                        return null;
+                        return deleteCourse(deleted);
                     case url.match(new RegExp('/course/\\d+$')) && method === "PUT":
-                        return null;
+                        return putCourse(body, created);
                     case url.endsWith('/course-semester') && method === "GET": 
-                        return null;
+                        return getCourseSemester(ok);
                     case url.endsWith('/course-semester') && method === "POST":
-                        return null;
+                        return postCourseSemester(body, created);
                     case url.match(new RegExp('/course-semester/\\d+$')) && method === "DELETE":
-                        return null;
+                        return deleteCourseSemester(deleted);
                     case url.match(new RegExp('/course-semester/\\d+$')) && method === "PUT":
-                        return null;
+                        return putCourseSemester(body, created);
                     case url.endsWith('/contest') && method === "GET": 
-                        return null;
+                        return getContest(ok);
                     case url.endsWith('/contest') && method === "POST":
-                        return null;
+                        return postContest(body, created);
                     case url.match(new RegExp('/contest/\\d+$')) && method === "DELETE":
-                        return null;
+                        return deleteContest(deleted);
                     case url.match(new RegExp('/contest/\\d+$')) && method === "PUT":
-                        return null;
+                        return putContest(body, created);
                     case url.endsWith('/feedback') && method === "GET": 
                         return getFeedback(ok);
                     case url.endsWith('/feedback') && method === "POST":

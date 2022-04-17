@@ -6,6 +6,39 @@ export const CHANGE_LESSON_TIME_AMOUNT: string = "CHANGE_LESSON_TIME_AMOUNT";
 export const CHANGE_LESSON_TIME_PENDING_EDIT: string = "CHANGE_LESSON_TIME_PENDING_EDIT";
 export const CLEAR_LESSON_TIME_PENDING_EDIT: string = "CLEAR_LESSON_TIME_PENDING_EDIT";
 export const SET_MODIFICATION_STATE: string = "SET_MODIFICATION_STATE";
+export const FETCH_DATA_REQUEST: string = "FETCH_DATA_REQUEST";
+export const FETCH_DATA_SUCCESS: string = "FETCH_DATA_SUCCESS";
+export const FETCH_DATA_ERROR: string = "FETCH_DATA_ERROR";
+export const REMOVE_LESSON_TIME_ALL: string = "REMOVE_LESSON_TIME_ALL";
+export const INITIAL_LESSON_TIME: string = "INITIAL_LESSON_TIME";
+
+export function fetchDataRequest() {
+    return {
+        type: FETCH_DATA_REQUEST
+    };
+}
+
+export function fetchDataSuccess(lessontime: ILessonTime) {
+    return {
+        type: FETCH_DATA_SUCCESS,
+        lessontime
+    };
+}
+
+export function fetchDataError(error: any) {
+    return {
+        type: FETCH_DATA_ERROR,
+        payload: { error }
+    };
+}
+
+export function initialLessonTime(lessontime: ILessonTime): IInitialLessonTimeActionType {
+    return { type: INITIAL_LESSON_TIME, lessontime: lessontime };
+}
+
+export function removeLessonTimeAll(): IRemoveLessonTimeAllActionType {
+    return { type: REMOVE_LESSON_TIME_ALL };
+}
 
 export function addLessonTime(lessontime: ILessonTime): IAddLessonTimeActionType {
     return { type: ADD_LESSON_TIME, lessontime: lessontime };
@@ -42,3 +75,5 @@ interface IChangeSelectedLessonTimeActionType { type: string, lessontime: ILesso
 interface IClearSelectedLessonTimeActionType { type: string };
 interface ISetModificationStateActionType { type: string, value:  LessonTimeModificationStatus};
 interface IChangeLessonTimeAmountType {type: string, id: number, amount: number};
+interface IRemoveLessonTimeAllActionType { type: string }
+interface IInitialLessonTimeActionType {type: string, lessontime: ILessonTime}

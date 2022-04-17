@@ -3,8 +3,6 @@ export interface ISchedule {
     creator_id: string;
     name: string;
     description: string;
-    createTime: string;
-    updateTime: string;
 }
 
 export enum ScheduleModificationStatus {

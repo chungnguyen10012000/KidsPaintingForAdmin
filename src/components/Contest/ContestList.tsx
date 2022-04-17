@@ -8,12 +8,18 @@ export type productListProps = {
   children?: React.ReactNode;
 };
 
+type Options = {
+  name: string;
+  value: any;
+}
+
 function ContestList(props: productListProps): JSX.Element  {
   const contests: IContestState = useSelector((state: IStateType) => state.contest);
 
+
   const productElements: (JSX.Element | null)[] = contests.contest.map(contest_item => {
     if (!contest_item) { return null; }
-    else if (contest_item.status === ""){
+    else if (contest_item.is_enabled === false){
       return (<tr className={`table-row contest-end ${(contests.selectedContest&& contests.selectedContest.id === contest_item.id) ? "selected" : ""}`}
       onClick={() => {
         if(props.onSelect) props.onSelect(contest_item);
@@ -21,11 +27,11 @@ function ContestList(props: productListProps): JSX.Element  {
       key={`contest_${contest_item.id}`}>
       <th scope="row">{contest_item.id}</th>
       <td>{contest_item.name}</td>
-      <td>{contest_item.type}</td>
-      <td>{contest_item.level}</td>
-      <td>{contest_item.amount}</td>
-      <td>{contest_item.hasBeginDate}</td>
-      <td>{contest_item.hasExpiryDate}</td>
+      <td>{contest_item.art_type_id}</td>
+      <td>{contest_item.art_level_id}</td>
+      <td>{contest_item.max_participant}</td>
+      <td>{contest_item.start_time}</td>
+      <td>{contest_item.end_time}</td>
     </tr>);
     }
     return (<tr className={`table-row ${(contests.selectedContest&& contests.selectedContest.id === contest_item.id) ? "selected" : ""}`}
@@ -35,11 +41,11 @@ function ContestList(props: productListProps): JSX.Element  {
       key={`contest_${contest_item.id}`}>
       <th scope="row">{contest_item.id}</th>
       <td>{contest_item.name}</td>
-      <td>{contest_item.type}</td>
-      <td>{contest_item.level}</td>
-      <td>{contest_item.amount}</td>
-      <td>{contest_item.hasBeginDate}</td>
-      <td>{contest_item.hasExpiryDate}</td>
+      <td>{contest_item.art_type_id}</td>
+      <td>{contest_item.art_level_id}</td>
+      <td>{contest_item.max_participant}</td>
+      <td>{contest_item.start_time}</td>
+      <td>{contest_item.end_time}</td>
     </tr>);
   });
 

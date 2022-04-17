@@ -2,12 +2,14 @@ import React, { useState, FormEvent, Dispatch, Fragment } from "react";
 import { IStateType, ICourseState, ICourseSemesterState, IScheduleState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { ICourseSemester, CourseSemesterModificationStatus } from "../../store/models/course_for_semester.interface";
-import { editCourseSemester, clearSelectedCourseSemester, setModificationStateSemester, addCourseSemester } from "../../store/actions/course_for_semester.actions";
+import { editCourseSemester, clearSelectedCourseSemester, setModificationStateSemester, addCourseSemester } from "../../store/actions/course_semester/course_for_semester.actions";
 import { addNotification } from "../../store/actions/notifications.action";
-import SelectInput from "../../common/components/Select";
+import SelectInput from "../../common/components/SelectInput";
 import { OnChangeModel, ICourseSemesterFormState } from "../../common/types/Form.types";
 import { ILevel } from "../../store/models/levels.interface";
 import { IMytype } from "../../store/models/mytypes.interface";
+import { postCourseSemester } from "../../store/actions/course_semester/postCourseSemester";
+import { putCourseSemester } from "../../store/actions/course_semester/putCourseSemester";
 
 export type levelListProps = {
     onSelect?: (level: ILevel) => void;
@@ -19,19 +21,28 @@ export type mytypeListProps = {
     children?: React.ReactNode;
 };
 
+type Options = {
+    name: string;
+    value: any;
+}
+
 
 const CourseSemesterForm: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();
     const courses: ICourseState | null = useSelector((state: IStateType) => state.courses);
     const schedules: IScheduleState | null = useSelector((state: IStateType) => state.schedules);
 
-    const listSchedule: string[] = []
-    schedules.schedules.map((ele) => {
-        return listSchedule.push(ele.name)
+    const schedules2: IScheduleState | null = useSelector((state: IStateType) => state.schedules);
+    let listSchedule: Options[] = [];
+    schedules2.schedules.map(ele => {
+        let item: Options = {"name": ele.name, "value": ele.id}
+        return listSchedule.push(item)
     })
-    const listCourses: string[] = []
-    courses.courses.map((ele) => {
-        return listCourses.push(ele.courseName)
+
+    let listCourses: Options[] = [];
+    courses.courses.map(ele => {
+        let item: Options = {"name": ele.name, "value": ele.id}
+        return listCourses.push(item)
     })
 
     const courseSemesters: ICourseSemesterState | null = useSelector((state: IStateType) => state.courseSemeters);
@@ -40,13 +51,12 @@ const CourseSemesterForm: React.FC = () => {
     const isCreate: boolean = (courseSemesters.modificationState === CourseSemesterModificationStatus.Create);
 
     if (!courseSemester || isCreate) {
-        courseSemester = { courseId: 0, courseTemplate: "", time: 'Thứ 2-4-6', timeLesson: "" };
+        courseSemester = { id: 0, course_id: 1, schedule_id: 1};
     }
 
     const [formState, setFormState] = useState({
-        courseTemplate: { error: "", value: courseSemester.courseTemplate },
-        time: { error: "", value: courseSemester.time },
-        timeLesson: { error: "", value: courseSemester.timeLesson },
+        course_id: { error: "", value: courseSemester.course_id },
+        schedule_id: { error: "", value: courseSemester.schedule_id },
     });
 
     function hasFormValueChanged(model: OnChangeModel): void {
@@ -65,12 +75,21 @@ const CourseSemesterForm: React.FC = () => {
 
     function saveForm(formState: ICourseSemesterFormState, saveFn: Function): void {
         if (courseSemester) {
-            dispatch(saveFn({
-                ...courseSemester,
-                courseTemplate: formState.courseTemplate.value,
-                time: formState.time.value,
-                timeLesson: formState.timeLesson.value,
-            }));
+            if (saveFn == addCourseSemester){
+                dispatch(postCourseSemester({
+                    ...courseSemester,
+                    course_id: formState.course_id.value,
+                    schedule_id: formState.schedule_id.value,
+                }));
+            }
+            else {
+                dispatch(putCourseSemester(courseSemester.id, {
+                    ...courseSemester,
+                    course_id: formState.course_id.value,
+                    schedule_id: formState.schedule_id.value,
+                }));
+            }
+
 
             dispatch(addNotification("Khóa học theo kỳ", `Đã được thêm bởi bạn`));
             dispatch(clearSelectedCourseSemester());
@@ -88,7 +107,7 @@ const CourseSemesterForm: React.FC = () => {
     }
 
     function isFormInvalid(): boolean {
-        return (formState.courseTemplate.error || !formState.courseTemplate.value) as boolean;
+        return (formState.course_id.error || !formState.course_id.value) as boolean;
     }
 
     return (
@@ -101,9 +120,9 @@ const CourseSemesterForm: React.FC = () => {
                     <div className="card-body">
                         <form onSubmit={saveUser}>
                             <div className="form-group">
-                                <SelectInput id="input_courseTemplate"
-                                    field="courseTemplate"
-                                    value={formState.courseTemplate.value}
+                                <SelectInput id="input_course_id"
+                                    field="course_id"
+                                    value={formState.course_id.value}
                                     onChange={hasFormValueChanged}
                                     required={true}
                                     label="Khóa học chính"
@@ -112,13 +131,13 @@ const CourseSemesterForm: React.FC = () => {
                             </div>
                             <div className="form-group">
                                 <SelectInput
-                                    id="input_time"
-                                    field="time"
+                                    id="input_schedule_id"
+                                    field="schedule_id"
                                     label="Lịch học"
                                     options={listSchedule}
                                     required={true}
                                     onChange={hasFormValueChanged}
-                                    value={formState.time.value}
+                                    value={formState.schedule_id.value}
                                 />
                             </div>
                             <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
