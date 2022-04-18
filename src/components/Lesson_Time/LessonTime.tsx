@@ -8,7 +8,7 @@ import { updateCurrentPath } from "../../store/actions/root.actions";
 import { ILessonTimeState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
 import Popup from "reactjs-popup";
 import {
-    removeLessonTime, clearSelectedLessonTime, setModificationState,
+    clearSelectedLessonTime, setModificationState,
     changeSelectedLessonTime
 } from "../../store/actions/lesson_time/lesson_time.actions";
 import { addNotification } from "../../store/actions/notifications.action";

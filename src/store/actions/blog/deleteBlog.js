@@ -1,4 +1,4 @@
-import { fetchDataRequest, fetchDataSuccess, fetchDataError, editBlog, removeBlog } from "./blogs.actions";
+import { fetchDataRequest, fetchDataSuccess, fetchDataError,  removeBlog } from "./blogs.actions";
 
 export function deleteBlog(id) {
     return dispatch => {

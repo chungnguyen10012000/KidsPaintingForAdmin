@@ -116,7 +116,7 @@ const CoursesForm: React.FC = () => {
 
   function saveForm(formState: ICourseFormState, saveFn: Function): void {
     if (course) {
-      if (saveFn == addCourse){
+      if (saveFn === addCourse){
         dispatch(postCourse({
           ...course,
           name: formState.name.value,

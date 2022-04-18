@@ -32,20 +32,20 @@ const FeedBack: React.FC = () => {
         <td>{feedback.email}</td>
         <td><p>{feedback.content}</p></td>
         <td><button className="btn btn-success" onClick={() => {
-            if (localStorage.getItem('role') == "ROLE_SUPER_ADMIN"){
+            if (localStorage.getItem('role') === "ROLE_SUPER_ADMIN"){
               history.push({
                 pathname: `/super-admin/feedback-detail`,
                 state: { id : feedback.id}
               })
             }
-            else if (localStorage.getItem('role') == "ROLE_ADMIN"){
+            else if (localStorage.getItem('role') === "ROLE_ADMIN"){
               history.push({
                 pathname: `/admin/feedback-detail`,
                 state: { id : feedback.id}
               })
             }
 
-            else if (localStorage.getItem('role') == "ROLE_STAFF"){
+            else if (localStorage.getItem('role') === "ROLE_STAFF"){
               history.push({
                 pathname: `/employee/feedback-detail`,
                 state: { id : feedback.id}

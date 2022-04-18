@@ -1,12 +1,8 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { ICourse } from "../../store/models/courses.interface";
+import { ICourseState, IStateType } from "../../store/models/root.interface";
 
-const data = [
-    {
-        "courseName": "Khóa học sơn dầu dành cho trẻ 9-12 tuổi",
-        "maxCourseParticipant": "60"
-    }
-]
 
 export type myclassListProps = {
     onSelect?: (myclass: ICourse) => void;
@@ -22,13 +18,14 @@ function SigupLevelTeacherList(props: myclassListProps): JSX.Element {
         return checkSigup ? "disabled" : "";
     }
 
-    const courseElements: (JSX.Element | null)[] = data.map((course_item, index) => {
+    const courses: ICourseState = useSelector((state: IStateType) => state.courses);
+
+    const courseElements: (JSX.Element | null)[] = courses.courses.map((course_item, index) => {
         if (!course_item) { return null; }
         return (<tr className={`table-row `}
             key={`class_${index}`}>
             <th scope="row">{index + 1}</th>
-            <td>{course_item.courseName}</td>
-            <td>{course_item.maxCourseParticipant}</td>
+            <td>{course_item.name}</td>
             <td>
                 <button className={`btn btn-warning left-margin`}>Xem chi tiết</button> 
             </td>
@@ -49,7 +46,6 @@ function SigupLevelTeacherList(props: myclassListProps): JSX.Element {
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tên lớp</th>
-                        <th scope="col">Số lượng tối đa học sinh</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>

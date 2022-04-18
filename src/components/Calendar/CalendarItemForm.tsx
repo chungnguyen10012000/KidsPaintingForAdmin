@@ -62,7 +62,7 @@ const CalendarItemForm: React.FC = () => {
 
     function saveForm(formState: IScheduleItemFormState, saveFn: Function): void {
         if (schedule) {
-            if (saveFn == addScheduleItem){
+            if (saveFn === addScheduleItem){
                 dispatch(postScheduleItem({
                     ...schedule,
                     lesson_time: formState.lesson_time.value,
@@ -123,7 +123,7 @@ const CalendarItemForm: React.FC = () => {
                                 <SelectInput
                                     id="input_lesson_time"
                                     field="lesson_time"
-                                    label="Tiết"
+                                    label="Thời gian"
                                     options={listLessonTime}
                                     required={true}
                                     onChange={hasFormValueChanged}

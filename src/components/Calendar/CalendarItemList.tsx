@@ -2,8 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { IStateType, IScheduleItemState, IScheduleState, ILessonTimeState } from "../../store/models/root.interface";
 import { IScheduleItem } from "../../store/models/schedule_item.interface";
-import { ISchedule } from "../../store/models/schedule.interface";
-import { ILessonTime } from "../../store/models/lesson_time.interface";
 
 export type scheduleItemListProps = {
     onSelect?: (scheduleItem: IScheduleItem) => void;
@@ -15,6 +13,24 @@ function CalendarItemList(props: scheduleItemListProps): JSX.Element {
     const scheduleItems: IScheduleItemState = useSelector((state: IStateType) => state.scheduleItems);
     const schedules: IScheduleState | null = useSelector((state: IStateType) => state.schedules);
     const lessonTimes: ILessonTimeState = useSelector((state: IStateType) => state.lessonTimes);
+
+    let scheduleList: string[] = []
+    scheduleItems.scheduleItems.map ((schedule_item) => {
+        return schedules.schedules.forEach(element => {
+            if (element.id === schedule_item.schedule_id){
+                return scheduleList.push(element.name)
+            }
+        });
+    })
+
+    let lessonTimeList: string[] = []
+    scheduleItems.scheduleItems.map ((schedule_item) => {
+        return lessonTimes.lessonTimes.forEach(element => {
+            if (element.id === schedule_item.lesson_time){
+                return lessonTimeList.push(`${element.start_time} => ${element.end_time}`)
+            }
+        });
+    })
     // console.log(schedules.schedules)
     // console.log(scheduleItems.scheduleItems)
     const scheduleItemElements: (JSX.Element | null)[] = scheduleItems.scheduleItems.map((lesson_time_item, index)=> {
@@ -29,8 +45,8 @@ function CalendarItemList(props: scheduleItemListProps): JSX.Element {
             }}
             key={`class_${index}`}>
             <th scope="row">{index}</th>
-            <td>{lesson_time_item.schedule_id}</td>
-            <td>{lesson_time_item.lesson_time}</td> 
+            <td>{scheduleList[index]}</td>
+            <td>{lessonTimeList[index]}</td> 
             <td>{lesson_time_item.date_of_week}</td>
         </tr>);
     });

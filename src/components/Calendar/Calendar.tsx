@@ -8,13 +8,13 @@ import { updateCurrentPath } from "../../store/actions/root.actions";
 import { IScheduleState, IStateType, IRootPageStateType, IScheduleItemState } from "../../store/models/root.interface";
 import Popup from "reactjs-popup";
 import {
-    removeSchedule, clearSelectedSchedule, setModificationState,
+    clearSelectedSchedule, setModificationState,
     changeSelectedSchedule
 } from "../../store/actions/schedule/schedule.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { ScheduleModificationStatus, ISchedule } from "../../store/models/schedule.interface";
 import { ScheduleItemModificationStatus, IScheduleItem } from "../../store/models/schedule_item.interface";
-import { changeSelectedScheduleItem, clearSelectedScheduleItem, removeScheduleItem, setModificationStateItem } from "../../store/actions/schedule/schedule_item.actions";
+import { changeSelectedScheduleItem, clearSelectedScheduleItem, setModificationStateItem } from "../../store/actions/schedule/schedule_item.actions";
 import CalendarItemForm from "./CalendarItemForm";
 import CalendarItemList from "./CalendarItemList";
 import { getSchedule } from "../../store/actions/schedule/getSchedule";

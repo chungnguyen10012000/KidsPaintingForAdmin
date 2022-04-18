@@ -1,9 +1,14 @@
-import React, { Fragment, Dispatch } from "react";
+import React, { Fragment, Dispatch, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import TopCard from "../../common/components/TopCard";
-import { IStateType, IMyClassState, ICourseState, IContestState, IFeedBackState, IUserState, IEmployeeState} from "../../store/models/root.interface";
+import { IStateType, ICourseState, IContestState, IFeedBackState, IUserState, IEmployeeState, IBlogState} from "../../store/models/root.interface";
 import { useParams } from "react-router";
+import { getBlog } from "../../store/actions/blog/getBlog";
+import { getCourse } from "../../store/actions/course/getCourse";
+import { getContest } from "../../store/actions/contest/getContest";
+import { fetchProducts } from "../../store/actions/users/fetchDataUser";
+import { getFeedback } from "../../store/actions/feedback/getFeedback";
 
 type role = {
   id: string;
@@ -14,23 +19,45 @@ const Home: React.FC = () => {
   const { id } = useParams<role>()
   //console.log(id)
 
-  const blogs: IFeedBackState = useSelector((state: IStateType) => state.feedbacks);
+  const dispatch: Dispatch<any> = useDispatch();
+
+  useEffect(() => {
+    dispatch(getBlog())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getCourse())
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getFeedback())
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getContest())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [dispatch])
+
+  const feedbacks: IFeedBackState = useSelector((state: IStateType) => state.feedbacks);
+  const blogs: IBlogState = useSelector((state: IStateType) => state.blogs);
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
-  const classs: IMyClassState = useSelector((state: IStateType) => state.myclass);
   const contests: IContestState = useSelector((state: IStateType) => state.contest);
   const teachers: IUserState = useSelector((state: IStateType) => state.users);
   const employees: IEmployeeState = useSelector((state: IStateType) => state.employees);
 
-  const dispatch: Dispatch<any> = useDispatch();
+  
   dispatch(updateCurrentPath("Trang chủ", ""));
 
 
   const numberTeacherCount: number = teachers.users.length;
   const numberEmployeeCount: number = employees.employees.length;
   const numberCoursesCount: number = courses.courses.length;
-  const numberClassCount: number = classs.myclass.length;
   const numberContestCount: number = contests.contest.length;
-  const numberBlogAcceptCount: number = blogs.feedbacks.length;
+  const numberFeedbackAcceptCount: number = feedbacks.feedbacks.length;
+  const numberBlogAcceptCount: number = blogs.blogs.length;
 
   if (id === "teacher"){
     return (
@@ -39,7 +66,6 @@ const Home: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
-        <TopCard title="TỔNG SỐ LỚP" text={`${numberClassCount}`} icon="user" class="primary" />
         <TopCard title="TỔNG SỐ CUỘC THI" text={`${numberContestCount}`} icon="warehouse" class="danger" />
       </div>
 
@@ -89,9 +115,9 @@ const Home: React.FC = () => {
       </div>
 
       <div className="row">
-        <TopCard title="TỔNG SỐ LỚP HỌC" text={`${numberClassCount}`} icon="warehouse" class="danger" /> 
         <TopCard title="TỔNG SỐ CUỘC THI" text={`${numberContestCount}`} icon="box" class="primary" />
-        <TopCard title="TỔNG SỐ PHẢN HỒI" text={`${numberBlogAcceptCount}`} icon="warehouse" class="danger" /> 
+        <TopCard title="TỔNG SỐ PHẢN HỒI" text={`${numberFeedbackAcceptCount}`} icon="warehouse" class="danger" />
+        <TopCard title="TỔNG SỐ BLOG" text={`${numberBlogAcceptCount}`} icon="warehouse" class="danger" />  
       </div>
 
     </Fragment>

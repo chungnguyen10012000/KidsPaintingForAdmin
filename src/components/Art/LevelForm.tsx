@@ -39,7 +39,7 @@ const LevelForm: React.FC = () => {
 
   function saveForm(formState: ILevelFormState, saveFn: Function): void {
     if (level) {
-      if (saveFn == addLevel){
+      if (saveFn === addLevel){
         dispatch(postLevel({
           ...level,
           name: formState.name.value,

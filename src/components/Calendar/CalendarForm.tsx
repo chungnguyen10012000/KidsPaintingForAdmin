@@ -40,7 +40,7 @@ const CalendarForm: React.FC = () => {
 
     function saveForm(formState: IScheduleFormState, saveFn: Function): void {
         if (schedule) {
-            if (saveFn == addSchedule) {
+            if (saveFn === addSchedule) {
                 dispatch(postSchedule({
                     ...schedule,
                     name: formState.name.value,

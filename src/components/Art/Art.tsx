@@ -16,9 +16,9 @@ import { ICourseState, ICourseSemesterState, IStateType, IRootPageStateType, IMy
 import { MytypeModificationStatus, IMytype } from "../../store/models/mytypes.interface";
 import { LevelModificationStatus, ILevel } from "../../store/models/levels.interface";
 
-import { removeMytype, clearSelectedMytype, changeSelectedMytype, setModificationStateMytype } from "../../store/actions/art_type/mytypes.actions";
+import { clearSelectedMytype, changeSelectedMytype, setModificationStateMytype } from "../../store/actions/art_type/mytypes.actions";
 import { removeCourse, clearSelectedCourse } from "../../store/actions/course/courses.actions";
-import { removeLevel, clearSelectedLevel, changeSelectedLevel, setModificationStateLevel } from "../../store/actions/art_level/levels.actions";
+import { clearSelectedLevel, changeSelectedLevel, setModificationStateLevel } from "../../store/actions/art_level/levels.actions";
 
 import { removeCourseSemester, clearSelectedCourseSemester} from "../../store/actions/course_semester/course_for_semester.actions";
 import { getArtType } from "../../store/actions/art_type/getArtType";

@@ -1,19 +1,21 @@
-import React, { Fragment, Dispatch } from "react";
-import { useDispatch } from "react-redux";
+import React, { Fragment, Dispatch, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getBlog } from "../../store/actions/blog/getBlog";
 import { updateCurrentPath } from "../../store/actions/root.actions";
+import { IBlogState, IStateType } from "../../store/models/root.interface";
 import "./ReviewBlog.css"
-
-const data = [{
-    "name": "Tại sao bé nên học mỹ thuật",
-    "content": "Các nghiên cứu về trẻ em Việt Nam cho thấy, người lớn vẫn thường thích trẻ vâng lời, làm theo sự chỉ dẫn hơn là thích trẻ sáng tạo, có chính kiến riêng. Nhiều bậc cha mẹ luôn đánh giá sự phát triển của con mình bằng những tiêu chí khuôn mẫu như bé ngoan ngoãn, tuân thủ nề nếp, đạt kết quả cao trên trường, bằng bạn bằng bè."
-}]
 
 const ReviewBlog: React.FC = () => {
 
 
 
     const dispatch: Dispatch<any> = useDispatch();
+    const blogs: IBlogState = useSelector((state: IStateType) => state.blogs);
     dispatch(updateCurrentPath("Giáo viên đăng ký", "Danh sách"));
+
+    useEffect(() => {
+        dispatch(getBlog())
+      }, [dispatch])
 
     // useEffect(() => {
     //   let pathUsers = getDomain('user?role=ROLE_TEACHER')
@@ -30,13 +32,12 @@ const ReviewBlog: React.FC = () => {
     // }, [])
 
 
-    const userElements: JSX.Element[] = data.map((ele, index) => {
+    const userElements: JSX.Element[] = blogs.blogs.map((ele, index) => {
         return (
             <tr className={`table-row`}
                 key={`user_${index}`}>
                 <th scope="row">{index + 1}</th>
                 <td>{ele.name}</td>
-                <td><p>{ele.content}</p></td>
                 <td><button className="btn btn-warning" >Xem chi tiết</button> </td>
                 <td><button className="btn btn-success" >Chấp nhận</button> </td>
                 <td><button className="btn btn-danger" >Xóa</button> </td>
@@ -61,7 +62,6 @@ const ReviewBlog: React.FC = () => {
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Tên Blog</th>
-                                            <th scope="col">Nội dung</th>
                                             <th scope="col"></th>
                                             <th scope="col">Cấp quyền</th>
                                             <th scope="col"></th>

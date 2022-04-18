@@ -30,7 +30,7 @@ type Options = {
 const CourseSemesterForm: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();
     const courses: ICourseState | null = useSelector((state: IStateType) => state.courses);
-    const schedules: IScheduleState | null = useSelector((state: IStateType) => state.schedules);
+    //const schedules: IScheduleState | null = useSelector((state: IStateType) => state.schedules);
 
     const schedules2: IScheduleState | null = useSelector((state: IStateType) => state.schedules);
     let listSchedule: Options[] = [];
@@ -75,7 +75,7 @@ const CourseSemesterForm: React.FC = () => {
 
     function saveForm(formState: ICourseSemesterFormState, saveFn: Function): void {
         if (courseSemester) {
-            if (saveFn == addCourseSemester){
+            if (saveFn === addCourseSemester){
                 dispatch(postCourseSemester({
                     ...courseSemester,
                     course_id: formState.course_id.value,

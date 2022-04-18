@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { IStateType, ICourseSemesterState } from "../../store/models/root.interface";
+import { IStateType, ICourseSemesterState, ICourseState, IScheduleState } from "../../store/models/root.interface";
 import { ICourseSemester } from "../../store/models/course_for_semester.interface";
 
 export type courseListProps = {
@@ -10,18 +10,39 @@ export type courseListProps = {
 
 function CoursesSemesterList(props: courseListProps): JSX.Element {
     const courseSemester: ICourseSemesterState = useSelector((state: IStateType) => state.courseSemeters);
+    const courses: ICourseState = useSelector((state: IStateType) => state.courses);
+    const schedules: IScheduleState = useSelector((state: IStateType) => state.schedules);
+
+    let courseList : string[] = []
+
+    courseSemester.courseSemesters.map ((course_semester_item) => {
+        return courses.courses.forEach(element => {
+            if (element.id === course_semester_item.course_id){
+                return courseList.push(element.name)
+            }
+        });
+    })
+
+    let scheduleList: string[] = []
+    courseSemester.courseSemesters.map ((course_semester_item) => {
+        return schedules.schedules.forEach(element => {
+            if (element.id === course_semester_item.schedule_id){
+                return scheduleList.push(element.name)
+            }
+        });
+    })
 
 
-    const courseElements: (JSX.Element | null)[] = courseSemester.courseSemesters.map(course => {
+    const courseElements: (JSX.Element | null)[] = courseSemester.courseSemesters.map((course, index) => {
         if (!course) { return null; }
         return (<tr className={`table-row ${(courseSemester.selectedCourseSemester && courseSemester.selectedCourseSemester.id === course.id) ? "selected" : ""}`}
             onClick={() => {
                 if (props.onSelect) props.onSelect(course);
             }}
             key={`course_${course.id}`}>
-            <th scope="row">{course.id}</th>
-            <td>{course.course_id}</td>
-            <td>{course.schedule_id}</td>
+            <th scope="row">{index}</th>
+            <td>{courseList[index]}</td>
+            <td>{scheduleList[index]}</td>
         </tr>);
     });
 

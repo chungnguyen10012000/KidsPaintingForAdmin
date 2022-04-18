@@ -1,5 +1,5 @@
 import { getTeacher } from "./handler/GET/GetUser";
-import { postUser, PostUser } from "./handler/POST/PostUser";
+import { postUser } from "./handler/POST/PostUser";
 import { login } from "./handler/POST/login";
 import { getBlog } from "./handler/GET/GetBlog";
 import { postBlog } from "./handler/POST/postBlog";

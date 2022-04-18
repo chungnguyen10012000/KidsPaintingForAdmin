@@ -9,6 +9,7 @@ import {
 } from "../../store/actions/course/courses.actions";
 import { CourseModificationStatus, ICourse } from "../../store/models/courses.interface";
 import SigupLevelTeacherList from "./SigupLevelTeacherList";
+import { getCourse } from "../../store/actions/course/getCourse";
 
 const SigupLevelTeacher: React.FC = () => {
     //console.log(id)
@@ -18,6 +19,10 @@ const SigupLevelTeacher: React.FC = () => {
 
     const dispatch: Dispatch<any> = useDispatch();
     const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
+
+    useEffect(() => {
+        dispatch(getCourse())
+      }, [dispatch]);
 
     useEffect(() => {
         dispatch(clearSelectedCourse());

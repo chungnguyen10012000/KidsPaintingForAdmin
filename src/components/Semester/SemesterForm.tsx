@@ -45,7 +45,7 @@ const SemesterForm: React.FC = () => {
 
     function saveForm(formState: ISemesterFormState, saveFn: Function): void {
         if (semester) {
-            if(saveFn == addSemester){
+            if(saveFn === addSemester){
                 dispatch(postSemester({
                     ...semester,
                     name: formState.name.value,

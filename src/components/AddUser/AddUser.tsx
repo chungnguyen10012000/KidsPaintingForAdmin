@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { IRootPageStateType, IStateType, IUserState } from "../../store/models/root.interface";
 import { removeUser, setModificationState } from "../../store/actions/users/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
-import TeacherForm from "./AddUserForm";
 import { addNotification } from "../../store/actions/notifications.action";
 import SelectInput from "../../common/components/Select";
 import { fetchProducts } from "../../store/actions/users/fetchDataUser";

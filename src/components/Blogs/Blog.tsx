@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { IBlogState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
 import Popup from "reactjs-popup";
-import { removeBlog, clearSelectedBlog, setModificationState,
+import { clearSelectedBlog, setModificationState,
   changeSelectedBlog } from "../../store/actions/blog/blogs.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { BlogModificationStatus, IBlog } from "../../store/models/blogs.innterface";

@@ -1,4 +1,4 @@
-import { fetchDataRequest, fetchDataSuccess, fetchDataError, removeBlogAll, addBlog, initialBlog } from "./blogs.actions";
+import { fetchDataRequest, fetchDataSuccess, fetchDataError, addBlog } from "./blogs.actions";
 
 export function postBlog(data) {
     return dispatch => {

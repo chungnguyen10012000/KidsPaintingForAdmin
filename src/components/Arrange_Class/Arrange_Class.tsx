@@ -1,7 +1,8 @@
-import React, { Fragment, Dispatch, useState } from "react";
+import React, { Fragment, Dispatch, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SelectInput from "../../common/components/Select";
 import { updateCurrentPath } from "../../store/actions/root.actions";
+import { getSemester } from "../../store/actions/semester/getSemester";
 import { ISemesterState, IStateType } from "../../store/models/root.interface";
 //import { getRestApiWithToken, getDomain, postRestApiWithToken } from "../../common/util/RestAPI.util";
 //import { Page } from "../../common/util/User.util";
@@ -20,6 +21,10 @@ const ArrangeClass: React.FC = () => {
 
     const dispatch: Dispatch<any> = useDispatch();
     dispatch(updateCurrentPath("Xếp lớp", ""));
+
+    useEffect(() => {
+        dispatch(getSemester())
+    }, [dispatch])
 
     // useEffect(() => {
     //   let pathUsers = getDomain('user?role=ROLE_TEACHER')

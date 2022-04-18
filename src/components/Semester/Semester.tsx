@@ -8,13 +8,12 @@ import { updateCurrentPath } from "../../store/actions/root.actions";
 import { ISemesterState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
 import Popup from "reactjs-popup";
 import {
-    removeSemester, clearSelectedSemester, setModificationState,
+    clearSelectedSemester, setModificationState,
     changeSelectedSemester
 } from "../../store/actions/semester/semester.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { SemesterModificationStatus, ISemester } from "../../store/models/semester.interface";
 import { getSemester } from "../../store/actions/semester/getSemester";
-import { deleteContest } from "../../store/actions/contest/deleteContest";
 import { deleteSemester } from "../../store/actions/semester/deleteSemester";
 
 type role = {

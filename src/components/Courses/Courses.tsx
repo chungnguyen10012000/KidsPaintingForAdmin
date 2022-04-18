@@ -11,13 +11,13 @@ import CoursesSemesterList from "./CourseSemesterList";
 import CourseSemesterForm from "./CourseSemesterForm";
 
 
-import { ICourseState, ICourseSemesterState, IStateType, IRootPageStateType, IMytypeState, ILevelState } from "../../store/models/root.interface";
+import { ICourseState, ICourseSemesterState, IStateType, IRootPageStateType, IMytypeState } from "../../store/models/root.interface";
 
 import { CourseModificationStatus, ICourse } from "../../store/models/courses.interface";
 
 import { removeMytype, clearSelectedMytype } from "../../store/actions/art_type/mytypes.actions";
 import { removeCourse, clearSelectedCourse, setModificationState, changeSelectedCourse } from "../../store/actions/course/courses.actions";
-import { removeLevel, clearSelectedLevel } from "../../store/actions/art_level/levels.actions";
+import { clearSelectedLevel } from "../../store/actions/art_level/levels.actions";
 
 import { CourseSemesterModificationStatus, ICourseSemester } from "../../store/models/course_for_semester.interface";
 import { removeCourseSemester, clearSelectedCourseSemester, setModificationStateSemester, changeSelectedCourseSemester } from "../../store/actions/course_semester/course_for_semester.actions";
@@ -41,7 +41,7 @@ const Courses: React.FC = () => {
 
   const [popup, setPopup] = useState(false);
   const [popup1, setPopup1] = useState(false);
-  const [popup2, setPopup2] = useState(false);
+  //const [popup2, setPopup2] = useState(false);
   const [popup3, setPopup3] = useState(false);
 
   let [isCheck, setIsCheck] = useState('')
@@ -50,7 +50,7 @@ const Courses: React.FC = () => {
 
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
   const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
-  const levels: ILevelState = useSelector((state: IStateType) => state.levels);
+  //const levels: ILevelState = useSelector((state: IStateType) => state.levels);
   const courseSemesters: ICourseSemesterState = useSelector((state: IStateType) => state.courseSemeters);
 
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);

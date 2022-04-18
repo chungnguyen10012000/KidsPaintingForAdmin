@@ -8,7 +8,7 @@ import { updateCurrentPath } from "../../store/actions/root.actions";
 import { IContestState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
 import Popup from "reactjs-popup";
 import {
-  removeContest, clearSelectedContest, setModificationState,
+  clearSelectedContest, setModificationState,
   changeSelectedContest
 } from "../../store/actions/contest/contest.actions";
 import { addNotification } from "../../store/actions/notifications.action";
@@ -110,7 +110,6 @@ const Contests: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
       <div className="row">
         <TopCard title="TỔNG SỐ CUỘC THI" text={`${numberItemsCount}`} icon="box" class="primary" />
-        <TopCard title="TỔNG SỐ CUỘC THI ĐÃ KẾT THÚC" text={`${numberItemsCount}`} icon="box" class="primary" />
       </div>
 
       <div className="row">

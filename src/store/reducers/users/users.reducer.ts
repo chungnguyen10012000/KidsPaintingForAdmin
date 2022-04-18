@@ -1,5 +1,5 @@
 import { IUserState, IActionBase } from "../../models/root.interface";
-import { EDIT_USER, ADD_USER, REMOVE_USER, FETCH_DATA_ERROR as FETCH_DATA_USER_ERROR, FETCH_DATA_REQUEST as FETCH_DATA_USER_REQUEST, FETCH_DATA_SUCCESS as FETCH_DATA_USER_SUCCESS, INITIAL_USER, REMOVE_USER_ALL, SET_MODIFICATION_STATE } from "../../actions/users/users.action";
+import { EDIT_USER, ADD_USER, REMOVE_USER, INITIAL_USER, REMOVE_USER_ALL, SET_MODIFICATION_STATE } from "../../actions/users/users.action";
 import { IUser, UserModificationStatus } from "../../models/user.interface";
 
 const initialState: IUserState = {
