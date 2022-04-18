@@ -1,4 +1,4 @@
-import { fetchDataRequest, fetchDataSuccess, fetchDataError, removeSchedule, initialSchedule, addSchedule } from "./schedule.actions";
+import { fetchDataRequest, fetchDataSuccess, fetchDataError, removeScheduleAll, initialSchedule, addSchedule } from "./schedule.actions";
 
 export function getSchedule() {
     return dispatch => {
@@ -16,7 +16,7 @@ export function getSchedule() {
             })
             .then (data => {
                 dispatch(fetchDataSuccess(data))
-                dispatch(removeSchedule())
+                dispatch(removeScheduleAll())
                 data.map((ele, index) => {
                     if (index === 0){
                         return dispatch(initialSchedule(ele));

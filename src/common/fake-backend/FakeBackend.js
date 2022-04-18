@@ -1,5 +1,5 @@
 import { getTeacher } from "./handler/GET/GetUser";
-import { PostUser } from "./handler/POST/PostUser";
+import { postUser, PostUser } from "./handler/POST/PostUser";
 import { login } from "./handler/POST/login";
 import { getBlog } from "./handler/GET/GetBlog";
 import { postBlog } from "./handler/POST/postBlog";
@@ -63,7 +63,7 @@ export function configureFakeBackend() {
                     case url.endsWith(`${path}/auth`) && method === 'POST':
                         return login(body, created);
                     case url.endsWith(`${path}/user`) && method === 'POST':
-                        return PostUser(created);
+                        return postUser(body,created);
                     case url.endsWith(`${path}/user`) && method === 'GET':
                         return getTeacher(ok);
                     case url.match(new RegExp('/user/\\d+$')) && method === 'GET':

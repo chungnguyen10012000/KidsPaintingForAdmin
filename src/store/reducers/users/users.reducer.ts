@@ -1,5 +1,5 @@
 import { IUserState, IActionBase } from "../../models/root.interface";
-import { EDIT_USER, ADD_USER, REMOVE_USER, FETCH_DATA_ERROR as FETCH_DATA_USER_ERROR, FETCH_DATA_REQUEST as FETCH_DATA_USER_REQUEST, FETCH_DATA_SUCCESS as FETCH_DATA_USER_SUCCESS } from "../../actions/users/users.action";
+import { EDIT_USER, ADD_USER, REMOVE_USER, FETCH_DATA_ERROR as FETCH_DATA_USER_ERROR, FETCH_DATA_REQUEST as FETCH_DATA_USER_REQUEST, FETCH_DATA_SUCCESS as FETCH_DATA_USER_SUCCESS, INITIAL_USER, REMOVE_USER_ALL, SET_MODIFICATION_STATE } from "../../actions/users/users.action";
 import { IUser, UserModificationStatus } from "../../models/user.interface";
 
 const initialState: IUserState = {
@@ -14,27 +14,10 @@ function userReducer(state: IUserState = initialState, action: IActionBase): IUs
     // console.log('enter reducer')
     // console.log(action)
     switch (action.type) {
-        case FETCH_DATA_USER_REQUEST:{
-            return {
-                ...state,
-                loading: true,
-                error: null
-            };
-        }
-        case FETCH_DATA_USER_SUCCESS:{
-            return {
-                ...state,
-                loading: false,
-                users: action.user
-            };
-        }
-        case FETCH_DATA_USER_ERROR:{
-            return {
-                ...state,
-                loading: false,
-                error: action.payload.error,
-                users: []
-            };
+        case INITIAL_USER: {
+            let maxId: number = 0;
+            action.user.id = maxId + 1;
+            return { ...state, users : [...state.users, action.user]};
         }
         case EDIT_USER: {
             const foundIndex: number = state.users.findIndex(pr => pr.id === action.user.id);
@@ -49,6 +32,12 @@ function userReducer(state: IUserState = initialState, action: IActionBase): IUs
         }
         case REMOVE_USER: {
             return { ...state, users: state.users.filter(pr => pr.id !== action.id) };
+        }
+        case REMOVE_USER_ALL: {
+            return { ...state, users: [] };
+        }
+        case SET_MODIFICATION_STATE: {
+            return { ...state, modificationState: action.value };
         }
         default:
             return state;

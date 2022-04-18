@@ -1,11 +1,11 @@
-import { fetchDataRequest, fetchDataSuccess, fetchDataError } from "./users.action";
+import { fetchDataRequest, fetchDataSuccess, fetchDataError, addUser } from "./users.action";
 
 export function postUser(data) {
     return dispatch => {
         dispatch(fetchDataRequest());
         fetch(
                 "/api/v1/user", {
-                    method: "GET",
+                    method: "POST",
                     body: JSON.stringify(data)
                 }
             )
@@ -17,6 +17,7 @@ export function postUser(data) {
             })
             .then (data => {
                 dispatch(fetchDataSuccess(data))
+                dispatch(addUser(data))
                 console.log(data)
             })
             .catch(error => {

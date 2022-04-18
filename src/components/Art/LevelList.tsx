@@ -17,14 +17,14 @@ function TypeList(props: levelListProps): JSX.Element  {
   
   const levels: ILevelState = useSelector((state: IStateType) => state.levels);
 
-  const levelElements: (JSX.Element | null)[] = levels.levels.map(level => {
+  const levelElements: (JSX.Element | null)[] = levels.levels.map((level, index) => {
     if (!level) { return null; }
     return (<tr className={`table-row ${(levels.selectedLevel && levels.selectedLevel.id === level.id) ? "selected" : ""}`}
       onClick={() => {
         if(props.onSelect) props.onSelect(level);
       }}
       key={`level_${level.id}`}>
-      <th scope="row">{level.id}</th>
+      <th scope="row">{index}</th>
       <td>{level.name}</td>
     </tr>);
   });

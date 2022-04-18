@@ -9,6 +9,8 @@ export const CLEAR_USER_PENDING_EDIT: string = "CLEAR_USER_PENDING_EDIT";
 export const FETCH_DATA_REQUEST: string = "FETCH_DATA_REQUEST";
 export const FETCH_DATA_SUCCESS: string = "FETCH_DATA_SUCCESS";
 export const FETCH_DATA_ERROR: string = "FETCH_DATA_ERROR";
+export const REMOVE_USER_ALL: string = "REMOVE_USER_ALL";
+export const INITIAL_USER: string = "INITIAL_USER";
 
 export function fetchDataRequest() {
     return {
@@ -28,6 +30,14 @@ export function fetchDataError(error: any) {
         type: FETCH_DATA_ERROR,
         payload: { error }
     };
+}
+
+export function initialUser(user: IUser): IInitialUserActionType {
+    return { type: INITIAL_USER, user: user };
+}
+
+export function removeUserAll(): IRemoveUserAllActionType {
+    return { type: REMOVE_USER_ALL };
 }
 
 export function addUser(user: IUser): IAddUserActionType {
@@ -62,4 +72,6 @@ interface IRemoveUserActionType { type: string, id: number };
 interface ISetModificationStateActionUser { type: string, value: UserModificationStatus };
 interface IChangeSelectedUserActionType { type: string, user: IUser };
 interface IClearSelectedUserActionType { type: string };
+interface IRemoveUserAllActionType { type: string }
+interface IInitialUserActionType {type: string, user: IUser}
 

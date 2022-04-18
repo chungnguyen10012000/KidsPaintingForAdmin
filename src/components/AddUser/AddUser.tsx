@@ -1,22 +1,40 @@
 import React, { Fragment, Dispatch, useState, useEffect } from "react";
 import TopCard from "../../common/components/TopCard";
-import { IUser } from "../../store/models/user.interface";
+import { IUser, UserModificationStatus } from "../../store/models/user.interface";
 import { useDispatch, useSelector } from "react-redux";
-import { IStateType } from "../../store/models/root.interface";
-import { removeUser } from "../../store/actions/users/users.action";
+import { IRootPageStateType, IStateType, IUserState } from "../../store/models/root.interface";
+import { removeUser, setModificationState } from "../../store/actions/users/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import TeacherForm from "./AddUserForm";
 import { addNotification } from "../../store/actions/notifications.action";
 import SelectInput from "../../common/components/Select";
 import { fetchProducts } from "../../store/actions/users/fetchDataUser";
+import { getCourse } from "../../store/actions/course/getCourse";
+import AddUserForm from "./AddUserForm";
 
 const AddUser: React.FC = () => {
 
   const [typeUser, setTypeUser] = useState("Giáo viên")
+  localStorage.setItem('typeUserAdd', typeUser)
 
   const dispatch: Dispatch<any> = useDispatch();
-  dispatch(updateCurrentPath("Người dùng", ""));
-  const users: IUser[] = useSelector((state: IStateType) => state.users.users);
+  const users: IUserState = useSelector((state: IStateType) => state.users);
+  const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getCourse())
+  }, [dispatch])
+
+
+  useEffect(() => {
+    dispatch(updateCurrentPath("Người dùng", ""));
+  }, [path.area, dispatch]);
+  
+  //const users: IUser[] = useSelector((state: IStateType) => state.users.users);
 
 
   function removeTeacher(teacher: IUser): void {
@@ -24,11 +42,7 @@ const AddUser: React.FC = () => {
     dispatch(removeUser(teacher.id));
   }
 
-  useEffect(() => {
-    dispatch(fetchProducts())
-  }, [dispatch])
-
-  const userElements: JSX.Element[] = users.map( (ele, index) => {
+  const userElements: JSX.Element[] = users.users.map( (ele, index) => {
     return (
       <tr className={`table-row`}
         key={`user_${index}`}>
@@ -56,8 +70,8 @@ const AddUser: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
-        <TopCard title="GIÁO VIÊN" text={users.length.toString()} icon="user" class="danger" />
-        <TopCard title="NHÂN VIÊN" text={users.length.toString()} icon="user" class="danger" />
+        <TopCard title="GIÁO VIÊN" text={users.users.length.toString()} icon="user" class="danger" />
+        <TopCard title="NHÂN VIÊN" text={users.users.length.toString()} icon="user" class="danger" />
       </div>
 
       <div className="row">
@@ -72,7 +86,11 @@ const AddUser: React.FC = () => {
                   label="Loại"
                   options={listUser}
                   required={true}
-                  onChange={(text: string) => setTypeUser(text)}
+                  onChange={(text: any) => {
+                    localStorage.removeItem('typeUserAdd')
+                    localStorage.setItem('typeUserAdd', text.value)
+                    setTypeUser(text.value)
+                  }}
                   value={typeUser}
                 />
               </div>
@@ -80,6 +98,21 @@ const AddUser: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="row">
+        <div className="col-xl-12 col-lg-12">
+          <button className="btn btn-success btn-green btn-create" onClick={() =>
+            dispatch(setModificationState(UserModificationStatus.Create))}>
+            <i className="fas fa fa-plus"></i>
+            Tạo người dùng
+          </button>
+        </div>
+        {
+          console.log(users.modificationState)
+        }
+
+        {((users.modificationState === UserModificationStatus.Create)) ?
+          <AddUserForm /> : null}
       </div>
       <div className="row">
         <div className="col-xl-12 col-lg-12">
@@ -107,10 +140,6 @@ const AddUser: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="row">
-        <TeacherForm />
       </div>
     </Fragment >
   );

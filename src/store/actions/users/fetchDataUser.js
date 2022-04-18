@@ -1,10 +1,10 @@
-import { fetchDataRequest, fetchDataSuccess, fetchDataError } from "./users.action";
+import { fetchDataRequest, fetchDataSuccess, fetchDataError, initialUser, removeUserAll, addUser } from "./users.action";
 
 export function fetchProducts() {
     return dispatch => {
         dispatch(fetchDataRequest());
         fetch(
-                "/api/v1/user/1", {
+                "/api/v1/user", {
                     method: "GET"
                 }
             )
@@ -16,6 +16,15 @@ export function fetchProducts() {
             })
             .then (data => {
                 dispatch(fetchDataSuccess(data))
+                dispatch(removeUserAll())
+                data.map((ele, index) => {
+                    if (index === 0){
+                        return dispatch(initialUser(ele));
+                    }
+                    else{
+                        return dispatch(addUser(ele))
+                    }
+                })
             })
             .catch(error => {
                 dispatch(fetchDataError(error));

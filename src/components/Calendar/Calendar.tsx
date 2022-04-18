@@ -34,6 +34,7 @@ const Calendar: React.FC = () => {
     const scheduleItems: IScheduleItemState = useSelector((state: IStateType) => state.scheduleItems);
     const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
     const numberItemsCount: number = schedules.schedules.length;
+    const numberItemsCount1: number = scheduleItems.scheduleItems.length;
     const [popup, setPopup] = useState(false);
     const [popup1, setPopup1] = useState(false);
     let [isCheck, setIsCheck] = useState('')
@@ -89,7 +90,8 @@ const Calendar: React.FC = () => {
             <h1 className="h3 mb-2 text-gray-800">Lịch </h1>
             <p className="mb-4">Thông tin chung</p>
             <div className="row">
-                <TopCard title="TỔNG SỐ TIẾT HỌC" text={`${numberItemsCount}`} icon="box" class="primary" />
+                <TopCard title="TỔNG SỐ LỊCH CHUNG" text={`${numberItemsCount}`} icon="box" class="primary" />
+                <TopCard title="TỔNG SỐ LỊCH CHI TIẾT" text={`${numberItemsCount1}`} icon="box" class="primary" />
                 <div className="col-xl-6 col-md-6 mb-4">
                     <div className="card-body">
                         <input
