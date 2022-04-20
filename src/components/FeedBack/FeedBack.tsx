@@ -1,4 +1,4 @@
-import React, { Fragment, Dispatch } from "react";
+import React, { Fragment, Dispatch, useEffect } from "react";
 import TopCard from "../../common/components/TopCard";
 import { IFeedBack } from "../../store/models/feedback.interface";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +18,9 @@ const FeedBack: React.FC = () => {
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Phản hồi", "Danh sách"));
-  dispatch(getFeedback())
+  useEffect(() => {
+    dispatch(getFeedback())
+  }, [dispatch])
   
   const feedbacks: IFeedBack[] = useSelector((state: IStateType) => state.feedbacks.feedbacks);
 
@@ -32,23 +34,24 @@ const FeedBack: React.FC = () => {
         <td>{feedback.email}</td>
         <td><p>{feedback.content}</p></td>
         <td><button className="btn btn-success" onClick={() => {
+            console.log('enter click')
             if (localStorage.getItem('role') === "ROLE_SUPER_ADMIN"){
               history.push({
                 pathname: `/super-admin/feedback-detail`,
-                state: { id : feedback.id}
+                state: { content : feedback.content}
               })
             }
             else if (localStorage.getItem('role') === "ROLE_ADMIN"){
               history.push({
                 pathname: `/admin/feedback-detail`,
-                state: { id : feedback.id}
+                state: { content : feedback.content}
               })
             }
 
             else if (localStorage.getItem('role') === "ROLE_STAFF"){
               history.push({
                 pathname: `/employee/feedback-detail`,
-                state: { id : feedback.id}
+                state: { content : feedback.content}
               })
             }
           }}>Xem chi tiết</button> </td>
@@ -81,9 +84,10 @@ const FeedBack: React.FC = () => {
                       <th scope="col">#</th>
                       <th scope="col">Email</th>
                       <th scope="col">Nội dung</th>
+                      <th scope="col"></th>
                     </tr>
                   </thead>
-                  <tbody id="xxx">
+                  <tbody>
                     {blogElements}
                   </tbody>
                 </table>

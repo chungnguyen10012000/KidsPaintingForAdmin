@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 const FeedBackDetail: React.FC = () => {
 
     let location = useLocation()
-    let { id } = location.state
+    let { content } = location.state
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Phản hồi", "Chi tiết"));
@@ -28,17 +28,7 @@ const FeedBackDetail: React.FC = () => {
             </div>
             <div className="card-body">
                 {
-                    function () {
-                        for (let index = 0; index < blogs.length; index++) {
-                            if (blogs[index].id === id){
-                                return (
-                                    <div>
-                                        {blogs[index].content}
-                                    </div>
-                                )
-                            }                          
-                        }
-                    }()
+                    content
                 }
             </div>
           </div>
