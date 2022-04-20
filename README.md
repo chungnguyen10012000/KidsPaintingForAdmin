@@ -36,7 +36,7 @@
     - [x] Create semester
     - [x] Select semester for arrange class 
     - [ ] Review semester (admin, super-admin)
-    - [ ] Notification top menu (da xem, chua xem)
+    - [x] Notification top menu (da xem, chua xem)
     - [ ] Search, paging
     - [x] Login jwt
 - Teacher
@@ -46,9 +46,9 @@
     - [x] Edit cancel lesson (selection lesson time start -> end) 
     - [x] Edit sesson (button select sesson template)
     - [ ] Create page templagte sesson
-    - [ ] Remove link (*)
+    - [x] Remove link (*)
     - [x] Remove change class (*)
-    - [ ] Add view notification (*)
+    - [x] Add view notification (*)
 
 
 ## ROLE
