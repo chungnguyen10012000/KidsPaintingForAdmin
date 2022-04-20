@@ -32,7 +32,7 @@ const AddUser: React.FC = () => {
   useEffect(() => {
     dispatch(updateCurrentPath("Người dùng", ""));
   }, [path.area, dispatch]);
-  
+
   //const users: IUser[] = useSelector((state: IStateType) => state.users.users);
 
 
@@ -41,7 +41,7 @@ const AddUser: React.FC = () => {
     dispatch(removeUser(teacher.id));
   }
 
-  const userElements: JSX.Element[] = users.users.map( (ele, index) => {
+  const userElements: JSX.Element[] = users.users.map((ele, index) => {
     return (
       <tr className={`table-row`}
         key={`user_${index}`}>
@@ -53,13 +53,13 @@ const AddUser: React.FC = () => {
 
   let listUser: string[] = []
 
-  if (localStorage.getItem('role') === "ROLE_SUPER_ADMIN"){
+  if (localStorage.getItem('role') === "ROLE_SUPER_ADMIN") {
     listUser = ['Quản trị viên', 'Nhân viên', 'Giáo viên']
   }
-  else if (localStorage.getItem('role') === "ROLE_ADMIN"){
+  else if (localStorage.getItem('role') === "ROLE_ADMIN") {
     listUser = ['Nhân viên', 'Giáo viên']
   }
-  else if (localStorage.getItem('role') === 'ROLE_STAFF'){
+  else if (localStorage.getItem('role') === 'ROLE_STAFF') {
     listUser = ['Giáo viên']
   }
 
@@ -71,7 +71,7 @@ const AddUser: React.FC = () => {
       <div className="row">
         {
           function () {
-            if (localStorage.getItem('role') === "ROLE_SUPER_ADMIN"){
+            if (localStorage.getItem('role') === "ROLE_SUPER_ADMIN") {
               return (
                 <>
                   <TopCard title="GIÁO VIÊN" text={users.users.length.toString()} icon="user" class="danger" />
@@ -80,7 +80,7 @@ const AddUser: React.FC = () => {
                 </>
               )
             }
-            else if (localStorage.getItem('role') === "ROLE_ADMIN"){
+            else if (localStorage.getItem('role') === "ROLE_ADMIN") {
               return (
                 <>
                   <TopCard title="GIÁO VIÊN" text={users.users.length.toString()} icon="user" class="danger" />
@@ -88,7 +88,7 @@ const AddUser: React.FC = () => {
                 </>
               )
             }
-            else if (localStorage.getItem('role') === "ROLE_STAFF"){
+            else if (localStorage.getItem('role') === "ROLE_STAFF") {
               return (
                 <>
                   <TopCard title="GIÁO VIÊN" text={users.users.length.toString()} icon="user" class="danger" />
@@ -100,26 +100,26 @@ const AddUser: React.FC = () => {
       </div>
 
       <div className="row">
-      <div className="col-xl-12 col-lg-12">
+        <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-body">
-            <form >
-              <div className="form-group">
-                <SelectInput
-                  id="input_course"
-                  field="course"
-                  label="Loại"
-                  options={listUser}
-                  required={true}
-                  onChange={(text: any) => {
-                    localStorage.removeItem('typeUserAdd')
-                    localStorage.setItem('typeUserAdd', text.value)
-                    setTypeUser(text.value)
-                  }}
-                  value={typeUser}
-                />
-              </div>
-            </form>
+              <form >
+                <div className="form-group">
+                  <SelectInput
+                    id="input_course"
+                    field="course"
+                    label="Loại"
+                    options={listUser}
+                    required={true}
+                    onChange={(text: any) => {
+                      localStorage.removeItem('typeUserAdd')
+                      localStorage.setItem('typeUserAdd', text.value)
+                      setTypeUser(text.value)
+                    }}
+                    value={typeUser}
+                  />
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -129,7 +129,7 @@ const AddUser: React.FC = () => {
           <button className="btn btn-success btn-green btn-create" onClick={() =>
             dispatch(setModificationState(UserModificationStatus.Create))}>
             <i className="fas fa fa-plus"></i>
-            Tạo người dùng
+            Thêm người dùng
           </button>
         </div>
         {
@@ -143,7 +143,7 @@ const AddUser: React.FC = () => {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách người dùng</h6>
+              <h6 className="m-0 font-weight-bold text-green">Danh sách {typeUser}</h6>
               <div className="header-buttons">
               </div>
             </div>
@@ -161,6 +161,15 @@ const AddUser: React.FC = () => {
                     {userElements}
                   </tbody>
                 </table>
+                <nav aria-label="Page navigation example">
+                  <ul className="pagination">
+                    <li className="page-item"><a className="page-link" href="">Previous</a></li>
+                    <li className="page-item"><a className="page-link" href="">1</a></li>
+                    <li className="page-item"><a className="page-link" href="">2</a></li>
+                    <li className="page-item"><a className="page-link" href="">3</a></li>
+                    <li className="page-item"><a className="page-link" href="">Next</a></li>
+                  </ul>
+                </nav>
               </div>
             </div>
           </div>

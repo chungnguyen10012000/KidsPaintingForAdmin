@@ -94,9 +94,9 @@ const ArrangeClass: React.FC = () => {
                             <form >
                                 <div className="form-group">
                                     <SelectInput
-                                        id="input_course"
-                                        field="course"
-                                        label="Loại"
+                                        id="input_semester"
+                                        field="semester"
+                                        label="Học kì"
                                         options={semesterList}
                                         required={true}
                                         onChange={(text: string) => setSemester(text)}

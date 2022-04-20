@@ -48,7 +48,8 @@ const Art: React.FC = () => {
     const courseSemesters: ICourseSemesterState = useSelector((state: IStateType) => state.courseSemeters);
 
     const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
-    const numberItemsCount: number = courses.courses.length;
+    const numberLevelCount: number = levels.levels.length;
+    const numberMyTypeCount: number = mytypes.mytypes.length;
     useEffect(() => {
         dispatch(getArtType())
     }, [dispatch])
@@ -93,8 +94,8 @@ const Art: React.FC = () => {
             <h1 className="h3 mb-2 text-gray-800">Mỹ thuật</h1>
             <p className="mb-4">Thông tin chung</p>
             <div className="row">
-                <TopCard title="TỔNG SỐ THỂ LOẠI" text={`${numberItemsCount}`} icon="box" class="primary" />
-                <TopCard title="TỔNG SỐ MỨC ĐỘ" text={`${numberItemsCount}`} icon="box" class="primary" />
+                <TopCard title="TỔNG SỐ THỂ LOẠI" text={`${numberMyTypeCount}`} icon="box" class="primary" />
+                <TopCard title="TỔNG SỐ MỨC ĐỘ" text={`${numberLevelCount}`} icon="box" class="primary" />
             </div>
 
             <div className="row">

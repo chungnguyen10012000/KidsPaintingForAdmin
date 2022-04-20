@@ -13,7 +13,7 @@ const ReviewBlog: React.FC = () => {
 
     useEffect(() => {
         dispatch(getBlog())
-      }, [dispatch])
+    }, [dispatch])
 
     // useEffect(() => {
     //   let pathUsers = getDomain('user?role=ROLE_TEACHER')
@@ -69,6 +69,15 @@ const ReviewBlog: React.FC = () => {
                                         {userElements}
                                     </tbody>
                                 </table>
+                                <nav aria-label="Page navigation example">
+                                    <ul className="pagination">
+                                        <li className="page-item"><a className="page-link" href="">Previous</a></li>
+                                        <li className="page-item"><a className="page-link" href="">1</a></li>
+                                        <li className="page-item"><a className="page-link" href="">2</a></li>
+                                        <li className="page-item"><a className="page-link" href="">3</a></li>
+                                        <li className="page-item"><a className="page-link" href="">Next</a></li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
