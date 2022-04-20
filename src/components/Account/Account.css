@@ -32,3 +32,14 @@
 .selected {
     background-color:lavender;
 }
+
+#circle1 {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;/* specify the radius */
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}

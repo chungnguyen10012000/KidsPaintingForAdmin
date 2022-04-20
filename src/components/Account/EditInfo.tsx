@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, Dispatch, Fragment } from "react";
+import React, { useState, FormEvent, Dispatch, Fragment, useEffect } from "react";
 //import { IStateType, IUserState } from "../../store/models/root.interface";
 import { useDispatch } from "react-redux";
 import { IUser, UserModificationStatus } from "../../store/models/user.interface";
@@ -93,10 +93,39 @@ const EditInfo: React.FC = () => {
       || formState.dateOfDay.error || !formState.firstName.value || !formState.sex.value) as boolean;
   }
 
+  const [selectedFile, setSelectedFile] = useState<any>()
+  const [preview, setPreview] = useState<any>()
+
+    // create a preview as a side effect, whenever selected file is changed
+    useEffect(() => {
+        if (!selectedFile) {
+            setPreview(undefined)
+            return
+        }
+
+        const objectUrl = URL.createObjectURL(selectedFile)
+        setPreview(objectUrl)
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [selectedFile])
+
+    function onSelectFile (e: any): void{
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile(undefined)
+            return
+        }
+
+        // I've kept this example simple by using the first image instead of multiple
+        setSelectedFile(e.target.files[0])
+    }
+
+    console.log(selectedFile)
+
 
   return (
     <Fragment>
-      <div className="col-xl-12 col-lg-12">
+      <div className="col-xl-8 col-lg-8">
         <div className="card shadow mb-4">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-green"> Thay đổi mật khẩu tài khoản</h6>
@@ -107,8 +136,17 @@ const EditInfo: React.FC = () => {
                 <input id="input_avatar"
                   type="file"
                   value={formState.avatar.value}
-                  onChange={() => hasFormValueChanged}
+                  onChange={onSelectFile}
                   placeholder="Chọn ảnh đại diện" />
+              </div>
+              <div className="circleBase type3">
+                { 
+                  selectedFile 
+                  &&  
+                  <div id="circle1">
+                    <img src={preview} alt=''/>
+                  </div> 
+                }
               </div>
               <div className="form-group">
                 <TextInput id="input_firstName"

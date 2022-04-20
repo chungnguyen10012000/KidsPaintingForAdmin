@@ -97,7 +97,7 @@ const AccountForm: React.FC = () => {
 
   return (
     <Fragment>
-      <div className="col-xl-12 col-lg-12">
+      <div className="col-xl-6 col-lg-6">
         <div className="card shadow mb-4">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-green"> {"Sửa"} thông tin tài khoản</h6>
