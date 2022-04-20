@@ -15,30 +15,61 @@ function AccountList(props: userListProps): JSX.Element {
     <div className="table-responsive portlet">
       <table className="table">
         <thead className="thead-light">
-          <tr>
-            <th scope="col">Tên đăng nhập</th>
-            <th scope="col">Email</th>
-            <th scope="col">Giới tính</th>
-            <th scope="col">Ngày sinh</th>
-            <th scope="col">Địa chỉ</th>
-            <th scope="col">Số điện thoại</th>
-          </tr>
         </thead>
         <tbody>
           {
             function(){
               for (let index = 0; index < users.users.length; index++) {
                 console.log(users.users[index], localStorage.getItem('email'))
-                if (users.users[index].username === localStorage.getItem('email')) {
-                  return (<tr className={`table-row`}
-                    key={`admin_${index}`}>
-                    <td>{users.users[index].username}</td>
-                    <td>{users.users[index].email}</td>
-                    <td>{users.users[index].sex}</td>
-                    <td>{users.users[index].dateOfDay}</td>
-                    <td>{users.users[index].address}</td>
-                    <td>{users.users[index].phone}</td>
-                  </tr>
+                if (users.users[index].username === "chung123") {
+                  return (
+                    <>
+                      <tr 
+                        className={`table-col`}
+                        key={`admin_${index}`}
+                      >
+                        <th scope="row">Tên đăng nhập</th>
+                        <td>{users.users[index].username}</td>
+                      </tr>
+                      <tr 
+                        className={`table-col`}
+                        key={`admin_${index}`}
+                      >
+                        <th scope="row">Email</th>
+                        <td>{users.users[index].email}</td>
+                      </tr>
+                      <tr 
+                        className={`table-col`}
+                        key={`admin_${index}`}
+                      >
+                        <th scope="row">Giới tính</th>
+                        <td>{users.users[index].sex}</td>
+                      </tr>
+                      <tr 
+                        className={`table-col`}
+                        key={`admin_${index}`}
+                      >
+                        <th scope="row">Ngày sinh</th>
+                        <td>{users.users[index].dateOfDay}</td>
+                      </tr>
+                      <tr 
+                        className={`table-col`}
+                        key={`admin_${index}`}
+                      >
+                        <th scope="row">Địa chỉ</th>
+                        <td>{users.users[index].address}</td>
+                      </tr>
+                      <tr 
+                        className={`table-col`}
+                        key={`admin_${index}`}
+                      >
+                        <th scope="row">Số điện thoại</th>
+                        <td>{users.users[index].phone}</td>
+                      </tr>
+                    
+                    
+                  
+                  </>
                   );
                 }
               }

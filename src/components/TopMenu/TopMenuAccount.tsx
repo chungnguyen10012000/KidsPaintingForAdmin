@@ -1,12 +1,20 @@
 import React, { useState, Dispatch } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import { logout } from "../../store/actions/account.actions";
 import { IStateType } from "../../store/models/root.interface";
+
+type role = {
+  id: string;
+};
 
 function TopMenuAccount(): JSX.Element {
   const dispatch: Dispatch<any> = useDispatch();
   const email: string = useSelector((state: IStateType) => state.account.email);
   const [isShow, setShow] = useState(false);
+
+  const { id } = useParams<role>()
+  let history = useHistory();
 
   return (
 
@@ -27,6 +35,21 @@ function TopMenuAccount(): JSX.Element {
 
       <div className={`dropdown-menu dropdown-menu-right shadow animated--grow-in ${(isShow) ? "show" : ""}`}
         aria-labelledby="userDropdown">
+                  <a className="dropdown-item"
+        onClick={() => 
+                  {
+                      history.push({
+                        pathname: `/${id}/account`,
+                      })
+                  }}
+        data-toggle="modal"
+        href={`/${id}/account`}
+        data-target="#logoutModal">
+          <i className="fas fa-cog fa-sm fa-fw mr-2 text-gray-400"></i>
+          Cài đặt
+        </a>
+
+
         <a className="dropdown-item"
         onClick={() => {
           dispatch(logout())
@@ -43,8 +66,12 @@ function TopMenuAccount(): JSX.Element {
           <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
           Logout
         </a>
+
+
+
       </div>
     </li>
+    
   );
 };
 

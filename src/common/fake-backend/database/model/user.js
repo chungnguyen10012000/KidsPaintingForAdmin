@@ -6,9 +6,9 @@ export class User {
         this.password = userJson.password
         this.firstName = userJson.firstName
         this.lastName = userJson.lastName
-        this.dateOfBirth = userJson.dateOfBirth
+        this.dateOfDay = userJson.dateOfBirth
         this.sex = userJson.sex
-        this.address = userJson.Address
+        this.address = userJson.address
         this.phone = userJson.phone
     }
 }

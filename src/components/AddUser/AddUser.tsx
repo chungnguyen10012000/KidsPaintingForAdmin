@@ -69,8 +69,34 @@ const AddUser: React.FC = () => {
       <p className="mb-4">Thông tin chung</p>
 
       <div className="row">
-        <TopCard title="GIÁO VIÊN" text={users.users.length.toString()} icon="user" class="danger" />
-        <TopCard title="NHÂN VIÊN" text={users.users.length.toString()} icon="user" class="danger" />
+        {
+          function () {
+            if (localStorage.getItem('role') === "ROLE_SUPER_ADMIN"){
+              return (
+                <>
+                  <TopCard title="GIÁO VIÊN" text={users.users.length.toString()} icon="user" class="danger" />
+                  <TopCard title="NHÂN VIÊN" text={users.users.length.toString()} icon="user" class="danger" />
+                  <TopCard title="QUẢN TRỊ VIÊN" text={users.users.length.toString()} icon="user" class="danger" />
+                </>
+              )
+            }
+            else if (localStorage.getItem('role') === "ROLE_ADMIN"){
+              return (
+                <>
+                  <TopCard title="GIÁO VIÊN" text={users.users.length.toString()} icon="user" class="danger" />
+                  <TopCard title="NHÂN VIÊN" text={users.users.length.toString()} icon="user" class="danger" />
+                </>
+              )
+            }
+            else if (localStorage.getItem('role') === "ROLE_STAFF"){
+              return (
+                <>
+                  <TopCard title="GIÁO VIÊN" text={users.users.length.toString()} icon="user" class="danger" />
+                </>
+              )
+            }
+          }()
+        }
       </div>
 
       <div className="row">

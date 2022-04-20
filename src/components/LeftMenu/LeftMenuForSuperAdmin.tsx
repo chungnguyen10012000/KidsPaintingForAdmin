@@ -133,12 +133,6 @@ const LeftMenuForSuperAdmin: React.FC = () => {
                         <span>Thông báo</span>
                     </Link>
                 </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/super-admin/account`}>
-                        <i className="fas fa-fw fa-user-circle"></i>
-                        <span>Tài khoản</span>
-                    </Link>
-                </li>
             </ul>
         </Fragment>
     );

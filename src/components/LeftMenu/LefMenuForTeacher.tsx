@@ -91,12 +91,6 @@ const LeftMenuForTeacher: React.FC = () => {
                         <span>Thông báo</span>
                     </Link>
                 </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/teacher/account`}>
-                        <i className="fas fa-fw fa-user-circle"></i>
-                        <span>Tài khoản</span>
-                    </Link>
-                </li>
             </ul>
         </Fragment>
     );

@@ -15,7 +15,7 @@ const Teachers: React.FC = () => {
 
 
   const dispatch: Dispatch<any> = useDispatch();
-  dispatch(updateCurrentPath("Giáo viên đăng ký", "Danh sách"));
+  dispatch(updateCurrentPath("Yêu cầu", "Danh sách"));
 
   // useEffect(() => {
   //   let pathUsers = getDomain('user?role=ROLE_TEACHER')

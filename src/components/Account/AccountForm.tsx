@@ -105,6 +105,7 @@ const AccountForm: React.FC = () => {
           <div className="card-body">
             <form onSubmit={saveUser}>
               <div className="form-group">
+                <label>Chọn ảnh đại diện</label>
                 <input id="input_avatar"
                   type="file"
                   value={formState.avatar.value}

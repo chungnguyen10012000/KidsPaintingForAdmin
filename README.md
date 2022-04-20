@@ -38,7 +38,7 @@
     - [ ] Review semester (admin, super-admin)
     - [ ] Notification top menu (da xem, chua xem)
     - [ ] Search, paging
-    - [ ] Login jwt
+    - [x] Login jwt
 - Teacher
     - [x] Edit register semester course 
     - [x] Edit register course for teaching (course resigested for color,  button register course => table search course => detail) 
@@ -47,7 +47,7 @@
     - [x] Edit sesson (button select sesson template)
     - [ ] Create page templagte sesson
     - [ ] Remove link (*)
-    - [ ] Remove change class (*)
+    - [x] Remove change class (*)
     - [ ] Add view notification (*)
 
 

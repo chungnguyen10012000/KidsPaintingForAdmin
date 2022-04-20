@@ -1,7 +1,6 @@
 import React, { Fragment, Dispatch, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlog } from "../../store/actions/blog/getBlog";
-import { updateCurrentPath } from "../../store/actions/root.actions";
 import { IBlogState, IStateType } from "../../store/models/root.interface";
 import "./ReviewBlog.css"
 
@@ -11,7 +10,6 @@ const ReviewBlog: React.FC = () => {
 
     const dispatch: Dispatch<any> = useDispatch();
     const blogs: IBlogState = useSelector((state: IStateType) => state.blogs);
-    dispatch(updateCurrentPath("Giáo viên đăng ký", "Danh sách"));
 
     useEffect(() => {
         dispatch(getBlog())
