@@ -6,9 +6,9 @@ import { IStateType, IRootPageStateType } from "../../store/models/root.interfac
 import { clearSelectedMyClass, setModificationState,
   changeSelectedMyClass } from "../../store/actions/myclass.actions";
 import { MyClassModificationStatus, IMyClass} from "../../store/models/myclass.interface";
-import SigupOfCourseList from "./SigupOfClassList";
+import SigupOfCourseList from "./SigupOfSemesterCourseList";
 import { getCourseSemester } from "../../store/actions/course_semester/getCourseSemester";
-import SigupCoursesSemesterList from "./SigupOfClassList";
+import SigupCoursesSemesterList from "./SigupOfSemesterCourseList";
 import { getCourse } from "../../store/actions/course/getCourse";
 import { getSchedule } from "../../store/actions/schedule/getSchedule";
 
