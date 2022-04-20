@@ -7,6 +7,10 @@ import { clearSelectedMyClass, setModificationState,
   changeSelectedMyClass } from "../../store/actions/myclass.actions";
 import { MyClassModificationStatus, IMyClass} from "../../store/models/myclass.interface";
 import SigupOfCourseList from "./SigupOfClassList";
+import { getCourseSemester } from "../../store/actions/course_semester/getCourseSemester";
+import SigupCoursesSemesterList from "./SigupOfClassList";
+import { getCourse } from "../../store/actions/course/getCourse";
+import { getSchedule } from "../../store/actions/schedule/getSchedule";
 
 const SigupOfCourse: React.FC = () => {
   //console.log(id)
@@ -18,14 +22,21 @@ const SigupOfCourse: React.FC = () => {
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
 
   useEffect(() => {
+    dispatch(getCourse())
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getCourseSemester())
+  }, [dispatch]);
+  
+  useEffect(() => {
+    dispatch(getSchedule())
+  }, [dispatch])
+
+  useEffect(() => {
     dispatch(clearSelectedMyClass());
     dispatch(updateCurrentPath("Khóa học", "Danh sách"));
   }, [path.area, dispatch]);
-
-  function onMyClassSelect(myClass: IMyClass): void {
-    dispatch(changeSelectedMyClass(myClass));
-    dispatch(setModificationState(MyClassModificationStatus.None));
-  }
 
     return (
       <Fragment>
@@ -41,9 +52,7 @@ const SigupOfCourse: React.FC = () => {
                 </div>
               </div>
               <div className="card-body">
-                <SigupOfCourseList
-                  onSelect={onMyClassSelect}
-                />
+                <SigupCoursesSemesterList />
               </div>
             </div>
           </div>

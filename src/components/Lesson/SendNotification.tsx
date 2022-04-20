@@ -7,8 +7,9 @@ import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IMyClassFormState } from "../../common/types/Form.types";
 import { ICourse } from "../../store/models/courses.interface";
 import SelectInput from "../../common/components/Select";
+import TextInput from "../../common/components/TextInput";
 
-const OnLeave: React.FC = () => {
+const SendNotification: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();
     const myClass: IMyClassState | null = useSelector((state: IStateType) => state.myclass);
     let myclass: IMyClass | null = myClass.selectedMyClass;
@@ -93,20 +94,29 @@ const OnLeave: React.FC = () => {
             <div className="col-xl-12 col-lg-12">
                 <div className="card shadow mb-4">
                     <div className="card-header py-3">
-                        <h6 className="m-0 font-weight-bold text-green"> Đăng kí nghỉ</h6>
+                        <h6 className="m-0 font-weight-bold text-green"> Gửi thống báo cho lớp</h6>
                     </div>
                     <div className="card-body">
                         <form onSubmit={saveUser}>
                             <div className="form-group">
-                                <SelectInput
-                                    id="input_lesson"
-                                    field="lesson"
-                                    label="Buổi nghỉ"
-                                    options={LessonList}
-                                    required={true}
-                                    onChange={hasFormValueChanged}
-                                    value={formState.teacher_id.value}
-                                />
+                            <TextInput id="input_name"
+                                value={formState.name.value}
+                                field="name"
+                                onChange={hasFormValueChanged}
+                                required={true}
+                                maxLength={100}
+                                label="Tên"
+                                placeholder="" />
+                            </div>
+                            <div className="form-group">
+                            <TextInput id="input_name"
+                                value={formState.name.value}
+                                field="name"
+                                onChange={hasFormValueChanged}
+                                required={true}
+                                maxLength={100}
+                                label="Nội dung"
+                                placeholder="Nhập tên khóa học" />
                             </div>
                             <button className="btn btn-danger" onClick={() => cancelForm()}>Hủy</button>
                             <button type="submit" className={`btn btn-success left-margin ${getDisabledMyClass()}`}>Lưu</button>
@@ -118,4 +128,4 @@ const OnLeave: React.FC = () => {
     )
 };
 
-export default OnLeave;
+export default SendNotification;

@@ -18,17 +18,18 @@ function MyClassListForKid(props: myclassListProps): JSX.Element  {
   const myclassElements: (JSX.Element | null)[] = myClass.myclass.map(class_item => {
     if (!class_item) { return null; }
     return (<tr className={`table-row ${(myClass.selectedMyClass && myClass.selectedMyClass.id === class_item.id) ? "selected" : ""}`}
-      onClick={() => {
-        if(props.onSelect) props.onSelect(class_item);
-        history.push({
-          pathname: '/teacher/lesson',
-          state: { id : class_item.id}
-        })
-      }}
       key={`class_${class_item.id}`}>
       <th scope="row">{class_item.id}</th>
       <td>{class_item.name}</td>
       <td>{class_item.amount}</td>
+      <td>
+        <button className="btn btn-success" onClick={() => {
+        history.push({
+          pathname: '/teacher/lesson',
+          state: { id : class_item.id}
+        })
+      }}>Vào lớp</button>
+      </td>
     </tr>);
   });
 
@@ -41,6 +42,7 @@ function MyClassListForKid(props: myclassListProps): JSX.Element  {
             <th scope="col">#</th>
             <th scope="col">Tên lớp</th>
             <th scope="col">Số lượng tối đa học sinh</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>

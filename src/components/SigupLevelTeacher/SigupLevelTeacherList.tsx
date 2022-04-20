@@ -26,9 +26,6 @@ function SigupLevelTeacherList(props: myclassListProps): JSX.Element {
             key={`class_${index}`}>
             <th scope="row">{index + 1}</th>
             <td>{course_item.name}</td>
-            <td>
-                <button className={`btn btn-warning left-margin`}>Xem chi tiết</button> 
-            </td>
             <td><button className={`btn btn-success left-margin ${getDisabledClass()}`} onClick={() => {
                 alert("Đăng ký thành công!")
                 setCheckSigup(true)
@@ -46,7 +43,6 @@ function SigupLevelTeacherList(props: myclassListProps): JSX.Element {
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tên lớp</th>
-                        <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>

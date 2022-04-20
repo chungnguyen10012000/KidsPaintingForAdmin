@@ -1,4 +1,4 @@
-import React, { Fragment, Dispatch, useEffect } from "react";
+import React, { Fragment, Dispatch, useEffect, useState } from "react";
 import TopCard from "../../common/components/TopCard";
 import "./Lesson.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { ISesson } from '../../store/models/sesson.interface'
 
 import OnLeave from "../OnLeave/OnLeave";
+import SendNotification from "./SendNotification";
 
 //TODO: đánh giá điểm của lớp, bảng điểm từng thành viên lớp
 
@@ -102,6 +103,9 @@ const Lesson: React.FC = () => {
             <td>{lesson_item.firstName}</td>
         </tr>);
     });
+
+    const [isCheckOnLeave, setIsCheckOnLeave] = useState(false)
+    const [isCheckSendNoti, setIsCheckSendNoti] = useState(false)
     return (
         <Fragment>
             <h1 className="h3 mb-2 text-gray-800">Chi tiết lớp học</h1>
@@ -109,7 +113,28 @@ const Lesson: React.FC = () => {
             <div className="row">
                 <TopCard title="TỔNG SỐ BUỔI HỌC" text={`${numberSessoonCount}`} icon="box" class="primary" />
                 <TopCard title="TỔNG SỐ HỌC SINH" text={`${numberItemsCount}`} icon="box" class="primary" />
-                
+
+            </div>
+
+            <div className="row">
+                <div className="col-xl-6 col-lg-6">
+                    <button className="btn btn-success btn-green btn-create" onClick={() =>
+                        setIsCheckOnLeave(!isCheckOnLeave)}>
+                        <i className="fas fa fa-plus"></i>
+                        Đăng kí nghỉ dạy
+                    </button>
+                    {((isCheckOnLeave)) ?
+                        <OnLeave /> : null}
+                </div>
+                <div className="col-xl-6 col-lg-6">
+                    <button className="btn btn-success btn-green btn-create" onClick={() =>
+                        setIsCheckSendNoti(!isCheckSendNoti)}>
+                        <i className="fas fa fa-plus"></i>
+                        Gửi thông báo cho lớp
+                    </button>
+                    {((isCheckSendNoti)) ?
+                        <SendNotification /> : null}
+                </div>
             </div>
 
             <div className="row">
@@ -165,9 +190,6 @@ const Lesson: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="row">
-                <OnLeave />                       
             </div>
         </Fragment >
     );

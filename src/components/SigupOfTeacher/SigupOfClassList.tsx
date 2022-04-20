@@ -1,58 +1,65 @@
 import React from "react";
-import { IMyClass } from "../../store/models/myclass.interface";
+import { useSelector } from "react-redux";
+import { IStateType, ICourseSemesterState, ICourseState, IScheduleState } from "../../store/models/root.interface";
+import { ICourseSemester } from "../../store/models/course_for_semester.interface";
 
-const data = [
-{
-  "name": "CM-2",
-  "amount": "6"
-},
-{
-  "name": "CM-3",
-  "amount": "6"
+function SigupCoursesSemesterList(): JSX.Element {
+    const courseSemester: ICourseSemesterState = useSelector((state: IStateType) => state.courseSemeters);
+    const courses: ICourseState = useSelector((state: IStateType) => state.courses);
+    const schedules: IScheduleState = useSelector((state: IStateType) => state.schedules);
+
+    let courseList : string[] = []
+
+    courseSemester.courseSemesters.map ((course_semester_item) => {
+        return courses.courses.forEach(element => {
+            if (element.id === course_semester_item.course_id){
+                return courseList.push(element.name)
+            }
+        });
+    })
+
+    let scheduleList: string[] = []
+    courseSemester.courseSemesters.map ((course_semester_item) => {
+        return schedules.schedules.forEach(element => {
+            if (element.id === course_semester_item.schedule_id){
+                return scheduleList.push(element.name)
+            }
+        });
+    })
+
+
+    const courseElements: (JSX.Element | null)[] = courseSemester.courseSemesters.map((course, index) => {
+        if (!course) { return null; }
+        return (<tr className={`table-row ${(courseSemester.selectedCourseSemester && courseSemester.selectedCourseSemester.id === course.id) ? "selected" : ""}`}
+            key={`course_${course.id}`}>
+            <th scope="row">{index}</th>
+            <td>{courseList[index]}</td>
+            <td>{scheduleList[index]}</td>
+            <td>
+              <button className="btn btn-success">Đăng ký ngay</button>
+            </td>
+        </tr>);
+    });
+
+
+    return (
+        <div className="table-responsive portlet">
+            <table className="table">
+                <thead className="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Khóa học</th>
+                        <th scope="col">Thuộc lịch</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {courseElements}
+                </tbody>
+            </table>
+        </div>
+
+    );
 }
-]
 
-export type myclassListProps = {
-  onSelect?: (myclass: IMyClass) => void;
-  children?: React.ReactNode;
-};
-
-function SigupOfCourseList(props: myclassListProps): JSX.Element  {
-
-  const myclassElements: (JSX.Element | null)[] = data.map((class_item, index) => {
-    if (!class_item) { return null; }
-    return (<tr className={`table-row`}
-      key={`class_${index}`}>
-      <th scope="row">{index + 1}</th>
-      <td>{class_item.name}</td>
-      <td>{class_item.amount}</td>
-      <td><button className={`btn btn-warning left-margin`}
-      >
-        Xem chi tiết</button> </td>
-    </tr>);
-  });
-
-
-  return (
-    <div className="table-responsive portlet">
-      <table className="table">
-        <thead className="thead-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Tên khóa học</th>
-            <th scope="col">Thể loại</th>
-            <th scope="col">Trình độ</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {myclassElements}
-        </tbody>
-      </table>
-    </div>
-
-  );
-}
-
-export default SigupOfCourseList;
+export default SigupCoursesSemesterList;
