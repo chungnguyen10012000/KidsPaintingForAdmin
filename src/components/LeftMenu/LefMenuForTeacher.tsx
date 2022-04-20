@@ -80,17 +80,6 @@ const LeftMenuForTeacher: React.FC = () => {
                         <span>Cuộc thi chấm</span>
                     </Link>
                 </li>
-
-                <hr className="sidebar-divider" />
-                <div className="sidebar-heading">
-                    Quản lý tài khoản
-                </div>
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/teacher/notification`}>
-                        <i className="fas fa-fw fa-bell"></i>
-                        <span>Thông báo</span>
-                    </Link>
-                </li>
             </ul>
         </Fragment>
     );

@@ -122,17 +122,6 @@ const LeftMenuForSuperAdmin: React.FC = () => {
                         <span>Blog</span>
                     </Link>
                 </li>
-
-                <hr className="sidebar-divider" />
-                <div className="sidebar-heading">
-                    Quản lý tài khoản
-                </div>
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/super-admin/notification`}>
-                        <i className="fas fa-fw fa-bell"></i>
-                        <span>Thông báo</span>
-                    </Link>
-                </li>
             </ul>
         </Fragment>
     );
