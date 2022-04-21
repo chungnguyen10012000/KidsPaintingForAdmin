@@ -26,7 +26,9 @@ const Semester: React.FC = () => {
     const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
     const numberItemsCount: number = semesters.semesters.length;
     const [popup, setPopup] = useState(false);
-    const [searchTerm, setSearchTerm] = React.useState("");
+    const [searchTerm, setSearchTerm] = useState("");
+    const [isCheckOpen1, setIsCheckOpen1] = useState(false)
+    const [isCheckOpen2, setIsCheckOpen2] = useState(false)
 
     const handleChange = (event: any) => {
         setSearchTerm(event.target.value);
@@ -73,17 +75,34 @@ const Semester: React.FC = () => {
             </div>
 
             <div className="row">
+        <div className="col-xl-12 col-lg-12">
+            <button className="btn btn-success btn-green btn-create" onClick={() =>
+                {
+                    dispatch(setModificationState(SemesterModificationStatus.Create))
+                    setIsCheckOpen1(!isCheckOpen1)
+                }}
+            >
+            <i className="fas fa fa-plus"></i>
+            Thêm học kì mới
+          </button>
+        </div>
+
+        {((semesters.modificationState === SemesterModificationStatus.Create) && isCheckOpen1 === true) ?
+          <SemesterForm /> : null}
+      </div>
+
+            <div className="row">
                 <div className="col-xl-12 col-lg-12">
                     <div className="card shadow mb-4">
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-green">Danh sách học kì</h6>
                             <div className="header-buttons">
-                                <button className="btn btn-success btn-green" onClick={() =>
-                                    dispatch(setModificationState(SemesterModificationStatus.Create))}>
-                                    <i className="fas fa fa-plus"></i>
-                                </button>
                                 <button className="btn btn-success btn-blue" onClick={() =>
-                                    dispatch(setModificationState(SemesterModificationStatus.Edit))}>
+                                    {
+                                        dispatch(setModificationState(SemesterModificationStatus.Edit))
+                                        setIsCheckOpen2(!isCheckOpen2)
+                                    }}
+                                >
                                     <i className="fas fa fa-pen"></i>
                                 </button>
                                 <button className="btn btn-success btn-red" onClick={() => onSemesterRemove()}>
@@ -92,14 +111,13 @@ const Semester: React.FC = () => {
                             </div>
                         </div>
                         <div className="card-body">
-                           <SemesterList 
-                            onSelect={onSemesterSelect}
-                           />
+                            <SemesterList 
+                                onSelect={onSemesterSelect}
+                            />
                         </div>
                     </div>
                 </div>
-                {((semesters.modificationState === SemesterModificationStatus.Create)
-                    || (semesters.modificationState === SemesterModificationStatus.Edit && semesters.selectedSemester)) ?
+                {((semesters.modificationState === SemesterModificationStatus.Edit && semesters.selectedSemester && isCheckOpen2 === true)) ?
                     <SemesterForm /> : null}
             </div>
 
