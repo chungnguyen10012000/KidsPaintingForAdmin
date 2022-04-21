@@ -106,6 +106,11 @@ const Courses: React.FC = () => {
     }
   }
 
+  const [isCheckOpen1, setIsCheckOpen1] = useState(false)
+  const [isCheckOpen2, setIsCheckOpen2] = useState(false)
+  const [isCheckOpen3, setIsCheckOpen3] = useState(false)
+  const [isCheckOpen4, setIsCheckOpen4] = useState(false)
+
   if (id === "admin" || id === "super-admin") {
     return (
       <Fragment>
@@ -116,19 +121,34 @@ const Courses: React.FC = () => {
         </div>
 
         <div className="row">
+                <div className="col-xl-12 col-lg-12">
+                    <button className="btn btn-success btn-green btn-create" onClick={() => {
+                        dispatch(setModificationState(CourseModificationStatus.Create))
+                        setIsCheckOpen3(!isCheckOpen3)
+                    }}
+                    >
+                        <i className="fas fa fa-plus"></i>
+                        Thêm khóa học
+                    </button>
+                </div>
+
+                {((courses.modificationState === CourseModificationStatus.Create) && isCheckOpen3 === true) ?
+                    <CoursesForm /> : null}
+            </div>
+
+        <div className="row">
           <div className="col-xl-12 col-lg-12">
             <div className="card shadow mb-4">
               <div className="card-header py-3">
                 <h6 className="m-0 font-weight-bold text-green">Danh sách khóa học</h6>
                 <div className="header-buttons">
-                  <button className="btn btn-success btn-green" id="0" onClick={() => {
-                    setIsCheck('1')
-                    dispatch(setModificationState(CourseModificationStatus.Create))
-                  }}>
-                    <i className="fas fa fa-plus"></i>
-                  </button>
                   <button className="btn btn-success btn-blue" onClick={() =>
-                    dispatch(setModificationState(CourseModificationStatus.Edit))}>
+                    {
+                      dispatch(setModificationState(CourseModificationStatus.Edit))
+                      if (courses.selectedCourse){
+                        setIsCheckOpen4(!isCheckOpen4)
+                      }
+                    }}>
                     <i className="fas fa fa-pen"></i>
                   </button>
                   <button className="btn btn-success btn-red" onClick={() => onCourseRemove()}>
@@ -143,10 +163,25 @@ const Courses: React.FC = () => {
               </div>
             </div>
           </div>
-          {((courses.modificationState === CourseModificationStatus.Create && isCheck === '1')
-            || (courses.modificationState === CourseModificationStatus.Edit && courses.selectedCourse)) ?
+          {((courses.modificationState === CourseModificationStatus.Edit && courses.selectedCourse && isCheckOpen4 === true)) ?
             <CoursesForm /> : null}
         </div>
+
+        <div className="row">
+                <div className="col-xl-12 col-lg-12">
+                    <button className="btn btn-success btn-green btn-create" onClick={() => {
+                        dispatch(setModificationStateSemester(CourseSemesterModificationStatus.Create))
+                        setIsCheckOpen1(!isCheckOpen1)
+                    }}
+                    >
+                        <i className="fas fa fa-plus"></i>
+                        Thêm khóa học theo kì
+                    </button>
+                </div>
+
+                {((courseSemesters.modificationState === CourseSemesterModificationStatus.Create) && isCheckOpen1 === true) ?
+                    <CourseSemesterForm /> : null}
+            </div>
 
 
         <div className="row">
@@ -155,14 +190,13 @@ const Courses: React.FC = () => {
               <div className="card-header py-3">
                 <h6 className="m-0 font-weight-bold text-green">Danh sách khóa học theo học kỳ</h6>
                 <div className="header-buttons">
-                  <button className="btn btn-success btn-green" id="0" onClick={() => {
-                    setIsCheck('100')
-                    dispatch(setModificationStateSemester(CourseSemesterModificationStatus.Create))
-                  }}>
-                    <i className="fas fa fa-plus"></i>
-                  </button>
                   <button className="btn btn-success btn-blue" onClick={() =>
-                    dispatch(setModificationStateSemester(CourseSemesterModificationStatus.Edit))}>
+                    {
+                      dispatch(setModificationStateSemester(CourseSemesterModificationStatus.Edit))
+                      if (courseSemesters.selectedCourseSemester){
+                        setIsCheckOpen2(!isCheckOpen2)
+                      }
+                    }}>
                     <i className="fas fa fa-pen"></i>
                   </button>
                   <button className="btn btn-success btn-red" onClick={() => onCourseSemesterRemove()}>
@@ -177,8 +211,7 @@ const Courses: React.FC = () => {
               </div>
             </div>
           </div>
-          {((courseSemesters.modificationState === CourseSemesterModificationStatus.Create && isCheck === '100')
-            || (courseSemesters.modificationState === CourseSemesterModificationStatus.Edit && courseSemesters.selectedCourseSemester)) ?
+          {((courseSemesters.modificationState === CourseSemesterModificationStatus.Edit && courseSemesters.selectedCourseSemester && isCheckOpen2 === true)) ?
             <CourseSemesterForm /> : null}
         </div>
 

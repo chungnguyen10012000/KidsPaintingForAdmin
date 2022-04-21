@@ -87,6 +87,11 @@ const Art: React.FC = () => {
         }
     }
 
+    const [isCheckOpen1, setIsCheckOpen1] = useState(false)
+    const [isCheckOpen2, setIsCheckOpen2] = useState(false)
+    const [isCheckOpen3, setIsCheckOpen3] = useState(false)
+    const [isCheckOpen4, setIsCheckOpen4] = useState(false)
+
 
 
     return (
@@ -100,18 +105,33 @@ const Art: React.FC = () => {
 
             <div className="row">
                 <div className="col-xl-12 col-lg-12">
+                    <button className="btn btn-success btn-green btn-create" onClick={() => {
+                        dispatch(setModificationStateMytype(MytypeModificationStatus.Create))
+                        setIsCheckOpen1(!isCheckOpen1)
+                    }}
+                    >
+                        <i className="fas fa fa-plus"></i>
+                        Thêm loại hình
+                    </button>
+                </div>
+
+                {((mytypes.modificationState === MytypeModificationStatus.Create) && isCheckOpen1 === true) ?
+                    <TypeForm /> : null}
+            </div>
+
+            <div className="row">
+                <div className="col-xl-12 col-lg-12">
                     <div className="card shadow mb-4">
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-green">Danh sách loại hình </h6>
                             <div className="header-buttons">
-                                <button className="btn btn-success btn-green btn-createType" id="1" onClick={() => {
-                                    setIsCheck('2')
-                                    dispatch(setModificationStateMytype(MytypeModificationStatus.Create))
-                                }}>
-                                    <i className="fas fa fa-plus"></i>
-                                </button>
                                 <button className="btn btn-success btn-blue btn-editType" onClick={() =>
-                                    dispatch(setModificationStateMytype(MytypeModificationStatus.Edit))}>
+                                    {
+                                        dispatch(setModificationStateMytype(MytypeModificationStatus.Edit))
+                                        if (mytypes.selectedMytype){
+                                            setIsCheckOpen2(!isCheckOpen2)
+                                        }
+                                    }}>
                                     <i className="fas fa fa-pen"></i>
                                 </button>
                                 <button className="btn btn-success btn-red btn-removeType" onClick={() => onMytypeRemove()}>
@@ -126,9 +146,24 @@ const Art: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                {((mytypes.modificationState === MytypeModificationStatus.Create && isCheck === '2')
-                    || (mytypes.modificationState === MytypeModificationStatus.Edit && mytypes.selectedMytype)) ?
+                {((mytypes.modificationState === MytypeModificationStatus.Edit && mytypes.selectedMytype && isCheckOpen2 === true)) ?
                     <TypeForm /> : null}
+            </div>
+
+            <div className="row">
+                <div className="col-xl-12 col-lg-12">
+                    <button className="btn btn-success btn-green btn-create" onClick={() => {
+                        dispatch(setModificationStateLevel(LevelModificationStatus.Create))
+                        setIsCheckOpen3(!isCheckOpen3)
+                    }}
+                    >
+                        <i className="fas fa fa-plus"></i>
+                        Thêm mức độ
+                    </button>
+                </div>
+
+                {((levels.modificationState === LevelModificationStatus.Create) && isCheckOpen3 === true) ?
+                    <LevelForm /> : null}
             </div>
 
 
@@ -138,14 +173,13 @@ const Art: React.FC = () => {
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-green">Danh sách mức độ </h6>
                             <div className="header-buttons">
-                                <button className="btn btn-success btn-green btn-createType1" id="1" onClick={() => {
-                                    setIsCheck('3')
-                                    dispatch(setModificationStateLevel(LevelModificationStatus.Create))
-                                }}>
-                                    <i className="fas fa fa-plus"></i>
-                                </button>
                                 <button className="btn btn-success btn-blue btn-editType1" onClick={() =>
-                                    dispatch(setModificationStateLevel(LevelModificationStatus.Edit))}>
+                                    {
+                                        dispatch(setModificationStateLevel(LevelModificationStatus.Edit))
+                                        if (levels.selectedLevel){
+                                            setIsCheckOpen4(!isCheckOpen4)
+                                        }
+                                    }}>
                                     <i className="fas fa fa-pen"></i>
                                 </button>
                                 <button className="btn btn-success btn-red btn-removeType1" onClick={() => onLevelRemove()}>
@@ -160,8 +194,7 @@ const Art: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                {((levels.modificationState === LevelModificationStatus.Create && isCheck === '3')
-                    || (levels.modificationState === LevelModificationStatus.Edit && levels.selectedLevel)) ?
+                {((levels.modificationState === LevelModificationStatus.Edit && levels.selectedLevel && isCheckOpen4 === true)) ?
                     <LevelForm /> : null}
             </div>
 
