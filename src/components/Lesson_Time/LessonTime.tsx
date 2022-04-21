@@ -54,6 +54,9 @@ const LessonTime: React.FC = () => {
         }
     }
 
+    const [isCheckOpen1, setIsCheckOpen1] = useState(false)
+    const [isCheckOpen2, setIsCheckOpen2] = useState(false)
+
     return (
         <Fragment>
             <h1 className="h3 mb-2 text-gray-800">Tiết học</h1>
@@ -75,16 +78,32 @@ const LessonTime: React.FC = () => {
 
             <div className="row">
                 <div className="col-xl-12 col-lg-12">
+                    <button className="btn btn-success btn-green btn-create" onClick={() => {
+                        dispatch(setModificationState(LessonTimeModificationStatus.Create))
+                        setIsCheckOpen1(!isCheckOpen1)
+                    }}
+                    >
+                        <i className="fas fa fa-plus"></i>
+                        Thêm tiết mới
+                    </button>
+                </div>
+
+                {((lessonTimes.modificationState === LessonTimeModificationStatus.Create) && isCheckOpen1 === true) ?
+                    <LessonTimeForm /> : null}
+            </div>
+
+            <div className="row">
+                <div className="col-xl-12 col-lg-12">
                     <div className="card shadow mb-4">
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-green">Danh sách tiết học</h6>
                             <div className="header-buttons">
-                                <button className="btn btn-success btn-green" onClick={() =>
-                                    dispatch(setModificationState(LessonTimeModificationStatus.Create))}>
-                                    <i className="fas fa fa-plus"></i>
-                                </button>
-                                <button className="btn btn-success btn-blue" onClick={() =>
-                                    dispatch(setModificationState(LessonTimeModificationStatus.Edit))}>
+                                <button className="btn btn-success btn-blue" onClick={() => {
+                                    dispatch(setModificationState(LessonTimeModificationStatus.Edit))
+                                    if (lessonTimes.selectedLessonTime){
+                                        setIsCheckOpen2(!isCheckOpen2)
+                                    }
+                                }}>
                                     <i className="fas fa fa-pen"></i>
                                 </button>
                                 <button className="btn btn-success btn-red" onClick={() => onLessonTimeRemove()}>
@@ -93,14 +112,13 @@ const LessonTime: React.FC = () => {
                             </div>
                         </div>
                         <div className="card-body">
-                           <LessonTimeList 
-                            onSelect={onLessonTimeSelect}
-                           />
+                            <LessonTimeList
+                                onSelect={onLessonTimeSelect}
+                            />
                         </div>
                     </div>
                 </div>
-                {((lessonTimes.modificationState === LessonTimeModificationStatus.Create)
-                    || (lessonTimes.modificationState === LessonTimeModificationStatus.Edit && lessonTimes.selectedLessonTime)) ?
+                {((lessonTimes.modificationState === LessonTimeModificationStatus.Edit && lessonTimes.selectedLessonTime && isCheckOpen2 === true)) ?
                     <LessonTimeForm /> : null}
             </div>
 

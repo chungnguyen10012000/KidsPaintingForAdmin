@@ -65,6 +65,9 @@ const Contests: React.FC = () => {
     }
   }
 
+  const [isCheckOpen1, setIsCheckOpen1] = useState(false)
+  const [isCheckOpen2, setIsCheckOpen2] = useState(false)
+
   if (id === 'teacher') {
     return (
       <Fragment>
@@ -128,13 +131,16 @@ const Contests: React.FC = () => {
       <div className="row">
         <div className="col-xl-12 col-lg-12">
           <button className="btn btn-success btn-green btn-create" onClick={() =>
-            dispatch(setModificationState(ContestModificationStatus.Create))}>
+            {
+              dispatch(setModificationState(ContestModificationStatus.Create))
+              setIsCheckOpen1(!isCheckOpen1)
+            }}>
             <i className="fas fa fa-plus"></i>
             Tạo cuộc thi
           </button>
         </div>
 
-        {((contests.modificationState === ContestModificationStatus.Create)) ?
+        {((contests.modificationState === ContestModificationStatus.Create && isCheckOpen1 === true)) ?
           <ContestForm /> : null}
       </div>
 
@@ -145,7 +151,12 @@ const Contests: React.FC = () => {
               <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi</h6>
               <div className="header-buttons">
                 <button className="btn btn-success btn-blue" onClick={() =>
-                  dispatch(setModificationState(ContestModificationStatus.Edit))}>
+                  {
+                    dispatch(setModificationState(ContestModificationStatus.Edit))
+                    if (contests.selectedContest){
+                      setIsCheckOpen2(!isCheckOpen2)
+                    }
+                  }}>
                   <i className="fas fa fa-pen"></i>
                 </button>
                 <button className="btn btn-success btn-red" onClick={() => onContestRemove()}>
@@ -170,7 +181,7 @@ const Contests: React.FC = () => {
             </div>
           </div>
         </div>
-        {((contests.modificationState === ContestModificationStatus.Edit && contests.selectedContest)) ?
+        {((contests.modificationState === ContestModificationStatus.Edit && contests.selectedContest && isCheckOpen2 === true)) ?
           <ContestForm /> : null}
       </div>
 

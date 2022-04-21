@@ -75,21 +75,20 @@ const Semester: React.FC = () => {
             </div>
 
             <div className="row">
-        <div className="col-xl-12 col-lg-12">
-            <button className="btn btn-success btn-green btn-create" onClick={() =>
-                {
-                    dispatch(setModificationState(SemesterModificationStatus.Create))
-                    setIsCheckOpen1(!isCheckOpen1)
-                }}
-            >
-            <i className="fas fa fa-plus"></i>
-            Thêm học kì mới
-          </button>
-        </div>
+                <div className="col-xl-12 col-lg-12">
+                    <button className="btn btn-success btn-green btn-create" onClick={() => {
+                        dispatch(setModificationState(SemesterModificationStatus.Create))
+                        setIsCheckOpen1(!isCheckOpen1)
+                    }}
+                    >
+                        <i className="fas fa fa-plus"></i>
+                        Thêm học kì mới
+                    </button>
+                </div>
 
-        {((semesters.modificationState === SemesterModificationStatus.Create) && isCheckOpen1 === true) ?
-          <SemesterForm /> : null}
-      </div>
+                {((semesters.modificationState === SemesterModificationStatus.Create) && isCheckOpen1 === true) ?
+                    <SemesterForm /> : null}
+            </div>
 
             <div className="row">
                 <div className="col-xl-12 col-lg-12">
@@ -97,11 +96,12 @@ const Semester: React.FC = () => {
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-green">Danh sách học kì</h6>
                             <div className="header-buttons">
-                                <button className="btn btn-success btn-blue" onClick={() =>
-                                    {
-                                        dispatch(setModificationState(SemesterModificationStatus.Edit))
+                                <button className="btn btn-success btn-blue" onClick={() => {
+                                    dispatch(setModificationState(SemesterModificationStatus.Edit))
+                                    if (semesters.selectedSemester){
                                         setIsCheckOpen2(!isCheckOpen2)
-                                    }}
+                                    }
+                                }}
                                 >
                                     <i className="fas fa fa-pen"></i>
                                 </button>
@@ -111,7 +111,7 @@ const Semester: React.FC = () => {
                             </div>
                         </div>
                         <div className="card-body">
-                            <SemesterList 
+                            <SemesterList
                                 onSelect={onSemesterSelect}
                             />
                         </div>

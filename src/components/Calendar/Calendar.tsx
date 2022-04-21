@@ -37,7 +37,6 @@ const Calendar: React.FC = () => {
     const numberItemsCount1: number = scheduleItems.scheduleItems.length;
     const [popup, setPopup] = useState(false);
     const [popup1, setPopup1] = useState(false);
-    let [isCheck, setIsCheck] = useState('')
     const [searchTerm, setSearchTerm] = React.useState("");
 
     const handleChange = (event: any) => {
@@ -84,6 +83,10 @@ const Calendar: React.FC = () => {
             setPopup1(true);
         }
     }
+    const [isCheckOpen1, setIsCheckOpen1] = useState(false)
+    const [isCheckOpen2, setIsCheckOpen2] = useState(false)
+    const [isCheckOpen3, setIsCheckOpen3] = useState(false)
+    const [isCheckOpen4, setIsCheckOpen4] = useState(false)
 
     return (
         <Fragment>
@@ -107,18 +110,31 @@ const Calendar: React.FC = () => {
 
             <div className="row">
                 <div className="col-xl-12 col-lg-12">
+                    <button className="btn btn-success btn-green btn-create" onClick={() => {
+                        dispatch(setModificationState(ScheduleModificationStatus.Create))
+                        setIsCheckOpen1(!isCheckOpen1)
+                    }}
+                    >
+                        <i className="fas fa fa-plus"></i>
+                        Thêm lịch học chung
+                    </button>
+                </div>
+
+                {((schedules.modificationState === ScheduleModificationStatus.Create) && isCheckOpen1 === true) ?
+                    <CalendarForm /> : null}
+            </div>
+
+            <div className="row">
+                <div className="col-xl-12 col-lg-12">
                     <div className="card shadow mb-4">
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-green">Danh sách lịch chung</h6>
                             <div className="header-buttons">
-                                <button className="btn btn-success btn-green" onClick={() => {
-                                    setIsCheck('2')
-                                    dispatch(setModificationState(ScheduleModificationStatus.Create))
-                                }}>
-                                    <i className="fas fa fa-plus"></i>
-                                </button>
                                 <button className="btn btn-success btn-blue" onClick={() => {
                                     dispatch(setModificationState(ScheduleModificationStatus.Edit))
+                                    if (schedules.selectedSchedule){
+                                        setIsCheckOpen2(!isCheckOpen2)
+                                    }
                                 }}>
                                     <i className="fas fa fa-pen"></i>
                                 </button>
@@ -134,11 +150,25 @@ const Calendar: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                {((schedules.modificationState === ScheduleModificationStatus.Create && isCheck === '2')
-                    || (schedules.modificationState === ScheduleModificationStatus.Edit && schedules.selectedSchedule)) ?
+                {((schedules.modificationState === ScheduleModificationStatus.Edit && schedules.selectedSchedule && isCheckOpen2 === true)) ?
                     <CalendarForm /> : null}
             </div>
 
+            <div className="row">
+                <div className="col-xl-12 col-lg-12">
+                    <button className="btn btn-success btn-green btn-create" onClick={() => {
+                        dispatch(setModificationStateItem(ScheduleItemModificationStatus.Create))
+                        setIsCheckOpen3(!isCheckOpen3)
+                    }}
+                    >
+                        <i className="fas fa fa-plus"></i>
+                        Thêm lịch học chi tiết
+                    </button>
+                </div>
+
+                {((scheduleItems.modificationState === ScheduleItemModificationStatus.Create) && isCheckOpen3 === true) ?
+                    <CalendarItemForm /> : null}
+            </div>
 
             <div className="row">
                 <div className="col-xl-12 col-lg-12">
@@ -146,14 +176,11 @@ const Calendar: React.FC = () => {
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-green">Danh sách lịch chi tiết</h6>
                             <div className="header-buttons">
-                                <button className="btn btn-success btn-green btn-x" onClick={() => {
-                                    setIsCheck('4')
-                                    dispatch(setModificationStateItem(ScheduleItemModificationStatus.Create))
-                                }}>
-                                    <i className="fas fa fa-plus"></i>
-                                </button>
                                 <button className="btn btn-success btn-blue btn-y" onClick={() => {
                                     dispatch(setModificationStateItem(ScheduleItemModificationStatus.Edit))
+                                    if (scheduleItems.selectedScheduleItem){
+                                        setIsCheckOpen4(!isCheckOpen4)
+                                    }
                                 }}>
                                     <i className="fas fa fa-pen"></i>
                                 </button>
@@ -169,8 +196,7 @@ const Calendar: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                {((scheduleItems.modificationState === ScheduleItemModificationStatus.Create && isCheck === '4')
-                    || (scheduleItems.modificationState === ScheduleItemModificationStatus.Edit && scheduleItems.selectedScheduleItem)) ?
+                {((scheduleItems.modificationState === ScheduleItemModificationStatus.Edit && scheduleItems.selectedScheduleItem && isCheckOpen4 === true)) ?
                     <CalendarItemForm /> : null}
             </div> 
 
