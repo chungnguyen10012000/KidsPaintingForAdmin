@@ -1,10 +1,10 @@
 import { fetchDataRequest, fetchDataSuccess, fetchDataError, initialUser, removeUserAll, addUser } from "./users.action";
 
-export function fetchProducts() {
+export function getStaff() {
     return dispatch => {
         dispatch(fetchDataRequest());
         fetch(
-                "/api/v1/user", {
+                "/api/v1/staff", {
                     method: "GET"
                 }
             )

@@ -1,4 +1,4 @@
-import { listUser } from "../../database/data/user"
+import { listUser } from "../../database/data/admin"
 import { User } from "../../database/model/user"
 
 const contexParse = (res) => {

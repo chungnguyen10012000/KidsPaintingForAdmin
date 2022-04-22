@@ -7,7 +7,7 @@ import { useParams } from "react-router";
 import { getBlog } from "../../store/actions/blog/getBlog";
 import { getCourse } from "../../store/actions/course/getCourse";
 import { getContest } from "../../store/actions/contest/getContest";
-import { fetchProducts } from "../../store/actions/users/fetchDataUser";
+import { getAdmin } from "../../store/actions/users/getAdmin";
 import { getFeedback } from "../../store/actions/feedback/getFeedback";
 
 type role = {
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(fetchProducts())
+    dispatch(getAdmin())
   }, [dispatch])
 
   const feedbacks: IFeedBackState = useSelector((state: IStateType) => state.feedbacks);

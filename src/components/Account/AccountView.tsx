@@ -8,7 +8,7 @@ export type userListProps = {
   children?: React.ReactNode;
 };
 
-function AccountList(props: userListProps): JSX.Element {
+function AccountView(props: userListProps): JSX.Element {
   const users: IUserState = useSelector((state: IStateType) => state.users);
 
   return (
@@ -21,7 +21,7 @@ function AccountList(props: userListProps): JSX.Element {
             function(){
               for (let index = 0; index < users.users.length; index++) {
                 console.log(users.users[index], localStorage.getItem('email'))
-                if (users.users[index].username === "chung123") {
+                if (users.users[index].username === localStorage.getItem('email')) {
                   return (
                     <>
                       <tr 
@@ -82,4 +82,4 @@ function AccountList(props: userListProps): JSX.Element {
   );
 }
 
-export default AccountList;
+export default AccountView;

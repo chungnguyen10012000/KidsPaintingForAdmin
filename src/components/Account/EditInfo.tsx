@@ -1,18 +1,44 @@
 import React, { useState, FormEvent, Dispatch, Fragment, useEffect } from "react";
 //import { IStateType, IUserState } from "../../store/models/root.interface";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IUser, UserModificationStatus } from "../../store/models/user.interface";
 import TextInput from "../../common/components/TextInput";
 import { editUser, clearSelectedUser, setModificationState } from "../../store/actions/users/users.action";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IUserFormState } from "../../common/types/Form.types";
 import SelectInput from "../../common/components/Select";
+import { IRootPageStateType, IStateType, IUserState } from "../../store/models/root.interface";
+import { getAdmin } from "../../store/actions/users/getAdmin";
+import { getStaff } from "../../store/actions/users/getStaff";
+import { getTeacher } from "../../store/actions/users/getTeacher";
+import { getSuperAdmin } from "../../store/actions/users/getSuperAdmin";
+import { updateCurrentPath } from "../../store/actions/root.actions";
 
 const EditInfo: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  //const users: IUserState | null = useSelector((state: IStateType) => state.users);
+  const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
+  useEffect(() => {
+    if (localStorage.getItem('role') === "ROLE_ADMIN"){
+      dispatch(getAdmin())
+    }
+    else if (localStorage.getItem('role') === 'ROLE_STAFF'){
+      dispatch(getStaff())
+    }
+    else if (localStorage.getItem('role') === 'ROLE_TEACHER'){
+      dispatch(getTeacher())
+    }
+    else {
+      dispatch(getSuperAdmin())
+    }
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(updateCurrentPath("Thay đổi thông tin tài khoản", ""));
+  }, [path.area, dispatch]);
+
   let user: IUser | null = {
-    id: 0, firstName: "", 
+    id: 0, 
+    firstName: "", 
     lastName: "", 
     avatar: "", 
     email: "", 
@@ -24,11 +50,20 @@ const EditInfo: React.FC = () => {
     username:"", 
     userStatus: true
   }
+  const users: IUserState = useSelector((state: IStateType) => state.users);
+  for (let index = 0; index < users.users.length; index++) {
+    if (users.users[index].username === localStorage.getItem('email')){
+      user = users.users[index]
+    }
+  }
 
+  console.log('in user',user)
+  
+  
+  
 
 
   
-
   const [formState, setFormState] = useState({
     firstName: { error: "", value: user.firstName },
     lastName: { error: "", value: user.lastName},
@@ -206,7 +241,7 @@ const EditInfo: React.FC = () => {
                   onChange={hasFormValueChanged}
                   required={true}
                   maxLength={20}
-                  label=""
+                  label="Ngày sinh"
                   placeholder="" />
               </div>
               <div className="form-group">

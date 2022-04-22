@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { IStateType, ICourseSemesterState, ICourseState, IScheduleState } from "../../store/models/root.interface";
-import { ICourseSemester } from "../../store/models/course_for_semester.interface";
 
 function SigupCoursesSemesterList(): JSX.Element {
     const courseSemester: ICourseSemesterState = useSelector((state: IStateType) => state.courseSemeters);

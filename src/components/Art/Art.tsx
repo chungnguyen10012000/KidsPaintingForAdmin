@@ -38,8 +38,6 @@ const Art: React.FC = () => {
     const [popup2, setPopup2] = useState(false);
     const [popup3, setPopup3] = useState(false);
 
-    let [isCheck, setIsCheck] = useState('')
-
     const dispatch: Dispatch<any> = useDispatch();
 
     const courses: ICourseState = useSelector((state: IStateType) => state.courses);

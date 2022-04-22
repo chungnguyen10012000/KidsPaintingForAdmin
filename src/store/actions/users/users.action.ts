@@ -11,6 +11,8 @@ export const FETCH_DATA_SUCCESS: string = "FETCH_DATA_SUCCESS";
 export const FETCH_DATA_ERROR: string = "FETCH_DATA_ERROR";
 export const REMOVE_USER_ALL: string = "REMOVE_USER_ALL";
 export const INITIAL_USER: string = "INITIAL_USER";
+export const FIND_USER_BY_ID: string = "FIND_USER_BY_ID";
+export const FIND_USER_BY_USERNAME: string = "FIND_USER_BY_USERNAME";
 
 export function fetchDataRequest() {
     return {
@@ -48,6 +50,15 @@ export function removeUser(id: number): IRemoveUserActionType {
     return { type: REMOVE_USER, id: id };
 }
 
+export function findUserById(user: IUser): IFindUserByIdActionType {
+
+    return { type: FIND_USER_BY_ID, user: user}
+}
+
+export function findUserByUsername(user: IUser): IFindUserByUsernameActionType {
+    return { type: FIND_USER_BY_ID, user: user}
+}
+
 export function editUser(user: IUser): IEditUserActionType {
     return { type: EDIT_USER, user: user };
 }
@@ -69,6 +80,8 @@ export function clearSelectedUser(): IClearSelectedUserActionType {
 interface IEditUserActionType { type: string, user: IUser };
 interface IAddUserActionType { type: string, user: IUser };
 interface IRemoveUserActionType { type: string, id: number };
+interface IFindUserByIdActionType { type: string, user: IUser };
+interface IFindUserByUsernameActionType { type: string, user: IUser };
 interface ISetModificationStateActionUser { type: string, value: UserModificationStatus };
 interface IChangeSelectedUserActionType { type: string, user: IUser };
 interface IClearSelectedUserActionType { type: string };

@@ -7,9 +7,11 @@ import { removeUser, setModificationState } from "../../store/actions/users/user
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import SelectInput from "../../common/components/Select";
-import { fetchProducts } from "../../store/actions/users/fetchDataUser";
+import { getAdmin } from "../../store/actions/users/getAdmin";
 import { getCourse } from "../../store/actions/course/getCourse";
 import AddUserForm from "./AddUserForm";
+import { getTeacher } from "../../store/actions/users/getTeacher";
+import { getStaff } from "../../store/actions/users/getStaff";
 
 const AddUser: React.FC = () => {
 
@@ -20,9 +22,18 @@ const AddUser: React.FC = () => {
   const users: IUserState = useSelector((state: IStateType) => state.users);
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
 
+  
   useEffect(() => {
-    dispatch(fetchProducts())
-  }, [dispatch])
+    if (typeUser === "Giáo viên"){
+      dispatch(getTeacher())
+    }
+    else if (typeUser === "Nhân viên"){
+      dispatch(getStaff())
+    }
+    else{
+      dispatch(getAdmin())
+    }
+  }, [dispatch, typeUser])
 
   useEffect(() => {
     dispatch(getCourse())
@@ -62,6 +73,8 @@ const AddUser: React.FC = () => {
   else if (localStorage.getItem('role') === 'ROLE_STAFF') {
     listUser = ['Giáo viên']
   }
+
+  const [isCheckOpen, setIsCheckOpen] = useState(false)
 
   return (
     <Fragment>
@@ -127,7 +140,10 @@ const AddUser: React.FC = () => {
       <div className="row">
         <div className="col-xl-12 col-lg-12">
           <button className="btn btn-success btn-green btn-create" onClick={() =>
-            dispatch(setModificationState(UserModificationStatus.Create))}>
+            {
+              dispatch(setModificationState(UserModificationStatus.Create))
+              setIsCheckOpen(!isCheckOpen)
+            }}>
             <i className="fas fa fa-plus"></i>
             Thêm người dùng
           </button>
@@ -136,7 +152,7 @@ const AddUser: React.FC = () => {
           console.log(users.modificationState)
         }
 
-        {((users.modificationState === UserModificationStatus.Create)) ?
+        {((users.modificationState === UserModificationStatus.Create && isCheckOpen === true)) ?
           <AddUserForm /> : null}
       </div>
       <div className="row">
@@ -163,11 +179,11 @@ const AddUser: React.FC = () => {
                 </table>
                 <nav aria-label="Page navigation example">
                   <ul className="pagination">
-                    <li className="page-item"><a className="page-link" href="">Previous</a></li>
-                    <li className="page-item"><a className="page-link" href="">1</a></li>
-                    <li className="page-item"><a className="page-link" href="">2</a></li>
-                    <li className="page-item"><a className="page-link" href="">3</a></li>
-                    <li className="page-item"><a className="page-link" href="">Next</a></li>
+                    <li className="page-item"><a className="page-link" href="/">Previous</a></li>
+                    <li className="page-item"><a className="page-link" href="/">1</a></li>
+                    <li className="page-item"><a className="page-link" href="/">2</a></li>
+                    <li className="page-item"><a className="page-link" href="/">3</a></li>
+                    <li className="page-item"><a className="page-link" href="/">Next</a></li>
                   </ul>
                 </nav>
               </div>

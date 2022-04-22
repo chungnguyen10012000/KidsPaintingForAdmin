@@ -1,7 +1,5 @@
 import React, { Fragment, Dispatch } from "react";
-import { IFeedBack } from "../../store/models/feedback.interface";
-import { useDispatch, useSelector } from "react-redux";
-import { IStateType } from "../../store/models/root.interface";
+import { useDispatch } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { useLocation } from "react-router-dom";
 
@@ -12,8 +10,6 @@ const FeedBackDetail: React.FC = () => {
 
   const dispatch: Dispatch<any> = useDispatch();
   dispatch(updateCurrentPath("Phản hồi", "Chi tiết"));
-  
-  const blogs: IFeedBack[] = useSelector((state: IStateType) => state.feedbacks.feedbacks);
 
   return (
     <Fragment>

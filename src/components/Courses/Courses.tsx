@@ -44,8 +44,6 @@ const Courses: React.FC = () => {
   //const [popup2, setPopup2] = useState(false);
   const [popup3, setPopup3] = useState(false);
 
-  let [isCheck, setIsCheck] = useState('')
-
   const dispatch: Dispatch<any> = useDispatch();
 
   const courses: ICourseState = useSelector((state: IStateType) => state.courses);
@@ -322,9 +320,6 @@ const Courses: React.FC = () => {
             </div>
           </div>
         </div>
-        {((courses.modificationState === CourseModificationStatus.Create && isCheck === '1')
-          || (courses.modificationState === CourseModificationStatus.Edit && courses.selectedCourse)) ?
-          <CoursesForm /> : null}
       </div>
 
 
@@ -341,9 +336,6 @@ const Courses: React.FC = () => {
             </div>
           </div>
         </div>
-        {((courseSemesters.modificationState === CourseSemesterModificationStatus.Create && isCheck === '100')
-          || (courseSemesters.modificationState === CourseSemesterModificationStatus.Edit && courseSemesters.selectedCourseSemester)) ?
-          <CourseSemesterForm /> : null}
       </div>
 
 

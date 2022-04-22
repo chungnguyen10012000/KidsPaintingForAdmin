@@ -1,13 +1,16 @@
 import React, { Fragment, Dispatch, useEffect } from "react";
-import AccountList from "./AccountList";
 import "./Account.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import {  IStateType, IRootPageStateType } from "../../store/models/root.interface";
 import { setModificationState, changeSelectedUser, clearSelectedUser } from "../../store/actions/users/users.action";
 import { UserModificationStatus, IUser } from "../../store/models/user.interface";
-import { fetchProducts } from "../../store/actions/users/fetchDataUser";
+import { getAdmin } from "../../store/actions/users/getAdmin";
 import { useHistory, useParams } from "react-router-dom";
+import AccountView from "./AccountView";
+import { getStaff } from "../../store/actions/users/getStaff";
+import { getTeacher } from "../../store/actions/users/getTeacher";
+import { getSuperAdmin } from "../../store/actions/users/getSuperAdmin";
 
 type role = {
   id: string;
@@ -23,7 +26,18 @@ const Account: React.FC = () => {
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
 
   useEffect(() => {
-    dispatch(fetchProducts())
+    if (localStorage.getItem('role') === "ROLE_ADMIN"){
+      dispatch(getAdmin())
+    }
+    else if (localStorage.getItem('role') === 'ROLE_STAFF'){
+      dispatch(getStaff())
+    }
+    else if (localStorage.getItem('role') === 'ROLE_TEACHER'){
+      dispatch(getTeacher())
+    }
+    else {
+      dispatch(getSuperAdmin())
+    }
   }, [dispatch])
 
   useEffect(() => {
@@ -49,7 +63,7 @@ const Account: React.FC = () => {
               </div>
             </div>
             <div className="card-body">
-              <AccountList
+              <AccountView
                 onSelect={onUserSelect}
               />
             </div>

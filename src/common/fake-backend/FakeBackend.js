@@ -1,4 +1,4 @@
-import { getTeacher } from "./handler/GET/GetUser";
+import { getUser } from "./handler/GET/GetAdmin";
 import { postUser } from "./handler/POST/PostUser";
 import { login } from "./handler/POST/login";
 import { getBlog } from "./handler/GET/GetBlog";
@@ -42,6 +42,10 @@ import { getCourseSemester } from "./handler/GET/GetCourseSemester";
 import { postCourseSemester } from "./handler/POST/postCourseSemester";
 import { deleteCourseSemester } from "./handler/DELETE/deleteCourseSemester";
 import { putCourseSemester } from "./handler/PUT/putCourseSemester";
+import { getUserById } from "./handler/GET/GetUserById";
+import { getTeacher } from "./handler/GET/GetTeacher";
+import { getStaff } from "./handler/GET/GetStaff";
+import { getSuperAdmin } from "./handler/GET/GetSuperAdmin";
 
 
 const path = "/api/v1"
@@ -65,9 +69,9 @@ export function configureFakeBackend() {
                     case url.endsWith(`${path}/user`) && method === 'POST':
                         return postUser(body,created);
                     case url.endsWith(`${path}/user`) && method === 'GET':
-                        return getTeacher(ok);
+                        return getUser(ok);
                     case url.match(new RegExp('/user/\\d+$')) && method === 'GET':
-                        return getTeacher(ok);
+                        return getUserById(ok);
                     case url.match(new RegExp('/user/\\d+$')) && method === 'DELETE':
                         return null;
                     case url.endsWith('/semester') && method === "GET": 
@@ -158,6 +162,12 @@ export function configureFakeBackend() {
                         return deleteBlog(deleted);
                     case url.match(new RegExp('/blog/\\d+$')) && method === "PUT":
                         return putBlog(body, created);
+                    case url.endsWith('/teacher') && method === "GET": 
+                        return getTeacher(ok);
+                    case url.endsWith('/staff') && method === "GET": 
+                        return getStaff(ok);
+                    case url.endsWith('/super-admin') && method === "GET": 
+                        return getSuperAdmin(ok);
                     default:
                         // pass through any requests not handled above
                         return realFetch(url, opts)

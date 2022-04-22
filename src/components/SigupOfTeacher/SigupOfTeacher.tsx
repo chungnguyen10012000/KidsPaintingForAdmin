@@ -3,10 +3,6 @@ import "./SigupOfCourse.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { IStateType, IRootPageStateType } from "../../store/models/root.interface";
-import { clearSelectedMyClass, setModificationState,
-  changeSelectedMyClass } from "../../store/actions/myclass.actions";
-import { MyClassModificationStatus, IMyClass} from "../../store/models/myclass.interface";
-import SigupOfCourseList from "./SigupOfSemesterCourseList";
 import { getCourseSemester } from "../../store/actions/course_semester/getCourseSemester";
 import SigupCoursesSemesterList from "./SigupOfSemesterCourseList";
 import { getCourse } from "../../store/actions/course/getCourse";
@@ -34,7 +30,6 @@ const SigupOfCourse: React.FC = () => {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(clearSelectedMyClass());
     dispatch(updateCurrentPath("Khóa học", "Danh sách"));
   }, [path.area, dispatch]);
 

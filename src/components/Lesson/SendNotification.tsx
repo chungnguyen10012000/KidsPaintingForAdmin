@@ -6,7 +6,6 @@ import { editMyClass, clearSelectedMyClass, setModificationState, addMyClass } f
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IMyClassFormState } from "../../common/types/Form.types";
 import { ICourse } from "../../store/models/courses.interface";
-import SelectInput from "../../common/components/Select";
 import TextInput from "../../common/components/TextInput";
 
 const SendNotification: React.FC = () => {
@@ -25,17 +24,6 @@ const SendNotification: React.FC = () => {
     listCourse.map((ele) => {
         return listCourses.push(ele.name)
     })
-
-
-    //const teachers: IUserState = useSelector((state: IStateType) => state.users);
-    const LessonList: string[] = [
-        "Buổi 1",
-        "Buổi 2",
-        "Buổi 3",
-        "Buổi 4",
-        "Buổi 5",
-        "Buổi 6",
-    ]
 
     const [formState, setFormState] = useState({
         name: { error: "", value: myclass.name },
