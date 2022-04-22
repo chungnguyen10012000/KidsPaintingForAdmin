@@ -35,7 +35,7 @@ function SigupCoursesSemesterList(): JSX.Element {
             <td>{courseList[index]}</td>
             <td>{scheduleList[index]}</td>
             <td>
-              <button className="btn btn-success">Đăng ký ngay</button>
+              <button className="btn btn-success">Đăng ký</button>
             </td>
         </tr>);
     });

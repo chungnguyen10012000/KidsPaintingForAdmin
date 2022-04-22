@@ -27,7 +27,7 @@ const ContestGrade: React.FC = () => {
                 <div className="col-xl-12 col-lg-12">
                     <h6 className="m-0 font-weight-bold text-green">Danh sách bài nộp</h6>
                 </div>
-                <div className="card-body text-center">
+                <div className="card-body">
                     <img src="https://media.fmp-data.bliss.build/original_images/Air_competition_1.jpg" alt="Girl in a jacket" width="500" height="600" />
                     <form >
                         <div className="form-group">

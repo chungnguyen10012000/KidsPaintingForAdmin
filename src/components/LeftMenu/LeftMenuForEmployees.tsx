@@ -65,6 +65,13 @@ const LeftMenuForEmployees: React.FC = () => {
                 </div>
 
                 <li className="nav-item">
+                    <Link className="nav-link" to={`/employee/calendar`}>
+                        <i className="fas fa-fw fa-warehouse"></i>
+                        <span>Lịch</span>
+                    </Link>
+                </li>
+
+                <li className="nav-item">
                     <Link className="nav-link" to={`/employee/courses`}>
                         <i className="fas fa-fw fa-warehouse"></i>
                         <span>Khoá học</span>

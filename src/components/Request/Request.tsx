@@ -2,6 +2,7 @@ import React, { Fragment, Dispatch } from "react";
 import { useDispatch } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import ReviewBlog from "./ReviewBlog";
+import ReviewSemester from "./ReviewSemester";
 //import { getRestApiWithToken, getDomain, postRestApiWithToken } from "../../common/util/RestAPI.util";
 //import { Page } from "../../common/util/User.util";
 //import { RestApiAuth } from "../../common/components/RestApiAuth";
@@ -118,7 +119,12 @@ const RequestForTeacher: React.FC = () => {
       {
         function () {
           if (localStorage.getItem('role') === 'ROLE_ADMIN' || localStorage.getItem('role') === 'ROLE_SUPER_ADMIN'){
-            return <ReviewBlog />
+            return (
+              <>
+                <ReviewBlog />
+                <ReviewSemester />
+              </>
+            )
           }
         } ()
       }

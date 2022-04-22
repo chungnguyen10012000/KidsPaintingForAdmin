@@ -109,7 +109,7 @@ const Courses: React.FC = () => {
   const [isCheckOpen3, setIsCheckOpen3] = useState(false)
   const [isCheckOpen4, setIsCheckOpen4] = useState(false)
 
-  if (id === "admin" || id === "super-admin") {
+  if (id === "admin" || id === "super-admin" || id === "employee") {
     return (
       <Fragment>
         <h1 className="h3 mb-2 text-gray-800">Khóa học</h1>

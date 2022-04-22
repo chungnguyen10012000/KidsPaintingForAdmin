@@ -38,7 +38,7 @@ const LessonDetail: React.FC = () => {
     }
   }, [quill]);
 
-  const listPage = ["1", "2", "3", "Nhiều hơn"]
+  const listPage = ["1", "2", "3", "4", "5", "6", "Nhiều hơn"]
   const [page, setPage] = useState("1")
   return (
     <Fragment>
@@ -52,12 +52,12 @@ const LessonDetail: React.FC = () => {
             <div className="card-header py-3">
               <h6 className="m-0 font-weight-bold text-green"> Danh sách bài tập</h6>
             </div>
-            <div className="card-body">
+            <div className="card-body text-center">
               {
                 <ExerciseList />
               }
               <button
-                className={`btn btn-primary btn-user btn-block`}
+                className={`btn btn-primary`}
                 onClick={() => {
                   history.push('/teacher/exercise')
                 }}
@@ -71,8 +71,8 @@ const LessonDetail: React.FC = () => {
 
       <div className="row">
         <div className="col-xl-6 col-lg-6">
-          <div className="card shadow mb-12">
-            <div className="card-header py-12">
+          <div className="card mb-4">
+            <div className="card-header py-3">
               <h6 className="m-0 font-weight-bold text-green"> Buổi học mẫu</h6>
             </div>
             <div className="card-body text-center">
@@ -91,7 +91,7 @@ const LessonDetail: React.FC = () => {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-12">
             <div className="card-header py-12">
-              <h6 className="m-0 font-weight-bold text-green"> Soạn giáo án</h6>
+              <h6 className="m-0 font-weight-bold text-green"> Tạo giáo án cho buổi học</h6>
             </div>
             <div className="card-body">
               <form>
@@ -108,15 +108,16 @@ const LessonDetail: React.FC = () => {
                 <div className="form-group">
                   <div ref={quillRef} style={{ minHeight: 200 }} />
                 </div>
-              </form>
+              <button className="btn btn-danger">Hủy</button>
               <button
-                className={`btn btn-primary btn-user btn-block`}
+                className={`btn btn-success left-margin`}
                 onClick={() => {
                   alert(textHtml)
                 }}
               >
                 Gửi
               </button>
+              </form>
             </div>
           </div>
         </div>

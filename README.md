@@ -37,8 +37,9 @@
     - [x] Select semester for arrange class 
     - [ ] Review semester (admin, super-admin)
     - [x] Notification top menu (da xem, chua xem)
-    - [ ] Search, paging
+    - [x] Search, paging
     - [x] Login jwt
+
 - Teacher
     - [x] Edit register semester course 
     - [x] Edit register course for teaching (course resigested for color,  button register course => table search course => detail) 
@@ -49,6 +50,8 @@
     - [x] Remove link (*)
     - [x] Remove change class (*)
     - [x] Add view notification (*)
+    - [ ] Leson-detail
+    - [ ] Submition
 
 
 ## ROLE

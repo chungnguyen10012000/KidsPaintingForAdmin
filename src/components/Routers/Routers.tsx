@@ -189,6 +189,7 @@ const Routers: React.FC = () => {
               <Route path={`/:id/edit-info`}><EditInfo /></Route>
               <Route path={`/:id/change-password`}><ChangePassword /></Route>
               <Route path={`/:id/notification`}><Notification /></Route>
+              <Route path={`/:id/calendar`}><Calendar /></Route>
               <Route path={`/:id/feedbacks`}><FeedBack /></Route>
               <Route path={`/:id/add-user`}><AddUser /></Route>
               <Route path={`/:id/request`}><RequestForTeacher /></Route>
