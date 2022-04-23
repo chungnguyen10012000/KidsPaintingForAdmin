@@ -26,7 +26,6 @@ type role = {
 const Contests: React.FC = () => {
 
   const { id } = useParams<role>()
-  let [isId, setIsId] = useState<number>(0)
   let [description, setDescription] = useState<string>("");
 
   let history = useHistory();
@@ -55,7 +54,6 @@ const Contests: React.FC = () => {
   function onContestSelect(product: IContest): void {
     dispatch(changeSelectedContest(product));
     dispatch(setModificationState(ContestModificationStatus.None));
-    setIsId(product.id)
     setDescription(product.description)
   }
 
@@ -77,8 +75,11 @@ const Contests: React.FC = () => {
           <TopCard title="TỔNG SỐ CUỘC THI" text={`${numberItemsCount}`} icon="box" class="primary" />
         </div>
 
+        <h6 className="mb-4 font-weight-bold text-green">Danh sách cuộc thi</h6>
+
         <div className="row">
-          <div className="col-xl-12 col-lg-12">
+          <ContestList />
+          {/* <div className="col-xl-12 col-lg-12">
             <div className="card shadow mb-4">
               <div className="card-header py-3">
                 <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi</h6>
@@ -101,7 +102,7 @@ const Contests: React.FC = () => {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </Fragment >
     );

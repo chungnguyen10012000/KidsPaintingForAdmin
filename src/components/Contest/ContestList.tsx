@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { IStateType, IContestState } from "../../store/models/root.interface";
+import { IStateType, IContestState, IMytypeState, ILevelState } from "../../store/models/root.interface";
 import { IContest } from "../../store/models/contest.interface";
+import { useHistory } from "react-router-dom";
 
 export type productListProps = {
   onSelect?: (product: IContest) => void;
@@ -14,62 +15,69 @@ type Options = {
 }
 
 function ContestList(props: productListProps): JSX.Element  {
+
+  let history = useHistory();
+  
   const contests: IContestState = useSelector((state: IStateType) => state.contest);
+  const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
+  const levels: ILevelState = useSelector((state: IStateType) => state.levels);
+
+  let typeList: string[] = []
+
+    contests.contest.map((contest_item) => {
+        return mytypes.mytypes.forEach(element => {
+            if (element.id === contest_item.art_type_id) {
+                return typeList.push(element.name)
+            }
+        });
+    })
+
+    let levelList: string[] = []
+
+    contests.contest.map((contest_item) => {
+        return levels.levels.forEach(element => {
+            if (element.id === contest_item.art_level_id) {
+                return levelList.push(element.name)
+            }
+        });
+    })
 
 
-  const productElements: (JSX.Element | null)[] = contests.contest.map(contest_item => {
+  const productElements: (JSX.Element | null)[] = contests.contest.map((contest_item, index) => {
     if (!contest_item) { return null; }
-    else if (contest_item.is_enabled === false){
-      return (<tr className={`table-row contest-end ${(contests.selectedContest&& contests.selectedContest.id === contest_item.id) ? "selected" : ""}`}
-      onClick={() => {
-        if(props.onSelect) props.onSelect(contest_item);
-      }}
-      key={`contest_${contest_item.id}`}>
-      <th scope="row">{contest_item.id}</th>
-      <td>{contest_item.name}</td>
-      <td>{contest_item.art_type_id}</td>
-      <td>{contest_item.art_level_id}</td>
-      <td>{contest_item.max_participant}</td>
-      <td>{contest_item.start_time}</td>
-      <td>{contest_item.end_time}</td>
-    </tr>);
-    }
-    return (<tr className={`table-row ${(contests.selectedContest&& contests.selectedContest.id === contest_item.id) ? "selected" : ""}`}
-      onClick={() => {
-        if(props.onSelect) props.onSelect(contest_item);
-      }}
-      key={`contest_${contest_item.id}`}>
-      <th scope="row">{contest_item.id}</th>
-      <td>{contest_item.name}</td>
-      <td>{contest_item.art_type_id}</td>
-      <td>{contest_item.art_level_id}</td>
-      <td>{contest_item.max_participant}</td>
-      <td>{contest_item.start_time}</td>
-      <td>{contest_item.end_time}</td>
-    </tr>);
+    return (
+      <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12" key={index}>
+                <div className="card shadow mb-4">
+                    <div className="card-header py-3">
+                        <h6 className="m-0 font-weight-bold text-green">{contest_item.name}</h6>
+                        <div className="header-buttons">
+                        </div>
+                    </div>
+                    <img className="card-img-top" src={require('../../assets/img/contest/contest_1.png')} alt=""></img>
+                    <div className="card-body">
+                        <p className="card-text">Thể loại: {typeList[index]}</p>
+                        <p className="card-text">Trình độ: {levelList[index]}</p>
+                        <button 
+                          className="btn btn-success"
+                          onClick={() => {
+                              history.push({
+                                pathname: '/teacher/contest-grade',
+                                state: { id: contest_item.id }
+                              })
+                            }
+                          }
+                        >Chấm bài</button>
+                    </div>
+                </div>
+            </div>
+    );
   });
 
 
   return (
-    <div className="table-responsive portlet">
-      <table className="table">
-        <thead className="thead-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Tên cuộc thi</th>
-            <th scope="col">Thể loại</th>
-            <th scope="col">Cấp độ</th>
-            <th scope="col">Số lượng tối đa tham gia</th>
-            <th scope="col">Thời gian bắt đầu</th>
-            <th scope="col">Thời gian kết thúc</th>
-          </tr>
-        </thead>
-        <tbody>
+        <>
           {productElements}
-        </tbody>
-      </table>
-    </div>
-
+        </>
   );
 }
 
