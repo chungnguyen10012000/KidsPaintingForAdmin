@@ -45,6 +45,7 @@ import Calendar from "../Calendar/Calendar";
 import Semester from "../Semester/Semester";
 import MyClass from "../MyClass/MyClass"
 import NotificationDetail from "../Notification/NotificationDetail";
+import ContestForm from "../Contest/ContestForm";
 
 type role = {
   id: string;
@@ -110,6 +111,7 @@ const Routers: React.FC = () => {
                 <Route path={`/:id/notification-detail`}><NotificationDetail /></Route>
                 <Route path={`/:id/feedbacks`}><FeedBack /></Route>
                 <Route path={`/:id/add-user`}><AddUser /></Route>
+                <Route path={`/:id/edit-contest`}><ContestForm /></Route>
                 <Route path={`/:id/calendar`}><Calendar /></Route>
                 <Route path={`/:id/arrange-class`}><ArrangeClass /></Route>
                 <Route path={`/:id/teacher-rating`}><StarRatingForAdmin /></Route>
@@ -148,6 +150,7 @@ const Routers: React.FC = () => {
                 <Route path={`/:id/change-password`}><ChangePassword /></Route>
                 <Route path={`/:id/semester`}><Semester /></Route>
                 <Route path={`/:id/notification`}><Notification /></Route>
+                <Route path={`/:id/edit-contest`}><ContestForm /></Route>
                 <Route path={`/:id/feedbacks`}><FeedBack /></Route>
                 <Route path={`/:id/notification-detail`}><NotificationDetail /></Route>
                 <Route path={`/:id/calendar`}><Calendar /></Route>
@@ -195,6 +198,7 @@ const Routers: React.FC = () => {
               <Route path={`/:id/request`}><RequestForTeacher /></Route>
               <Route path={`/:id/student-request`}><Student /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
+              <Route path={`/:id/edit-contest`}><ContestForm /></Route>
               <Route path={`/:id/notification-detail`}><NotificationDetail /></Route>
               <Route path={`/:id/blog`}><Blogs /></Route>
               <Route path={`/:id/teacher-rating`}><StarRatingForAdmin /></Route>

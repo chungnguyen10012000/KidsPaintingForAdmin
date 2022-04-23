@@ -57,12 +57,6 @@ const Contests: React.FC = () => {
     setDescription(product.description)
   }
 
-  function onContestRemove() {
-    if (contests.selectedContest) {
-      setPopup(true);
-    }
-  }
-
   const [isCheckOpen1, setIsCheckOpen1] = useState(false)
   const [isCheckOpen2, setIsCheckOpen2] = useState(false)
 
@@ -79,30 +73,6 @@ const Contests: React.FC = () => {
 
         <div className="row">
           <ContestList />
-          {/* <div className="col-xl-12 col-lg-12">
-            <div className="card shadow mb-4">
-              <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi</h6>
-                <div className="header-buttons">
-                  <button className="btn btn-success btn-blue" onClick={() => {
-                    if (contests.selectedContest) {
-                      history.push({
-                        pathname: '/teacher/contest-grade',
-                        state: { id: isId }
-                      })
-                    }
-                  }}>
-                    <i className="fas fa fa-info-circle"></i>
-                  </button>
-                </div>
-              </div>
-              <div className="card-body">
-                <ContestList
-                  onSelect={onContestSelect}
-                />
-              </div>
-            </div>
-          </div> */}
         </div>
       </Fragment >
     );
@@ -145,76 +115,11 @@ const Contests: React.FC = () => {
           <ContestForm /> : null}
       </div>
 
+      <h6 className="mb-4 font-weight-bold text-green">Danh sách cuộc thi</h6>
+
       <div className="row">
-        <div className="col-xl-12 col-lg-12">
-          <div className="card shadow mb-4">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Danh sách cuộc thi</h6>
-              <div className="header-buttons">
-                <button className="btn btn-success btn-blue" onClick={() =>
-                  {
-                    dispatch(setModificationState(ContestModificationStatus.Edit))
-                    if (contests.selectedContest){
-                      setIsCheckOpen2(!isCheckOpen2)
-                    }
-                  }}>
-                  <i className="fas fa fa-pen"></i>
-                </button>
-                <button className="btn btn-success btn-red" onClick={() => onContestRemove()}>
-                  <i className="fas fa fa-times"></i>
-                </button>
-                <button className="btn btn-success btn-blue" onClick={() => {
-                  if (contests.selectedContest) {
-                    history.push({
-                      pathname: `/${id}/contest-detail`,
-                      state: { body: description }
-                    })
-                  }
-                }}>
-                  <i className="fas fa fa-info-circle"></i>
-                </button>
-              </div>
-            </div>
-            <div className="card-body">
-              <ContestList
-                onSelect={onContestSelect}
-              />
-            </div>
-          </div>
-        </div>
-        {((contests.modificationState === ContestModificationStatus.Edit && contests.selectedContest && isCheckOpen2 === true)) ?
-          <ContestForm /> : null}
-      </div>
-
-
-
-
-      <Popup
-        className="popup-modal"
-        open={popup}
-        onClose={() => setPopup(false)}
-        closeOnDocumentClick
-      >
-        <div className="popup-modal">
-          <div className="popup-title">
-            Bạn chắc chắn?
-          </div>
-          <div className="popup-content">
-            <button type="button"
-              className="btn btn-danger"
-              onClick={() => {
-                if (!contests.selectedContest) {
-                  return;
-                }
-                dispatch(addNotification("Cuộc thi", ` ${contests.selectedContest.name} đã bị xóa khỏi hệ thống`));
-                dispatch(deleteContest(contests.selectedContest.id));
-                dispatch(clearSelectedContest());
-                setPopup(false);
-              }}>Xóa
-            </button>
-          </div>
-        </div>
-      </Popup>
+        <ContestList onSelect={onContestSelect}/>
+      </div> 
     </Fragment >
   );
 };

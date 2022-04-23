@@ -123,9 +123,7 @@ const AddUserForm: React.FC = (props: any) => {
           phone: { error: "", value: user.phone },
           password: { error: "", value: user.password },
         };
-        console.log(ele.username)
         let saveUserFn: Function = addUser;
-        console.log('add')
         saveForm(x, saveUserFn);
       }
       return 0
@@ -144,7 +142,6 @@ const AddUserForm: React.FC = (props: any) => {
 
     reader.readAsText(file);
   }
-    console.log(localStorage.getItem('typeUserAdd'))
   if (localStorage.getItem('typeUserAdd') === "Quản trị viên" || localStorage.getItem('typeUserAdd') === "Nhân viên"){
     return (
       <Fragment>
