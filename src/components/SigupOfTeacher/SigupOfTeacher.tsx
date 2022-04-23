@@ -7,6 +7,8 @@ import { getCourseSemester } from "../../store/actions/course_semester/getCourse
 import SigupCoursesSemesterList from "./SigupOfSemesterCourseList";
 import { getCourse } from "../../store/actions/course/getCourse";
 import { getSchedule } from "../../store/actions/schedule/getSchedule";
+import { getScheduleItem } from "../../store/actions/schedule/getScheduleItem";
+import { getLessonTime } from "../../store/actions/lesson_time/getLessonTime";
 
 const SigupOfCourse: React.FC = () => {
   //console.log(id)
@@ -30,6 +32,14 @@ const SigupOfCourse: React.FC = () => {
   }, [dispatch])
 
   useEffect(() => {
+    dispatch(getScheduleItem())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getLessonTime())
+  }, [dispatch])
+
+  useEffect(() => {
     dispatch(updateCurrentPath("Khóa học", "Danh sách"));
   }, [path.area, dispatch]);
 
@@ -37,20 +47,11 @@ const SigupOfCourse: React.FC = () => {
       <Fragment>
         <h1 className="h3 mb-2 text-gray-800">Đăng ký</h1>
         <p className="mb-4">Thông tin chung</p>
+
+        <h6 className="mb-4 font-weight-bold text-green">Danh sách khóa học</h6>
   
         <div className="row">
-          <div className="col-xl-12 col-lg-12">
-            <div className="card shadow mb-4">
-              <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-green">Danh sách khóa học</h6>
-                <div className="header-buttons">
-                </div>
-              </div>
-              <div className="card-body">
-                <SigupCoursesSemesterList />
-              </div>
-            </div>
-          </div>
+          <SigupCoursesSemesterList />
         </div>
       </Fragment >
     );

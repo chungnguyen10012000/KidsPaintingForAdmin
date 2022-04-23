@@ -3,13 +3,10 @@ import "./SigupLevelTeacher.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { IStateType, IRootPageStateType } from "../../store/models/root.interface";
-import {
-    clearSelectedCourse, setModificationState,
-    changeSelectedCourse
-} from "../../store/actions/course/courses.actions";
-import { CourseModificationStatus, ICourse } from "../../store/models/courses.interface";
 import SigupLevelTeacherList from "./SigupLevelTeacherList";
 import { getCourse } from "../../store/actions/course/getCourse";
+import { getArtType } from "../../store/actions/art_type/getArtType";
+import { getLevel } from "../../store/actions/art_level/getLevel";
 
 const SigupLevelTeacher: React.FC = () => {
     //console.log(id)
@@ -22,38 +19,29 @@ const SigupLevelTeacher: React.FC = () => {
 
     useEffect(() => {
         dispatch(getCourse())
-      }, [dispatch]);
+    }, [dispatch]);
 
     useEffect(() => {
-        dispatch(clearSelectedCourse());
+        dispatch(getArtType())
+    }, [dispatch])
+    
+    useEffect(() => {
+        dispatch(getLevel())
+    }, [dispatch])
+
+    useEffect(() => {
         dispatch(updateCurrentPath("Lớp", "Danh sách"));
     }, [path.area, dispatch]);
-
-    function onCourseSelect(course: ICourse): void {
-        dispatch(changeSelectedCourse(course));
-        dispatch(setModificationState(CourseModificationStatus.None));
-    }
 
     return (
         <Fragment>
             <h1 className="h3 mb-2 text-gray-800">Đăng ký</h1>
             <p className="mb-4">Thông tin chung</p>
 
+            <h6 className="mb-4 font-weight-bold text-green">Danh sách trình độ</h6>
+
             <div className="row">
-                <div className="col-xl-12 col-lg-12">
-                    <div className="card shadow mb-4">
-                        <div className="card-header py-3">
-                            <h6 className="m-0 font-weight-bold text-green">Danh sách trình độ</h6>
-                            <div className="header-buttons">
-                            </div>
-                        </div>
-                        <div className="card-body">
-                            <SigupLevelTeacherList
-                                onSelect={onCourseSelect}
-                            />
-                        </div>
-                    </div>
-                </div>
+                <SigupLevelTeacherList />
             </div>
         </Fragment >
     );
