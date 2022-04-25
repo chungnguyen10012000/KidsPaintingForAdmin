@@ -10,14 +10,14 @@ import Popup from "reactjs-popup";
 import {
   clearSelectedContest, setModificationState,
   changeSelectedContest
-} from "../../store/actions/contest/contest.actions";
+} from "../../store/actions/contest.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { ContestModificationStatus, IContest } from "../../store/models/contest.interface";
 import { useHistory, useParams } from "react-router-dom";
-import { getArtType } from "../../store/actions/art_type/getArtType";
-import { getLevel } from "../../store/actions/art_level/getLevel";
-import { getContest } from "../../store/actions/contest/getContest";
-import { deleteContest } from "../../store/actions/contest/deleteContest";
+import { getArtType } from "../../common/service/art_type/getArtType";
+import { getLevel } from "../../common/service/art_level/getLevel";
+import { getContest } from "../../common/service/contest/getContest";
+import { deleteContest } from "../../common/service/contest/deleteContest";
 
 type role = {
   id: string;

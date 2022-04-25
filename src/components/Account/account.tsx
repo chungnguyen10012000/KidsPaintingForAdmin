@@ -3,14 +3,14 @@ import "./Account.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import {  IStateType, IRootPageStateType } from "../../store/models/root.interface";
-import { setModificationState, changeSelectedUser, clearSelectedUser } from "../../store/actions/users/users.action";
+import { setModificationState, changeSelectedUser, clearSelectedUser } from "../../store/actions/users.action";
 import { UserModificationStatus, IUser } from "../../store/models/user.interface";
-import { getAdmin } from "../../store/actions/users/getAdmin";
+import { getAdmin } from "../../common/service/user/getAdmin";
 import { useHistory, useParams } from "react-router-dom";
 import AccountView from "./AccountView";
-import { getStaff } from "../../store/actions/users/getStaff";
-import { getTeacher } from "../../store/actions/users/getTeacher";
-import { getSuperAdmin } from "../../store/actions/users/getSuperAdmin";
+import { getStaff } from "../../common/service/user/getStaff";
+import { getTeacher } from "../../common/service/user/getTeacher";
+import { getSuperAdmin } from "../../common/service/user/getSuperAdmin";
 
 type role = {
   id: string;

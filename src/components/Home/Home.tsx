@@ -4,11 +4,11 @@ import { updateCurrentPath } from "../../store/actions/root.actions";
 import TopCard from "../../common/components/TopCard";
 import { IStateType, ICourseState, IContestState, IFeedBackState, IUserState, IEmployeeState, IBlogState} from "../../store/models/root.interface";
 import { useParams } from "react-router";
-import { getBlog } from "../../store/actions/blog/getBlog";
-import { getCourse } from "../../store/actions/course/getCourse";
-import { getContest } from "../../store/actions/contest/getContest";
-import { getAdmin } from "../../store/actions/users/getAdmin";
-import { getFeedback } from "../../store/actions/feedback/getFeedback";
+import { getBlog } from "../../common/service/blog/getBlog";
+import { getCourse } from "../../common/service/course/getCourse";
+import { getContest } from "../../common/service/contest/getContest";
+import { getAdmin } from "../../common/service/user/getAdmin";
+import { getFeedback } from "../../common/service/feedback/getFeedback";
 
 type role = {
   id: string;

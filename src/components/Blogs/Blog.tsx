@@ -8,12 +8,12 @@ import { updateCurrentPath } from "../../store/actions/root.actions";
 import { IBlogState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
 import Popup from "reactjs-popup";
 import { clearSelectedBlog, setModificationState,
-  changeSelectedBlog } from "../../store/actions/blog/blogs.actions";
+  changeSelectedBlog } from "../../store/actions/blogs.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { BlogModificationStatus, IBlog } from "../../store/models/blogs.innterface";
 import { useHistory, useParams } from "react-router-dom";
-import { getBlog } from "../../store/actions/blog/getBlog";
-import { deleteBlog } from "../../store/actions/blog/deleteBlog";
+import { getBlog } from "../../common/service/blog/getBlog";
+import { deleteBlog } from "../../common/service/blog/deleteBlog";
 
 type role = {
   id: string;

@@ -1,6 +1,6 @@
 import React, { Fragment, Dispatch, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlog } from "../../store/actions/blog/getBlog";
+import { getBlog } from "../../common/service/blog/getBlog";
 import { IBlogState, IStateType } from "../../store/models/root.interface";
 import "./ReviewBlog.css"
 

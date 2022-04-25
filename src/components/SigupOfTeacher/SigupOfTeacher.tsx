@@ -3,12 +3,12 @@ import "./SigupOfCourse.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { IStateType, IRootPageStateType } from "../../store/models/root.interface";
-import { getCourseSemester } from "../../store/actions/course_semester/getCourseSemester";
+import { getCourseSemester } from "../../common/service/course_semester/getCourseSemester";
 import SigupCoursesSemesterList from "./SigupOfSemesterCourseList";
-import { getCourse } from "../../store/actions/course/getCourse";
-import { getSchedule } from "../../store/actions/schedule/getSchedule";
-import { getScheduleItem } from "../../store/actions/schedule/getScheduleItem";
-import { getLessonTime } from "../../store/actions/lesson_time/getLessonTime";
+import { getCourse } from "../../common/service/course/getCourse";
+import { getSchedule } from "../../common/service/schedule/getSchedule";
+import { getScheduleItem } from "../../common/service/schedule_item/getScheduleItem";
+import { getLessonTime } from "../../common/service/lesson_time/getLessonTime";
 
 const SigupOfCourse: React.FC = () => {
   //console.log(id)

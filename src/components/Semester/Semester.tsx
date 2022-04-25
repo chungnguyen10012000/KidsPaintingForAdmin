@@ -10,11 +10,11 @@ import Popup from "reactjs-popup";
 import {
     clearSelectedSemester, setModificationState,
     changeSelectedSemester
-} from "../../store/actions/semester/semester.actions";
+} from "../../store/actions/semester.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { SemesterModificationStatus, ISemester } from "../../store/models/semester.interface";
-import { getSemester } from "../../store/actions/semester/getSemester";
-import { deleteSemester } from "../../store/actions/semester/deleteSemester";
+import { getSemester } from "../../common/service/semester/getSemester";
+import { deleteSemester } from "../../common/service/semester/deleteSemester";
 
 type role = {
     id: string;

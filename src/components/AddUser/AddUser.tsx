@@ -3,15 +3,15 @@ import TopCard from "../../common/components/TopCard";
 import { IUser, UserModificationStatus } from "../../store/models/user.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootPageStateType, IStateType, IUserState } from "../../store/models/root.interface";
-import { removeUser, setModificationState } from "../../store/actions/users/users.action";
+import { removeUser, setModificationState } from "../../store/actions/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import SelectInput from "../../common/components/Select";
-import { getAdmin } from "../../store/actions/users/getAdmin";
-import { getCourse } from "../../store/actions/course/getCourse";
+import { getAdmin } from "../../common/service/user/getAdmin";
+import { getCourse } from "../../common/service/course/getCourse";
 import AddUserForm from "./AddUserForm";
-import { getTeacher } from "../../store/actions/users/getTeacher";
-import { getStaff } from "../../store/actions/users/getStaff";
+import { getTeacher } from "../../common/service/user/getTeacher";
+import { getStaff } from "../../common/service/user/getStaff";
 
 const AddUser: React.FC = () => {
 

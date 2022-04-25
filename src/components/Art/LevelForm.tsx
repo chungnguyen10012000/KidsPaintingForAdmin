@@ -3,11 +3,11 @@ import { IStateType, ILevelState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { ILevel, LevelModificationStatus } from "../../store/models/levels.interface";
 import TextInput from "../../common/components/TextInput";
-import { editLevel, clearSelectedLevel, setModificationStateLevel, addLevel } from "../../store/actions/art_level/levels.actions";
+import { editLevel, clearSelectedLevel, setModificationStateLevel, addLevel } from "../../store/actions/levels.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, ILevelFormState } from "../../common/types/Form.types";
-import { postLevel } from "../../store/actions/art_level/postLevel";
-import { putLevel } from "../../store/actions/art_level/putLevel";
+import { postLevel } from "../../common/service/art_level/postLevel";
+import { putLevel } from "../../common/service/art_level/putLevel";
 
 const LevelForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();

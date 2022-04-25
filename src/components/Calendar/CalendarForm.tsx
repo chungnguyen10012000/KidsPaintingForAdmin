@@ -3,11 +3,11 @@ import { IStateType, IScheduleState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { ISchedule, ScheduleModificationStatus } from "../../store/models/schedule.interface";
 import TextInput from "../../common/components/TextInput";
-import { editSchedule, clearSelectedSchedule, setModificationState, addSchedule } from "../../store/actions/schedule/schedule.actions";
+import { editSchedule, clearSelectedSchedule, setModificationState, addSchedule } from "../../store/actions/schedule.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IScheduleFormState } from "../../common/types/Form.types";
-import { postSchedule } from "../../store/actions/schedule/postSchedule";
-import { putSchedule } from "../../store/actions/schedule/putSchedule";
+import { postSchedule } from "../../common/service/schedule/postSchedule";
+import { putSchedule } from "../../common/service/schedule/putSchedule";
 
 const CalendarForm: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();

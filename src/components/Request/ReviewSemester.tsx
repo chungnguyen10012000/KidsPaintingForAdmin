@@ -1,6 +1,6 @@
 import React, { Fragment, Dispatch, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSemester } from "../../store/actions/semester/getSemester";
+import { getSemester } from "../../common/service/semester/getSemester";
 import { ISemesterState, IStateType } from "../../store/models/root.interface";
 import "./ReviewBlog.css"
 

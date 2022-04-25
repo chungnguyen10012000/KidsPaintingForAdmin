@@ -3,24 +3,24 @@ import { UPDATE_CURRENT_PATH } from "../actions/root.actions";
 import { IRootStateType, IActionBase, IStateType } from "../models/root.interface";
 import productsReducer from "./products.reducer";
 import notificationReducer from "./notification.reducer";
-import userReducer from "./users/users.reducer";
+import userReducer from "./users.reducer";
 import orderReducer from "./order.reducer";
 import accountReducer from "./account.reducer";
-import courseReducer from "./course/courses.reducer";
-import contestReducer from "./contest/contest.reducer";
+import courseReducer from "./courses.reducer";
+import contestReducer from "./contest.reducer";
 import myclasssReducer from "./myclass.reducer";
-import mytypesReducer from "./art_type/mytypes.reducer";
-import levelsReducer from "./art_level/levels.reducer";
+import mytypesReducer from "./mytypes.reducer";
+import levelsReducer from "./levels.reducer";
 import exercisesReducer from "./exercise.reducer";
-import feedbackReducer from "./feedback/feedback.reducer";
+import feedbackReducer from "./feedback.reducer";
 import sessonsReducer from "./sesson.reducer";
-import blogReducer from "./blog/blog.reducer";
+import blogReducer from "./blog.reducer";
 import employeeReducer from "./employee.reducer";
-import coursesSemesterReducer from "./course_semester/course_for_semester.reducer";
-import lessonTimesReducer from "./lesson_time/lesson_time.reducer";
-import schedulesReducer from "./schedule/schedule.reducer";
-import scheduleItemsReducer from "./schedule/schedule_item.reducer";
-import semestersReducer from "./semester/semester.reducer";
+import coursesSemesterReducer from "./course_for_semester.reducer";
+import lessonTimesReducer from "./lesson_time.reducer";
+import schedulesReducer from "./schedule.reducer";
+import scheduleItemsReducer from "./schedule_item.reducer";
+import semestersReducer from "./semester.reducer";
 
 const initialState: IRootStateType = {
     page: {area: "home", subArea: ""}

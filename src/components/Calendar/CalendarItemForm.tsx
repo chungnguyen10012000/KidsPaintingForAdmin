@@ -2,13 +2,13 @@ import React, { useState, FormEvent, Dispatch, Fragment } from "react";
 import { IStateType, IScheduleItemState, ILessonTimeState, IScheduleState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { IScheduleItem, ScheduleItemModificationStatus } from "../../store/models/schedule_item.interface";
-import { editScheduleItem, clearSelectedScheduleItem, setModificationStateItem, addScheduleItem } from "../../store/actions/schedule/schedule_item.actions";
+import { editScheduleItem, clearSelectedScheduleItem, setModificationStateItem, addScheduleItem } from "../../store/actions/schedule_item.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import { OnChangeModel, IScheduleItemFormState } from "../../common/types/Form.types";
 import SelectInput from "../../common/components/SelectInput";
-import { postScheduleItem } from "../../store/actions/schedule/postScheduleItem";
-import { putScheduleItem } from "../../store/actions/schedule/putScheduleItem";
+import { postScheduleItem } from "../../common/service/schedule_item/postScheduleItem";
+import { putScheduleItem } from "../../common/service/schedule_item/putScheduleItem";
 
 type Options = {
     name: string;

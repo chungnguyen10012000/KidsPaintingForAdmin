@@ -3,15 +3,15 @@ import React, { useState, FormEvent, Dispatch, Fragment, useEffect } from "react
 import { useDispatch, useSelector } from "react-redux";
 import { IUser, UserModificationStatus } from "../../store/models/user.interface";
 import TextInput from "../../common/components/TextInput";
-import { editUser, clearSelectedUser, setModificationState } from "../../store/actions/users/users.action";
+import { editUser, clearSelectedUser, setModificationState } from "../../store/actions/users.action";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IUserFormState } from "../../common/types/Form.types";
 import SelectInput from "../../common/components/Select";
 import { IRootPageStateType, IStateType, IUserState } from "../../store/models/root.interface";
-import { getAdmin } from "../../store/actions/users/getAdmin";
-import { getStaff } from "../../store/actions/users/getStaff";
-import { getTeacher } from "../../store/actions/users/getTeacher";
-import { getSuperAdmin } from "../../store/actions/users/getSuperAdmin";
+import { getAdmin } from "../../common/service/user/getAdmin";
+import { getStaff } from "../../common/service/user/getStaff";
+import { getTeacher } from "../../common/service/user/getTeacher";
+import { getSuperAdmin } from "../../common/service/user/getSuperAdmin";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 
 const EditInfo: React.FC = () => {

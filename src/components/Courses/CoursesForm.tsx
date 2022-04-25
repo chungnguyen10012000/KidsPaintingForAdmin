@@ -3,7 +3,7 @@ import { IStateType, ICourseState, IMytypeState, ILevelState } from "../../store
 import { useSelector, useDispatch } from "react-redux";
 import { ICourse, CourseModificationStatus } from "../../store/models/courses.interface";
 import TextInput from "../../common/components/TextInput";
-import { editCourse, clearSelectedCourse, setModificationState, addCourse } from "../../store/actions/course/courses.actions";
+import { editCourse, clearSelectedCourse, setModificationState, addCourse } from "../../store/actions/courses.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import SelectInput from "../../common/components/SelectInput";
@@ -14,8 +14,8 @@ import { IMytype } from "../../store/models/mytypes.interface";
 import { useQuill } from 'react-quilljs';
 import BlotFormatter from 'quill-blot-formatter';
 import 'quill/dist/quill.snow.css';
-import { putCourse } from "../../store/actions/course/putCourse";
-import { postCourse } from "../../store/actions/course/postCourse";
+import { putCourse } from "../../common/service/course/putCourse";
+import { postCourse } from "../../common/service/course/postCourse";
 
 export type levelListProps = {
   onSelect?: (level: ILevel) => void;

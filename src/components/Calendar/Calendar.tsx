@@ -10,18 +10,18 @@ import Popup from "reactjs-popup";
 import {
     clearSelectedSchedule, setModificationState,
     changeSelectedSchedule
-} from "../../store/actions/schedule/schedule.actions";
+} from "../../store/actions/schedule.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { ScheduleModificationStatus, ISchedule } from "../../store/models/schedule.interface";
 import { ScheduleItemModificationStatus, IScheduleItem } from "../../store/models/schedule_item.interface";
-import { changeSelectedScheduleItem, clearSelectedScheduleItem, setModificationStateItem } from "../../store/actions/schedule/schedule_item.actions";
+import { changeSelectedScheduleItem, clearSelectedScheduleItem, setModificationStateItem } from "../../store/actions/schedule_item.actions";
 import CalendarItemForm from "./CalendarItemForm";
 import CalendarItemList from "./CalendarItemList";
-import { getSchedule } from "../../store/actions/schedule/getSchedule";
-import { deleteSchedule } from "../../store/actions/schedule/deleteSchedule";
-import { getScheduleItem } from "../../store/actions/schedule/getScheduleItem";
-import { deleteScheduleItem } from "../../store/actions/schedule/deleteScheduleItem";
-import { getLessonTime } from "../../store/actions/lesson_time/getLessonTime";
+import { getSchedule } from "../../common/service/schedule/getSchedule";
+import { deleteSchedule } from "../../common/service/schedule/deleteSchedule";
+import { getScheduleItem } from "../../common/service/schedule_item/getScheduleItem";
+import { deleteScheduleItem } from "../../common/service/schedule_item/deleteScheduleItem";
+import { getLessonTime } from "../../common/service/lesson_time/getLessonTime";
 
 type role = {
     id: string;

@@ -2,7 +2,7 @@ import React, { Fragment, Dispatch, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SelectInput from "../../common/components/Select";
 import { updateCurrentPath } from "../../store/actions/root.actions";
-import { getSemester } from "../../store/actions/semester/getSemester";
+import { getSemester } from "../../common/service/semester/getSemester";
 import { ISemesterState, IStateType } from "../../store/models/root.interface";
 //import { getRestApiWithToken, getDomain, postRestApiWithToken } from "../../common/util/RestAPI.util";
 //import { Page } from "../../common/util/User.util";

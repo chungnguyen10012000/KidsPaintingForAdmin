@@ -2,14 +2,14 @@ import React, { useState, FormEvent, Dispatch, Fragment } from "react";
 import { IStateType, ICourseState, ICourseSemesterState, IScheduleState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { ICourseSemester, CourseSemesterModificationStatus } from "../../store/models/course_for_semester.interface";
-import { editCourseSemester, clearSelectedCourseSemester, setModificationStateSemester, addCourseSemester } from "../../store/actions/course_semester/course_for_semester.actions";
+import { editCourseSemester, clearSelectedCourseSemester, setModificationStateSemester, addCourseSemester } from "../../store/actions/course_for_semester.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import SelectInput from "../../common/components/SelectInput";
 import { OnChangeModel, ICourseSemesterFormState } from "../../common/types/Form.types";
 import { ILevel } from "../../store/models/levels.interface";
 import { IMytype } from "../../store/models/mytypes.interface";
-import { postCourseSemester } from "../../store/actions/course_semester/postCourseSemester";
-import { putCourseSemester } from "../../store/actions/course_semester/putCourseSemester";
+import { postCourseSemester } from "../../common/service/course_semester/postCourseSemester";
+import { putCourseSemester } from "../../common/service/course_semester/putCourseSemester";
 
 export type levelListProps = {
     onSelect?: (level: ILevel) => void;

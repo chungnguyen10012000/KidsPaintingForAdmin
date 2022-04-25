@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { IStateType, IContestState, IMytypeState, ILevelState } from "../../store/models/root.interface";
 import { IContest, ContestModificationStatus } from "../../store/models/contest.interface";
 import { useHistory, useParams } from "react-router-dom";
-import { changeSelectedContest, clearSelectedContest, setModificationState } from "../../store/actions/contest/contest.actions";
+import { changeSelectedContest, clearSelectedContest, setModificationState } from "../../store/actions/contest.actions";
 import { addNotification } from "../../store/actions/notifications.action";
-import { deleteContest } from "../../store/actions/contest/deleteContest";
+import { deleteContest } from "../../common/service/contest/deleteContest";
 import Popup from "reactjs-popup";
 
 

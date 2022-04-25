@@ -15,20 +15,20 @@ import { ICourseState, ICourseSemesterState, IStateType, IRootPageStateType, IMy
 
 import { CourseModificationStatus, ICourse } from "../../store/models/courses.interface";
 
-import { removeMytype, clearSelectedMytype } from "../../store/actions/art_type/mytypes.actions";
-import { removeCourse, clearSelectedCourse, setModificationState, changeSelectedCourse } from "../../store/actions/course/courses.actions";
-import { clearSelectedLevel } from "../../store/actions/art_level/levels.actions";
+import { removeMytype, clearSelectedMytype } from "../../store/actions/mytypes.actions";
+import { removeCourse, clearSelectedCourse, setModificationState, changeSelectedCourse } from "../../store/actions/courses.actions";
+import { clearSelectedLevel } from "../../store/actions/levels.actions";
 
 import { CourseSemesterModificationStatus, ICourseSemester } from "../../store/models/course_for_semester.interface";
-import { removeCourseSemester, clearSelectedCourseSemester, setModificationStateSemester, changeSelectedCourseSemester } from "../../store/actions/course_semester/course_for_semester.actions";
+import { removeCourseSemester, clearSelectedCourseSemester, setModificationStateSemester, changeSelectedCourseSemester } from "../../store/actions/course_for_semester.actions";
 import { useParams } from "react-router-dom";
-import { getCourse } from "../../store/actions/course/getCourse";
-import { deleteCourse } from "../../store/actions/course/deleteCourse";
-import { getArtType } from "../../store/actions/art_type/getArtType";
-import { getLevel } from "../../store/actions/art_level/getLevel";
-import { getSchedule } from "../../store/actions/schedule/getSchedule";
-import { getCourseSemester } from "../../store/actions/course_semester/getCourseSemester";
-import { deleteCourseSemester } from "../../store/actions/course_semester/deleteCourseSemester";
+import { getCourse } from "../../common/service/course/getCourse";
+import { deleteCourse } from "../../common/service/course/deleteCourse";
+import { getArtType } from "../../common/service/art_type/getArtType";
+import { getLevel } from "../../common/service/art_level/getLevel";
+import { getSchedule } from "../../common/service/schedule/getSchedule";
+import { getCourseSemester } from "../../common/service/course_semester/getCourseSemester";
+import { deleteCourseSemester } from "../../common/service/course_semester/deleteCourseSemester";
 
 
 type role = {

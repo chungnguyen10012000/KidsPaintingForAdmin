@@ -3,12 +3,12 @@ import { IStateType, ISemesterState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { ISemester, SemesterModificationStatus } from "../../store/models/semester.interface";
 import TextInput from "../../common/components/TextInput";
-import { editSemester, clearSelectedSemester, setModificationState, addSemester } from "../../store/actions/semester/semester.actions";
+import { editSemester, clearSelectedSemester, setModificationState, addSemester } from "../../store/actions/semester.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, ISemesterFormState } from "../../common/types/Form.types";
 import NumberInput from "../../common/components/NumberInput";
-import { postSemester } from "../../store/actions/semester/postSemester";
-import { putSemester } from "../../store/actions/semester/putSemester";
+import { postSemester } from "../../common/service/semester/postSemester";
+import { putSemester } from "../../common/service/semester/putSemester";
 
 const SemesterForm: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();

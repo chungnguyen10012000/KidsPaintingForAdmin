@@ -10,11 +10,11 @@ import Popup from "reactjs-popup";
 import {
     clearSelectedLessonTime, setModificationState,
     changeSelectedLessonTime
-} from "../../store/actions/lesson_time/lesson_time.actions";
+} from "../../store/actions/lesson_time.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { LessonTimeModificationStatus, ILessonTime } from "../../store/models/lesson_time.interface";
-import { getLessonTime } from "../../store/actions/lesson_time/getLessonTime";
-import { deleteLessonTime } from "../../store/actions/lesson_time/deleteLessonTime";
+import { getLessonTime } from "../../common/service/lesson_time/getLessonTime";
+import { deleteLessonTime } from "../../common/service/lesson_time/deleteLessonTime";
 
 type role = {
     id: string;

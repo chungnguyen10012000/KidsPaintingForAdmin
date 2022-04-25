@@ -3,7 +3,7 @@ import { IStateType, IContestState, ILevelState, IMytypeState  } from "../../sto
 import { useSelector, useDispatch } from "react-redux";
 import { IContest, ContestModificationStatus } from "../../store/models/contest.interface";
 import TextInput from "../../common/components/TextInput";
-import { editContest, clearSelectedContest, setModificationState, addContest } from "../../store/actions/contest/contest.actions";
+import { editContest, clearSelectedContest, setModificationState, addContest } from "../../store/actions/contest.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import { OnChangeModel, IContestFormState } from "../../common/types/Form.types";
@@ -15,8 +15,8 @@ import { IMytype } from "../../store/models/mytypes.interface";
 import { useQuill } from 'react-quilljs';
 import BlotFormatter from 'quill-blot-formatter';
 import 'quill/dist/quill.snow.css';
-import { postContest } from "../../store/actions/contest/postContest";
-import { putContest } from "../../store/actions/contest/putContest";
+import { postContest } from "../../common/service/contest/postContest";
+import { putContest } from "../../common/service/contest/putContest";
 
 export type levelListProps = {
   onSelect?: (level: ILevel) => void;

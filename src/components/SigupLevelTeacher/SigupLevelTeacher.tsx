@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { IStateType, IRootPageStateType } from "../../store/models/root.interface";
 import SigupLevelTeacherList from "./SigupLevelTeacherList";
-import { getCourse } from "../../store/actions/course/getCourse";
-import { getArtType } from "../../store/actions/art_type/getArtType";
-import { getLevel } from "../../store/actions/art_level/getLevel";
+import { getCourse } from "../../common/service/course/getCourse";
+import { getArtType } from "../../common/service/art_type/getArtType";
+import { getLevel } from "../../common/service/art_level/getLevel";
 
 const SigupLevelTeacher: React.FC = () => {
     //console.log(id)

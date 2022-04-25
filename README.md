@@ -10,8 +10,15 @@
 - Authentication
 - **Clean, easy, ready to start new project**
 
-##NOTE 
-- User register semester couse
+##USING
+- Teacher login: 
+    - username: teacher
+- Super-admin login: 
+    - username: super-admin
+- Admin: 
+    - username: admin
+- Staff: 
+    - username: staff
 
 
 ##TODO

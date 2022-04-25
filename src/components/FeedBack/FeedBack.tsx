@@ -6,7 +6,7 @@ import { IStateType } from "../../store/models/root.interface";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { useHistory } from "react-router-dom";
 import "./Feedback.css"
-import { getFeedback } from "../../store/actions/feedback/getFeedback";
+import { getFeedback } from "../../common/service/feedback/getFeedback";
 
 type role = {
   id: string;

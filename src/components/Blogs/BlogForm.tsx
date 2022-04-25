@@ -3,7 +3,7 @@ import { IStateType, IBlogState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { IBlog, BlogModificationStatus } from "../../store/models/blogs.innterface";
 import TextInput from "../../common/components/TextInput";
-import { editBlog, clearSelectedBlog, setModificationState, addBlog } from "../../store/actions/blog/blogs.actions";
+import { editBlog, clearSelectedBlog, setModificationState, addBlog } from "../../store/actions/blogs.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IBlogFormState } from "../../common/types/Form.types";
 
@@ -13,8 +13,8 @@ import { IMytype } from "../../store/models/mytypes.interface";
 import { useQuill } from 'react-quilljs';
 import BlotFormatter from 'quill-blot-formatter';
 import 'quill/dist/quill.snow.css';
-import { postBlog } from "../../store/actions/blog/postBlog";
-import { putBlog } from "../../store/actions/blog/putBlog";
+import { postBlog } from "../../common/service/blog/postBlog";
+import { putBlog } from "../../common/service/blog/putBlog";
 
 export type levelListProps = {
   onSelect?: (level: ILevel) => void;

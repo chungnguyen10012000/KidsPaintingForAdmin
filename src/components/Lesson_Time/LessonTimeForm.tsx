@@ -3,11 +3,11 @@ import { IStateType, ILessonTimeState } from "../../store/models/root.interface"
 import { useSelector, useDispatch } from "react-redux";
 import { ILessonTime, LessonTimeModificationStatus } from "../../store/models/lesson_time.interface";
 import TextInput from "../../common/components/TextInput";
-import { editLessonTime, clearSelectedLessonTime, setModificationState, addLessonTime } from "../../store/actions/lesson_time/lesson_time.actions";
+import { editLessonTime, clearSelectedLessonTime, setModificationState, addLessonTime } from "../../store/actions/lesson_time.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, ILessonTimeFormState } from "../../common/types/Form.types";
-import { postLessonTime } from "../../store/actions/lesson_time/postLessonTime";
-import { putLessonTime } from "../../store/actions/lesson_time/putLessonTime";
+import { postLessonTime } from "../../common/service/lesson_time/postLessonTime";
+import { putLessonTime } from "../../common/service/lesson_time/putLessonTime";
 
 const LessonTimeForm: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();

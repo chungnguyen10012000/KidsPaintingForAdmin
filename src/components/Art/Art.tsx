@@ -16,15 +16,15 @@ import { ICourseState, ICourseSemesterState, IStateType, IRootPageStateType, IMy
 import { MytypeModificationStatus, IMytype } from "../../store/models/mytypes.interface";
 import { LevelModificationStatus, ILevel } from "../../store/models/levels.interface";
 
-import { clearSelectedMytype, changeSelectedMytype, setModificationStateMytype } from "../../store/actions/art_type/mytypes.actions";
-import { removeCourse, clearSelectedCourse } from "../../store/actions/course/courses.actions";
-import { clearSelectedLevel, changeSelectedLevel, setModificationStateLevel } from "../../store/actions/art_level/levels.actions";
+import { clearSelectedMytype, changeSelectedMytype, setModificationStateMytype } from "../../store/actions/mytypes.actions";
+import { removeCourse, clearSelectedCourse } from "../../store/actions/courses.actions";
+import { clearSelectedLevel, changeSelectedLevel, setModificationStateLevel } from "../../store/actions/levels.actions";
 
-import { removeCourseSemester, clearSelectedCourseSemester} from "../../store/actions/course_semester/course_for_semester.actions";
-import { getArtType } from "../../store/actions/art_type/getArtType";
-import { deleteArtType } from "../../store/actions/art_type/deleteArtType";
-import { getLevel } from "../../store/actions/art_level/getLevel";
-import { deleteLevel } from "../../store/actions/art_level/deleteLevel";
+import { removeCourseSemester, clearSelectedCourseSemester} from "../../store/actions/course_for_semester.actions";
+import { getArtType } from "../../common/service/art_type/getArtType";
+import { deleteArtType } from "../../common/service/art_type/deleteArtType";
+import { getLevel } from "../../common/service/art_level/getLevel";
+import { deleteLevel } from "../../common/service/art_level/deleteLevel";
 
 
 type role = {

@@ -3,11 +3,11 @@ import { IStateType, IMytypeState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { IMytype, MytypeModificationStatus } from "../../store/models/mytypes.interface";
 import TextInput from "../../common/components/TextInput";
-import { editMytype, clearSelectedMytype, setModificationStateMytype, addMytype } from "../../store/actions/art_type/mytypes.actions";
+import { editMytype, clearSelectedMytype, setModificationStateMytype, addMytype } from "../../store/actions/mytypes.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { OnChangeModel, IMytypeFormState } from "../../common/types/Form.types";
-import { postArtType } from "../../store/actions/art_type/postArtType";
-import { putArtType } from "../../store/actions/art_type/putArtType";
+import { postArtType } from "../../common/service/art_type/postArtType";
+import { putArtType } from "../../common/service/art_type/putArtType";
 
 const TypeForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
