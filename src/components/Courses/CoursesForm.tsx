@@ -16,10 +16,16 @@ import BlotFormatter from 'quill-blot-formatter';
 import 'quill/dist/quill.snow.css';
 import { putCourse } from "../../common/service/course/putCourse";
 import { postCourse } from "../../common/service/course/postCourse";
+import { useHistory, useParams } from "react-router-dom";
+import Popup from "reactjs-popup";
 
 export type levelListProps = {
   onSelect?: (level: ILevel) => void;
   children?: React.ReactNode;
+};
+
+type role = {
+  id: string;
 };
 
 type Options = {
@@ -33,6 +39,12 @@ export type mytypeListProps = {
 };
 
 const CoursesForm: React.FC = () => {
+  
+  let history = useHistory();
+  const { id } = useParams<role>()
+
+  const [popup, setPopup] = useState(false);
+
   const dispatch: Dispatch<any> = useDispatch();
   const courses: ICourseState | null = useSelector((state: IStateType) => state.courses);
   let course: ICourse | null = courses.selectedCourse;
@@ -154,6 +166,7 @@ const CoursesForm: React.FC = () => {
 
   function cancelForm(): void {
     dispatch(setModificationState(CourseModificationStatus.None));
+    setPopup(true)
   }
 
   function getDisabledClass(): string {
@@ -210,6 +223,13 @@ const CoursesForm: React.FC = () => {
                   />
               </div> 
               <div className="form-group">
+                <label className="lable-image">Ảnh</label>
+                <input id="input_image_url"
+                  type="file"
+                  value={formState.image_url.value}
+                  placeholder="Chọn ảnh đại diện" />
+              </div>
+              <div className="form-group">
                 <NumberInput id="input_price"
                   field = "price"
                   value={formState.price.value}
@@ -239,6 +259,29 @@ const CoursesForm: React.FC = () => {
           </div>
         </div>
       </div>
+      <Popup
+        className="popup-modal"
+        open={popup}
+        onClose={() => setPopup(false)}
+        closeOnDocumentClick
+      >
+        <div className="popup-modal">
+          <div className="popup-title">
+            Bạn chắc chắn?
+          </div>
+          <div className="popup-content">
+            <button type="button"
+              className="btn btn-danger"
+              onClick={() => {
+                history.push({
+                  pathname: `/${id}/courses`
+                })
+                setPopup(false);
+              }}>Hủy
+            </button>
+          </div>
+        </div>
+      </Popup>
     </Fragment>
   )
 };

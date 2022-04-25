@@ -92,12 +92,6 @@ const Courses: React.FC = () => {
     dispatch(setModificationStateSemester(CourseSemesterModificationStatus.None));
   }
 
-  function onCourseRemove() {
-    if (courses.selectedCourse) {
-      setPopup(true);
-    }
-  }
-
   function onCourseSemesterRemove() {
     if (courseSemesters.selectedCourseSemester) {
       setPopup3(true);
@@ -107,7 +101,6 @@ const Courses: React.FC = () => {
   const [isCheckOpen1, setIsCheckOpen1] = useState(false)
   const [isCheckOpen2, setIsCheckOpen2] = useState(false)
   const [isCheckOpen3, setIsCheckOpen3] = useState(false)
-  const [isCheckOpen4, setIsCheckOpen4] = useState(false)
 
   if (id === "admin" || id === "super-admin" || id === "employee") {
     return (
@@ -135,7 +128,10 @@ const Courses: React.FC = () => {
             </div>
 
         <div className="row">
-          <div className="col-xl-12 col-lg-12">
+          <CoursesList
+            onSelect={onCourseSelect}
+          />
+{/*           <div className="col-xl-12 col-lg-12">
             <div className="card shadow mb-4">
               <div className="card-header py-3">
                 <h6 className="m-0 font-weight-bold text-green">Danh sách khóa học</h6>
@@ -162,7 +158,7 @@ const Courses: React.FC = () => {
             </div>
           </div>
           {((courses.modificationState === CourseModificationStatus.Edit && courses.selectedCourse && isCheckOpen4 === true)) ?
-            <CoursesForm /> : null}
+            <CoursesForm /> : null} */}
         </div>
 
         <div className="row">
@@ -196,9 +192,11 @@ const Courses: React.FC = () => {
                       }
                     }}>
                     <i className="fas fa fa-pen"></i>
+                    Chỉnh sửa
                   </button>
                   <button className="btn btn-success btn-red" onClick={() => onCourseSemesterRemove()}>
                     <i className="fas fa fa-times"></i>
+                    Xóa
                   </button>
                 </div>
               </div>

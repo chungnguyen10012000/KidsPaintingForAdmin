@@ -6,14 +6,10 @@ import "./Blog.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { IBlogState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
-import Popup from "reactjs-popup";
 import { clearSelectedBlog, setModificationState,
   changeSelectedBlog } from "../../store/actions/blogs.actions";
-import { addNotification } from "../../store/actions/notifications.action";
 import { BlogModificationStatus, IBlog } from "../../store/models/blogs.innterface";
-import { useHistory, useParams } from "react-router-dom";
 import { getBlog } from "../../common/service/blog/getBlog";
-import { deleteBlog } from "../../common/service/blog/deleteBlog";
 
 type role = {
   id: string;
@@ -21,16 +17,11 @@ type role = {
 
 const Blogs: React.FC = () => {
 
-  const { id } = useParams<role>()
-  const [description, setDescription] = useState<String>('')
-
-  let history = useHistory();
 
   const dispatch: Dispatch<any> = useDispatch();
   const blogs: IBlogState = useSelector((state: IStateType) => state.blogs);
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
   const numberItemsCount: number = blogs.blogs.length;
-  const [popup, setPopup] = useState(false);
 
   useEffect(() => {
     dispatch(getBlog())
@@ -45,14 +36,9 @@ const Blogs: React.FC = () => {
   function onBlogSelect(product: IBlog): void {
     dispatch(changeSelectedBlog(product));
     dispatch(setModificationState(BlogModificationStatus.None));
-    setDescription(product.description)
   }
 
-  function onBlogRemove() {
-    if(blogs.selectedBlog) {
-      setPopup(true);
-    }
-  }
+  const [isCheckOpen1, setIsCheckOpen1] = useState(false)
 
   return (
     <Fragment>
@@ -63,21 +49,41 @@ const Blogs: React.FC = () => {
       </div>
 
       <div className="row">
-        <div className="col-xl-12 col-lg-12">
+                <div className="col-xl-12 col-lg-12">
+                    <button className="btn btn-success btn-green btn-create" onClick={() => {
+                        dispatch(setModificationState(BlogModificationStatus.Create))
+                        setIsCheckOpen1(!isCheckOpen1)
+                    }}
+                    >
+                        <i className="fas fa fa-plus"></i>
+                        Thêm Blog
+                    </button>
+                </div>
+
+                {((blogs.modificationState === BlogModificationStatus.Create) && isCheckOpen1 === true) ?
+                    <BlogForm /> : null}
+            </div>
+
+      <div className="row">
+        <BlogList
+          onSelect={onBlogSelect}
+        />
+{/*         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
               <h6 className="m-0 font-weight-bold text-green">Danh sách Blog</h6>
               <div className="header-buttons">
-                <button className="btn btn-success btn-green" onClick={() =>
-                  dispatch(setModificationState(BlogModificationStatus.Create))}>
-                  <i className="fas fa fa-plus"></i>
-                </button>
                 <button className="btn btn-success btn-blue" onClick={() =>
-                  dispatch(setModificationState(BlogModificationStatus.Edit))}>
+                  {
+                    dispatch(setModificationState(BlogModificationStatus.Edit))
+                    setIsCheckOpen2(!isCheckOpen2)
+                  }}>
                   <i className="fas fa fa-pen"></i>
+                  Chỉnh sửa
                 </button>
                 <button className="btn btn-success btn-red" onClick={() => onBlogRemove()}>
                   <i className="fas fa fa-times"></i>
+                  Xóa
                 </button>
                 <button className="btn btn-success btn-blue" onClick={() => 
                   {
@@ -89,6 +95,7 @@ const Blogs: React.FC = () => {
                     }
                   }}>
                   <i className="fas fa fa-info-circle"></i>
+                  Chi tiết
                 </button>
               </div>
             </div>
@@ -99,38 +106,9 @@ const Blogs: React.FC = () => {
             </div>
           </div>
         </div>
-        {((blogs.modificationState === BlogModificationStatus.Create)
-          || (blogs.modificationState === BlogModificationStatus.Edit && blogs.selectedBlog)) ?
-          <BlogForm /> : null}
+        {((blogs.modificationState === BlogModificationStatus.Edit && blogs.selectedBlog && isCheckOpen2 === true)) ?
+          <BlogForm /> : null} */}
       </div>
-
-
-      <Popup
-        className="popup-modal"
-        open={popup}
-        onClose={() => setPopup(false)}
-        closeOnDocumentClick
-      >
-        <div className="popup-modal">
-          <div className="popup-title">
-            Bạn chắc chắn?
-          </div>
-          <div className="popup-content">
-            <button type="button"
-              className="btn btn-danger"
-              onClick={() => {
-                if (!blogs.selectedBlog) {
-                  return;
-                }
-                dispatch(addNotification("Blog", ` ${blogs.selectedBlog.name} đã bị xóa khỏi hệ thống`));
-                dispatch(deleteBlog(blogs.selectedBlog.id));
-                dispatch(clearSelectedBlog());
-                setPopup(false);
-              }}>Xóa
-              </button>
-          </div>
-        </div>
-      </Popup>
     </Fragment >
   );
 };

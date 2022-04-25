@@ -137,9 +137,11 @@ const Calendar: React.FC = () => {
                                     }
                                 }}>
                                     <i className="fas fa fa-pen"></i>
+                                    Chỉnh sửa
                                 </button>
                                 <button className="btn btn-success btn-red" onClick={() => onScheduleRemove()}>
                                     <i className="fas fa fa-times"></i>
+                                    Xóa
                                 </button>
                             </div>
                         </div>
@@ -183,9 +185,11 @@ const Calendar: React.FC = () => {
                                     }
                                 }}>
                                     <i className="fas fa fa-pen"></i>
+                                    Chỉnh sửa
                                 </button>
                                 <button className="btn btn-success btn-red btn-z" onClick={() => onScheduleItemRemove()}>
                                     <i className="fas fa fa-times"></i>
+                                    Xóa
                                 </button>
                             </div>
                         </div>

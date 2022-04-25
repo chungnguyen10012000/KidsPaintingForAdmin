@@ -104,9 +104,11 @@ const Semester: React.FC = () => {
                                 }}
                                 >
                                     <i className="fas fa fa-pen"></i>
+                                    Chỉnh sửa
                                 </button>
                                 <button className="btn btn-success btn-red" onClick={() => onSemesterRemove()}>
                                     <i className="fas fa fa-times"></i>
+                                    Xóa
                                 </button>
                             </div>
                         </div>

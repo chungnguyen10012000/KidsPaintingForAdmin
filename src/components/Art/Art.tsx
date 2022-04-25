@@ -131,9 +131,11 @@ const Art: React.FC = () => {
                                         }
                                     }}>
                                     <i className="fas fa fa-pen"></i>
+                                    Chỉnh sửa
                                 </button>
                                 <button className="btn btn-success btn-red btn-removeType" onClick={() => onMytypeRemove()}>
                                     <i className="fas fa fa-times"></i>
+                                    Xóa
                                 </button>
                             </div>
                         </div>
@@ -179,9 +181,11 @@ const Art: React.FC = () => {
                                         }
                                     }}>
                                     <i className="fas fa fa-pen"></i>
+                                    Chỉnh sửa
                                 </button>
                                 <button className="btn btn-success btn-red btn-removeType1" onClick={() => onLevelRemove()}>
                                     <i className="fas fa fa-times"></i>
+                                    Xóa
                                 </button>
                             </div>
                         </div>

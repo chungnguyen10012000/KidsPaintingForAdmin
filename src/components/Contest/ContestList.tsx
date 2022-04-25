@@ -35,24 +35,22 @@ function ContestList(props: contestListProps): JSX.Element {
   const levels: ILevelState = useSelector((state: IStateType) => state.levels);
 
   let typeList: string[] = []
-
-  contests.contest.map((contest_item) => {
-    return mytypes.mytypes.forEach(element => {
-      if (element.id === contest_item.art_type_id) {
-        return typeList.push(element.name)
-      }
-    });
-  })
-
   let levelList: string[] = []
+    contests.contest.map((contest_item) => {
+      return mytypes.mytypes.forEach(element => {
+        if (element.id === contest_item.art_type_id) {
+          return typeList.push(element.name)
+        }
+      });
+    })
 
-  contests.contest.map((contest_item) => {
-    return levels.levels.forEach(element => {
-      if (element.id === contest_item.art_level_id) {
-        return levelList.push(element.name)
-      }
-    });
-  })
+    contests.contest.map((contest_item) => {
+      return levels.levels.forEach(element => {
+        if (element.id === contest_item.art_level_id) {
+          return levelList.push(element.name)
+        }
+      });
+    })
 
   const [popup, setPopup] = useState(false);
   const [contest, setContest] = useState<any>()
@@ -126,6 +124,8 @@ function ContestList(props: contestListProps): JSX.Element {
           <div className="card-body">
             <p className="card-text">Thể loại: {typeList[index]}</p>
             <p className="card-text">Trình độ: {levelList[index]}</p>
+            <p className="card-text">Số người tham gia tối đa: {contest_item.max_participant}</p>
+            <p className="card-text">Thời gian: {contest_item.start_time} đến {contest_item.end_time}</p>
             <button
               className="btn btn-success"
               onClick={() => {

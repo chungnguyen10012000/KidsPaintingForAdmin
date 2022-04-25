@@ -46,6 +46,9 @@ import Semester from "../Semester/Semester";
 import MyClass from "../MyClass/MyClass"
 import NotificationDetail from "../Notification/NotificationDetail";
 import ContestForm from "../Contest/ContestForm";
+import CoursesForm from "../Courses/CoursesForm";
+import CourseDetail from "../Courses/CourseDetail";
+import BlogForm from "../Blogs/BlogForm";
 
 type role = {
   id: string;
@@ -110,8 +113,10 @@ const Routers: React.FC = () => {
                 <Route path={`/:id/notification`}><Notification /></Route>
                 <Route path={`/:id/notification-detail`}><NotificationDetail /></Route>
                 <Route path={`/:id/feedbacks`}><FeedBack /></Route>
+                <Route path={`/:id/course-detail`}><CourseDetail /></Route>
                 <Route path={`/:id/add-user`}><AddUser /></Route>
                 <Route path={`/:id/edit-contest`}><ContestForm /></Route>
+                <Route path={`/:id/edit-course`}><CoursesForm /></Route>
                 <Route path={`/:id/calendar`}><Calendar /></Route>
                 <Route path={`/:id/arrange-class`}><ArrangeClass /></Route>
                 <Route path={`/:id/teacher-rating`}><StarRatingForAdmin /></Route>
@@ -122,6 +127,7 @@ const Routers: React.FC = () => {
                 <Route path={`/:id/blog`}><Blogs /></Route>
                 <Route path={`/:id/contest-detail`}><ContestView /></Route>
                 <Route path={`/:id/blog-detail`}><BlogDetail /></Route>
+                <Route path={`/:id/edit-blog`}><BlogForm /></Route>
                 <Route path={`/:id/feedback-detail`}><FeedBackDetail /></Route>
                 <Route path={`/:id/sesson`}><Sesson /></Route>
                 <Route path={`/:id/contest`}><Contest /></Route>
@@ -151,9 +157,12 @@ const Routers: React.FC = () => {
                 <Route path={`/:id/semester`}><Semester /></Route>
                 <Route path={`/:id/notification`}><Notification /></Route>
                 <Route path={`/:id/edit-contest`}><ContestForm /></Route>
+                <Route path={`/:id/edit-course`}><CoursesForm /></Route>
                 <Route path={`/:id/feedbacks`}><FeedBack /></Route>
+                <Route path={`/:id/edit-blog`}><BlogForm /></Route>
                 <Route path={`/:id/notification-detail`}><NotificationDetail /></Route>
                 <Route path={`/:id/calendar`}><Calendar /></Route>
+                <Route path={`/:id/course-detail`}><CourseDetail /></Route>
                 <Route path={`/:id/arrange-class`}><ArrangeClass /></Route>
                 <Route path={`/:id/lesson-time`}><LessonTime /></Route>
                 <Route path={`/:id/add-user`}><AddUser /></Route>
@@ -192,13 +201,16 @@ const Routers: React.FC = () => {
               <Route path={`/:id/edit-info`}><EditInfo /></Route>
               <Route path={`/:id/change-password`}><ChangePassword /></Route>
               <Route path={`/:id/notification`}><Notification /></Route>
+              <Route path={`/:id/course-detail`}><CourseDetail /></Route>
               <Route path={`/:id/calendar`}><Calendar /></Route>
+              <Route path={`/:id/edit-blog`}><BlogForm /></Route>
               <Route path={`/:id/feedbacks`}><FeedBack /></Route>
               <Route path={`/:id/add-user`}><AddUser /></Route>
               <Route path={`/:id/request`}><RequestForTeacher /></Route>
               <Route path={`/:id/student-request`}><Student /></Route>
               <Route path={`/:id/courses`}><Courses /></Route>
               <Route path={`/:id/edit-contest`}><ContestForm /></Route>
+              <Route path={`/:id/edit-course`}><CoursesForm /></Route>
               <Route path={`/:id/notification-detail`}><NotificationDetail /></Route>
               <Route path={`/:id/blog`}><Blogs /></Route>
               <Route path={`/:id/teacher-rating`}><StarRatingForAdmin /></Route>

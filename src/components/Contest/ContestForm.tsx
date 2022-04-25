@@ -235,14 +235,11 @@ const ContestForm: React.FC = () => {
                   />
               </div> 
               <div className="form-group">
-                <TextInput id="input_image_url"
-                  field = "image_url"
+                <label className="lable-image">Ảnh</label>
+                <input id="input_image_url"
+                  type="file"
                   value={formState.image_url.value}
-                  onChange={hasFormValueChanged}
-                  required={false}
-                  maxLength={100}
-                  label="Ảnh đại diện"
-                  placeholder="" />
+                  placeholder="Chọn ảnh đại diện" />
               </div>
               <div className="form-group">
                   <NumberInput id="input_max_participant"

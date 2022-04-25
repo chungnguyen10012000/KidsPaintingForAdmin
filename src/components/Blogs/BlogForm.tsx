@@ -66,6 +66,7 @@ const BlogForm: React.FC = () => {
   const [formState, setFormState] = useState({
     name: { error: "", value: blog.name },
     description: { error: "", value: blog.description },
+    image_url: { error: "", value: blog.image_url },
   });
 
   function hasFormValueChanged(model: OnChangeModel): void {
@@ -137,6 +138,13 @@ const BlogForm: React.FC = () => {
                   maxLength={10000}
                   label="Tên blog"
                   placeholder="Nhập tên blog" />
+              </div>
+              <div className="form-group">
+                <label className="lable-image">Ảnh</label>
+                <input id="input_image_url"
+                  type="file"
+                  value={formState.image_url.value}
+                  placeholder="Chọn ảnh đại diện" />
               </div>
               <div className="form-group">
                 <div ref={quillRef} />
