@@ -10,7 +10,7 @@
 - Authentication
 - **Clean, easy, ready to start new project**
 
-##USING
+## USING
 - Teacher login: 
     - username: teacher
 - Super-admin login: 
@@ -21,7 +21,7 @@
     - username: staff
 
 
-##TODO
+## TODO
 - Admin:
     - [x] Add super admin (WRITE_ART, WRITE_LESSON_TIME)
     - [x] Edit account (view detail, update detail, change  password) 
