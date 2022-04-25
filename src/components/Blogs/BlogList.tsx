@@ -38,7 +38,7 @@ function BlogList(props: productListProps): JSX.Element  {
   const productElements: (JSX.Element | null)[] = blogs.blogs.map((blog_item, index) => {
     if (!blog_item) { return null; }
     return (
-      <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12" key={index}>
+      <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12" key={index}>
         <div className="card shadow mb-4">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-green">{blog_item.name}</h6>

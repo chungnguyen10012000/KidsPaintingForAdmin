@@ -15,6 +15,8 @@ import BlotFormatter from 'quill-blot-formatter';
 import 'quill/dist/quill.snow.css';
 import { postBlog } from "../../common/service/blog/postBlog";
 import { putBlog } from "../../common/service/blog/putBlog";
+import Popup from "reactjs-popup";
+import { useHistory, useParams } from "react-router-dom";
 
 export type levelListProps = {
   onSelect?: (level: ILevel) => void;
@@ -26,7 +28,15 @@ export type mytypeListProps = {
   children?: React.ReactNode;
 };
 
+type role = {
+  id: string;
+};
+
 const BlogForm: React.FC = () => {
+
+  let history = useHistory();
+  const { id } = useParams<role>()
+  
   const dispatch: Dispatch<any> = useDispatch();
   const blogs: IBlogState | null = useSelector((state: IStateType) => state.blogs);
   let blog: IBlog | null = blogs.selectedBlog;
@@ -107,8 +117,11 @@ const BlogForm: React.FC = () => {
     }
   }
 
+  const [popup, setPopup] = useState(false);
+
   function cancelForm(): void {
     dispatch(setModificationState(BlogModificationStatus.None));
+    setPopup(true)
   }
 
   function getDisabledClass(): string {
@@ -155,6 +168,29 @@ const BlogForm: React.FC = () => {
           </div>
         </div>
       </div>
+      <Popup
+        className="popup-modal"
+        open={popup}
+        onClose={() => setPopup(false)}
+        closeOnDocumentClick
+      >
+        <div className="popup-modal">
+          <div className="popup-title">
+            Bạn chắc chắn?
+          </div>
+          <div className="popup-content">
+            <button type="button"
+              className="btn btn-danger"
+              onClick={() => {
+                history.push({
+                  pathname: `/${id}/blog`
+                })
+                setPopup(false);
+              }}>Hủy
+            </button>
+          </div>
+        </div>
+      </Popup>
     </Fragment>
   );
 };

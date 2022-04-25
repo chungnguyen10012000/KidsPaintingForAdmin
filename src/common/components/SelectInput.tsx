@@ -15,12 +15,12 @@ function SelectInput(props: SelectProps): JSX.Element {
             ["Value has to be selected", "is-invalid"] : ["", "is-valid"];
 
 
-        props.onChange({ value: elementValue, error: error, touched: touched, field: props.field });
+        props.onChange({ value: parseInt(elementValue), error: error, touched: touched, field: props.field });
 
         setTouch(true);
         setError(error);
         setHtmlClass(validClass);
-        setValue(elementValue);
+        setValue(parseInt(elementValue));
     }
 
     const getOptions: (JSX.Element | null)[] = props.options.map( (option: any, index:number) => {
@@ -37,7 +37,7 @@ function SelectInput(props: SelectProps): JSX.Element {
                 id={`${props.id}`}
                 className={`form-control ${props.inputClass ? props.inputClass : ""} ${htmlClass}`}
                 onChange={onValueChanged}>
-                <option value="">Choose...</option>
+                <option value= {0}>Choose...</option>
                 {getOptions}
             </select>
 

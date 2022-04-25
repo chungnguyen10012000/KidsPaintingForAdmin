@@ -128,6 +128,7 @@ const CoursesForm: React.FC = () => {
 
   function saveForm(formState: ICourseFormState, saveFn: Function): void {
     if (course) {
+      console.log(typeof(formState.art_level_id.value))
       if (saveFn === addCourse){
         dispatch(postCourse({
           ...course,

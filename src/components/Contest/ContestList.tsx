@@ -33,24 +33,29 @@ function ContestList(props: contestListProps): JSX.Element {
   const contests: IContestState = useSelector((state: IStateType) => state.contest);
   const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
   const levels: ILevelState = useSelector((state: IStateType) => state.levels);
-
   let typeList: string[] = []
   let levelList: string[] = []
-    contests.contest.map((contest_item) => {
-      return mytypes.mytypes.forEach(element => {
-        if (element.id === contest_item.art_type_id) {
-          return typeList.push(element.name)
-        }
-      });
-    })
+  contests.contest.map((contest_item) => {
+    return mytypes.mytypes.forEach(element => {
+      if (element.id === contest_item.art_type_id) {
+        return typeList.push(element.name)
+      }
+    });
+  })
 
-    contests.contest.map((contest_item) => {
-      return levels.levels.forEach(element => {
-        if (element.id === contest_item.art_level_id) {
-          return levelList.push(element.name)
-        }
-      });
-    })
+
+  contests.contest.map((contest_item) => {
+    return levels.levels.forEach(element => {
+      if (element.id === contest_item.art_level_id) {
+        return levelList.push(element.name)
+      }
+    });
+  })
+
+  
+  
+
+    console.log('enter list contest')
 
   const [popup, setPopup] = useState(false);
   const [contest, setContest] = useState<any>()
