@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IStateType, IContestState, IMytypeState, ILevelState } from "../../store/models/root.interface";
 import { IContest, ContestModificationStatus } from "../../store/models/contest.interface";
 import { useHistory, useParams } from "react-router-dom";
-import { changeSelectedContest, clearSelectedContest, setModificationState } from "../../store/actions/contest.actions";
+import { clearSelectedContest, setModificationState } from "../../store/actions/contest.actions";
 import { addNotification } from "../../store/actions/notifications.action";
 import { deleteContest } from "../../common/service/contest/deleteContest";
 import Popup from "reactjs-popup";
@@ -83,6 +83,8 @@ function ContestList(props: contestListProps): JSX.Element  {
                     <div className="card-body">
                         <p className="card-text">Thể loại: {typeList[index]}</p>
                         <p className="card-text">Trình độ: {levelList[index]}</p>
+                        <p className="card-text">Số người tham gia tối đa: {contest_item.max_participant}</p>
+                        <p className="card-text">Thời gian: {contest_item.start_time} đến {contest_item.end_time}</p>
                         <button 
                           className="btn btn-success btn-blue"
                           onClick={() => {
@@ -186,7 +188,4 @@ function ContestList(props: contestListProps): JSX.Element  {
 }
 
 export default ContestList;
-function dispatch(arg0: any) {
-  throw new Error("Function not implemented.");
-}
 

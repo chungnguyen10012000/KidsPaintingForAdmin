@@ -6,18 +6,15 @@ import "./Contest.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 import { IContestState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
-import Popup from "reactjs-popup";
 import {
   clearSelectedContest, setModificationState,
   changeSelectedContest
 } from "../../store/actions/contest.actions";
-import { addNotification } from "../../store/actions/notifications.action";
 import { ContestModificationStatus, IContest } from "../../store/models/contest.interface";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getArtType } from "../../common/service/art_type/getArtType";
 import { getLevel } from "../../common/service/art_level/getLevel";
 import { getContest } from "../../common/service/contest/getContest";
-import { deleteContest } from "../../common/service/contest/deleteContest";
 
 type role = {
   id: string;
@@ -26,15 +23,11 @@ type role = {
 const Contests: React.FC = () => {
 
   const { id } = useParams<role>()
-  let [description, setDescription] = useState<string>("");
-
-  let history = useHistory();
 
   const dispatch: Dispatch<any> = useDispatch();
   const contests: IContestState = useSelector((state: IStateType) => state.contest);
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
   const numberItemsCount: number = contests.contest.length;
-  const [popup, setPopup] = useState(false);
   useEffect(() => {
     dispatch(getContest())
   }, [dispatch])
@@ -54,11 +47,9 @@ const Contests: React.FC = () => {
   function onContestSelect(product: IContest): void {
     dispatch(changeSelectedContest(product));
     dispatch(setModificationState(ContestModificationStatus.None));
-    setDescription(product.description)
   }
 
   const [isCheckOpen1, setIsCheckOpen1] = useState(false)
-  const [isCheckOpen2, setIsCheckOpen2] = useState(false)
 
   if (id === 'teacher') {
     return (
