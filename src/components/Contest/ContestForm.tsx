@@ -17,6 +17,8 @@ import BlotFormatter from 'quill-blot-formatter';
 import 'quill/dist/quill.snow.css';
 import { postContest } from "../../common/service/contest/postContest";
 import { putContest } from "../../common/service/contest/putContest";
+import { useHistory, useParams } from "react-router-dom";
+import Popup from "reactjs-popup";
 
 export type levelListProps = {
   onSelect?: (level: ILevel) => void;
@@ -28,12 +30,22 @@ type Options = {
   value: any;
 }
 
+type role = {
+  id: string;
+};
+
 export type mytypeListProps = {
   onSelect?: (mytype: IMytype) => void;
   children?: React.ReactNode;
 };
 
 const ContestForm: React.FC = () => {
+
+  let history = useHistory();
+  const { id } = useParams<role>()
+
+  const [popup, setPopup] = useState(false);
+  
   const dispatch: Dispatch<any> = useDispatch();
   const contests: IContestState | null = useSelector((state: IStateType) => state.contest);
   let contest: IContest | null = contests.selectedContest;
@@ -156,6 +168,7 @@ const ContestForm: React.FC = () => {
 
   function cancelForm(): void {
     dispatch(setModificationState(ContestModificationStatus.None));
+    setPopup(true)
   }
 
   function getDisabledClass(): string {
@@ -268,6 +281,29 @@ const ContestForm: React.FC = () => {
           </div>
         </div>
       </div>
+      <Popup
+        className="popup-modal"
+        open={popup}
+        onClose={() => setPopup(false)}
+        closeOnDocumentClick
+      >
+        <div className="popup-modal">
+          <div className="popup-title">
+            Bạn chắc chắn?
+          </div>
+          <div className="popup-content">
+            <button type="button"
+              className="btn btn-danger"
+              onClick={() => {
+                history.push({
+                  pathname: `/${id}/contest`
+                })
+                setPopup(false);
+              }}>Hủy
+            </button>
+          </div>
+        </div>
+      </Popup>
     </Fragment>
   );
 };

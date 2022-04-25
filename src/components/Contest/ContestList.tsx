@@ -23,44 +23,44 @@ export type contestListProps = {
   children?: React.ReactNode;
 };
 
-function ContestList(props: contestListProps): JSX.Element  {
+function ContestList(props: contestListProps): JSX.Element {
 
   let history = useHistory();
   const { id } = useParams<role>()
 
   const dispatch: Dispatch<any> = useDispatch();
-  
+
   const contests: IContestState = useSelector((state: IStateType) => state.contest);
   const mytypes: IMytypeState = useSelector((state: IStateType) => state.mytypes);
   const levels: ILevelState = useSelector((state: IStateType) => state.levels);
 
   let typeList: string[] = []
 
-    contests.contest.map((contest_item) => {
-        return mytypes.mytypes.forEach(element => {
-            if (element.id === contest_item.art_type_id) {
-                return typeList.push(element.name)
-            }
-        });
-    })
+  contests.contest.map((contest_item) => {
+    return mytypes.mytypes.forEach(element => {
+      if (element.id === contest_item.art_type_id) {
+        return typeList.push(element.name)
+      }
+    });
+  })
 
-    let levelList: string[] = []
+  let levelList: string[] = []
 
-    contests.contest.map((contest_item) => {
-        return levels.levels.forEach(element => {
-            if (element.id === contest_item.art_level_id) {
-                return levelList.push(element.name)
-            }
-        });
-    })
+  contests.contest.map((contest_item) => {
+    return levels.levels.forEach(element => {
+      if (element.id === contest_item.art_level_id) {
+        return levelList.push(element.name)
+      }
+    });
+  })
 
   const [popup, setPopup] = useState(false);
   const [contest, setContest] = useState<any>()
 
   function onContestRemove(contest: IContest) {
     console.log('enter Remove')
-      setPopup(true);
-      setContest(contest)
+    setPopup(true);
+    setContest(contest)
   }
 
 
@@ -68,46 +68,46 @@ function ContestList(props: contestListProps): JSX.Element  {
     if (!contest_item) { return null; }
     return (
       <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12" key={index}>
-                <div className="card shadow mb-4">
-                    <div className="card-header py-3">
-                        <h6 className="m-0 font-weight-bold text-green">{contest_item.name}</h6>
-                        <div className="header-buttons">
-                        </div>
-                    </div>
-                    <img className="card-img-top" src={require('../../assets/img/contest/contest_1.png')} alt="" onClick={() => {
-                      history.push({
-                        pathname: `/${id}/contest-detail`,
-                        state: { body: contest_item.description }
-                      })
-                    }}></img>
-                    <div className="card-body">
-                        <p className="card-text">Thể loại: {typeList[index]}</p>
-                        <p className="card-text">Trình độ: {levelList[index]}</p>
-                        <p className="card-text">Số người tham gia tối đa: {contest_item.max_participant}</p>
-                        <p className="card-text">Thời gian: {contest_item.start_time} đến {contest_item.end_time}</p>
-                        <button 
-                          className="btn btn-success btn-blue"
-                          onClick={() => {
-                              if(props.onSelect) props.onSelect(contest_item);
-                              dispatch(setModificationState(ContestModificationStatus.Edit))
-                              history.push({
-                                pathname: `/${id}/edit-contest`,
-                                state: { body: contest_item.description }
-                              })
-                            }
-                          }
-                        >
-                        <i className="fas fa fa-pen"></i>
-                        Chỉnh sửa</button>
-                        <button className="btn btn-success btn-red float-right" onClick={() => {
-                            onContestRemove(contest_item)
-                          }}>
-                          <i className="fas fa fa-times" ></i>
-                          Xóa
-                        </button>
-                    </div>
-                </div>
+        <div className="card shadow mb-4">
+          <div className="card-header py-3">
+            <h6 className="m-0 font-weight-bold text-green">{contest_item.name}</h6>
+            <div className="header-buttons">
             </div>
+          </div>
+          <img className="card-img-top" src={require('../../assets/img/contest/contest_1.png')} alt="" onClick={() => {
+            history.push({
+              pathname: `/${id}/contest-detail`,
+              state: { body: contest_item.description }
+            })
+          }}></img>
+          <div className="card-body">
+            <p className="card-text">Thể loại: {typeList[index]}</p>
+            <p className="card-text">Trình độ: {levelList[index]}</p>
+            <p className="card-text">Số người tham gia tối đa: {contest_item.max_participant}</p>
+            <p className="card-text">Thời gian: {contest_item.start_time} đến {contest_item.end_time}</p>
+            <button
+              className="btn btn-success btn-blue"
+              onClick={() => {
+                if (props.onSelect) props.onSelect(contest_item);
+                dispatch(setModificationState(ContestModificationStatus.Edit))
+                history.push({
+                  pathname: `/${id}/edit-contest`,
+                  state: { body: contest_item.description }
+                })
+              }
+              }
+            >
+              <i className="fas fa fa-pen"></i>
+              Chỉnh sửa</button>
+            <button className="btn btn-success btn-red float-right" onClick={() => {
+              onContestRemove(contest_item)
+            }}>
+              <i className="fas fa fa-times" ></i>
+              Xóa
+            </button>
+          </div>
+        </div>
+      </div>
     );
   });
 
@@ -116,46 +116,46 @@ function ContestList(props: contestListProps): JSX.Element  {
     if (!contest_item) { return null; }
     return (
       <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12" key={index}>
-                <div className="card shadow mb-4">
-                    <div className="card-header py-3">
-                        <h6 className="m-0 font-weight-bold text-green">{contest_item.name}</h6>
-                        <div className="header-buttons">
-                        </div>
-                    </div>
-                    <img className="card-img-top" src={require('../../assets/img/contest/contest_1.png')} alt=""></img>
-                    <div className="card-body">
-                        <p className="card-text">Thể loại: {typeList[index]}</p>
-                        <p className="card-text">Trình độ: {levelList[index]}</p>
-                        <button 
-                          className="btn btn-success"
-                          onClick={() => {
-                              history.push({
-                                pathname: '/teacher/contest-grade',
-                                state: { id: contest_item.id }
-                              })
-                            }
-                          }
-                        >Chấm bài</button>
-                    </div>
-                </div>
+        <div className="card shadow mb-4">
+          <div className="card-header py-3">
+            <h6 className="m-0 font-weight-bold text-green">{contest_item.name}</h6>
+            <div className="header-buttons">
             </div>
+          </div>
+          <img className="card-img-top" src={require('../../assets/img/contest/contest_1.png')} alt=""></img>
+          <div className="card-body">
+            <p className="card-text">Thể loại: {typeList[index]}</p>
+            <p className="card-text">Trình độ: {levelList[index]}</p>
+            <button
+              className="btn btn-success"
+              onClick={() => {
+                history.push({
+                  pathname: '/teacher/contest-grade',
+                  state: { id: contest_item.id }
+                })
+              }
+              }
+            >Chấm bài</button>
+          </div>
+        </div>
+      </div>
     );
   });
 
 
   return (
-        <>
-          {
-            function () {
-              if (id === 'teacher') {
-                return productElements
-              }
-              else {
-                return contestElements
-              }
-            }()
+    <>
+      {
+        function () {
+          if (id === 'teacher') {
+            return productElements
           }
-<Popup
+          else {
+            return contestElements
+          }
+        }()
+      }
+      <Popup
         className="popup-modal"
         open={popup}
         onClose={() => setPopup(false)}
@@ -183,7 +183,7 @@ function ContestList(props: contestListProps): JSX.Element  {
       </Popup>
 
 
-        </>
+    </>
   );
 }
 
